@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/custom_theme.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -7,7 +8,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'ForestInv',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: CustomTheme.apply(),
     ).modular();
   }
 }

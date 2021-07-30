@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ResponsiveWidgetConfig {
+class ResponsiveConfig {
   static MediaQueryData? _mediaQueryData;
   static double? screenWidth;
   static double? screenHeight;
@@ -14,7 +14,7 @@ class ResponsiveWidgetConfig {
 
   static double? fontScale;
 
-  void init(BuildContext context) {
+  static void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);
     screenWidth = _mediaQueryData!.size.width;
     screenHeight = _mediaQueryData!.size.height;
