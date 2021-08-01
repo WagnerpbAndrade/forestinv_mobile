@@ -1,9 +1,14 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/core/interface/failure.dart';
-import 'package:dartz/dartz.dart';
-import 'package:forestinv_mobile/app/modules/projeto/domain/repository/projeto_repository.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/repository/project_repository.dart';
+import 'package:forestinv_mobile/app/modules/projeto/infra/datasource/projeto_datasource.dart';
+import 'package:fpdart/fpdart.dart';
 
-class ProjetoRepositoryImpl implements ProjetoRepository {
+class ProjectRepositoryImpl implements ProjectRepository {
+  final datasource = Modular.get<ProjetoDatasource>();
+
   @override
   Future<Either<Failure, void>> add(Project project) {
     // TODO: implement add
@@ -29,9 +34,16 @@ class ProjetoRepositoryImpl implements ProjetoRepository {
   }
 
   @override
-  Future<Either<Failure, List<Project>>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+  Future<Either<Failure, List<Project>>> getAll() async {
+    try {
+      final result = await datasource.getAll();
+
+      return Right(result);
+    } on DatasourceError catch (e) {
+      throw Left(e);
+    } catch (e) {
+      throw Left(DatasourceError());
+    }
   }
 
   @override

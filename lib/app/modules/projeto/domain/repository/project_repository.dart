@@ -1,8 +1,8 @@
-import 'package:dartz/dartz.dart';
 import 'package:forestinv_mobile/app/core/interface/failure.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
+import 'package:fpdart/fpdart.dart';
 
-abstract class ProjetoRepository {
+abstract class ProjectRepository {
   Future<Either<Failure, List<Project>>> getAll();
 
   Future<Either<Failure, void>> add(Project project);

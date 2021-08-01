@@ -21,6 +21,19 @@ class Address extends Equatable {
     required this.estado,
   });
 
+  factory Address.fromJson(dynamic json) {
+    return Address(
+      id: json['id'] as num,
+      logradouro: json['logradouro'] as String,
+      bairro: json['bairro'] as String,
+      numero: json['numero'] as String,
+      cep: json['cep'] as String,
+      complemento: json['complemento'] as String,
+      cidade: json['cidade'] as String,
+      estado: json['estado'] as String,
+    );
+  }
+
   @override
   List<Object?> get props => [
         id,
