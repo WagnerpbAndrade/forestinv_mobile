@@ -1,4 +1,3 @@
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/core/interface/failure.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
@@ -7,7 +6,9 @@ import 'package:forestinv_mobile/app/modules/projeto/infra/datasource/projeto_da
 import 'package:fpdart/fpdart.dart';
 
 class ProjectRepositoryImpl implements ProjectRepository {
-  final datasource = Modular.get<ProjetoDatasource>();
+  final ProjetoDatasource datasource;
+
+  ProjectRepositoryImpl(this.datasource);
 
   @override
   Future<Either<Failure, void>> add(Project project) {

@@ -1,13 +1,18 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/data/exceptions/server_exception.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
-import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
+import 'package:forestinv_mobile/app/modules/projeto/external/drivers/dio/dio_client.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/datasource/projeto_datasource.dart';
+import 'package:http/http.dart' as http;
 
 class HerokuDatasourceImpl implements ProjetoDatasource {
-  final dio = Modular.get<Dio>();
+  //final Dio _dio;
+
+  //static final URL = "https://forestinv-api.herokuapp.com/api/v1/projetos";
+  //static final headers = {'Content-Type': 'application/json'};
+
+  HerokuDatasourceImpl();
 
   @override
   Future<void> addProject(Project project) {
@@ -35,18 +40,11 @@ class HerokuDatasourceImpl implements ProjetoDatasource {
 
   @override
   Future<List<Project>> getAll() async {
-    try {
-      var response =
-          await dio.get('http://forestinv-api.herokuapp.com/api/v1/projects');
+    DioClient dioClient = DioClient();
 
-      var projectObjsJson = jsonDecode(response.data) as List;
-      List<Project> projectObjs = projectObjsJson
-          .map((projectJson) => Project.fromJson(projectJson))
-          .toList();
-      return projectObjs;
-    } on DatasourceError catch (e) {
-      throw e;
-    }
+    var list = await dioClient.getAll();
+
+    return list!;
   }
 
   @override

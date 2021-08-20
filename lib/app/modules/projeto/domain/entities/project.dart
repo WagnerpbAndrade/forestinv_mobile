@@ -1,44 +1,60 @@
 import 'package:equatable/equatable.dart';
 import 'package:forestinv_mobile/app/core/interface/base_entity.dart';
-import 'package:forestinv_mobile/app/modules/projeto/domain/entities/address.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/entities/endereco.dart';
+
+import 'dart:convert';
+
+List<Project> projectFromMap(String str) =>
+    List<Project>.from(json.decode(str).map((x) => Project.fromMap(x)));
+
+String projectToMap(List<Project> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
 
 class Project extends Equatable implements BaseEntity {
-  final num id;
+  final int id;
   final String nome;
-  final String area;
-  final String visibilidade;
-  final Address endereco;
+  final double area;
+  final String visibilidadeProjetoEnum;
   final DateTime dataCriacao;
   final DateTime ultimaAtualizacao;
+  final Endereco endereco;
 
   Project({
     required this.id,
     required this.nome,
     required this.area,
-    required this.visibilidade,
-    required this.endereco,
+    required this.visibilidadeProjetoEnum,
     required this.dataCriacao,
     required this.ultimaAtualizacao,
+    required this.endereco,
   });
 
-  factory Project.fromJson(dynamic json) {
-    return Project(
-      id: json['id'] as num,
-      nome: json['nome'] as String,
-      area: json['area'] as String,
-      visibilidade: json['visibilidade'] as String,
-      endereco: Address.fromJson(json['address']),
-      dataCriacao: json['dataCriacao'] as DateTime,
-      ultimaAtualizacao: json['ultimaAtualizacao'] as DateTime,
-    );
-  }
+  factory Project.fromMap(Map<String, dynamic> json) => Project(
+        id: json["id"],
+        nome: json["nome"],
+        area: json["area"],
+        visibilidadeProjetoEnum: json["visibilidadeProjetoEnum"],
+        dataCriacao: DateTime.parse(json["dataCriacao"]),
+        ultimaAtualizacao: DateTime.parse(json["ultimaAtualizacao"]),
+        endereco: Endereco.fromMap(json["endereco"]),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "nome": nome,
+        "area": area,
+        "visibilidadeProjetoEnum": visibilidadeProjetoEnum,
+        "dataCriacao": dataCriacao,
+        "ultimaAtualizacao": ultimaAtualizacao,
+        "endereco": endereco.toMap(),
+      };
 
   @override
   List<Object?> get props => [
         id,
         nome,
         area,
-        visibilidade,
+        visibilidadeProjetoEnum,
         endereco,
         dataCriacao,
         ultimaAtualizacao,

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:forestinv_mobile/app/core/interface/base_entity.dart';
-import 'package:forestinv_mobile/app/modules/projeto/domain/entities/address.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/entities/endereco.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/enums/visibilidade_projeto_enum.dart';
 
 class ProjetoModel extends Equatable implements BaseEntity {
@@ -8,7 +8,7 @@ class ProjetoModel extends Equatable implements BaseEntity {
   final String nome;
   final String area;
   final VisibilidadeProjetoEnum visibilidadeProjetoEnum;
-  final Address endereco;
+  final Endereco endereco;
   final DateTime dataCriacao;
   final DateTime ultimaAtualizacao;
 
