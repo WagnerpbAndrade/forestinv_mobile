@@ -1,23 +1,37 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:forestinv_mobile/app/core/data/exceptions/server_exception.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
 import 'package:forestinv_mobile/app/modules/projeto/external/drivers/dio/dio_client.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/datasource/projeto_datasource.dart';
-import 'package:http/http.dart' as http;
 
 class HerokuDatasourceImpl implements ProjetoDatasource {
-  //final Dio _dio;
+  final DioClient _dioClient;
 
-  //static final URL = "https://forestinv-api.herokuapp.com/api/v1/projetos";
-  //static final headers = {'Content-Type': 'application/json'};
-
-  HerokuDatasourceImpl();
+  HerokuDatasourceImpl(this._dioClient);
 
   @override
-  Future<void> addProject(Project project) {
-    // TODO: implement addProject
-    throw UnimplementedError();
+  Future<void> addProject(Project project) async {
+    try {
+      Response response =
+          await _dioClient.instance.post('/projetos', data: project.toMap());
+
+      print('User Info: ${response.data}');
+    } on DioError catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data}');
+        print('HEADERS: ${e.response?.headers}');
+      } else {
+        // Error due to setting up or sending the request
+        print('Error sending request!');
+        print(e.message);
+      }
+
+      throw DatasourceError();
+    }
   }
 
   @override
@@ -40,17 +54,54 @@ class HerokuDatasourceImpl implements ProjetoDatasource {
 
   @override
   Future<List<Project>> getAll() async {
-    DioClient dioClient = DioClient();
+    try {
+      Response response = await _dioClient.instance.get('/projetos');
 
-    var list = await dioClient.getAll();
+      print('User Info: ${response.data}');
 
-    return list!;
+      return (response.data as List).map((e) => Project.fromMap(e)).toList();
+    } on DioError catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data}');
+        print('HEADERS: ${e.response?.headers}');
+      } else {
+        // Error due to setting up or sending the request
+        print('Error sending request!');
+        print(e.message);
+      }
+
+      throw DatasourceError();
+    }
   }
 
   @override
-  Future<Project> getById(num projectId) {
-    // TODO: implement getById
-    throw UnimplementedError();
+  Future<Project> getById(num projectId) async {
+    try {
+      Response response = await _dioClient.instance.get('/projetos/$projectId');
+
+      print('User Info: ${response.data}');
+
+      return Project.fromMap(response.data);
+    } on DioError catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data}');
+        print('HEADERS: ${e.response?.headers}');
+      } else {
+        // Error due to setting up or sending the request
+        print('Error sending request!');
+        print(e.message);
+      }
+
+      throw DatasourceError();
+    }
   }
 
   @override

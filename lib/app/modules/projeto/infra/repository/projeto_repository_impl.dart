@@ -11,9 +11,16 @@ class ProjectRepositoryImpl implements ProjectRepository {
   ProjectRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<Failure, void>> add(Project project) {
-    // TODO: implement add
-    throw UnimplementedError();
+  Future<Either<Failure, void>> add(Project project) async {
+    try {
+      final result = await datasource.addProject(project);
+
+      return Right(result);
+    } on DatasourceError catch (e) {
+      throw Left(e);
+    } catch (e) {
+      throw Left(DatasourceError());
+    }
   }
 
   @override
@@ -48,9 +55,16 @@ class ProjectRepositoryImpl implements ProjectRepository {
   }
 
   @override
-  Future<Either<Failure, Project>> getById(num projectId) {
-    // TODO: implement getById
-    throw UnimplementedError();
+  Future<Either<Failure, Project>> getById(num projectId) async {
+    try {
+      final result = await datasource.getById(projectId);
+
+      return Right(result);
+    } on DatasourceError catch (e) {
+      throw Left(e);
+    } catch (e) {
+      throw Left(DatasourceError());
+    }
   }
 
   @override

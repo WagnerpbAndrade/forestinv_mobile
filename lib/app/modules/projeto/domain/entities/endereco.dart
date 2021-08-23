@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Endereco extends Equatable {
-  final int id;
+  final int? id;
   final String logradouro;
   final String bairro;
   final String numero;
@@ -11,7 +11,7 @@ class Endereco extends Equatable {
   final String estado;
 
   Endereco({
-    required this.id,
+    this.id,
     required this.logradouro,
     required this.bairro,
     required this.numero,

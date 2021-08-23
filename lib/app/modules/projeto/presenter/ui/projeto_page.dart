@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/gb_floating_action_button.dart';
 import 'package:forestinv_mobile/app/modules/projeto/constants/ui_text.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,9 @@ class ProjetoPageState extends State<ProjetoPage> {
           ),
         ),
         floatingActionButton: GbFloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Modular.to.pushNamed(RouterConst.ADD_PROJECT_ROUTER);
+          },
           icon: Icons.add,
         ));
   }

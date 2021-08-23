@@ -20,7 +20,7 @@ class GbFloatingActionButton extends StatelessWidget {
       child: Icon(icon),
       backgroundColor: backgroundColor ?? ColorsConst.secundaryColor,
       foregroundColor: foregroundColor ?? ColorsConst.textColorSecundary,
-      onPressed: onPressed(),
+      onPressed: () => onPressed(),
     );
   }
 }
