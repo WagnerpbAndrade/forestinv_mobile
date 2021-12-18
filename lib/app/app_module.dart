@@ -4,13 +4,11 @@ import 'package:forestinv_mobile/app/modules/intro/intro_module.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/projeto_module.dart';
 
 import 'modules/home/home_module.dart';
-import 'modules/services/via_cep_service.dart';
 
 class AppModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.factory((i) => Dio()),
-    Bind.factory((i) => ViaCepService(i.get())),
   ];
 
   @override

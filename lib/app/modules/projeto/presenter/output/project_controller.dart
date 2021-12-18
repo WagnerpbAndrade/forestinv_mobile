@@ -2,9 +2,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_id_project_usecase.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/projeto_store.dart';
+import 'package:forestinv_mobile/controller/base_controller.dart';
+import 'package:get/get.dart';
 
-class ProjectController extends ProjetoStore {
+class ProjectController extends GetxController with BaseController {
   Future<List<Project>?> getAllProject() async {
     final usecase = Modular.get<GetAllProjectsUsecase>();
     try {

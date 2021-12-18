@@ -3,17 +3,18 @@ import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dar
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
 import 'package:forestinv_mobile/app/modules/projeto/external/drivers/dio/dio_client.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/datasource/projeto_datasource.dart';
+import 'package:forestinv_mobile/controller/base_controller.dart';
 
-class HerokuDatasourceImpl implements ProjetoDatasource {
-  final DioClient _dioClient;
-
-  HerokuDatasourceImpl(this._dioClient);
+class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
+  static final String _baseUrl = 'https://forestinv-api.herokuapp.com/api/v1';
+  HerokuDatasourceImpl();
 
   @override
   Future<void> addProject(Project project) async {
     try {
-      Response response =
-          await _dioClient.instance.post('/projetos', data: project.toMap());
+      Response response = await DioClient()
+          .post(_baseUrl, '/projetos', project.toMap())
+          .catchError(handleError);
 
       print('User Info: ${response.data}');
     } on DioError catch (e) {
@@ -55,7 +56,7 @@ class HerokuDatasourceImpl implements ProjetoDatasource {
   @override
   Future<List<Project>> getAll() async {
     try {
-      Response response = await _dioClient.instance.get('/projetos');
+      Response response = await DioClient().get(_baseUrl, '/projetos');
 
       print('User Info: ${response.data}');
 
@@ -80,7 +81,7 @@ class HerokuDatasourceImpl implements ProjetoDatasource {
 
   @override
   Future<Project> getById(num projectId) async {
-    try {
+    /*try {
       Response response = await _dioClient.instance.get('/projetos/$projectId');
 
       print('User Info: ${response.data}');
@@ -101,7 +102,8 @@ class HerokuDatasourceImpl implements ProjetoDatasource {
       }
 
       throw DatasourceError();
-    }
+    }*/
+    throw Exception();
   }
 
   @override
