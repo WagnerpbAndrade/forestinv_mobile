@@ -42,11 +42,11 @@ class ProjectRepositoryImpl implements ProjectRepository {
   }
 
   @override
-  Future<Either<Failure, List<Project>>> getAll() async {
+  Future<List<Project>> getAll() async {
     try {
       final result = await datasource.getAll();
 
-      return Right(result);
+      return result;
     } on DatasourceError catch (e) {
       throw Left(e);
     } catch (e) {

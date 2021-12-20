@@ -15,7 +15,7 @@ class ProjetoModule extends Module {
   final List<Bind> binds = [
     Bind.lazySingleton((i) => ProjetoStore()),
     Bind.factory((i) => DioClient()),
-    Bind((i) => HerokuDatasourceImpl()),
+    Bind((i) => HerokuDatasourceImpl(i.get())),
     Bind((i) => ProjectRepositoryImpl(i.get())),
     Bind((i) => GetAllProjectsUsecaseImpl(i.get())),
     Bind((i) => GetByIdProjectUsecaseImpl(i.get())),

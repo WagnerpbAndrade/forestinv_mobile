@@ -6,15 +6,17 @@ import 'package:forestinv_mobile/app/modules/projeto/infra/datasource/projeto_da
 import 'package:forestinv_mobile/controller/base_controller.dart';
 
 class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
-  static final String _baseUrl = 'https://forestinv-api.herokuapp.com/api/v1';
-  HerokuDatasourceImpl();
+  static final String _baseUrl =
+      'https://forestinv-api.herokuapp.com/v1/api/projetos';
+
+  final DioClient dioClient;
+
+  HerokuDatasourceImpl(this.dioClient);
 
   @override
   Future<void> addProject(Project project) async {
     try {
-      Response response = await DioClient()
-          .post(_baseUrl, '/projetos', project.toMap())
-          .catchError(handleError);
+      Response response = await dioClient.post(_baseUrl, '', project.toMap());
 
       print('User Info: ${response.data}');
     } on DioError catch (e) {
@@ -56,7 +58,7 @@ class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
   @override
   Future<List<Project>> getAll() async {
     try {
-      Response response = await DioClient().get(_baseUrl, '/projetos');
+      Response response = await dioClient.get(_baseUrl, '');
 
       print('User Info: ${response.data}');
 
@@ -107,8 +109,26 @@ class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
   }
 
   @override
-  Future<void> update(Project project) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> update(Project project) async {
+    try {
+      Response response = await dioClient.put(_baseUrl, '', project.toMap());
+
+      print('User Info: ${response.data}');
+    } on DioError catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data}');
+        print('HEADERS: ${e.response?.headers}');
+      } else {
+        // Error due to setting up or sending the request
+        print('Error sending request!');
+        print(e.message);
+      }
+
+      throw DatasourceError();
+    }
   }
 }

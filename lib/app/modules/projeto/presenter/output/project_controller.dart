@@ -10,9 +10,9 @@ class ProjectController extends GetxController with BaseController {
     final usecase = Modular.get<GetAllProjectsUsecase>();
     try {
       final result = await usecase.getAll();
-      if (result.isRight()) {
-        return result.getOrElse((_) => <Project>[]);
-      }
+      //if (result.isRight()) {
+      //return result.getOrElse((_) => <Project>[]);
+      // }
     } catch (e) {
       throw e;
     }

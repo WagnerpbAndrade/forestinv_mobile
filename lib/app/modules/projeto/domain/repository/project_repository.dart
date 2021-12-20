@@ -3,7 +3,7 @@ import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dar
 import 'package:fpdart/fpdart.dart';
 
 abstract class ProjectRepository {
-  Future<Either<Failure, List<Project>>> getAll();
+  Future<List<Project>> getAll();
 
   Future<Either<Failure, void>> add(Project project);
 
