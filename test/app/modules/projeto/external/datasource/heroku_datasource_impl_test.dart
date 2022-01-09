@@ -10,13 +10,13 @@ void main() {
   final datasource = HerokuDatasourceImpl(dio);
   test("Deve retornar uma lista de projetos", () async {
     var projetos = await datasource.getAll();
-    expect(13, projetos.length);
+    expect(14, projetos.length);
   });
 
   test('Deve salvar um projeto', () async {
     final newProjeto = Project(
-      nome: "Teste 2",
-      area: 120.0,
+      nome: "Test saving project",
+      area: 2022.0,
       visibilidadeProjetoEnum: "PRIVADO",
     );
 
@@ -25,12 +25,26 @@ void main() {
 
   test('Deve atualizar um projeto', () async {
     final updateProjeto = Project(
-      id: 15,
+      id: 85,
       nome: "Teste Update",
       area: 120.0,
       visibilidadeProjetoEnum: "PRIVADO",
     );
 
     final result = await datasource.update(updateProjeto);
+  });
+
+  test("Deve retornar um projeto by id", () async {
+    var nameExpected = "Projeto Alegre";
+    var projeto = await datasource.getById(1);
+
+    expect(nameExpected, projeto.nome);
+  });
+
+  test("Deve deletar um projeto", () async {
+    var deletedProject = 9;
+    var isResult = await datasource.delete(deletedProject);
+
+    expect(true, isResult);
   });
 }

@@ -1,4 +1,4 @@
-import 'package:forestinv_mobile/app/modules/intro/intro_Page.dart';
+import 'package:forestinv_mobile/app/modules/intro/intro_page.dart';
 import 'package:forestinv_mobile/app/modules/intro/intro_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

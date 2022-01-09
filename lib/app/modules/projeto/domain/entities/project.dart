@@ -45,12 +45,6 @@ class Project extends Equatable implements BaseEntity {
       };
 
   @override
-  List<Object?> get props => [
-        id,
-        nome,
-        area,
-        visibilidadeProjetoEnum,
-        dataCriacao,
-        ultimaAtualizacao,
-      ];
+  List<Object?> get props =>
+      [id, nome, area, visibilidadeProjetoEnum, dataCriacao];
 }

@@ -7,7 +7,7 @@ import 'package:forestinv_mobile/controller/base_controller.dart';
 
 class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
   static final String _baseUrl =
-      'https://forestinv-api.herokuapp.com/v1/api/projetos';
+      'http://forestinvapi-env.eba-xhmpqqqz.us-east-1.elasticbeanstalk.com/v1/api/projetos';
 
   final DioClient dioClient;
 
@@ -38,9 +38,27 @@ class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
   }
 
   @override
-  Future<bool> delete(num projectId) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<bool> delete(num projectId) async {
+    try {
+      await dioClient.delete(_baseUrl, '/$projectId');
+
+      return true;
+    } on DioError catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data}');
+        print('HEADERS: ${e.response?.headers}');
+      } else {
+        // Error due to setting up or sending the request
+        print('Error sending request!');
+        print(e.message);
+      }
+
+      throw DatasourceError();
+    }
   }
 
   @override
@@ -83,8 +101,8 @@ class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
 
   @override
   Future<Project> getById(num projectId) async {
-    /*try {
-      Response response = await _dioClient.instance.get('/projetos/$projectId');
+    try {
+      Response response = await dioClient.get(_baseUrl, '/$projectId');
 
       print('User Info: ${response.data}');
 
@@ -104,8 +122,7 @@ class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
       }
 
       throw DatasourceError();
-    }*/
-    throw Exception();
+    }
   }
 
   @override

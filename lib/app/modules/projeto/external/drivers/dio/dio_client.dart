@@ -58,13 +58,30 @@ class DioClient {
   }
 
   //DELETE
+  //PUT
+  Future<void> delete(String baseUrl, String api) async {
+    var uri = Uri.parse(baseUrl + api);
+    try {
+      await Dio()
+          .delete(baseUrl + api)
+          .timeout(Duration(seconds: TIME_OUT_DURATION));
+    } on SocketException {
+      throw FetchDataException('No Internet connection', uri.toString());
+    } on TimeoutException {
+      throw ApiNotRespondingException(
+          'API not responded in time', uri.toString());
+    }
+  }
+
   //OTHER
 
   dynamic _processResponse(response) {
     switch (response.statusCode) {
       case 200:
+        return response;
       case 201:
         return response;
+      case 204:
       case 400:
         throw BadRequestException(
             utf8.decode(response.bodyBytes), response.request!.url.toString());
