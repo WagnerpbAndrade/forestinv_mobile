@@ -10,7 +10,7 @@ void main() {
   final datasource = HerokuDatasourceImpl(dio);
   test("Deve retornar uma lista de projetos", () async {
     var projetos = await datasource.getAll();
-    expect(14, projetos.length);
+    expect(8, projetos.length);
   });
 
   test('Deve salvar um projeto', () async {

@@ -1,6 +1,7 @@
-import 'package:forestinv_mobile/app/modules/projeto/constants/ui_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/project_controller.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 class ProjetoPage extends StatefulWidget {
@@ -9,6 +10,8 @@ class ProjetoPage extends StatefulWidget {
 }
 
 class ProjetoPageState extends State<ProjetoPage> {
+  final controller = Modular.get<ProjectController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,6 +22,10 @@ class ProjetoPageState extends State<ProjetoPage> {
         ),
       ),
       body: buildFloatingSearchBar(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
     );
   }
 
@@ -26,50 +33,33 @@ class ProjetoPageState extends State<ProjetoPage> {
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
 
-    return FloatingSearchBar(
-      hint: 'Pesquisar projetos',
-      scrollPadding: const EdgeInsets.only(top: 16, bottom: 56),
-      transitionDuration: const Duration(milliseconds: 800),
-      transitionCurve: Curves.easeInOut,
-      physics: const BouncingScrollPhysics(),
-      axisAlignment: isPortrait ? 0.0 : -1.0,
-      openAxisAlignment: 0.0,
-      width: isPortrait ? 600 : 500,
-      debounceDelay: const Duration(milliseconds: 500),
-      onQueryChanged: (query) {
-        // Call your model, bloc, controller here.
-      },
-      // Specify a custom transition to be used for
-      // animating between opened and closed stated.
-      transition: CircularFloatingSearchBarTransition(),
-      actions: [
-        FloatingSearchBarAction(
-          showIfOpened: false,
-          child: CircularButton(
-            icon: const Icon(Icons.place),
-            onPressed: () {},
-          ),
-        ),
-        FloatingSearchBarAction.icon(
-          icon: Icon(Icons.close_rounded),
-          onTap: () => {},
-          showIfOpened: true,
-          showIfClosed: false,
-        )
-      ],
-      builder: (context, transition) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Material(
-            color: Colors.white,
-            elevation: 4.0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: Colors.accents.map((color) {
-                return Container(height: 112, color: color);
-              }).toList(),
-            ),
-          ),
+    return FutureBuilder<List<Project>>(
+      future: controller.getAllProject(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.none) {
+          return Container();
+        }
+
+        if (snapshot.hasError) {
+          return Center(
+            child: Text("Servidor indisponível no momento"),
+          );
+        }
+
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        List<Project> projetos = snapshot.data as List<Project>;
+        return ListView.builder(
+          itemCount: projetos.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(projetos[index].nome),
+              subtitle: Text("Área: " + projetos[index].area.toString()),
+            );
+          },
         );
       },
     );

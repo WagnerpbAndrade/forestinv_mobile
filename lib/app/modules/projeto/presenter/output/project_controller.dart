@@ -6,13 +6,14 @@ import 'package:forestinv_mobile/controller/base_controller.dart';
 import 'package:get/get.dart';
 
 class ProjectController extends GetxController with BaseController {
-  Future<List<Project>?> getAllProject() async {
+  Future<List<Project>> getAllProject() async {
     final usecase = Modular.get<GetAllProjectsUsecase>();
     try {
-      final result = await usecase.getAll();
-      //if (result.isRight()) {
-      //return result.getOrElse((_) => <Project>[]);
-      // }
+      var result = await usecase.getAll();
+      if (result == null) {
+        return List.empty();
+      }
+      return result;
     } catch (e) {
       throw e;
     }
