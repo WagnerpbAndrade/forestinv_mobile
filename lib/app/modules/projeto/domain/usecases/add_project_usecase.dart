@@ -5,10 +5,10 @@ abstract class AddProjectUsecase {
   Future<void> add(Project project);
 }
 
-class addProjectUsecaseImpl implements AddProjectUsecase {
+class AddProjectUsecaseImpl implements AddProjectUsecase {
   final ProjectRepository repository;
 
-  addProjectUsecaseImpl(this.repository);
+  AddProjectUsecaseImpl(this.repository);
 
   @override
   Future<void> add(Project project) {

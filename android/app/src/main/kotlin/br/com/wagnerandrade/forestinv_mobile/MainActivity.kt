@@ -8,8 +8,8 @@ class MainActivity: FlutterActivity() {
 
     override fun attachBaseContext(newBase: Context?) {
         super.attachBaseContext(newBase)
-        SDK.init(
-                newBase
-        ) { it.setAppID("sl5mcu/forestinv") }
+//        SDK.init(
+//                newBase
+//        ) { it.setAppID("sl5mcu/forestinv") }
     }
 }

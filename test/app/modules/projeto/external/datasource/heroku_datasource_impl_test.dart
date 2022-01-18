@@ -47,4 +47,11 @@ void main() {
 
     expect(true, isResult);
   });
+
+  test("Deve retornar uma lista de projetos buscados por nome", () async {
+    final searchName = 'teste';
+    var projetos = await datasource.getByName(searchName);
+    print(projetos);
+    expect(projetos.length, 1);
+  });
 }

@@ -11,6 +11,8 @@ abstract class ProjectRepository {
 
   Future<Either<Failure, Project>> getById(num projectId);
 
+  Future<List<Project>> getByName(String name);
+
   Future<Either<Failure, void>> update(Project project);
 
   Future<Either<Failure, void>> enable(Project project);

@@ -14,4 +14,6 @@ abstract class ProjetoDatasource {
   Future<bool> delete(num projectId);
 
   Future<Project> getById(num projectId);
+
+  Future<List<Project>> getByName(String name);
 }

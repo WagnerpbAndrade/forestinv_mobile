@@ -72,4 +72,15 @@ class ProjectRepositoryImpl implements ProjectRepository {
     // TODO: implement update
     throw UnimplementedError();
   }
+
+  @override
+  Future<List<Project>> getByName(String name) async {
+    try {
+      return await datasource.getByName(name);
+    } on DatasourceError catch (e) {
+      throw Left(e);
+    } catch (e) {
+      throw Left(DatasourceError());
+    }
+  }
 }

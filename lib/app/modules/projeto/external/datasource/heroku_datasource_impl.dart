@@ -148,4 +148,31 @@ class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
       throw DatasourceError();
     }
   }
+
+  @override
+  Future<List<Project>> getByName(String name) async {
+    try {
+      final Response response =
+          await dioClient.get(_baseUrl + '/name?value=', '$name');
+
+      print('User Info: ${response.data}');
+
+      return (response.data as List).map((e) => Project.fromMap(e)).toList();
+    } on DioError catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data}');
+        print('HEADERS: ${e.response?.headers}');
+      } else {
+        // Error due to setting up or sending the request
+        print('Error sending request!');
+        print(e.message);
+      }
+
+      throw DatasourceError();
+    }
+  }
 }
