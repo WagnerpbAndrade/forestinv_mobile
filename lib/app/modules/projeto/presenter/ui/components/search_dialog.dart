@@ -13,6 +13,9 @@ class SearchDialog extends StatelessWidget {
     return Stack(
       children: [
         Positioned(
+          top: 2,
+          left: 2,
+          right: 2,
           child: Card(
             child: TextField(
               controller: controller,
