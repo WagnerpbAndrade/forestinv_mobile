@@ -9,25 +9,39 @@ part of 'home_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeStore on HomeStoreBase, Store {
-  final _$counterAtom = Atom(name: 'HomeStoreBase.counter');
+  final _$searchAtom = Atom(name: 'HomeStoreBase.search');
 
   @override
-  int get counter {
-    _$counterAtom.reportRead();
-    return super.counter;
+  String get search {
+    _$searchAtom.reportRead();
+    return super.search;
   }
 
   @override
-  set counter(int value) {
-    _$counterAtom.reportWrite(value, super.counter, () {
-      super.counter = value;
+  set search(String value) {
+    _$searchAtom.reportWrite(value, super.search, () {
+      super.search = value;
     });
+  }
+
+  final _$HomeStoreBaseActionController =
+      ActionController(name: 'HomeStoreBase');
+
+  @override
+  void setSearch(String value) {
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.setSearch');
+    try {
+      return super.setSearch(value);
+    } finally {
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
-counter: ${counter}
+search: ${search}
     ''';
   }
 }
