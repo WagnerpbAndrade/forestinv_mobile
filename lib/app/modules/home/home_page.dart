@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/modules/home/components/project_card.dart';
 import 'package:forestinv_mobile/app/modules/home/home_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 
@@ -56,13 +57,14 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           actions: [
             Observer(
               builder: (_) {
-                if (controller.search.isEmpty)
+                if (controller.search.isEmpty) {
                   return IconButton(
                     onPressed: () {
                       openSearch();
                     },
                     icon: const Icon(Icons.search),
                   );
+                }
                 return IconButton(
                   onPressed: () {
                     controller.setSearch('');
@@ -73,12 +75,82 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
             )
           ],
         ),
-        body: listProjects(),
+        body: projetosFiltrados(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           child: const Icon(Icons.add),
         ),
       ),
+    );
+  }
+
+  Widget projetosFiltrados() {
+    return Observer(
+      builder: (_) {
+        if (controller.error.isNotEmpty) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.error,
+                color: Colors.white,
+                size: 100,
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              const Text(
+                'Ocorreu um erro!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          );
+        }
+        if (controller.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (controller.projectsList.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.border_clear,
+                  color: Colors.white,
+                  size: 100,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                const Text(
+                  'Humm...Nenhum projeto encontrado!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        return ListView.builder(
+            itemCount: controller.projectsList.length,
+            itemBuilder: (_, index) {
+              return ProjectCard(
+                project: controller.projectsList[index],
+              );
+            });
+      },
     );
   }
 

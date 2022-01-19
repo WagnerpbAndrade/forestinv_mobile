@@ -7,8 +7,8 @@ import 'home_page.dart';
 class HomeModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => HomeStore()),
     Bind((i) => ProjetoStore()),
+    Bind.lazySingleton((i) => HomeStore(i.get())),
   ];
 
   @override
