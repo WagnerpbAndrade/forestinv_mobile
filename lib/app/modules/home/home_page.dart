@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/home/components/project_card.dart';
 import 'package:forestinv_mobile/app/modules/home/home_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/projeto_store.dart';
 
 import 'components/search_dialog.dart';
 
@@ -16,6 +17,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeStore> {
+  final projectStore = Modular.get<ProjetoStore>();
+
   void openSearch() async {
     final search = await showDialog(
       context: context,
@@ -135,6 +138,8 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           itemBuilder: (_, index) {
             return ProjectCard(
               project: controller.projectsList[index],
+              onTap: () =>
+                  projectStore.goToProjectPage(controller.projectsList[index]),
             );
           },
         );
@@ -167,6 +172,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           itemBuilder: (_, index) {
             return ProjectCard(
               project: projetos[index],
+              onTap: () => projectStore.goToProjectPage(projetos[index]),
             );
           },
         );

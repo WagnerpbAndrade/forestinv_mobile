@@ -40,4 +40,8 @@ abstract class _ProjetoStoreBase with Store {
       rethrow;
     }
   }
+
+  void goToProjectPage(Project project) {
+    Modular.to.pushNamed('/projeto', arguments: project);
+  }
 }
