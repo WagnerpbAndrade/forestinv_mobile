@@ -84,6 +84,17 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
     );
   }
 
+  Widget body() {
+    return Observer(
+      builder: (_) {
+        if (controller.search.isEmpty) {
+          return listProjects();
+        }
+        return projetosFiltrados();
+      },
+    );
+  }
+
   Widget projetosFiltrados() {
     return Observer(
       builder: (_) {
@@ -111,45 +122,22 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
             ],
           );
         }
+        if (controller.projectsList.isEmpty) {
+          return listProjects();
+        }
         if (controller.isLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
-        if (controller.projectsList.isEmpty) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.border_clear,
-                  color: Colors.white,
-                  size: 100,
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                const Text(
-                  'Humm...Nenhum projeto encontrado!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
         return ListView.builder(
-            itemCount: controller.projectsList.length,
-            itemBuilder: (_, index) {
-              return ProjectCard(
-                project: controller.projectsList[index],
-              );
-            });
+          itemCount: controller.projectsList.length,
+          itemBuilder: (_, index) {
+            return ProjectCard(
+              project: controller.projectsList[index],
+            );
+          },
+        );
       },
     );
   }
@@ -176,10 +164,9 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
         final List<Project> projetos = snapshot.data as List<Project>;
         return ListView.builder(
           itemCount: projetos.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(projetos[index].nome),
-              subtitle: Text("Área: ${projetos[index].area.toString()}"),
+          itemBuilder: (_, index) {
+            return ProjectCard(
+              project: projetos[index],
             );
           },
         );

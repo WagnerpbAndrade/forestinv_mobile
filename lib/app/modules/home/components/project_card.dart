@@ -17,6 +17,7 @@ class ProjectCard extends StatelessWidget {
         ),
         elevation: 8,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const SizedBox(
               height: 100,
@@ -24,7 +25,9 @@ class ProjectCard extends StatelessWidget {
               child: Icon(Icons.three_g_mobiledata),
             ),
             Text(project.nome),
-            Text('Alegre - ES'),
+            Expanded(
+              child: Text('Área: ${project.area.toStringAsFixed(2)}'),
+            )
           ],
         ),
       ),

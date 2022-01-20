@@ -13,9 +13,14 @@ abstract class HomeStoreBase with Store {
     autorun((_) async {
       try {
         setLoading(true);
-        final projetosFiltrados = await projetoStore.getProjectsByName(search);
+        List<Project> projetos;
+        if (search.isEmpty) {
+          projetos = await projetoStore.getAllProject();
+        } else {
+          projetos = await projetoStore.getProjectsByName(search);
+        }
         projectsList.clear();
-        projectsList.addAll(projetosFiltrados);
+        projectsList.addAll(projetos);
         setError('');
         setLoading(false);
       } catch (e) {
