@@ -1,10 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/client/dio/dio_client.dart';
 import 'package:forestinv_mobile/app/modules/intro/intro_module.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_id_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_name_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/external/datasource/heroku_datasource_impl.dart';
-import 'package:forestinv_mobile/app/modules/projeto/external/drivers/dio/dio_client.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/repository/projeto_repository_impl.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/projeto_module.dart';
 

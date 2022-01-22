@@ -1,4 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/modules/parcela/domain/entities/list_parcela_response.dart';
+import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
+import 'package:forestinv_mobile/app/modules/parcela/parcela_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_id_project_usecase.dart';
@@ -36,6 +39,15 @@ abstract class _ProjetoStoreBase with Store {
         return result.fold(
             (l) => throw Exception("Projeto não encontrato"), (r) => r);
       }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<Parcela>> getAllParcelas(String projectId) async {
+    final parcelaStore = Modular.get<ParcelaStore>();
+    try {
+      return await parcelaStore.getAllParcelaByProject(projectId);
     } catch (e) {
       rethrow;
     }

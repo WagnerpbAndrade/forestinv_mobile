@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
+import 'package:forestinv_mobile/app/modules/parcela/output/components/parcela_card.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/projeto_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/components/bar_button.dart';
 
 class ProjetoPage extends StatefulWidget {
@@ -10,7 +14,7 @@ class ProjetoPage extends StatefulWidget {
   ProjetoPageState createState() => ProjetoPageState();
 }
 
-class ProjetoPageState extends State<ProjetoPage> {
+class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +27,7 @@ class ProjetoPageState extends State<ProjetoPage> {
           children: [
             topBar(),
             Expanded(
-              child: conteudo(),
+              child: buildListParcelas(),
             ),
           ],
         ),
@@ -35,14 +39,37 @@ class ProjetoPageState extends State<ProjetoPage> {
     );
   }
 
-  Widget conteudo() {
-    return ListView.builder(
-        itemCount: 15,
-        itemBuilder: (_, index) {
-          return ListTile(
-            title: Text('Parcela $index'),
+  Widget buildListParcelas() {
+    return FutureBuilder<List<Parcela>>(
+      future: controller.getAllParcelas(widget.project.id.toString()),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.none) {
+          return Container();
+        }
+
+        if (snapshot.hasError) {
+          return const Center(
+            child: Text("Servidor indisponível no momento"),
           );
-        });
+        }
+
+        if (!snapshot.hasData) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        final List<Parcela> parcelas = snapshot.data as List<Parcela>;
+        return ListView.builder(
+          itemCount: parcelas.length,
+          itemBuilder: (_, index) {
+            return ParcelaCard(
+              parcela: parcelas[index],
+              onTap: () => {},
+            );
+          },
+        );
+      },
+    );
   }
 
   Row topBar() {

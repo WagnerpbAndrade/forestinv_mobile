@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:forestinv_mobile/app/core/client/dio/dio_client.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/external/datasource/heroku_datasource_impl.dart';
-import 'package:forestinv_mobile/app/modules/projeto/external/drivers/dio/dio_client.dart';
 
 void main() {
   final dio = DioClient();

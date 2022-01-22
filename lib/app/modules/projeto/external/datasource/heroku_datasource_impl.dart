@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
+import 'package:forestinv_mobile/app/core/client/dio/dio_client.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
-import 'package:forestinv_mobile/app/modules/projeto/external/drivers/dio/dio_client.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/datasource/projeto_datasource.dart';
 import 'package:forestinv_mobile/controller/base_controller.dart';
 
 class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
-  static final String _baseUrl =
-      'http://forestinvapi-env.eba-xhmpqqqz.us-east-1.elasticbeanstalk.com/v1/api/projetos';
+  static const String _baseUrl =
+      'https://forestinv-api.herokuapp.com/v1/api/projetos';
 
   final DioClient dioClient;
 
@@ -16,9 +16,10 @@ class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
   @override
   Future<void> addProject(Project project) async {
     try {
-      Response response = await dioClient.post(_baseUrl, '', project.toMap());
+      final Response response =
+          await dioClient.post(_baseUrl, '', project.toMap());
 
-      print('User Info: ${response.data}');
+      print('Projeto Info: ${response.data}');
     } on DioError catch (e) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
@@ -76,9 +77,9 @@ class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
   @override
   Future<List<Project>> getAll() async {
     try {
-      Response response = await dioClient.get(_baseUrl, '');
+      final Response response = await dioClient.get(_baseUrl, '');
 
-      print('User Info: ${response.data}');
+      print('Projeto Info: ${response.data}');
 
       return (response.data as List).map((e) => Project.fromMap(e)).toList();
     } on DioError catch (e) {
@@ -102,9 +103,9 @@ class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
   @override
   Future<Project> getById(num projectId) async {
     try {
-      Response response = await dioClient.get(_baseUrl, '/$projectId');
+      final Response response = await dioClient.get(_baseUrl, '/$projectId');
 
-      print('User Info: ${response.data}');
+      print('Projeto Info: ${response.data}');
 
       return Project.fromMap(response.data);
     } on DioError catch (e) {
@@ -128,9 +129,10 @@ class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
   @override
   Future<void> update(Project project) async {
     try {
-      Response response = await dioClient.put(_baseUrl, '', project.toMap());
+      final Response response =
+          await dioClient.put(_baseUrl, '', project.toMap());
 
-      print('User Info: ${response.data}');
+      print('Projeto Info: ${response.data}');
     } on DioError catch (e) {
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
@@ -155,7 +157,7 @@ class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
       final Response response =
           await dioClient.get(_baseUrl + '/name?value=', '$name');
 
-      print('User Info: ${response.data}');
+      print('Projeto Info: ${response.data}');
 
       return (response.data as List).map((e) => Project.fromMap(e)).toList();
     } on DioError catch (e) {
