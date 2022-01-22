@@ -1,7 +1,4 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app/modules/parcela/domain/entities/list_parcela_response.dart';
-import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
-import 'package:forestinv_mobile/app/modules/parcela/presenter/output/parcela_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_id_project_usecase.dart';
@@ -13,6 +10,46 @@ part 'projeto_store.g.dart';
 class ProjetoStore = _ProjetoStoreBase with _$ProjetoStore;
 
 abstract class _ProjetoStoreBase with Store {
+  _ProjetoStoreBase() {
+    autorun((_) async {
+      try {
+        setLoading(true);
+        List<Project> projetos;
+        if (search.isEmpty) {
+          projetos = await getAllProject();
+        } else {
+          projetos = await getProjectsByName(search);
+        }
+        projectsList.clear();
+        projectsList.addAll(projetos);
+        setError('');
+        setLoading(false);
+      } catch (e) {
+        setError(e.toString());
+      }
+    });
+  }
+
+  ObservableList<Project> projectsList = ObservableList<Project>();
+
+  @observable
+  String search = '';
+
+  @action
+  void setSearch(String value) => search = value;
+
+  @observable
+  String error = '';
+
+  @action
+  void setError(String value) => error = value;
+
+  @observable
+  bool isLoading = false;
+
+  @action
+  void setLoading(bool value) => isLoading = value;
+
   Future<List<Project>> getAllProject() async {
     final usecase = Modular.get<GetAllProjectsUsecase>();
     try {
@@ -44,16 +81,7 @@ abstract class _ProjetoStoreBase with Store {
     }
   }
 
-  Future<List<Parcela>> getAllParcelas(String projectId) async {
-    final parcelaStore = Modular.get<ParcelaStore>();
-    try {
-      return await parcelaStore.getAllParcelaByProject(projectId);
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  void goToProjectPage(Project project) {
-    Modular.to.pushNamed('/projeto', arguments: project);
+  void goToParcelaPage(Project project) {
+    Modular.to.pushNamed('/parcela', arguments: project);
   }
 }

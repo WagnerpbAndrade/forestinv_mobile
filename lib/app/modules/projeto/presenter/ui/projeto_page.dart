@@ -1,47 +1,138 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
-import 'package:forestinv_mobile/app/modules/parcela/presenter/components/parcela_card.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/projeto_store.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/components/bar_button.dart';
+
+import 'components/project_card.dart';
+import 'components/search_dialog.dart';
 
 class ProjetoPage extends StatefulWidget {
-  final Project project;
-
-  const ProjetoPage({required this.project});
   @override
   ProjetoPageState createState() => ProjetoPageState();
 }
 
 class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
+  void openSearch() async {
+    final search = await showDialog(
+      context: context,
+      builder: (_) => SearchDialog(
+        currentSearch: controller.search,
+      ),
+    );
+    if (search != null) controller.setSearch(search);
+    print(search);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.project.nome),
-        centerTitle: true,
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            topBar(),
-            Expanded(
-              child: buildListParcelas(),
-            ),
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        drawer: Drawer(
+          child: Container(
+            width: 200,
+          ),
+        ),
+        appBar: AppBar(
+          title: Observer(
+            builder: (_) {
+              if (controller.search.isEmpty) return Container();
+              return GestureDetector(
+                onTap: () => openSearch(),
+                child: LayoutBuilder(
+                  builder: (_, constraints) {
+                    return Container(
+                      width: constraints.biggest.width,
+                      child: Text(controller.search),
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+          actions: [
+            Observer(
+              builder: (_) {
+                if (controller.search.isEmpty) {
+                  return IconButton(
+                    onPressed: () {
+                      openSearch();
+                    },
+                    icon: const Icon(Icons.search),
+                  );
+                }
+                return IconButton(
+                  onPressed: () {
+                    controller.setSearch('');
+                  },
+                  icon: const Icon(Icons.close),
+                );
+              },
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
+        body: buidListProjetos(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
 
-  Widget buildListParcelas() {
-    return FutureBuilder<List<Parcela>>(
-      future: controller.getAllParcelas(widget.project.id.toString()),
+  Widget buidListProjetos() {
+    return Observer(
+      builder: (_) {
+        if (controller.error.isNotEmpty) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.error,
+                color: Colors.white,
+                size: 100,
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              const Text(
+                'Ocorreu um erro!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          );
+        }
+        if (controller.projectsList.isEmpty) {
+          return listProjects();
+        }
+        if (controller.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return ListView.builder(
+          itemCount: controller.projectsList.length,
+          itemBuilder: (_, index) {
+            return ProjectCard(
+              project: controller.projectsList[index],
+              onTap: () =>
+                  controller.goToParcelaPage(controller.projectsList[index]),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget listProjects() {
+    return FutureBuilder<List<Project>>(
+      future: controller.getAllProject(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.none) {
           return Container();
@@ -58,43 +149,17 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
             child: CircularProgressIndicator(),
           );
         }
-        final List<Parcela> parcelas = snapshot.data as List<Parcela>;
+        final List<Project> projetos = snapshot.data as List<Project>;
         return ListView.builder(
-          itemCount: parcelas.length,
+          itemCount: projetos.length,
           itemBuilder: (_, index) {
-            return ParcelaCard(
-              parcela: parcelas[index],
-              onTap: () => {},
+            return ProjectCard(
+              project: projetos[index],
+              onTap: () => controller.goToParcelaPage(projetos[index]),
             );
           },
         );
       },
-    );
-  }
-
-  Row topBar() {
-    return Row(
-      children: [
-        BarButton(
-          label: 'Parcelas',
-          decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(color: Colors.grey),
-            ),
-          ),
-          onTap: () {},
-        ),
-        BarButton(
-          label: 'Medições',
-          decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(color: Colors.grey),
-              left: BorderSide(color: Colors.grey),
-            ),
-          ),
-          onTap: () {},
-        ),
-      ],
     );
   }
 }

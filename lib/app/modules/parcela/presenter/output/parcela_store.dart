@@ -17,4 +17,8 @@ abstract class _ParcelaStoreBase with Store {
       rethrow;
     }
   }
+
+  void goToMedicaoPage(Parcela parcela) {
+    Modular.to.pushNamed('/medicao', arguments: parcela);
+  }
 }
