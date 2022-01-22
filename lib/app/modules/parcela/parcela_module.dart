@@ -1,6 +1,7 @@
-import 'package:forestinv_mobile/app//modules/parcela/parcela_store.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app/modules/parcela/output/parcela_page.dart';
+
+import 'presenter/output/parcela_store.dart';
+import 'presenter/ui/parcela_page.dart';
 
 class ParcelaModule extends Module {
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
-import 'package:forestinv_mobile/app/modules/parcela/output/components/parcela_card.dart';
+import 'package:forestinv_mobile/app/modules/parcela/presenter/components/parcela_card.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/projeto_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/components/bar_button.dart';

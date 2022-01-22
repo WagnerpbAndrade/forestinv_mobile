@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app//modules/parcela/parcela_store.dart';
 import 'package:flutter/material.dart';
+import 'package:forestinv_mobile/app/modules/parcela/presenter/output/parcela_store.dart';
 
 class ParcelaPage extends StatefulWidget {
   final String title;
@@ -8,6 +8,7 @@ class ParcelaPage extends StatefulWidget {
   @override
   ParcelaPageState createState() => ParcelaPageState();
 }
+
 class ParcelaPageState extends State<ParcelaPage> {
   final ParcelaStore store = Modular.get();
 
