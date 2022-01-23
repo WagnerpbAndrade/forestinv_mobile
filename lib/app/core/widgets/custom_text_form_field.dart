@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:forestinv_mobile/app/core/theme/theme_app.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final Function validar;
@@ -50,9 +50,9 @@ class CustomTextFormField extends StatelessWidget {
                 style: !valido ? BorderStyle.none : BorderStyle.solid,
               ),
             ),
-            fillColor: ThemeApp.primaryColor.withOpacity(0.2),
+            fillColor: ColorsConst.primaryColor.withOpacity(0.1),
           ),
-          cursorColor: ThemeApp.primaryColor,
+          cursorColor: ColorsConst.primaryColor,
           keyboardType: textType,
         ),
       ),

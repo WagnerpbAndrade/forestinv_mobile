@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 
 class NewProjectController {
-  final TextEditingController nomeController = TextEditingController();
-  final TextEditingController areaController = TextEditingController();
+  TextEditingController nomeController = TextEditingController();
+  TextEditingController areaController = TextEditingController();
+  GlobalKey formKey = GlobalKey<FormState>();
+
+  NewProjectController() {
+    nomeController = TextEditingController();
+    areaController = TextEditingController();
+    formKey = GlobalKey<FormState>();
+  }
+
+  void salvarProjeto() {
+    //if (formKey.currentState!.validate()) {}
+    final nome = nomeController.text.toString();
+  }
 }

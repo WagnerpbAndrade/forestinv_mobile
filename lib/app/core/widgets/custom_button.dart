@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:forestinv_mobile/app/core/theme/theme_app.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 
 class CustomButton extends StatefulWidget {
   final Function action;
@@ -26,14 +26,14 @@ class _LoginButtonState extends State<CustomButton> {
             ),
           ),
           backgroundColor:
-              MaterialStateProperty.all<Color>(ThemeApp.pricipalButtonColor),
+              MaterialStateProperty.all<Color>(ColorsConst.secundaryColor),
         ),
         onPressed: () {
           widget.action();
         },
         child: Text(
           widget.title,
-          style: const TextStyle(color: ThemeApp.colorOnPrimary),
+          style: const TextStyle(color: ColorsConst.textColorSecundary),
         ),
       ),
     );

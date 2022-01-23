@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app/core/theme/theme_app.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_button.dart';
+import 'package:forestinv_mobile/app/core/widgets/custom_dropdown_button.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_text_form_field.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/new_project_controller.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/new_projeto_store.dart';
@@ -21,17 +22,13 @@ class _NewProjectPageState
       appBar: AppBar(
         title: const Text("Novo projeto"),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.save),
-            onPressed: () {},
-          )
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
+            key: newProjectController.formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               children: [
                 Observer(
@@ -41,7 +38,7 @@ class _NewProjectPageState
                       label: "Nome do projeto",
                       icon: const Icon(
                         Icons.person,
-                        color: ThemeApp.primaryColor,
+                        color: ColorsConst.primaryColor,
                       ),
                       validar: (value) {
                         store.name = value.toString();
@@ -62,7 +59,7 @@ class _NewProjectPageState
                       label: "Área do projeto",
                       icon: const Icon(
                         Icons.person,
-                        color: ThemeApp.primaryColor,
+                        color: ColorsConst.primaryColor,
                       ),
                       validar: (value) {
                         store.areaProjeto = value.toString();
@@ -78,6 +75,13 @@ class _NewProjectPageState
                       ),
                     );
                   },
+                ),
+                CustomDropdownButton(
+                  hint: 'Selecione',
+                  icon: Icons.arrow_drop_down_circle,
+                  items: const <String>["PUBLICO", "PRIVADO"],
+                  dropdownValue: 'PRIVADO',
+                  width: double.infinity,
                 ),
                 CustomButton(
                   title: "Salvar",
