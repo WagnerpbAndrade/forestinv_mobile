@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/widgets/custom_drawer/custom_drawer.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/projeto_controller.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/projeto_store.dart';
@@ -32,11 +33,7 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        drawer: Drawer(
-          child: Container(
-            width: 200,
-          ),
-        ),
+        drawer: const CustomDrawer(),
         appBar: AppBar(
           title: Observer(
             builder: (_) {
