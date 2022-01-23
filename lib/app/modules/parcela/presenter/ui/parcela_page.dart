@@ -4,7 +4,7 @@ import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dar
 import 'package:forestinv_mobile/app/modules/parcela/presenter/components/parcela_card.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/output/parcela_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/components/bar_button.dart';
+import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/components/bar_button.dart';
 
 class ParcelaPage extends StatefulWidget {
   final Project project;
@@ -19,13 +19,23 @@ class ParcelaPageState extends ModularState<ParcelaPage, ParcelaStore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.project.nome),
+        title: Text('Projeto: ${widget.project.nome}'),
         centerTitle: true,
       ),
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            topBar(),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              "Parcelas cadastradas",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             Expanded(
               child: buildListParcelas(),
             ),
@@ -69,32 +79,6 @@ class ParcelaPageState extends ModularState<ParcelaPage, ParcelaStore> {
           },
         );
       },
-    );
-  }
-
-  Row topBar() {
-    return Row(
-      children: [
-        BarButton(
-          label: 'Parcelas',
-          decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(color: Colors.grey),
-            ),
-          ),
-          onTap: () {},
-        ),
-        BarButton(
-          label: 'Medições',
-          decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(color: Colors.grey),
-              left: BorderSide(color: Colors.grey),
-            ),
-          ),
-          onTap: () {},
-        ),
-      ],
     );
   }
 }

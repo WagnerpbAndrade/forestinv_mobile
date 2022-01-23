@@ -4,6 +4,7 @@ import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dar
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/medicao_store.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 
+import 'components/bar_button.dart';
 import 'components/medicao_card.dart';
 
 class MedicaoPage extends StatefulWidget {
@@ -19,13 +20,19 @@ class MedicaoPageState extends ModularState<MedicaoPage, MedicaoStore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.parcela.numero.toString()),
+        title: Text('Parcela: ${widget.parcela.numero.toString()}'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.filter_alt_outlined),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Column(
           children: [
-            //topBar(),
+            topBar(),
             Expanded(
               child: buildListMedicoes(),
             ),
@@ -69,6 +76,22 @@ class MedicaoPageState extends ModularState<MedicaoPage, MedicaoStore> {
           },
         );
       },
+    );
+  }
+
+  Row topBar() {
+    return Row(
+      children: [
+        BarButton(
+          label: 'Filtros',
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: Colors.grey),
+            ),
+          ),
+          onTap: () {},
+        ),
+      ],
     );
   }
 }

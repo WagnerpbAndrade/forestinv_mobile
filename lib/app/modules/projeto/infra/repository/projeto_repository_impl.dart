@@ -1,5 +1,5 @@
-import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/core/interface/failure.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/repository/project_repository.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/datasource/projeto_datasource.dart';
@@ -11,15 +11,11 @@ class ProjectRepositoryImpl implements ProjectRepository {
   ProjectRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<Failure, void>> add(Project project) async {
+  Future<void> add(Project project) async {
     try {
-      final result = await datasource.addProject(project);
-
-      return Right(result);
-    } on DatasourceError catch (e) {
-      throw Left(e);
+      return await datasource.addProject(project);
     } catch (e) {
-      throw Left(DatasourceError());
+      throw e;
     }
   }
 

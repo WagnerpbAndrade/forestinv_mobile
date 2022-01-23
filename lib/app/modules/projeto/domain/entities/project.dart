@@ -1,7 +1,6 @@
+import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:forestinv_mobile/app/core/interface/base_entity.dart';
-
-import 'dart:convert';
 
 List<Project> projectFromMap(String str) =>
     List<Project>.from(json.decode(str).map((x) => Project.fromMap(x)));
@@ -17,7 +16,7 @@ class Project extends Equatable implements BaseEntity {
   final DateTime? dataCriacao;
   final DateTime? ultimaAtualizacao;
 
-  Project({
+  const Project({
     this.id,
     required this.nome,
     required this.area,

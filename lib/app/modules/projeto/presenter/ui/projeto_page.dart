@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/projeto_controller.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/projeto_store.dart';
 
 import 'components/project_card.dart';
@@ -13,6 +14,8 @@ class ProjetoPage extends StatefulWidget {
 }
 
 class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
+  final projetoController = Modular.get<ProjetoController>();
+
   void openSearch() async {
     final search = await showDialog(
       context: context,
@@ -74,7 +77,7 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
         ),
         body: buidListProjetos(),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () => projetoController.goToNewProject(),
           child: const Icon(Icons.add),
         ),
       ),
@@ -121,8 +124,8 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
           itemBuilder: (_, index) {
             return ProjectCard(
               project: controller.projectsList[index],
-              onTap: () =>
-                  controller.goToParcelaPage(controller.projectsList[index]),
+              onTap: () => projetoController
+                  .goToParcelaPage(controller.projectsList[index]),
             );
           },
         );
@@ -132,7 +135,7 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
 
   Widget listProjects() {
     return FutureBuilder<List<Project>>(
-      future: controller.getAllProject(),
+      future: projetoController.getAllProject(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.none) {
           return Container();
@@ -155,7 +158,7 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
           itemBuilder: (_, index) {
             return ProjectCard(
               project: projetos[index],
-              onTap: () => controller.goToParcelaPage(projetos[index]),
+              onTap: () => projetoController.goToParcelaPage(projetos[index]),
             );
           },
         );

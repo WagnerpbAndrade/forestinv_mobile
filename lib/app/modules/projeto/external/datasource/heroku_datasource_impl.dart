@@ -3,9 +3,8 @@ import 'package:forestinv_mobile/app/core/client/dio/dio_client.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/datasource/projeto_datasource.dart';
-import 'package:forestinv_mobile/controller/base_controller.dart';
 
-class HerokuDatasourceImpl with BaseController implements ProjetoDatasource {
+class HerokuDatasourceImpl implements ProjetoDatasource {
   static const String _baseUrl =
       'https://forestinv-api.herokuapp.com/v1/api/projetos';
 

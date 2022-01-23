@@ -5,7 +5,7 @@ import 'package:fpdart/fpdart.dart';
 abstract class ProjectRepository {
   Future<List<Project>> getAll();
 
-  Future<Either<Failure, void>> add(Project project);
+  Future<void> add(Project project);
 
   Future<Either<Failure, bool>> delete(num projectId);
 

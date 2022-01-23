@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/components/bar_button.dart';
+import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/components/bar_button.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({Key? key}) : super(key: key);
