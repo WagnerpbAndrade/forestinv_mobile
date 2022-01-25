@@ -76,16 +76,18 @@ class _NewProjectPageState
                     );
                   },
                 ),
-                CustomDropdownButton(
-                  hint: 'Selecione',
-                  icon: Icons.arrow_drop_down_circle,
-                  items: const <String>["PUBLICO", "PRIVADO"],
-                  dropdownValue: 'PRIVADO',
-                  width: double.infinity,
-                ),
+                // CustomDropdownButton(
+                //   hint: 'Selecione',
+                //   icon: Icons.arrow_drop_down_circle,
+                //   items: const <String>["PUBLICO", "PRIVADO"],
+                //   dropdownValue: 'PRIVADO',
+                //   width: double.infinity,
+                // ),
                 CustomButton(
                   title: "Salvar",
-                  action: () {},
+                  action: () {
+                    newProjectController.salvarProjeto();
+                  },
                 ),
               ],
             ),

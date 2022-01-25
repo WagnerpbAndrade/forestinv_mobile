@@ -2,6 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/medicao_module.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/output/parcela_module.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/add_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_id_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_name_project_usecase.dart';
@@ -26,6 +27,7 @@ class ProjetoModule extends Module {
     Bind((i) => GetAllProjectsUsecaseImpl(i.get())),
     Bind((i) => GetByIdProjectUsecaseImpl(i.get())),
     Bind((i) => GetByNameProjectUsecaseImpl(i.get())),
+    Bind((i) => AddProjectUsecaseImpl(i.get())),
     Bind((i) => ProjetoController()),
   ];
 

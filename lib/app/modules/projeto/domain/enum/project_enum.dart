@@ -1,0 +1,1 @@
+enum ProjectEnum { PUBLICO, PRIVADO }
