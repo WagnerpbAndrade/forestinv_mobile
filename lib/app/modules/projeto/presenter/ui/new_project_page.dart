@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_button.dart';
-import 'package:forestinv_mobile/app/core/widgets/custom_dropdown_button.dart';
+import 'package:forestinv_mobile/app/core/widgets/custom_snackbar.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_text_form_field.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/new_project_controller.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/new_projeto_store.dart';
@@ -16,6 +16,7 @@ class NewProjectPage extends StatefulWidget {
 class _NewProjectPageState
     extends ModularState<NewProjectPage, NewProjetoStore> {
   final newProjectController = Modular.get<NewProjectController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,6 +88,14 @@ class _NewProjectPageState
                   title: "Salvar",
                   action: () {
                     newProjectController.salvarProjeto();
+                    Navigator.of(context).pop();
+                    CustomSnackbar.showSnackBar(
+                      context: context,
+                      message: "Usuário salvo com sucesso.",
+                      color: Colors.purple,
+                      textColor: Colors.white,
+                      label: "Ok",
+                    );
                   },
                 ),
               ],

@@ -27,7 +27,7 @@ class ProjectCard extends StatelessWidget {
                 width: 100,
                 child: Icon(Icons.three_g_mobiledata),
               ),
-              Text(project.nome),
+              Expanded(child: Text(project.nome)),
               Expanded(
                 child: Text('Área: ${project.area.toStringAsFixed(2)}'),
               )
