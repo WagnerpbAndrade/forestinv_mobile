@@ -8,10 +8,10 @@ class CustomButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<CustomButton> createState() => _LoginButtonState();
+  State<CustomButton> createState() => _CustomButtonState();
 }
 
-class _LoginButtonState extends State<CustomButton> {
+class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
     return Container(

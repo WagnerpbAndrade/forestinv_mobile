@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:forestinv_mobile/app/core/client/dio/dio_client.dart';
+import 'package:forestinv_mobile/app/core/exceptions/app_exceptions.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/datasource/projeto_datasource.dart';
@@ -13,7 +14,7 @@ class HerokuDatasourceImpl implements ProjetoDatasource {
   HerokuDatasourceImpl(this.dioClient);
 
   @override
-  Future<void> addProject(Project project) async {
+  Future<void> save(Project project) async {
     try {
       final Response response =
           await dioClient.post(_baseUrl, '', project.toMap());
@@ -33,7 +34,9 @@ class HerokuDatasourceImpl implements ProjetoDatasource {
         print(e.message);
       }
 
-      throw DatasourceError();
+      throw const ApiNotRespondingException();
+    } catch (e) {
+      throw const ApiNotRespondingException();
     }
   }
 

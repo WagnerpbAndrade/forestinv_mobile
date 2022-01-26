@@ -1,11 +1,11 @@
-import 'package:forestinv_mobile/app/core/interface/failure.dart';
+import 'package:dartz/dartz.dart';
+import 'package:forestinv_mobile/app/core/exceptions/failure.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
-import 'package:fpdart/fpdart.dart';
 
 abstract class ProjectRepository {
   Future<List<Project>> getAll();
 
-  Future<void> add(Project project);
+  Future<Either<Failure, void>> save(Project project);
 
   Future<Either<Failure, bool>> delete(num projectId);
 

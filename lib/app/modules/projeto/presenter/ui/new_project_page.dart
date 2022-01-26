@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
+import 'package:forestinv_mobile/app/core/exceptions/error_object.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_button.dart';
+import 'package:forestinv_mobile/app/core/widgets/custom_error_dialog.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_snackbar.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_text_form_field.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/new_project_controller.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/new_projeto_store.dart';
+import 'package:mobx/mobx.dart';
 
 class NewProjectPage extends StatefulWidget {
   @override
@@ -16,6 +19,36 @@ class NewProjectPage extends StatefulWidget {
 class _NewProjectPageState
     extends ModularState<NewProjectPage, NewProjetoStore> {
   final newProjectController = Modular.get<NewProjectController>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    reaction(
+      (_) => newProjectController.failure,
+      (_) {
+        newProjectController.failure.fold(
+          () {
+            print("Reação right");
+            CustomSnackbar.showSnackBar(
+              context: context,
+              message: "Usuário salvo com sucesso.",
+              color: Colors.purple,
+              textColor: Colors.white,
+              label: "Ok",
+            );
+          },
+          (failure) {
+            print("Reação left");
+            CustomErrorDialog(
+              errorObject:
+                  ErrorObject.mapFailureToErrorObject(failure: failure),
+            );
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +68,14 @@ class _NewProjectPageState
                 Observer(
                   builder: (_) {
                     return CustomTextFormField(
+                      validator: store.validarNome,
                       controller: newProjectController.nomeController,
                       label: "Nome do projeto",
                       icon: const Icon(
                         Icons.person,
                         color: ColorsConst.primaryColor,
                       ),
-                      validar: (value) {
+                      onChanged: (value) {
                         store.name = value.toString();
                         store.textErrorName =
                             store.validarNome(store.name ?? "");
@@ -56,13 +90,14 @@ class _NewProjectPageState
                 Observer(
                   builder: (_) {
                     return CustomTextFormField(
+                      validator: store.validarAreaProjeto,
                       controller: newProjectController.areaController,
                       label: "Área do projeto",
                       icon: const Icon(
                         Icons.person,
                         color: ColorsConst.primaryColor,
                       ),
-                      validar: (value) {
+                      onChanged: (value) {
                         store.areaProjeto = value.toString();
                         store.textErrorAreaProjeto =
                             store.validarAreaProjeto(store.areaProjeto ?? '');
@@ -86,17 +121,7 @@ class _NewProjectPageState
                 // ),
                 CustomButton(
                   title: "Salvar",
-                  action: () {
-                    newProjectController.salvarProjeto();
-                    Navigator.of(context).pop();
-                    CustomSnackbar.showSnackBar(
-                      context: context,
-                      message: "Usuário salvo com sucesso.",
-                      color: Colors.purple,
-                      textColor: Colors.white,
-                      label: "Ok",
-                    );
-                  },
+                  action: () => newProjectController.salvarProjeto(),
                 ),
               ],
             ),

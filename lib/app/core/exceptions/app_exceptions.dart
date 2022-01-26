@@ -1,27 +1,38 @@
-class AppException implements Exception {
+import 'package:equatable/equatable.dart';
+
+class AppException extends Equatable implements Exception {
   final String? message;
   final String? prefix;
   final String? url;
 
-  AppException([this.message, this.prefix, this.url]);
+  const AppException([this.message, this.prefix, this.url]);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [message];
 }
 
 class BadRequestException extends AppException {
-  BadRequestException([String? message, String? url])
+  const BadRequestException({String? message, String? url})
       : super(message, 'Bad Request', url);
 }
 
 class FetchDataException extends AppException {
-  FetchDataException([String? message, String? url])
+  const FetchDataException({String? message, String? url})
       : super(message, 'Unable to process', url);
 }
 
 class ApiNotRespondingException extends AppException {
-  ApiNotRespondingException([String? message, String? url])
+  const ApiNotRespondingException({String? message, String? url})
       : super(message, 'Api not responded in time', url);
 }
 
 class UnAuthorizedException extends AppException {
-  UnAuthorizedException([String? message, String? url])
+  const UnAuthorizedException({String? message, String? url})
       : super(message, 'UnAuthorized request', url);
+}
+
+class NoConnectionException extends AppException {
+  const NoConnectionException({String? message, String? url})
+      : super(message, 'No connection', url);
 }

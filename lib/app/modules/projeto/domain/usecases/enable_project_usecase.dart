@@ -1,7 +1,7 @@
-import 'package:forestinv_mobile/app/core/interface/failure.dart';
+import 'package:dartz/dartz.dart';
+import 'package:forestinv_mobile/app/core/exceptions/failure.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/repository/project_repository.dart';
-import 'package:fpdart/fpdart.dart';
 
 abstract class EnableUsecase {
   Future<Either<Failure, void>> enable(Project project);

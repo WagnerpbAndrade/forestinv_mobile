@@ -18,7 +18,7 @@ void main() {
       visibilidadeProjetoEnum: "PRIVADO",
     );
 
-    final result = await datasource.addProject(newProjeto);
+    final result = await datasource.save(newProjeto);
   });
 
   test('Deve atualizar um projeto', () async {

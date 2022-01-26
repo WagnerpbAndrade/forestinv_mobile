@@ -1,7 +1,5 @@
-import 'package:forestinv_mobile/app/core/interface/failure.dart';
+import 'package:forestinv_mobile/app/core/exceptions/failure.dart';
 
 class DatasourceError extends Failure {
-  final String? message;
-
-  DatasourceError({this.message});
+  DatasourceError() : super('', '');
 }
