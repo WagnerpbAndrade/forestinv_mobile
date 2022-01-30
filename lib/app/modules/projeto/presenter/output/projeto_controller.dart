@@ -72,7 +72,7 @@ class ProjetoController {
     Modular.to.pushNamed('/parcela', arguments: project);
   }
 
-  void goToNewProject() {
-    Modular.to.pushNamed(RouterConst.ADD_PROJECT_ROUTER);
+  void goToNewProject(Project? project) {
+    Modular.to.pushNamed(RouterConst.ADD_PROJECT_ROUTER, arguments: project);
   }
 }

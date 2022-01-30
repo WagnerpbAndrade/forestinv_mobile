@@ -54,18 +54,6 @@ class ProjectDatasourceImpl implements ProjetoDatasource {
   }
 
   @override
-  Future<void> disable(Project project) {
-    // TODO: implement disable
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> enable(Project project) {
-    // TODO: implement enable
-    throw UnimplementedError();
-  }
-
-  @override
   Future<List<Project>> getAll() async {
     try {
       final Response response = await dioClient.get(_baseUrl, '');
@@ -118,27 +106,24 @@ class ProjectDatasourceImpl implements ProjetoDatasource {
   }
 
   @override
-  Future<void> update(Project project) async {
+  Future<Project> update(Project project) async {
     try {
       final Response response =
           await dioClient.put(_baseUrl, '', project.toMap());
 
       print('Projeto Info: ${response.data}');
-    } on DioError catch (e) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx and is also not 304.
-      if (e.response != null) {
-        print('Dio error!');
-        print('STATUS: ${e.response?.statusCode}');
-        print('DATA: ${e.response?.data}');
-        print('HEADERS: ${e.response?.headers}');
-      } else {
-        // Error due to setting up or sending the request
-        print('Error sending request!');
-        print(e.message);
-      }
 
-      throw DatasourceError();
+      return Project.fromMap(response.data);
+    } on DioError catch (e, stacktrace) {
+      if (e.type == DioErrorType.connectTimeout ||
+          e.type == DioErrorType.receiveTimeout) {
+        throw UpdateProjectNoInternetConnection();
+      } else if (e.type == DioErrorType.other) {
+        throw UpdateProjectNoInternetConnection();
+      } else {
+        throw UpdateProjectError(
+            stacktrace, 'ProjectDatasourceImpl-update', e, e.message);
+      }
     }
   }
 

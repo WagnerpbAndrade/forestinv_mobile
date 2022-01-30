@@ -57,7 +57,6 @@ class ProjectRepositoryImpl implements ProjectRepository {
   Future<Either<Failure, Project>> getById(num projectId) async {
     try {
       final result = await datasource.getById(projectId);
-
       return Right(result);
     } on DatasourceError catch (e) {
       throw Left(e);
@@ -67,9 +66,12 @@ class ProjectRepositoryImpl implements ProjectRepository {
   }
 
   @override
-  Future<Either<Failure, void>> update(Project project) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<Either<Failure, Project>> update(Project project) async {
+    try {
+      return Right(await datasource.update(project));
+    } on Failure catch (e) {
+      return Left(e);
+    }
   }
 
   @override

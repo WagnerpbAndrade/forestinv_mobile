@@ -3,17 +3,17 @@ import 'package:forestinv_mobile/app/core/exceptions/failure.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/repository/project_repository.dart';
 
-abstract class UpdateUsecase {
-  Future<Either<Failure, void>> update(Project project);
+abstract class UpdateProjectUsecase {
+  Future<Either<Failure, Project>> update(Project project);
 }
 
-class UpdateProjectUsecaseImpl implements UpdateUsecase {
+class UpdateProjectUsecaseImpl implements UpdateProjectUsecase {
   final ProjectRepository repository;
 
   UpdateProjectUsecaseImpl(this.repository);
 
   @override
-  Future<Either<Failure, void>> update(Project project) async {
-    return repository.update(project);
+  Future<Either<Failure, Project>> update(Project project) async {
+    return await repository.update(project);
   }
 }

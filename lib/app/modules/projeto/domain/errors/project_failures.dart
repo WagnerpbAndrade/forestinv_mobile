@@ -38,3 +38,19 @@ class DeleteProjectError extends Failure {
           errorMessage: errorMessage,
         );
 }
+
+class UpdateProjectNoInternetConnection extends NoInternetConnection {}
+
+class UpdateProjectError extends Failure {
+  UpdateProjectError(
+    StackTrace stackTrace,
+    String label,
+    dynamic exception,
+    String errorMessage,
+  ) : super(
+          stacktrace: stackTrace,
+          label: label,
+          exception: exception,
+          errorMessage: errorMessage,
+        );
+}

@@ -77,7 +77,7 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
         ),
         body: buidListProjetos(),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => projetoController.goToNewProject(),
+          onPressed: () => projetoController.goToNewProject(null),
           child: const Icon(Icons.add),
         ),
       ),
@@ -171,7 +171,10 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
                   desc: 'Deseja continuar com a exclusão do projeto?',
                 ).show();
               },
-              onPressedUpdate: () {},
+              onPressedUpdate: () {
+                projetoController
+                    .goToNewProject(controller.projectsList[index]);
+              },
             );
           },
         );
@@ -217,8 +220,7 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
                         projetoController.deleteProject(
                           controller.projectsList[index].id.toString(),
                         );
-                        store.projectsList
-                            .remove(controller.projectsList[index]);
+                        store.projectsList.remove(projetos[index]);
                         Modular.to.pop();
                       },
                     ),
@@ -234,7 +236,9 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
                   desc: 'Deseja continuar com a exclusão do projeto?',
                 ).show();
               },
-              onPressedUpdate: () {},
+              onPressedUpdate: () {
+                projetoController.goToNewProject(projetos[index]);
+              },
             );
           },
         );

@@ -5,11 +5,7 @@ abstract class ProjetoDatasource {
 
   Future<Project> save(Project project);
 
-  Future<void> update(Project project);
-
-  Future<void> disable(Project project);
-
-  Future<void> enable(Project project);
+  Future<Project> update(Project project);
 
   Future<bool> delete(String projectId);
 

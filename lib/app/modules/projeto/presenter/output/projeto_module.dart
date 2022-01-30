@@ -7,6 +7,7 @@ import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_pro
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_id_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_name_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/save_project_usecase.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/update_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/external/datasource/project_datasource_impl.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/repository/projeto_repository_impl.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/projeto_controller.dart';
@@ -31,13 +32,16 @@ class ProjetoModule extends Module {
     Bind((i) => SaveProjectUsecaseImpl(i.get())),
     Bind((i) => ProjetoController()),
     Bind((i) => DeleteProjectUsecaseImpl(i())),
+    Bind((i) => UpdateProjectUsecaseImpl(i())),
   ];
 
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => ProjetoPage()),
     ChildRoute(RouterConst.ADD_PROJECT_ROUTER,
-        child: (_, args) => NewProjectPage()),
+        child: (_, args) => NewProjectPage(
+              project: args.data,
+            )),
     ModuleRoute('/parcela', module: ParcelaModule()),
     ModuleRoute('/medicao', module: MedicaoModule()),
   ];
