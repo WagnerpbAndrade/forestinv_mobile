@@ -40,7 +40,7 @@ void main() {
   });
 
   test("Deve deletar um projeto", () async {
-    var deletedProject = 9;
+    final deletedProject = '205';
     var isResult = await datasource.delete(deletedProject);
 
     expect(true, isResult);

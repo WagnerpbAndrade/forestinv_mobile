@@ -22,3 +22,19 @@ class SaveProjectError extends Failure {
           errorMessage: errorMessage,
         );
 }
+
+class DeleteProjectNoInternetConnection extends NoInternetConnection {}
+
+class DeleteProjectError extends Failure {
+  DeleteProjectError(
+    StackTrace stackTrace,
+    String label,
+    dynamic exception,
+    String errorMessage,
+  ) : super(
+          stacktrace: stackTrace,
+          label: label,
+          exception: exception,
+          errorMessage: errorMessage,
+        );
+}

@@ -20,9 +20,12 @@ class ProjectRepositoryImpl implements ProjectRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> delete(num projectId) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<Either<Failure, bool>> delete(String projectId) async {
+    try {
+      return Right(await datasource.delete(projectId));
+    } on Failure catch (e) {
+      return Left(e);
+    }
   }
 
   @override

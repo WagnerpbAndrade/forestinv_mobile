@@ -7,7 +7,7 @@ abstract class ProjectRepository {
 
   Future<Either<Failure, Project>> save(Project project);
 
-  Future<Either<Failure, bool>> delete(num projectId);
+  Future<Either<Failure, bool>> delete(String projectId);
 
   Future<Either<Failure, Project>> getById(num projectId);
 
