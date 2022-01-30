@@ -1,16 +1,35 @@
+import 'package:flutter/material.dart';
+
 abstract class Failure {
-  final String title;
-  final String message;
+  final String errorMessage;
 
-  Failure(this.title, this.message);
+  Failure({
+    StackTrace? stacktrace,
+    String? label,
+    dynamic exception,
+    this.errorMessage = '',
+  }) {
+    if (stacktrace != null) {
+      debugPrintStack(label: label, stackTrace: stacktrace);
+    }
+    //Lançar exceção para analytics
+  }
 }
 
-class ApiNotRespondingFailure extends Failure {
-  ApiNotRespondingFailure({required String title, required String message})
-      : super(title, message);
-}
+class UnknowError extends Failure {
+  final String errorMessage;
+  final dynamic exception;
+  final StackTrace? stacktrace;
+  final String? label;
 
-class NoConnectionFailure extends Failure {
-  NoConnectionFailure({required String title, required String message})
-      : super(title, message);
+  UnknowError({
+    required this.errorMessage,
+    this.exception,
+    this.stacktrace,
+    this.label,
+  }) : super(
+          stacktrace: stacktrace,
+          label: label,
+          exception: exception,
+        );
 }

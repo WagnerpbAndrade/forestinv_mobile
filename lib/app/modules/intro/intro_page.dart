@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/utils/responsive_config.dart';
 import 'package:forestinv_mobile/app/modules/intro/intro_store.dart';
-import 'package:flutter/material.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage();
@@ -22,7 +22,7 @@ class IntroPageState extends State<IntroPage> {
   Widget build(BuildContext context) {
     ResponsiveConfig.init(context);
     return Scaffold(
-      backgroundColor: ColorsConst.primaryColor,
+      backgroundColor: ColorsConst.primary,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
@@ -30,7 +30,7 @@ class IntroPageState extends State<IntroPage> {
             width: ResponsiveConfig.screenWidth,
             height: ResponsiveConfig.screenHeight! * 0.35,
             decoration: BoxDecoration(
-                color: ColorsConst.secundaryColor,
+                color: ColorsConst.secondary,
                 borderRadius: BorderRadius.circular(100)),
           )
         ],

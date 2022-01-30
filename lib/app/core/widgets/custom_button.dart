@@ -26,14 +26,14 @@ class _CustomButtonState extends State<CustomButton> {
             ),
           ),
           backgroundColor:
-              MaterialStateProperty.all<Color>(ColorsConst.secundaryColor),
+              MaterialStateProperty.all<Color>(ColorsConst.secondary),
         ),
         onPressed: () {
           widget.action();
         },
         child: Text(
           widget.title,
-          style: const TextStyle(color: ColorsConst.textColorSecundary),
+          style: const TextStyle(color: ColorsConst.textColorPrimary),
         ),
       ),
     );

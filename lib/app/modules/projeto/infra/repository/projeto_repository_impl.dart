@@ -1,6 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:forestinv_mobile/app/core/constants/error_message.dart';
-import 'package:forestinv_mobile/app/core/exceptions/app_exceptions.dart';
 import 'package:forestinv_mobile/app/core/exceptions/failure.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
@@ -13,19 +11,11 @@ class ProjectRepositoryImpl implements ProjectRepository {
   ProjectRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<Failure, void>> save(Project project) async {
+  Future<Either<Failure, Project>> save(Project project) async {
     try {
       return Right(await datasource.save(project));
-    } on ApiNotRespondingException {
-      return Left(ApiNotRespondingFailure(
-        title: ErrorMessage.TITLE,
-        message: ErrorMessage.message_api_failure,
-      ));
-    } catch (e) {
-      return Left(ApiNotRespondingFailure(
-        title: ErrorMessage.TITLE,
-        message: ErrorMessage.message_api_failure,
-      ));
+    } on Failure catch (e) {
+      return Left(e);
     }
   }
 

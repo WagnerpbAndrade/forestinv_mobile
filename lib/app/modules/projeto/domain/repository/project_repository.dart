@@ -5,7 +5,7 @@ import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dar
 abstract class ProjectRepository {
   Future<List<Project>> getAll();
 
-  Future<Either<Failure, void>> save(Project project);
+  Future<Either<Failure, Project>> save(Project project);
 
   Future<Either<Failure, bool>> delete(num projectId);
 

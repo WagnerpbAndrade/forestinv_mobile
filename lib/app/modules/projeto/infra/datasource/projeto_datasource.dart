@@ -3,7 +3,7 @@ import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dar
 abstract class ProjetoDatasource {
   Future<List<Project>> getAll();
 
-  Future<void> save(Project project);
+  Future<Project> save(Project project);
 
   Future<void> update(Project project);
 

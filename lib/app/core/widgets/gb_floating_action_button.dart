@@ -7,7 +7,7 @@ class GbFloatingActionButton extends StatelessWidget {
   final Color? foregroundColor;
   final Function onPressed;
 
-  GbFloatingActionButton({
+  const GbFloatingActionButton({
     required this.icon,
     this.backgroundColor,
     this.foregroundColor,
@@ -18,8 +18,8 @@ class GbFloatingActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       child: Icon(icon),
-      backgroundColor: backgroundColor ?? ColorsConst.secundaryColor,
-      foregroundColor: foregroundColor ?? ColorsConst.textColorSecundary,
+      backgroundColor: backgroundColor ?? ColorsConst.secondary,
+      foregroundColor: foregroundColor ?? ColorsConst.textColorPrimary,
       onPressed: () => onPressed(),
     );
   }

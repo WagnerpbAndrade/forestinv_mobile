@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 
 class CustomDrawerHeader extends StatelessWidget {
   const CustomDrawerHeader({Key? key}) : super(key: key);
@@ -6,7 +7,7 @@ class CustomDrawerHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.purple,
+      color: ColorsConst.secondary,
       height: 120,
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(

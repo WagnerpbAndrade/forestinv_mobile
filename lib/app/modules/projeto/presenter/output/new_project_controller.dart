@@ -1,7 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app/core/exceptions/failure.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/save_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/projeto_store.dart';
@@ -19,19 +17,22 @@ class NewProjectController {
   void setLoading(bool value) => loading = value;
 
   @observable
-  Option<Failure> failure = none();
+  String errorMessage = '';
 
   @action
-  void setFailure(Option<Failure> value) => failure = value;
+  void setErrorMessage(String value) => errorMessage = value;
+
+  @observable
+  bool error = false;
+
+  @action
+  void setError(bool value) => error = value;
 
   @action
   void salvarProjeto() async {
     if (formKey.currentState!.validate()) {
-      setLoading(true);
-      setFailure(none());
-
       final projetoStore = Modular.get<ProjetoStore>();
-      final usecase = Modular.get<AddProjectUsecase>();
+      final usecase = Modular.get<SaveProjectUsecase>();
       final nome = nomeController.text.toString();
       final area = double.parse(areaController.text.toString());
 
@@ -43,17 +44,16 @@ class NewProjectController {
       final resultEither = await usecase.save(projectToSave);
       resultEither.fold(
         (failureResult) {
-          setFailure(optionOf(failureResult));
-          setLoading(false);
-          print('Entrou no left');
+          setError(true);
+          setErrorMessage(failureResult.errorMessage);
         },
-        (_) {
-          setLoading(false);
+        (project) {
+          setError(false);
           projetoStore.projectsList.add(projectToSave);
-          //Modular.to.pop();
-          print('Entrou no right');
         },
       );
+    } else {
+      print("Entrou no else do Salvar");
     }
   }
 }

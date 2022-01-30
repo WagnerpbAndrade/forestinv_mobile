@@ -13,7 +13,7 @@ class ErrorObject extends Equatable {
   @override
   List<Object?> get props => [title, message];
 
-  static ErrorObject mapFailureToErrorObject({required Failure failure}) {
-    return ErrorObject(title: failure.title, message: failure.message);
-  }
+  // static ErrorObject mapFailureToErrorObject({required Failure failure}) {
+  //   return ErrorObject(title: failure.title, message: failure.message);
+  // }
 }

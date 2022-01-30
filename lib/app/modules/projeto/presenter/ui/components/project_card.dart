@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 
 class ProjectCard extends StatelessWidget {
@@ -30,7 +31,26 @@ class ProjectCard extends StatelessWidget {
               Expanded(child: Text(project.nome)),
               Expanded(
                 child: Text('Área: ${project.area.toStringAsFixed(2)}'),
-              )
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.edit,
+                      color: ColorsConst.error,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.close_outlined,
+                      color: ColorsConst.error,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

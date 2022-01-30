@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:forestinv_mobile/app/core/client/dio/dio_client.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
-import 'package:forestinv_mobile/app/modules/projeto/external/datasource/heroku_datasource_impl.dart';
+import 'package:forestinv_mobile/app/modules/projeto/external/datasource/project_datasource_impl.dart';
 
 void main() {
   final dio = DioClient();
-  final datasource = HerokuDatasourceImpl(dio);
+  final datasource = ProjectDatasourceImpl(dio);
   test("Deve retornar uma lista de projetos", () async {
     final projetos = await datasource.getAll();
     expect(projetos.length, 10);

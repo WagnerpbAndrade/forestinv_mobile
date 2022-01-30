@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ColorsConst {
-  static const Color primaryColor = Colors.purple;
-  static const Color primaryColorLight = const Color(0xFF7C43BD);
-  static const Color primaryColorDark = const Color(0xFF12005E);
-  static const Color secundaryColor = const Color(0xFFFFEB3B);
-  static const Color secundaryColorLight = const Color(0xFFFFFF72);
-  static const Color secundaryColorDark = const Color(0xFFC8B900);
-  static const Color textColorPrimary = const Color(0xFFFFFFFF);
-  static const Color textColorSecundary = const Color(0xFF000000);
-  static const Color grey400 = const Color(0xFFBDBDBD);
-  static const Color grey600 = const Color(0xFF757575);
-  static const Color scaffoldBGColor = Colors.white;
+  static const Color primary = Color(0xff9C23FC);
+  static const Color onPrimary = Color(0xFFFFFFFF);
+  static const Color primaryVariant = Color(0xFF7B5CD4);
+  static const Color secondary = Color(0xFF66BB6A);
+  static const Color onSecondary = Color(0xFFFFFFFF);
+  static const Color secondaryVariant = Color(0xFF53B0B7);
+  static const Color textColorPrimary = Color(0xFFFFFFFF);
+  static const Color surface = Color(0xFFFFFFFF);
+  static const Color onSurface = Color(0xFF000000);
+  static const Color background = Color(0xFFF5F4F9);
+  static const Color onBackground = Color(0xFF000000);
+  static const Color error = Color(0xFFB00020);
+  static const Color onError = Color(0xFFFFFFFF);
 }

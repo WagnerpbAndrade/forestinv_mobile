@@ -1,42 +1,36 @@
 import 'package:dio/dio.dart';
 import 'package:forestinv_mobile/app/core/client/dio/dio_client.dart';
-import 'package:forestinv_mobile/app/core/exceptions/app_exceptions.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/errors/project_failures.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/datasource/projeto_datasource.dart';
 
-class HerokuDatasourceImpl implements ProjetoDatasource {
+class ProjectDatasourceImpl implements ProjetoDatasource {
   static const String _baseUrl =
       'https://forestinv-api.herokuapp.com/v1/api/projetos';
 
   final DioClient dioClient;
 
-  HerokuDatasourceImpl(this.dioClient);
+  ProjectDatasourceImpl(this.dioClient);
 
   @override
-  Future<void> save(Project project) async {
+  Future<Project> save(Project project) async {
     try {
       final Response response =
           await dioClient.post(_baseUrl, '', project.toMap());
 
       print('Projeto Info: ${response.data}');
-    } on DioError catch (e) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx and is also not 304.
-      if (e.response != null) {
-        print('Dio error!');
-        print('STATUS: ${e.response?.statusCode}');
-        print('DATA: ${e.response?.data}');
-        print('HEADERS: ${e.response?.headers}');
+      return Project.fromMap(response.data);
+    } on DioError catch (e, stacktrace) {
+      if (e.type == DioErrorType.connectTimeout ||
+          e.type == DioErrorType.receiveTimeout) {
+        throw SaveProjectNoInternetConnection();
+      } else if (e.type == DioErrorType.other) {
+        throw SaveProjectNoInternetConnection();
       } else {
-        // Error due to setting up or sending the request
-        print('Error sending request!');
-        print(e.message);
+        throw SaveProjectError(
+            stacktrace, 'ProjectDatasourceImpl-save', e, e.message);
       }
-
-      throw const ApiNotRespondingException();
-    } catch (e) {
-      throw const ApiNotRespondingException();
     }
   }
 

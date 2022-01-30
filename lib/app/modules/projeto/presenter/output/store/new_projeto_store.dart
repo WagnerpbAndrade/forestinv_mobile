@@ -25,7 +25,7 @@ abstract class _NewProjetoStoreBase with Store {
       return "Nome precisa ter no mínimo 6 letras";
     }
     errorName = false;
-    return "";
+    return '';
   }
 
   @action
@@ -47,6 +47,6 @@ abstract class _NewProjetoStoreBase with Store {
       return "Informe uma área válida";
     }
     errorAreaProjeto = false;
-    return "";
+    return '';
   }
 }
