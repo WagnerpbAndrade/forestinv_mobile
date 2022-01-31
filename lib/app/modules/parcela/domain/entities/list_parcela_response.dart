@@ -80,20 +80,21 @@ class Content {
   DateTime? dataCriacao;
   DateTime? ultimaAtualizacao;
 
-  Content(
-      {required this.id,
-      required this.numero,
-      required this.area,
-      required this.largura,
-      required this.numTalhao,
-      required this.latitude,
-      required this.longitude,
-      this.dataPlantio,
-      required this.espacamento,
-      required this.idadeParcela,
-      required this.tipoParcelaEnum,
-      this.dataCriacao,
-      this.ultimaAtualizacao});
+  Content({
+    required this.id,
+    required this.numero,
+    required this.area,
+    required this.largura,
+    required this.numTalhao,
+    required this.latitude,
+    required this.longitude,
+    this.dataPlantio,
+    required this.espacamento,
+    required this.idadeParcela,
+    required this.tipoParcelaEnum,
+    this.dataCriacao,
+    this.ultimaAtualizacao,
+  });
 
   factory Content.fromJson(Map<String, dynamic> json) => Content(
         id: json['id'],

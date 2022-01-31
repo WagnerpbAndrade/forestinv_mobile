@@ -13,7 +13,7 @@ class UpdateProjectUsecaseImpl implements UpdateProjectUsecase {
   UpdateProjectUsecaseImpl(this.repository);
 
   @override
-  Future<Either<Failure, Project>> update(Project project) async {
-    return await repository.update(project);
+  Future<Either<Failure, Project>> update(Project project) {
+    return repository.update(project);
   }
 }

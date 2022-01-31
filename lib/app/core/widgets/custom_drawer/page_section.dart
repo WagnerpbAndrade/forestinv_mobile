@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/modules/login/presenter/output/controller/login_controller.dart';
 
 import 'page_tile.dart';
 
 class PageSection extends StatelessWidget {
-  const PageSection({Key? key}) : super(key: key);
+  PageSection({Key? key}) : super(key: key);
+
+  final loginController = Modular.get<LoginController>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +34,7 @@ class PageSection extends StatelessWidget {
         PageTile(
           label: 'Sair',
           iconData: Icons.exit_to_app,
-          onTap: () {},
+          onTap: () => loginController.logoutGoogle(),
           highlighted: false,
         ),
       ],

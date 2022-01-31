@@ -3,7 +3,7 @@ import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final Function onChanged;
-  final Function validator;
+  final Function? validator;
   final String textError;
   final bool isPassWord;
   final bool valido;
@@ -22,7 +22,7 @@ class CustomTextFormField extends StatelessWidget {
     this.isPassWord = false,
     required this.textType,
     required this.controller,
-    required this.validator,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -38,7 +38,7 @@ class CustomTextFormField extends StatelessWidget {
         margin: const EdgeInsets.only(top: 5),
         height: 80,
         child: TextFormField(
-          validator: (value) => validator(value),
+          validator: validator == null ? null : (value) => validator!(value),
           controller: controller,
           obscureText: isPassWord,
           onChanged: (value) => onChanged(value),

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "581893178637",
+    "project_id": "forestinv-9786e",
+    "storage_bucket": "forestinv-9786e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581893178637:android:5c43c11ad38268e0551c44",
+        "android_client_info": {
+          "package_name": "br.com.wagnerandrade.forestinv_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581893178637-p3epqovrn2sf03pisnt09jkdsqn5u085.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.wagnerandrade.forestinv_mobile",
+            "certificate_hash": "f33c3ff98ae161653caa394b92a62713781bb5c3"
+          }
+        },
+        {
+          "client_id": "581893178637-mcde5ivvmbufbmgdlsvkcjo7cti49fu0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLItRVJpK-5zjsInnoKHwhHfQd-BWVrcY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "581893178637-mcde5ivvmbufbmgdlsvkcjo7cti49fu0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

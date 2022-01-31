@@ -14,4 +14,7 @@ class ColorsConst {
   static const Color onBackground = Color(0xFF000000);
   static const Color error = Color(0xFFB00020);
   static const Color onError = Color(0xFFFFFFFF);
+  static const Color fundoBotaoGoogle = Color(0XFFDEF4FC);
+  static const Color corTextoBotaoGoogle = Color(0XFF4990B6);
+  static const Color corBordaBotaoGoogle = Color(0xFF4283BF);
 }
