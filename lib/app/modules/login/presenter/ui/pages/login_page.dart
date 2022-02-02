@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/output/stores/login_store.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/ui/widgets/components/google_login_button.dart';
+import 'package:forestinv_mobile/app/modules/login/presenter/ui/widgets/components/login_footer.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/ui/widgets/components/logo_login.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/ui/widgets/form_login.dart';
 
@@ -27,10 +28,8 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          padding: const EdgeInsets.all(16),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -38,6 +37,10 @@ class LoginPageState extends State<LoginPage> {
                 const LogoLogin(),
                 FormLogin(),
                 const GoogleLoginButton(),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                ),
+                const LoginFooter(),
               ],
             ),
           ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  final Function onChanged;
+  final Function? onChanged;
   final Function? validator;
   final String textError;
   final bool isPassWord;
@@ -16,7 +16,7 @@ class CustomTextFormField extends StatelessWidget {
     Key? key,
     required this.label,
     required this.icon,
-    required this.onChanged,
+    this.onChanged,
     required this.textError,
     required this.valido,
     this.isPassWord = false,
@@ -41,7 +41,7 @@ class CustomTextFormField extends StatelessWidget {
           validator: validator == null ? null : (value) => validator!(value),
           controller: controller,
           obscureText: isPassWord,
-          onChanged: (value) => onChanged(value),
+          onChanged: onChanged == null ? null : (value) => onChanged!(value),
           decoration: InputDecoration(
             errorText: textError == "" ? "" : textError,
             prefixIcon: icon,

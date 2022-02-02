@@ -16,4 +16,9 @@ class LoginRepositoryImpl implements LoginRepository {
   Future<void> logout() {
     return datasource.logout();
   }
+
+  @override
+  Future<ApiResponse> loginWithEmailAndPassword(String email, String password) {
+    return datasource.loginWithEmailAndPassword(email, password);
+  }
 }

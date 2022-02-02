@@ -38,10 +38,12 @@ class ProjetoModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => ProjetoPage()),
-    ChildRoute(RouterConst.ADD_PROJECT_ROUTER,
-        child: (_, args) => NewProjectPage(
-              project: args.data,
-            )),
+    ChildRoute(
+      RouterConst.ADD_PROJECT_ROUTER,
+      child: (_, args) => NewProjectPage(
+        project: args.data,
+      ),
+    ),
     ModuleRoute('/parcela', module: ParcelaModule()),
     ModuleRoute('/medicao', module: MedicaoModule()),
   ];

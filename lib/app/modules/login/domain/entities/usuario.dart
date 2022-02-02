@@ -1,10 +1,10 @@
-abstract class User {
+abstract class Usuario {
   String nome;
   String email;
   String uid;
   String photoUrl;
 
-  User({
+  Usuario({
     required this.nome,
     required this.email,
     required this.uid,
