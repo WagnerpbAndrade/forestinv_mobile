@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_text_form_field.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/output/controller/login_controller.dart';
+import 'package:forestinv_mobile/app/modules/login/presenter/output/controller/recovery_password_controller.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/output/stores/login_store.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/ui/widgets/components/login_button.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -17,6 +18,7 @@ class _FormLoginState extends State<FormLogin> {
   final GlobalKey<FormState> formStateKey = GlobalKey<FormState>();
   final store = Modular.get<LoginStore>();
   final controller = Modular.get<LoginController>();
+  final recoverPasswordController = Modular.get<RecoveryPasswordController>();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +74,7 @@ class _FormLoginState extends State<FormLogin> {
                 alignment: Alignment.topRight,
                 child: TextButton(
                   onPressed: () {
-                    //loginController.irRecuperarSenha();
+                    recoverPasswordController.goToRecoveryPasswordPage();
                   },
                   child: const Text(
                     "Esqueci minha senha",

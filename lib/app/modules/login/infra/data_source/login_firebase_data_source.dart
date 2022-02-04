@@ -6,4 +6,6 @@ abstract class LoginFirebaseDatasource {
   Future<ApiResponse> loginWithEmailAndPassword(String email, String password);
 
   Future<void> logout();
+
+  Future<ApiResponse> recoverPassword(final String email);
 }

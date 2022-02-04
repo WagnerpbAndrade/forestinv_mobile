@@ -29,19 +29,22 @@ class LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const LogoLogin(),
-                FormLogin(),
-                const GoogleLoginButton(),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.2,
-                ),
-                const LoginFooter(),
-              ],
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const LogoLogin(),
+                  FormLogin(),
+                  const GoogleLoginButton(),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.2,
+                  ),
+                  const LoginFooter(),
+                ],
+              ),
             ),
           ),
         ),

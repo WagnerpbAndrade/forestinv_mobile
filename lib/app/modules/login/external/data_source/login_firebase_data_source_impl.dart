@@ -72,4 +72,17 @@ class LoginFirebaseDataSourceImpl implements LoginFirebaseDatasource {
       return ApiResponse.error(message: 'Não foi possível fazer o login');
     }
   }
+
+  @override
+  Future<ApiResponse> recoverPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return ApiResponse.ok(message: 'Email enviado com sucesso!');
+    } catch (e) {
+      print('LoginFirebaseDataSourceImpl-recoverPassword: $e');
+      return ApiResponse.error(
+          message:
+              'Não foi possível enviar o email. Tente novamente mais tarde!');
+    }
+  }
 }
