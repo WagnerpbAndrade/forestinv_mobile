@@ -13,7 +13,7 @@ abstract class _RecoveryPasswordStoreBase with Store {
   String email = "";
 
   @action
-  validarEmail() {
+  bool validarEmail() {
     errorEmail = true;
     if (!email.contains("@") || !email.contains(".com") || email.length <= 3) {
       textoErroEmail = "O email está incorreto";

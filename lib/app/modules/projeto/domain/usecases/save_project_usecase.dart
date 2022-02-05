@@ -13,7 +13,7 @@ class SaveProjectUsecaseImpl implements SaveProjectUsecase {
   SaveProjectUsecaseImpl(this.repository);
 
   @override
-  Future<Either<Failure, Project>> save(Project project) async {
-    return await repository.save(project);
+  Future<Either<Failure, Project>> save(Project project) {
+    return repository.save(project);
   }
 }

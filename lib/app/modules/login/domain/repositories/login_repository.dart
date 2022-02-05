@@ -8,4 +8,6 @@ abstract class LoginRepository {
   Future<void> logout();
 
   Future<ApiResponse> recoverPassword(final String email);
+
+  Future<ApiResponse> createUser(final String email, final String password);
 }

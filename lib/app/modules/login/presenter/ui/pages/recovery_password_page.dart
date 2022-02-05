@@ -17,20 +17,19 @@ class RecoveryPasswordPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: ColorsConst.primary),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
         title: Center(
           child: Container(
             margin: const EdgeInsets.only(right: 56),
             child: const Text(
-              "Esqueci a senha",
-              style: TextStyle(color: ColorsConst.primary),
+              "ESQUECI MINHA SENHA",
+              style: TextStyle(
+                color: ColorsConst.textColorPrimary,
+                fontWeight: FontWeight.w400,
+                wordSpacing: 2,
+              ),
             ),
           ),
         ),
-        backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       body: SingleChildScrollView(

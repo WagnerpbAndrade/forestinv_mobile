@@ -45,4 +45,12 @@ class LoginController {
     Modular.to.popAndPushNamed(RouterConst.INITIAL_ROUTER);
     print('Usuário deslogado');
   }
+
+  void goToRecoveryPasswordPage() {
+    Modular.to.pushNamed(RouterConst.RECOVERY_PASSWORD_ROUTER);
+  }
+
+  void goToSignUpPage() {
+    Modular.to.pushNamed(RouterConst.SIGN_UP_ROUTER);
+  }
 }

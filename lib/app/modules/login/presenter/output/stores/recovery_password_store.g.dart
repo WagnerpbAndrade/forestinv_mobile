@@ -59,7 +59,7 @@ mixin _$RecoveryPasswordStore on _RecoveryPasswordStoreBase, Store {
       ActionController(name: '_RecoveryPasswordStoreBase');
 
   @override
-  dynamic validarEmail() {
+  bool validarEmail() {
     final _$actionInfo = _$_RecoveryPasswordStoreBaseActionController
         .startAction(name: '_RecoveryPasswordStoreBase.validarEmail');
     try {

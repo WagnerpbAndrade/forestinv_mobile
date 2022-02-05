@@ -42,7 +42,7 @@ abstract class _LoginStoreBase with Store {
   String textoErroFirebase = "";
 
   @action
-  validarNome() {
+  bool validarNome() {
     if (nome.length < 4) {
       textoErroNome = "Nome pequeno";
       return false;
@@ -52,7 +52,7 @@ abstract class _LoginStoreBase with Store {
   }
 
   @action
-  validarEmail() {
+  bool validarEmail() {
     temErroFirebase = false;
     textoErroFirebase = "";
     errorEmail = true;
@@ -66,7 +66,7 @@ abstract class _LoginStoreBase with Store {
   }
 
   @action
-  validarSenha() {
+  bool validarSenha() {
     erroSenha = true;
     if (senha.length < 6) {
       textoErroSenha = "Usuário/senha inválido(a)";
@@ -88,7 +88,7 @@ abstract class _LoginStoreBase with Store {
   }
 
   @action
-  validarConfirmacaoSenha() {
+  bool validarConfirmacaoSenha() {
     erroConfirmacaoSenha = true;
     if (senha != confirmacaoSenha) {
       textoErroConfirmacaoSenha = "Senhas não conferem";
@@ -108,7 +108,7 @@ abstract class _LoginStoreBase with Store {
   }
 
   @action
-  retornoErroFirebaseLogin(String erro) {
+  void retornoErroFirebaseLogin(String erro) {
     switch (erro) {
       case "Usuário não encontrado":
         textoErroFirebase = "Usuário não encontrado";

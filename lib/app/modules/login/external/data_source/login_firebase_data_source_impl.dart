@@ -85,4 +85,32 @@ class LoginFirebaseDataSourceImpl implements LoginFirebaseDatasource {
               'Não foi possível enviar o email. Tente novamente mais tarde!');
     }
   }
+
+  @override
+  Future<ApiResponse> createUser(String email, String password) async {
+    try {
+      final UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      final User? user = userCredential.user;
+      if (user != null) {
+        final UserModelFirebase userModelFirebase = UserModelFirebase(
+          email: user.email,
+          nome: '',
+          uid: user.uid,
+          photoUrl: '',
+        );
+        return ApiResponse.ok(result: userModelFirebase);
+      }
+      return ApiResponse.error(
+          message: 'Não foi possível criar sua conta. Tente novamente!');
+    } catch (e) {
+      print('LoginFirebaseDataSourceImpl-createUser: $e');
+      return ApiResponse.error(
+          message: 'Não foi possível criar sua conta. Tente novamente!');
+    }
+  }
 }

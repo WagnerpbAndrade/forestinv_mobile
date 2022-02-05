@@ -1,6 +1,6 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/intro/intro_page.dart';
 import 'package:forestinv_mobile/app/modules/intro/intro_store.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class IntroModule extends Module {
   @override
@@ -10,6 +10,6 @@ class IntroModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => IntroPage()),
+    ChildRoute('/', child: (_, args) => const IntroPage()),
   ];
 }

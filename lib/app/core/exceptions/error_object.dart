@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:forestinv_mobile/app/core/exceptions/failure.dart';
 
 class ErrorObject extends Equatable {
   const ErrorObject({

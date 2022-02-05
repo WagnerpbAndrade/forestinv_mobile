@@ -14,7 +14,7 @@ class ParcelaRepositoryImpl implements ParcelaRepository {
 
       return result;
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 }

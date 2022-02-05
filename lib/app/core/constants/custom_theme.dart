@@ -19,7 +19,7 @@ class CustomTheme {
         onError: Colors.red,
         error: Colors.red,
       ),
-      buttonTheme: ButtonThemeData(),
+      buttonTheme: const ButtonThemeData(),
     );
   }
 }

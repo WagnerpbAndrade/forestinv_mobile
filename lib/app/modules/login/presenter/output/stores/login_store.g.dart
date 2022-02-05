@@ -243,7 +243,7 @@ mixin _$LoginStore on _LoginStoreBase, Store {
       ActionController(name: '_LoginStoreBase');
 
   @override
-  dynamic validarNome() {
+  bool validarNome() {
     final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
         name: '_LoginStoreBase.validarNome');
     try {
@@ -254,7 +254,7 @@ mixin _$LoginStore on _LoginStoreBase, Store {
   }
 
   @override
-  dynamic validarEmail() {
+  bool validarEmail() {
     final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
         name: '_LoginStoreBase.validarEmail');
     try {
@@ -265,7 +265,7 @@ mixin _$LoginStore on _LoginStoreBase, Store {
   }
 
   @override
-  dynamic validarSenha() {
+  bool validarSenha() {
     final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
         name: '_LoginStoreBase.validarSenha');
     try {
@@ -287,7 +287,7 @@ mixin _$LoginStore on _LoginStoreBase, Store {
   }
 
   @override
-  dynamic validarConfirmacaoSenha() {
+  bool validarConfirmacaoSenha() {
     final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
         name: '_LoginStoreBase.validarConfirmacaoSenha');
     try {
@@ -298,7 +298,7 @@ mixin _$LoginStore on _LoginStoreBase, Store {
   }
 
   @override
-  dynamic retornoErroFirebaseLogin(String erro) {
+  void retornoErroFirebaseLogin(String erro) {
     final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
         name: '_LoginStoreBase.retornoErroFirebaseLogin');
     try {
