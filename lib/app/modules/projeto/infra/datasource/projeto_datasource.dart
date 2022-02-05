@@ -12,4 +12,8 @@ abstract class ProjetoDatasource {
   Future<Project> getById(num projectId);
 
   Future<List<Project>> getByName(String name);
+
+  Future<List<Project>> getAllByUser(String uuid);
+
+  Future<List<Project>> getByNameAndUser(String name, String uuid);
 }

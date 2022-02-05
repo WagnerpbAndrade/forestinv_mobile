@@ -183,7 +183,7 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
 
   Widget listProjects() {
     return FutureBuilder<List<Project>>(
-      future: projetoController.getAllProject(),
+      future: projetoController.getAllProjectByUser(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.none) {
           return Container();

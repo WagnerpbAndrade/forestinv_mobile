@@ -18,4 +18,8 @@ abstract class ProjectRepository {
   Future<Either<Failure, void>> enable(Project project);
 
   Future<Either<Failure, void>> disable(Project project);
+
+  Future<List<Project>> getAllByUser(String uuid);
+
+  Future<List<Project>> getByNameAndUser(String name, String uuid);
 }

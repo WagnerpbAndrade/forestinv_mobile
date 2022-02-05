@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:forestinv_mobile/app/core/exceptions/failure.dart';
+import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/repository/project_repository.dart';
@@ -78,6 +79,28 @@ class ProjectRepositoryImpl implements ProjectRepository {
   Future<List<Project>> getByName(String name) async {
     try {
       return await datasource.getByName(name);
+    } on DatasourceError catch (e) {
+      throw Left(e);
+    } catch (e) {
+      throw Left(DatasourceError());
+    }
+  }
+
+  @override
+  Future<List<Project>> getAllByUser(String uuid) async {
+    try {
+      return await datasource.getAllByUser(uuid);
+    } on DatasourceError catch (e) {
+      throw Left(e);
+    } catch (e) {
+      throw Left(DatasourceError());
+    }
+  }
+
+  @override
+  Future<List<Project>> getByNameAndUser(String name, String uuid) async {
+    try {
+      return await datasource.getByNameAndUser(name, uuid);
     } on DatasourceError catch (e) {
       throw Left(e);
     } catch (e) {

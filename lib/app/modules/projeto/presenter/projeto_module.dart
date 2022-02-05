@@ -3,8 +3,10 @@ import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/medicao_module.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/output/parcela_module.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/delete_project_usecase.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_project_by_user_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_id_project_usecase.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_name_project_by_user_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_name_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/save_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/update_project_usecase.dart';
@@ -33,6 +35,8 @@ class ProjetoModule extends Module {
     Bind((i) => ProjetoController()),
     Bind((i) => DeleteProjectUsecaseImpl(i())),
     Bind((i) => UpdateProjectUsecaseImpl(i())),
+    Bind((i) => GetAllProjectByUserUsecaseImpl(i())),
+    Bind((i) => GetByNameProjectAndUserUsecaseImpl(i())),
   ];
 
   @override

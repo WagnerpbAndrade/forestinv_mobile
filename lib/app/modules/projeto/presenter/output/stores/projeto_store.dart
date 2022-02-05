@@ -15,9 +15,9 @@ abstract class _ProjetoStoreBase with Store {
         setLoading(true);
         List<Project> projetos;
         if (search.isEmpty) {
-          projetos = await projetoController.getAllProject();
+          projetos = await projetoController.getAllProjectByUser();
         } else {
-          projetos = await projetoController.getProjectsByName(search);
+          projetos = await projetoController.getProjectsByNameAndUser(search);
         }
         projectsList.clear();
         projectsList.addAll(projetos);
