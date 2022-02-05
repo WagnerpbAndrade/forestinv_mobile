@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/save_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/update_project_usecase.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/projeto_store.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/projeto_store.dart';
 import 'package:mobx/mobx.dart';
 
 class NewProjectController {
@@ -34,10 +35,12 @@ class NewProjectController {
     if (formKey.currentState!.validate()) {
       final projetoStore = Modular.get<ProjetoStore>();
       final usecase = Modular.get<SaveProjectUsecase>();
+      final auth = Modular.get<AuthStore>();
       final nome = nomeController.text.toString();
       final area = double.parse(areaController.text.toString());
 
       final projectToSave = Project(
+        uuid: auth.getUser().uid,
         nome: nome,
         area: area,
         visibilidadeProjetoEnum: "PRIVADO",

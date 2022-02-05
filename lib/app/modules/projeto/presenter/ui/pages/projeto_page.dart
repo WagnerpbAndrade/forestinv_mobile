@@ -3,14 +3,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_drawer/custom_drawer.dart';
-import 'package:forestinv_mobile/app/core/widgets/custom_snackbar.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/projeto_controller.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/projeto_store.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/controllers/projeto_controller.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/projeto_store.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import 'components/project_card.dart';
-import 'components/search_dialog.dart';
+import '../components/project_card.dart';
+import '../components/search_dialog.dart';
 
 class ProjetoPage extends StatefulWidget {
   @override

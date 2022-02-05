@@ -5,8 +5,8 @@ import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_button.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_text_form_field.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/new_project_controller.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/new_projeto_store.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/controllers/new_project_controller.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/new_projeto_store.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 

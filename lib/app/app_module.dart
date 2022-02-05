@@ -6,7 +6,7 @@ import 'package:forestinv_mobile/app/modules/auth/auth_guard.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/intro/intro_module.dart';
 import 'package:forestinv_mobile/app/modules/login/login_module.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/projeto_module.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/projeto_module.dart';
 
 class AppModule extends Module {
   @override

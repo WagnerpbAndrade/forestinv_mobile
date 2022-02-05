@@ -9,6 +9,7 @@ String projectToMap(List<Project> data) =>
 
 class Project extends Equatable {
   final int? id;
+  final String? uuid;
   final String nome;
   final double area;
   final String? visibilidadeProjetoEnum;
@@ -17,6 +18,7 @@ class Project extends Equatable {
 
   const Project({
     this.id,
+    this.uuid,
     required this.nome,
     required this.area,
     this.visibilidadeProjetoEnum,
@@ -26,6 +28,7 @@ class Project extends Equatable {
 
   factory Project.fromMap(Map<String, dynamic> json) => Project(
         id: json["id"],
+        uuid: json["uuid"],
         nome: json["nome"],
         area: json["area"],
         visibilidadeProjetoEnum: json["visibilidadeProjetoEnum"],
@@ -37,6 +40,7 @@ class Project extends Equatable {
 
   Map<String, dynamic> toMap() => {
         "id": id,
+        "uuid": uuid,
         "nome": nome,
         "area": area,
         "visibilidadeProjetoEnum": visibilidadeProjetoEnum

@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/projeto_controller.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/controllers/projeto_controller.dart';
 import 'package:mobx/mobx.dart';
 
 part 'projeto_store.g.dart';

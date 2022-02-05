@@ -10,13 +10,13 @@ import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/save_projec
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/update_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/external/datasource/project_datasource_impl.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/repository/projeto_repository_impl.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/projeto_controller.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/new_projeto_store.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/store/projeto_store.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/new_project_page.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/projeto_page.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/controllers/projeto_controller.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/new_projeto_store.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/projeto_store.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/new_project_page.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/projeto_page.dart';
 
-import 'new_project_controller.dart';
+import 'output/controllers/new_project_controller.dart';
 
 class ProjetoModule extends Module {
   @override
