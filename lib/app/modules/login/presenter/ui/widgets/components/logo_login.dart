@@ -5,9 +5,12 @@ class LogoLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
     return SizedBox(
-      height: 100,
-      width: 100,
+      height: width * 0.5,
+      width: height * 0.5,
       child: Image.asset("assets/images/logo.png"),
     );
   }
