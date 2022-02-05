@@ -46,14 +46,14 @@ class ProjectCard extends StatelessWidget {
                     onPressed: () => onPressedUpdate(),
                     icon: const Icon(
                       Icons.edit,
-                      color: ColorsConst.error,
+                      color: ColorsConst.secondary,
                     ),
                   ),
                   IconButton(
                     onPressed: () => onPressedDelete(),
                     icon: const Icon(
                       Icons.close_outlined,
-                      color: ColorsConst.error,
+                      color: ColorsConst.secondary,
                     ),
                   ),
                 ],
