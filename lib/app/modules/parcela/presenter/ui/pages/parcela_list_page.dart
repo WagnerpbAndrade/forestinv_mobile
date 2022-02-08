@@ -28,13 +28,6 @@ class ParcelaListPageState extends ModularState<ParcelaListPage, ParcelaStore> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 10,
-            ),
-            const Text(
-              "Parcelas cadastradas",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(
               height: 20,
             ),
             Expanded(
@@ -44,7 +37,8 @@ class ParcelaListPageState extends ModularState<ParcelaListPage, ParcelaStore> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => parcelaController.goToCreateParcelaPage(),
+        onPressed: () => parcelaController.goToCreateParcelaPage(
+            null, widget.project.id.toString()),
         child: const Icon(Icons.add),
       ),
     );
@@ -52,7 +46,8 @@ class ParcelaListPageState extends ModularState<ParcelaListPage, ParcelaStore> {
 
   Widget buildListParcelas() {
     return FutureBuilder<List<Parcela>>(
-      future: controller.getAllParcelaByProject(widget.project.id.toString()),
+      future: parcelaController
+          .getAllParcelaByProject(widget.project.id.toString()),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.none) {
           return Container();
@@ -75,7 +70,7 @@ class ParcelaListPageState extends ModularState<ParcelaListPage, ParcelaStore> {
           itemBuilder: (_, index) {
             return ParcelaCard(
               parcela: parcelas[index],
-              onTap: () => controller.goToMedicaoPage(parcelas[index]),
+              onTap: () => parcelaController.goToMedicaoPage(parcelas[index]),
             );
           },
         );

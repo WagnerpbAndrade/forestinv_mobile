@@ -6,7 +6,8 @@ Parcela listProjetoResponseFromMap(String str) =>
 String listProjetoResponseToMap(Parcela data) => json.encode(data.toMap());
 
 class Parcela {
-  int id;
+  int? id;
+  final int? projetoId;
   int numero;
   double area;
   double largura;
@@ -15,13 +16,14 @@ class Parcela {
   String longitude;
   String dataPlantio;
   String espacamento;
-  int idadeParcela;
+  int? idadeParcela;
   String tipoParcelaEnum;
   DateTime? dataCriacao;
   DateTime? ultimaAtualizacao;
 
   Parcela(
-      {required this.id,
+      {this.id,
+      this.projetoId,
       required this.numero,
       required this.area,
       required this.largura,
@@ -30,7 +32,7 @@ class Parcela {
       required this.longitude,
       required this.dataPlantio,
       required this.espacamento,
-      required this.idadeParcela,
+      this.idadeParcela,
       required this.tipoParcelaEnum,
       this.dataCriacao,
       this.ultimaAtualizacao});
@@ -55,7 +57,7 @@ class Parcela {
 
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
+    data['projetoId'] = projetoId;
     data['numero'] = numero;
     data['area'] = area;
     data['largura'] = largura;
@@ -64,10 +66,7 @@ class Parcela {
     data['longitude'] = longitude;
     data['dataPlantio'] = dataPlantio;
     data['espacamento'] = espacamento;
-    data['idadeParcela'] = idadeParcela;
     data['tipoParcelaEnum'] = tipoParcelaEnum;
-    data['dataCriacao'] = dataCriacao;
-    data['ultimaAtualizacao'] = ultimaAtualizacao;
     return data;
   }
 }

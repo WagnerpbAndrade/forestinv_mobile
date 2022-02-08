@@ -39,6 +39,20 @@ abstract class _CreateParcelaStoreBase with Store {
   @observable
   String espacamento = "";
 
+  @observable
+  String textErrorLatitude = "";
+  @observable
+  bool latitudeError = false;
+  @observable
+  String latitude = "";
+
+  @observable
+  String textErrorLongitude = "";
+  @observable
+  bool longitudeError = false;
+  @observable
+  String longitude = "";
+
   @action
   bool validarNumeroParcela() {
     numeroError = true;
@@ -155,5 +169,37 @@ abstract class _CreateParcelaStoreBase with Store {
     espacamentoError = false;
     textErrorEspacamento = '';
     return true;
+  }
+
+  @action
+  bool validarLatitudeParcela() {
+    latitudeError = true;
+    if (latitude.isEmpty) {
+      textErrorLatitude = "Informe a latitude da parcela";
+      return false;
+    }
+    latitudeError = false;
+    textErrorLatitude = '';
+    return true;
+  }
+
+  @action
+  bool validarLongitudeParcela() {
+    longitudeError = true;
+    if (longitude.isEmpty) {
+      textErrorLongitude = "Informe a longitude da parcela";
+      return false;
+    }
+    longitudeError = false;
+    textErrorLongitude = '';
+    return true;
+  }
+
+  bool isValidFields() {
+    return validarNumeroParcela() &&
+        validarAreaParcela() &&
+        validarEspacamentoParcela() &&
+        validarLarguraParcela() &&
+        validarNumTalhaoParcela();
   }
 }

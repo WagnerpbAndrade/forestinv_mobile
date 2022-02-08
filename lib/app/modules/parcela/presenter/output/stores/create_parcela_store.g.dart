@@ -194,6 +194,54 @@ mixin _$CreateParcelaStore on _CreateParcelaStoreBase, Store {
     });
   }
 
+  final _$textErrorEspacamentoAtom =
+      Atom(name: '_CreateParcelaStoreBase.textErrorEspacamento');
+
+  @override
+  String get textErrorEspacamento {
+    _$textErrorEspacamentoAtom.reportRead();
+    return super.textErrorEspacamento;
+  }
+
+  @override
+  set textErrorEspacamento(String value) {
+    _$textErrorEspacamentoAtom.reportWrite(value, super.textErrorEspacamento,
+        () {
+      super.textErrorEspacamento = value;
+    });
+  }
+
+  final _$espacamentoErrorAtom =
+      Atom(name: '_CreateParcelaStoreBase.espacamentoError');
+
+  @override
+  bool get espacamentoError {
+    _$espacamentoErrorAtom.reportRead();
+    return super.espacamentoError;
+  }
+
+  @override
+  set espacamentoError(bool value) {
+    _$espacamentoErrorAtom.reportWrite(value, super.espacamentoError, () {
+      super.espacamentoError = value;
+    });
+  }
+
+  final _$espacamentoAtom = Atom(name: '_CreateParcelaStoreBase.espacamento');
+
+  @override
+  String get espacamento {
+    _$espacamentoAtom.reportRead();
+    return super.espacamento;
+  }
+
+  @override
+  set espacamento(String value) {
+    _$espacamentoAtom.reportWrite(value, super.espacamento, () {
+      super.espacamento = value;
+    });
+  }
+
   final _$_CreateParcelaStoreBaseActionController =
       ActionController(name: '_CreateParcelaStoreBase');
 
@@ -242,6 +290,17 @@ mixin _$CreateParcelaStore on _CreateParcelaStoreBase, Store {
   }
 
   @override
+  bool validarEspacamentoParcela() {
+    final _$actionInfo = _$_CreateParcelaStoreBaseActionController.startAction(
+        name: '_CreateParcelaStoreBase.validarEspacamentoParcela');
+    try {
+      return super.validarEspacamentoParcela();
+    } finally {
+      _$_CreateParcelaStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 textErrorNumero: ${textErrorNumero},
@@ -255,7 +314,10 @@ larguraError: ${larguraError},
 largura: ${largura},
 textErrorNumTalhao: ${textErrorNumTalhao},
 numTalhaoError: ${numTalhaoError},
-numTalhao: ${numTalhao}
+numTalhao: ${numTalhao},
+textErrorEspacamento: ${textErrorEspacamento},
+espacamentoError: ${espacamentoError},
+espacamento: ${espacamento}
     ''';
   }
 }

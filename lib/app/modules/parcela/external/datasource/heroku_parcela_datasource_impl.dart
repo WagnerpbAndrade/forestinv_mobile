@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:forestinv_mobile/app/core/client/dio/dio_client.dart';
+import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/list_parcela_response.dart';
+import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/infra/datasource/parcela_datasource.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
 
@@ -36,6 +38,24 @@ class HerokuParcelaDatasourceImpl implements ParcelaDatasource {
       }
 
       throw DatasourceError();
+    }
+  }
+
+  @override
+  Future<ApiResponse> save(Parcela parcela) async {
+    try {
+      print('Save Parcela Info: ${parcela.toMap()}');
+      final Response response =
+          await dioClient.post(_baseUrl, '', parcela.toMap());
+
+      print('Save Parcela Info: ${response.data}');
+      return ApiResponse.ok(
+        result: Parcela.fromMap(response.data),
+      );
+    } catch (e) {
+      print('HerokuParcelaDatasourceImpl-save: $e');
+      return ApiResponse.error(
+          message: 'Oops! Algo deu errado. Tente novamente!');
     }
   }
 }
