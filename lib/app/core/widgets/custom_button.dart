@@ -4,8 +4,13 @@ import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 class CustomButton extends StatefulWidget {
   final Function action;
   final String title;
-  const CustomButton({Key? key, required this.action, required this.title})
-      : super(key: key);
+  final EdgeInsets? margin;
+  const CustomButton({
+    Key? key,
+    required this.action,
+    required this.title,
+    this.margin,
+  }) : super(key: key);
 
   @override
   State<CustomButton> createState() => _CustomButtonState();
@@ -17,7 +22,7 @@ class _CustomButtonState extends State<CustomButton> {
     return Container(
       height: 50,
       width: double.infinity,
-      margin: const EdgeInsets.only(top: 40),
+      margin: widget.margin ?? const EdgeInsets.only(top: 40),
       child: ElevatedButton(
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(

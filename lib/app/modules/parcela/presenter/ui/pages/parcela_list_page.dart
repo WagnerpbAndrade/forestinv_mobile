@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
-import 'package:forestinv_mobile/app/modules/parcela/presenter/components/parcela_card.dart';
-import 'package:forestinv_mobile/app/modules/parcela/presenter/output/parcela_store.dart';
+import 'package:forestinv_mobile/app/modules/parcela/presenter/output/controllers/parcela_controller.dart';
+import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/parcela_store.dart';
+import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/components/parcela_card.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
-import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/components/bar_button.dart';
 
-class ParcelaPage extends StatefulWidget {
+class ParcelaListPage extends StatefulWidget {
   final Project project;
 
-  const ParcelaPage({required this.project});
+  const ParcelaListPage({required this.project});
   @override
-  ParcelaPageState createState() => ParcelaPageState();
+  ParcelaListPageState createState() => ParcelaListPageState();
 }
 
-class ParcelaPageState extends ModularState<ParcelaPage, ParcelaStore> {
+class ParcelaListPageState extends ModularState<ParcelaListPage, ParcelaStore> {
+  final parcelaController = Modular.get<ParcelaController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +44,7 @@ class ParcelaPageState extends ModularState<ParcelaPage, ParcelaStore> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => parcelaController.goToCreateParcelaPage(),
         child: const Icon(Icons.add),
       ),
     );

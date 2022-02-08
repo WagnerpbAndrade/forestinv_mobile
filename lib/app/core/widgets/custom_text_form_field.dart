@@ -11,6 +11,10 @@ class CustomTextFormField extends StatelessWidget {
   final Icon icon;
   final TextInputType textType;
   final TextEditingController controller;
+  final double? width;
+  final InputDecoration? decoration;
+  final Function? onTap;
+  final bool? readOnly;
 
   const CustomTextFormField({
     Key? key,
@@ -23,41 +27,50 @@ class CustomTextFormField extends StatelessWidget {
     required this.textType,
     required this.controller,
     this.validator,
+    this.width,
+    this.decoration,
+    this.readOnly,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        final FocusScopeNode currentFocus = FocusScope.of(context);
-        if (!currentFocus.hasPrimaryFocus) {
-          currentFocus.unfocus();
-        }
-      },
+      onTap: onTap != null
+          ? () => onTap!()
+          : () {
+              final FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+            },
       child: Container(
         margin: const EdgeInsets.only(top: 5),
         height: 80,
+        width: width ?? double.infinity,
         child: TextFormField(
           validator: validator == null ? null : (value) => validator!(value),
           controller: controller,
           obscureText: isPassWord,
           onChanged: onChanged == null ? null : (value) => onChanged!(value),
-          decoration: InputDecoration(
-            errorText: textError == "" ? "" : textError,
-            prefixIcon: icon,
-            hintText: label,
-            filled: true,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(
-                width: 0,
-                style: !valido ? BorderStyle.none : BorderStyle.solid,
+          decoration: decoration ??
+              InputDecoration(
+                errorText: textError == "" ? "" : textError,
+                prefixIcon: icon,
+                hintText: label,
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: !valido ? BorderStyle.none : BorderStyle.solid,
+                  ),
+                ),
+                fillColor: ColorsConst.primary.withOpacity(0.1),
               ),
-            ),
-            fillColor: ColorsConst.primary.withOpacity(0.1),
-          ),
           cursorColor: ColorsConst.primary,
           keyboardType: textType,
+          readOnly: readOnly ?? false,
         ),
       ),
     );
