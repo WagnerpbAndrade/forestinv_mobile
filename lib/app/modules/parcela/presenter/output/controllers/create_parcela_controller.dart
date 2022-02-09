@@ -41,8 +41,8 @@ class CreateParcelaController {
       area: double.parse(area),
       largura: double.parse(largura),
       numTalhao: int.parse(numTalhao),
-      latitude: latitude,
-      longitude: longitude,
+      latitude: '',
+      longitude: '',
       dataPlantio: dataPlantio,
       espacamento: espacamento,
       tipoParcelaEnum: tipoParcelaEnum,
@@ -54,14 +54,15 @@ class CreateParcelaController {
   }
 
   Parcela getMockParcela() => Parcela(
-      projetoId: 365,
-      numero: 25,
-      area: 200.0,
-      largura: 150.0,
-      numTalhao: 1,
-      latitude: 'latitude',
-      longitude: 'longitude',
-      dataPlantio: '08/02/2022',
-      espacamento: '5x5',
-      tipoParcelaEnum: 'PERMANENTE');
+        projetoId: 365,
+        numero: 25,
+        area: 200.0,
+        largura: 150.0,
+        numTalhao: 1,
+        latitude: 'latitude',
+        longitude: 'longitude',
+        dataPlantio: '08/02/2022',
+        espacamento: '5x5',
+        tipoParcelaEnum: 'PERMANENTE',
+      );
 }

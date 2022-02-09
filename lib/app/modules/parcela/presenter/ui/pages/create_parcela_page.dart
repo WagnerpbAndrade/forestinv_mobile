@@ -24,6 +24,28 @@ class _CreateParcelaPageState
   DateTime _date = DateTime.now();
 
   @override
+  void initState() {
+    super.initState();
+    final Parcela? parcela = widget.args.elementAt(0);
+    if (parcela != null) {
+      final numero = parcela.numero.toString();
+      final area = parcela.area.toString();
+      final largura = parcela.largura.toString();
+      final talhao = parcela.numTalhao.toString();
+      final data = parcela.dataPlantio.toString();
+      final espacamento = parcela.espacamento.toString();
+
+      createParcelaController.txtNumeroParcelaController.text = numero;
+      createParcelaController.txtAreaParcelaController.text = area;
+      createParcelaController.txtLarguraParcelaController.text = largura;
+      createParcelaController.txtNumTalhaoParcelaController.text = talhao;
+      createParcelaController.txtDataPlantioParcelaController.text = data;
+      createParcelaController.txtEspacamentoParcelaController.text =
+          espacamento;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -146,75 +168,87 @@ class _CreateParcelaPageState
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                CustomTextFormField(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.45,
-                                  controller: createParcelaController
-                                      .txtLatitudeParcelaController,
-                                  label: "Latitude",
-                                  icon: const Icon(
-                                    Icons.email,
-                                    color: ColorsConst.primary,
-                                  ),
-                                  onChanged: (value) {
-                                    store.latitude = value.toString();
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //   mainAxisSize: MainAxisSize.max,
+                            //   children: [
+                            //     CustomTextFormField(
+                            //       width:
+                            //           MediaQuery.of(context).size.width * 0.45,
+                            //       controller: createParcelaController
+                            //           .txtLatitudeParcelaController,
+                            //       label: "Latitude",
+                            //       icon: const Icon(
+                            //         Icons.email,
+                            //         color: ColorsConst.primary,
+                            //       ),
+                            //       onChanged: (value) {
+                            //         store.latitude = value.toString();
 
-                                    store.validarLatitudeParcela();
-                                  },
-                                  textError: store.textErrorLatitude,
-                                  valido: store.latitudeError,
-                                  isPassWord: false,
-                                  textType: TextInputType.text,
-                                ),
-                                CustomTextFormField(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.45,
-                                  controller: createParcelaController
-                                      .txtLongitudeParcelaController,
-                                  label: "Longitude",
-                                  icon: const Icon(
-                                    Icons.email,
-                                    color: ColorsConst.primary,
-                                  ),
-                                  onChanged: (value) {
-                                    store.longitude = value.toString();
+                            //         store.validarLatitudeParcela();
+                            //       },
+                            //       textError: store.textErrorLatitude,
+                            //       valido: store.latitudeError,
+                            //       isPassWord: false,
+                            //       textType: TextInputType.text,
+                            //     ),
+                            //     CustomTextFormField(
+                            //       width:
+                            //           MediaQuery.of(context).size.width * 0.45,
+                            //       controller: createParcelaController
+                            //           .txtLongitudeParcelaController,
+                            //       label: "Longitude",
+                            //       icon: const Icon(
+                            //         Icons.email,
+                            //         color: ColorsConst.primary,
+                            //       ),
+                            //       onChanged: (value) {
+                            //         store.longitude = value.toString();
 
-                                    store.validarLongitudeParcela();
-                                  },
-                                  textError: store.textErrorLongitude,
-                                  valido: store.longitudeError,
-                                  isPassWord: false,
-                                  textType: TextInputType.text,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton.icon(
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all<Color>(
-                                          ColorsConst.secondary,
-                                        ),
-                                        fixedSize:
-                                            MaterialStateProperty.all<Size>(
-                                                Size.infinite)),
-                                    onPressed: () {},
-                                    icon: const Icon(
-                                      Icons.gps_fixed_rounded,
-                                      color: ColorsConst.textColorPrimary,
-                                    ),
-                                    label: const Text('GPS'),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            //         store.validarLongitudeParcela();
+                            //       },
+                            //       textError: store.textErrorLongitude,
+                            //       valido: store.longitudeError,
+                            //       isPassWord: false,
+                            //       textType: TextInputType.text,
+                            //     ),
+                            //   ],
+                            // ),
+                            // Row(
+                            //   mainAxisSize: MainAxisSize.max,
+                            //   children: [
+                            //     Expanded(
+                            //       child: ElevatedButton.icon(
+                            //         style: ButtonStyle(
+                            //             backgroundColor:
+                            //                 MaterialStateProperty.all<Color>(
+                            //               ColorsConst.secondary,
+                            //             ),
+                            //             fixedSize:
+                            //                 MaterialStateProperty.all<Size>(
+                            //                     Size.infinite)),
+                            //         onPressed: () async {
+                            //           final position =
+                            //               await createParcelaController
+                            //                   .getPosition();
+                            //           final latitude = position.latitude;
+                            //           final longitude = position.longitude;
+                            //           createParcelaController
+                            //               .txtLatitudeParcelaController
+                            //               .text = latitude.toString();
+                            //           createParcelaController
+                            //               .txtLongitudeParcelaController
+                            //               .text = longitude.toString();
+                            //         },
+                            //         icon: const Icon(
+                            //           Icons.gps_fixed_rounded,
+                            //           color: ColorsConst.textColorPrimary,
+                            //         ),
+                            //         label: const Text('GPS'),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
                           ],
                         ),
                         SizedBox(
@@ -237,7 +271,7 @@ class _CreateParcelaPageState
                               Icons.calendar_today_outlined,
                               color: ColorsConst.primary,
                             ),
-                            labelText: 'Data de Plantio',
+                            labelText: 'Data de plantio',
                             hintText: _date.formattedDate(),
                             filled: true,
                             border: OutlineInputBorder(

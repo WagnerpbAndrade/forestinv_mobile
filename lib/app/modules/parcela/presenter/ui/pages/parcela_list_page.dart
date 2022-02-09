@@ -5,6 +5,7 @@ import 'package:forestinv_mobile/app/modules/parcela/presenter/output/controller
 import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/parcela_store.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/components/parcela_card.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ParcelaListPage extends StatefulWidget {
   final Project project;
@@ -71,6 +72,36 @@ class ParcelaListPageState extends ModularState<ParcelaListPage, ParcelaStore> {
             return ParcelaCard(
               parcela: parcelas[index],
               onTap: () => parcelaController.goToMedicaoPage(parcelas[index]),
+              onPressedUpdate: () {
+                parcelaController.goToCreateParcelaPage(parcelas[index], null,
+                    isNewParcela: false);
+              },
+              onPressedDelete: () {
+                // Alert(
+                //   type: AlertType.warning,
+                //   buttons: [
+                //     DialogButton(
+                //       child: const Text('Sim'),
+                //       onPressed: () {
+                //         projetoController.deleteProject(
+                //           controller.projectsList[index].id.toString(),
+                //         );
+                //         store.projectsList.remove(projetos[index]);
+                //         Modular.to.pop();
+                //       },
+                //     ),
+                //     DialogButton(
+                //       child: const Text('Não'),
+                //       onPressed: () {
+                //         Modular.to.pop();
+                //       },
+                //     )
+                //   ],
+                //   context: context,
+                //   title: "Excluir projeto",
+                //   desc: 'Deseja continuar com a exclusão do projeto?',
+                // ).show();
+              },
             );
           },
         );

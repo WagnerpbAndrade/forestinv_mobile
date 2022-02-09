@@ -15,19 +15,21 @@ class ParcelaController {
   }
 
   void goToMedicaoPage(Parcela parcela) {
-    Modular.to.pushNamed('/medicao', arguments: parcela);
+    Modular.to.pushNamed(
+        '${RouterConst.PROJECT_ROUTER}${RouterConst.MEDICAO_ROUTER}',
+        arguments: parcela);
   }
 
-  void goToCreateParcelaPage(final Parcela? parcela, final String projetoId,
-      {final bool isNewParcela = false}) {
+  void goToCreateParcelaPage(final Parcela? parcela, final String? projetoId,
+      {final bool isNewParcela = true}) {
     if (isNewParcela) {
       Modular.to.pushNamed(
           '${RouterConst.PROJECT_ROUTER}${RouterConst.PARCELA_ROUTER}${RouterConst.CREATE_PARCELA_ROUTER}',
-          arguments: null);
+          arguments: [parcela, projetoId]);
     } else {
       Modular.to.pushNamed(
           '${RouterConst.PROJECT_ROUTER}${RouterConst.PARCELA_ROUTER}${RouterConst.CREATE_PARCELA_ROUTER}',
-          arguments: [parcela, projetoId]);
+          arguments: [parcela]);
     }
   }
 }
