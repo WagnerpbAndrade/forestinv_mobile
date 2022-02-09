@@ -39,6 +39,7 @@ class Parcela {
 
   factory Parcela.fromMap(Map<String, dynamic> json) => Parcela(
         id: json['id'],
+        projetoId: json['projetoId'],
         numero: json['numero'],
         area: json['area'],
         largura: json['largura'],
@@ -57,6 +58,7 @@ class Parcela {
 
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
     data['projetoId'] = projetoId;
     data['numero'] = numero;
     data['area'] = area;

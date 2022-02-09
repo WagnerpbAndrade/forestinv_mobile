@@ -73,7 +73,8 @@ class ParcelaListPageState extends ModularState<ParcelaListPage, ParcelaStore> {
               parcela: parcelas[index],
               onTap: () => parcelaController.goToMedicaoPage(parcelas[index]),
               onPressedUpdate: () {
-                parcelaController.goToCreateParcelaPage(parcelas[index], null,
+                parcelaController.goToCreateParcelaPage(
+                    parcelas[index], widget.project.id.toString(),
                     isNewParcela: false);
               },
               onPressedDelete: () {

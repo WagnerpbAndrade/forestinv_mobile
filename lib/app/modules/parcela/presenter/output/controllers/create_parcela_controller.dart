@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/save_parcela_usecase.dart';
+import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/update_parcela_usecase.dart';
 
 class CreateParcelaController {
   final TextEditingController txtNumeroParcelaController =
@@ -41,8 +42,8 @@ class CreateParcelaController {
       area: double.parse(area),
       largura: double.parse(largura),
       numTalhao: int.parse(numTalhao),
-      latitude: '',
-      longitude: '',
+      latitude: 'latitude',
+      longitude: 'longitude',
       dataPlantio: dataPlantio,
       espacamento: espacamento,
       tipoParcelaEnum: tipoParcelaEnum,
@@ -51,6 +52,64 @@ class CreateParcelaController {
     //final mock = getMockParcela();
 
     return usecase.call(parcela);
+  }
+
+  Future<ApiResponse> updateParcela(
+      final String parcelaId, final String projectId) {
+    final usecase = Modular.get<UpdateParcelaUsecaseImpl>();
+    final numero = txtNumeroParcelaController.text;
+    final area = txtAreaParcelaController.text;
+    final largura = txtLarguraParcelaController.text;
+    final numTalhao = txtNumTalhaoParcelaController.text;
+    final latitude = txtLatitudeParcelaController.text;
+    final longitude = txtLongitudeParcelaController.text;
+    final dataPlantio = txtDataPlantioParcelaController.text;
+    print('Data de plantio: $dataPlantio');
+    final espacamento = txtEspacamentoParcelaController.text;
+    const tipoParcelaEnum = 'PERMANENTE';
+
+    final parcela = Parcela(
+      id: int.parse(parcelaId),
+      projetoId: int.parse(projectId),
+      numero: int.parse(numero),
+      area: double.parse(area),
+      largura: double.parse(largura),
+      numTalhao: int.parse(numTalhao),
+      latitude: 'latitude',
+      longitude: 'longitude',
+      dataPlantio: dataPlantio,
+      espacamento: espacamento,
+      tipoParcelaEnum: tipoParcelaEnum,
+    );
+
+    //final mock = getMockParcela();
+
+    return usecase.call(parcela);
+  }
+
+  void configPage(final Parcela? parcela) {
+    if (parcela != null) {
+      final numero = parcela.numero.toString();
+      final area = parcela.area.toString();
+      final largura = parcela.largura.toString();
+      final talhao = parcela.numTalhao.toString();
+      final data = parcela.dataPlantio.toString();
+      final espacamento = parcela.espacamento.toString();
+
+      txtNumeroParcelaController.text = numero;
+      txtAreaParcelaController.text = area;
+      txtLarguraParcelaController.text = largura;
+      txtNumTalhaoParcelaController.text = talhao;
+      txtDataPlantioParcelaController.text = data;
+      txtEspacamentoParcelaController.text = espacamento;
+    } else {
+      txtNumeroParcelaController.text = '';
+      txtAreaParcelaController.text = '';
+      txtLarguraParcelaController.text = '';
+      txtNumTalhaoParcelaController.text = '';
+      txtDataPlantioParcelaController.text = '';
+      txtEspacamentoParcelaController.text = '';
+    }
   }
 
   Parcela getMockParcela() => Parcela(

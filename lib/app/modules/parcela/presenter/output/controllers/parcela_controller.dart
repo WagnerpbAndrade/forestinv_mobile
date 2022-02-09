@@ -29,7 +29,7 @@ class ParcelaController {
     } else {
       Modular.to.pushNamed(
           '${RouterConst.PROJECT_ROUTER}${RouterConst.PARCELA_ROUTER}${RouterConst.CREATE_PARCELA_ROUTER}',
-          arguments: [parcela]);
+          arguments: [parcela, projetoId]);
     }
   }
 }

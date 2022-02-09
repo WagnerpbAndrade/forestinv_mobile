@@ -44,7 +44,6 @@ class HerokuParcelaDatasourceImpl implements ParcelaDatasource {
   @override
   Future<ApiResponse> save(Parcela parcela) async {
     try {
-      print('Save Parcela Info: ${parcela.toMap()}');
       final Response response =
           await dioClient.post(_baseUrl, '', parcela.toMap());
 
@@ -54,6 +53,23 @@ class HerokuParcelaDatasourceImpl implements ParcelaDatasource {
       );
     } catch (e) {
       print('HerokuParcelaDatasourceImpl-save: $e');
+      return ApiResponse.error(
+          message: 'Oops! Algo deu errado. Tente novamente!');
+    }
+  }
+
+  @override
+  Future<ApiResponse> update(Parcela parcela) async {
+    try {
+      final Response response =
+          await dioClient.put(_baseUrl, '', parcela.toMap());
+
+      print('Update Parcela Info: ${response.data}');
+      return ApiResponse.ok(
+        result: Parcela.fromMap(response.data),
+      );
+    } catch (e) {
+      print('HerokuParcelaDatasourceImpl-update: $e');
       return ApiResponse.error(
           message: 'Oops! Algo deu errado. Tente novamente!');
     }

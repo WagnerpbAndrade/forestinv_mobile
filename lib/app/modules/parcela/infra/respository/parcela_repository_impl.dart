@@ -24,4 +24,9 @@ class ParcelaRepositoryImpl implements ParcelaRepository {
   Future<ApiResponse> save(Parcela parcela) {
     return datasource.save(parcela);
   }
+
+  @override
+  Future<ApiResponse> update(Parcela parcela) {
+    return datasource.update(parcela);
+  }
 }

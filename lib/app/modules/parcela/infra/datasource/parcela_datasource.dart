@@ -6,4 +6,6 @@ abstract class ParcelaDatasource {
   Future<ListParcelaResponse> getParcelasPagination(String projectId);
 
   Future<ApiResponse> save(Parcela parcela);
+
+  Future<ApiResponse> update(Parcela parcela);
 }

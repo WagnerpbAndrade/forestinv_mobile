@@ -22,40 +22,28 @@ class _CreateParcelaPageState
     extends ModularState<CreateParcelaPage, CreateParcelaStore> {
   final createParcelaController = Modular.get<CreateParcelaController>();
   DateTime _date = DateTime.now();
+  Parcela? get parcela => widget.args.elementAt(0);
 
   @override
   void initState() {
     super.initState();
-    final Parcela? parcela = widget.args.elementAt(0);
-    if (parcela != null) {
-      final numero = parcela.numero.toString();
-      final area = parcela.area.toString();
-      final largura = parcela.largura.toString();
-      final talhao = parcela.numTalhao.toString();
-      final data = parcela.dataPlantio.toString();
-      final espacamento = parcela.espacamento.toString();
 
-      createParcelaController.txtNumeroParcelaController.text = numero;
-      createParcelaController.txtAreaParcelaController.text = area;
-      createParcelaController.txtLarguraParcelaController.text = largura;
-      createParcelaController.txtNumTalhaoParcelaController.text = talhao;
-      createParcelaController.txtDataPlantioParcelaController.text = data;
-      createParcelaController.txtEspacamentoParcelaController.text =
-          espacamento;
-    }
+    createParcelaController.configPage(parcela);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Cadastrar Parcela',
-          style: TextStyle(
-            color: ColorsConst.textColorPrimary,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
+        title: parcela == null
+            ? const Text(
+                'Cadastrar Parcela',
+                style: TextStyle(
+                  color: ColorsConst.textColorPrimary,
+                  fontWeight: FontWeight.w400,
+                ),
+              )
+            : const Text('Editar Parcela'),
         centerTitle: true,
       ),
       body: Stack(
@@ -320,49 +308,95 @@ class _CreateParcelaPageState
             child: CustomButton(
               action: () async {
                 if (store.isValidFields()) {
-                  final response = await createParcelaController
-                      .createParcela(widget.args.elementAt(1));
-                  if (response.ok) {
-                    final parcela = response.result as Parcela;
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Parcela número: ${parcela.numero} Cadastrada com sucesso. ',
-                          style: const TextStyle(
-                            color: ColorsConst.textColorPrimary,
+                  if (parcela == null) {
+                    final response = await createParcelaController
+                        .createParcela(widget.args.elementAt(1));
+                    if (response.ok) {
+                      final parcela = response.result as Parcela;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Parcela número: ${parcela.numero} Cadastrada com sucesso. ',
+                            style: const TextStyle(
+                              color: ColorsConst.textColorPrimary,
+                            ),
                           ),
+                          backgroundColor: ColorsConst.primary,
+                          action: SnackBarAction(
+                            textColor: ColorsConst.textColorPrimary,
+                            label: 'Ok',
+                            onPressed: () {},
+                          ),
+                          duration: const Duration(milliseconds: 1500),
                         ),
-                        backgroundColor: ColorsConst.primary,
-                        action: SnackBarAction(
-                          textColor: ColorsConst.textColorPrimary,
-                          label: 'Ok',
-                          onPressed: () {},
+                      );
+                      Modular.to.pop();
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            response.message ?? '',
+                            style: const TextStyle(
+                              color: ColorsConst.textColorPrimary,
+                            ),
+                          ),
+                          backgroundColor: ColorsConst.primary,
+                          action: SnackBarAction(
+                            textColor: ColorsConst.textColorPrimary,
+                            label: 'Ok',
+                            onPressed: () {},
+                          ),
+                          duration: const Duration(milliseconds: 1500),
                         ),
-                        duration: const Duration(milliseconds: 1500),
-                      ),
-                    );
+                      );
+                    }
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          response.message ?? '',
-                          style: const TextStyle(
-                            color: ColorsConst.textColorPrimary,
+                    final response =
+                        await createParcelaController.updateParcela(
+                            parcela!.id.toString(), widget.args.elementAt(1));
+                    if (response.ok) {
+                      final parcela = response.result as Parcela;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Parcela número: ${parcela.numero} Atualizada com sucesso.',
+                            style: const TextStyle(
+                              color: ColorsConst.textColorPrimary,
+                            ),
                           ),
+                          backgroundColor: ColorsConst.primary,
+                          action: SnackBarAction(
+                            textColor: ColorsConst.textColorPrimary,
+                            label: 'Ok',
+                            onPressed: () {},
+                          ),
+                          duration: const Duration(milliseconds: 1500),
                         ),
-                        backgroundColor: ColorsConst.primary,
-                        action: SnackBarAction(
-                          textColor: ColorsConst.textColorPrimary,
-                          label: 'Ok',
-                          onPressed: () {},
+                      );
+                      Modular.to.pop();
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            response.message ?? '',
+                            style: const TextStyle(
+                              color: ColorsConst.textColorPrimary,
+                            ),
+                          ),
+                          backgroundColor: ColorsConst.primary,
+                          action: SnackBarAction(
+                            textColor: ColorsConst.textColorPrimary,
+                            label: 'Ok',
+                            onPressed: () {},
+                          ),
+                          duration: const Duration(milliseconds: 1500),
                         ),
-                        duration: const Duration(milliseconds: 1500),
-                      ),
-                    );
+                      );
+                    }
                   }
                 }
               },
-              title: "Salvar",
+              title: parcela == null ? "Salvar" : 'Atualizar',
               margin: const EdgeInsets.only(top: 5),
             ),
           ),
