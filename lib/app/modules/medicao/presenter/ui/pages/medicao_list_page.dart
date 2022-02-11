@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
-import 'package:forestinv_mobile/app/modules/medicao/presenter/output/medicao_store.dart';
+import 'package:forestinv_mobile/app/modules/medicao/presenter/output/controllers/medicao_list_controller.dart';
+import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/medicao_store.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 
-import 'components/bar_button.dart';
-import 'components/medicao_card.dart';
+import '../components/bar_button.dart';
+import '../components/medicao_card.dart';
 
-class MedicaoPage extends StatefulWidget {
+class MedicaoListPage extends StatefulWidget {
   final Parcela parcela;
 
-  const MedicaoPage({required this.parcela});
+  const MedicaoListPage({required this.parcela});
   @override
-  MedicaoPageState createState() => MedicaoPageState();
+  MedicaoListPageState createState() => MedicaoListPageState();
 }
 
-class MedicaoPageState extends ModularState<MedicaoPage, MedicaoStore> {
+class MedicaoListPageState extends ModularState<MedicaoListPage, MedicaoStore> {
+  final medicaoListController = Modular.get<MedicaoListController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +51,8 @@ class MedicaoPageState extends ModularState<MedicaoPage, MedicaoStore> {
 
   Widget buildListMedicoes() {
     return FutureBuilder<List<Medicao>>(
-      future: controller.getAllMedicaoByParcela(widget.parcela.id.toString()),
+      future: medicaoListController
+          .getAllMedicaoByParcela(widget.parcela.id.toString()),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.none) {
           return Container();
@@ -72,6 +76,8 @@ class MedicaoPageState extends ModularState<MedicaoPage, MedicaoStore> {
             return MedicaoCard(
               medicao: parcelas[index],
               onTap: () => {},
+              onPressedUpdate: () {},
+              onPressedDelete: () {},
             );
           },
         );
