@@ -8,4 +8,6 @@ abstract class ParcelaDatasource {
   Future<ApiResponse> save(Parcela parcela);
 
   Future<ApiResponse> update(Parcela parcela);
+
+  Future<ApiResponse> delete(final String parcelaId);
 }

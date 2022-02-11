@@ -69,4 +69,16 @@ class HerokuParcelaDatasourceImpl implements ParcelaDatasource {
           message: 'Oops! Algo deu errado. Tente novamente!');
     }
   }
+
+  @override
+  Future<ApiResponse> delete(final String parcelaId) async {
+    try {
+      await dioClient.delete(_baseUrl, '/$parcelaId');
+      return ApiResponse.ok();
+    } catch (e) {
+      print('HerokuParcelaDatasourceImpl-delete: $e');
+      return ApiResponse.error(
+          message: 'Oops! Algo deu errado. Tente novamente!');
+    }
+  }
 }

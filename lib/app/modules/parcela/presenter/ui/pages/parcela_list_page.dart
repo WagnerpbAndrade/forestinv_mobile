@@ -78,30 +78,30 @@ class ParcelaListPageState extends ModularState<ParcelaListPage, ParcelaStore> {
                     isNewParcela: false);
               },
               onPressedDelete: () {
-                // Alert(
-                //   type: AlertType.warning,
-                //   buttons: [
-                //     DialogButton(
-                //       child: const Text('Sim'),
-                //       onPressed: () {
-                //         projetoController.deleteProject(
-                //           controller.projectsList[index].id.toString(),
-                //         );
-                //         store.projectsList.remove(projetos[index]);
-                //         Modular.to.pop();
-                //       },
-                //     ),
-                //     DialogButton(
-                //       child: const Text('Não'),
-                //       onPressed: () {
-                //         Modular.to.pop();
-                //       },
-                //     )
-                //   ],
-                //   context: context,
-                //   title: "Excluir projeto",
-                //   desc: 'Deseja continuar com a exclusão do projeto?',
-                // ).show();
+                Alert(
+                  type: AlertType.warning,
+                  buttons: [
+                    DialogButton(
+                      child: const Text('Sim'),
+                      onPressed: () {
+                        parcelaController.delete(
+                          parcelas[index].id.toString(),
+                        );
+                        //store.projectsList.remove(projetos[index]);
+                        Modular.to.pop();
+                      },
+                    ),
+                    DialogButton(
+                      child: const Text('Não'),
+                      onPressed: () {
+                        Modular.to.pop();
+                      },
+                    )
+                  ],
+                  context: context,
+                  title: "Excluir parcela",
+                  desc: 'Deseja continuar com a exclusão da parcela?',
+                ).show();
               },
             );
           },

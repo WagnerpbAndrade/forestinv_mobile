@@ -29,4 +29,9 @@ class ParcelaRepositoryImpl implements ParcelaRepository {
   Future<ApiResponse> update(Parcela parcela) {
     return datasource.update(parcela);
   }
+
+  @override
+  Future<ApiResponse> delete(final String parcelaId) {
+    return datasource.delete(parcelaId);
+  }
 }

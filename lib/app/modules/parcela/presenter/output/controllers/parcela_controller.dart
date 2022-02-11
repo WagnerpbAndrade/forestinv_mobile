@@ -1,6 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
+import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
+import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/delete_parcela_usecase.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/get_all_parcela_by_project.dart';
 
 class ParcelaController {
@@ -31,5 +33,10 @@ class ParcelaController {
           '${RouterConst.PROJECT_ROUTER}${RouterConst.PARCELA_ROUTER}${RouterConst.CREATE_PARCELA_ROUTER}',
           arguments: [parcela, projetoId]);
     }
+  }
+
+  Future<ApiResponse> delete(final String parcelaId) {
+    final usecase = Modular.get<DeleteParcelaUsecase>();
+    return usecase.call(parcelaId);
   }
 }
