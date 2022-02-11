@@ -43,7 +43,12 @@ class MedicaoListPageState extends ModularState<MedicaoListPage, MedicaoStore> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          medicaoListController.goToCreateMedicaoPage(
+            null,
+            widget.parcela.id.toString(),
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );

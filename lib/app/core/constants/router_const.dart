@@ -9,5 +9,7 @@ class RouterConst {
 
   static String CREATE_PARCELA_ROUTER = '/create-parcela';
 
+  static String CREATE_MEDICAO_ROUTER = '/create-medicao';
+
   static String MEDICAO_ROUTER = '/medicao';
 }
