@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:forestinv_mobile/app/core/client/dio/dio_client.dart';
+import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/list_medicao_response.dart';
+import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:forestinv_mobile/app/modules/medicao/infra/datasource/medicao_datasource.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
 
@@ -36,6 +38,22 @@ class HerokuMedicaoDatasourceImpl implements MedicaoDatasource {
       }
 
       throw DatasourceError();
+    }
+  }
+
+  @override
+  Future<ApiResponse> save(final Medicao medicao) async {
+    try {
+      final Response response =
+          await dioClient.post(_baseUrl, '', medicao.toMap());
+
+      print('Save Medição Info: ${response.data}');
+      return ApiResponse.ok(
+        result: Medicao.fromMap(response.data),
+      );
+    } catch (e) {
+      print('HerokuMedicaoDatasourceImpl-save: $e');
+      return ApiResponse.error(message: 'Oops! ${e.toString()}');
     }
   }
 }

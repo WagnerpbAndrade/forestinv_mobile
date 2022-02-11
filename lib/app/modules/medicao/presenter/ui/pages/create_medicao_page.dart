@@ -179,90 +179,90 @@ class _CreateMedicaoPageState
                 if (store.isValidFields()) {
                   print('Entrou no if isValidFields');
                   if (medicao == null) {
-                    //   print('Entrou no if parcela == null');
-                    //   final response = await createMedicaoController
-                    //       .createParcela(widget.args.elementAt(1));
-                    //   if (response.ok) {
-                    //     final parcela = response.result as Parcela;
-                    //     ScaffoldMessenger.of(context).showSnackBar(
-                    //       SnackBar(
-                    //         content: Text(
-                    //           'Parcela número: ${parcela.numero} Cadastrada com sucesso. ',
-                    //           style: const TextStyle(
-                    //             color: ColorsConst.textColorPrimary,
-                    //           ),
+                    print('Entrou no if medicao == null');
+                    final response = await createMedicaoController
+                        .save(widget.args.elementAt(1));
+                    if (response.ok) {
+                      final medicao = response.result as Medicao;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Medição da árvore ${medicao.numArvore} cadastrada com sucesso.',
+                            style: const TextStyle(
+                              color: ColorsConst.textColorPrimary,
+                            ),
+                          ),
+                          backgroundColor: ColorsConst.primary,
+                          action: SnackBarAction(
+                            textColor: ColorsConst.textColorPrimary,
+                            label: 'Ok',
+                            onPressed: () {},
+                          ),
+                          duration: const Duration(milliseconds: 1500),
+                        ),
+                      );
+                      Modular.to.pop();
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            response.message ?? '',
+                            style: const TextStyle(
+                              color: ColorsConst.textColorPrimary,
+                            ),
+                          ),
+                          backgroundColor: ColorsConst.primary,
+                          action: SnackBarAction(
+                            textColor: ColorsConst.textColorPrimary,
+                            label: 'Ok',
+                            onPressed: () {},
+                          ),
+                          duration: const Duration(milliseconds: 1500),
+                        ),
+                      );
+                    }
+                  } else {
+                    // final response =
+                    //     await createMedicaoController.updateParcela(
+                    //         medicao!.id.toString(), widget.args.elementAt(1));
+                    // if (response.ok) {
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     SnackBar(
+                    //       content: const Text(
+                    //         'Parcela atualizada com sucesso.',
+                    //         style: TextStyle(
+                    //           color: ColorsConst.textColorPrimary,
                     //         ),
-                    //         backgroundColor: ColorsConst.primary,
-                    //         action: SnackBarAction(
-                    //           textColor: ColorsConst.textColorPrimary,
-                    //           label: 'Ok',
-                    //           onPressed: () {},
-                    //         ),
-                    //         duration: const Duration(milliseconds: 1500),
                     //       ),
-                    //     );
-                    //     Modular.to.pop();
-                    //   } else {
-                    //     ScaffoldMessenger.of(context).showSnackBar(
-                    //       SnackBar(
-                    //         content: Text(
-                    //           response.message ?? '',
-                    //           style: const TextStyle(
-                    //             color: ColorsConst.textColorPrimary,
-                    //           ),
-                    //         ),
-                    //         backgroundColor: ColorsConst.primary,
-                    //         action: SnackBarAction(
-                    //           textColor: ColorsConst.textColorPrimary,
-                    //           label: 'Ok',
-                    //           onPressed: () {},
-                    //         ),
-                    //         duration: const Duration(milliseconds: 1500),
+                    //       backgroundColor: ColorsConst.primary,
+                    //       action: SnackBarAction(
+                    //         textColor: ColorsConst.textColorPrimary,
+                    //         label: 'Ok',
+                    //         onPressed: () {},
                     //       ),
-                    //     );
-                    //   }
+                    //       duration: const Duration(milliseconds: 1500),
+                    //     ),
+                    //   );
+                    //   Modular.to.pop();
                     // } else {
-                    //   final response =
-                    //       await createMedicaoController.updateParcela(
-                    //           medicao!.id.toString(), widget.args.elementAt(1));
-                    //   if (response.ok) {
-                    //     ScaffoldMessenger.of(context).showSnackBar(
-                    //       SnackBar(
-                    //         content: const Text(
-                    //           'Parcela atualizada com sucesso.',
-                    //           style: TextStyle(
-                    //             color: ColorsConst.textColorPrimary,
-                    //           ),
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     SnackBar(
+                    //       content: Text(
+                    //         response.message ?? '',
+                    //         style: const TextStyle(
+                    //           color: ColorsConst.textColorPrimary,
                     //         ),
-                    //         backgroundColor: ColorsConst.primary,
-                    //         action: SnackBarAction(
-                    //           textColor: ColorsConst.textColorPrimary,
-                    //           label: 'Ok',
-                    //           onPressed: () {},
-                    //         ),
-                    //         duration: const Duration(milliseconds: 1500),
                     //       ),
-                    //     );
-                    //     Modular.to.pop();
-                    //   } else {
-                    //     ScaffoldMessenger.of(context).showSnackBar(
-                    //       SnackBar(
-                    //         content: Text(
-                    //           response.message ?? '',
-                    //           style: const TextStyle(
-                    //             color: ColorsConst.textColorPrimary,
-                    //           ),
-                    //         ),
-                    //         backgroundColor: ColorsConst.primary,
-                    //         action: SnackBarAction(
-                    //           textColor: ColorsConst.textColorPrimary,
-                    //           label: 'Ok',
-                    //           onPressed: () {},
-                    //         ),
-                    //         duration: const Duration(milliseconds: 1500),
+                    //       backgroundColor: ColorsConst.primary,
+                    //       action: SnackBarAction(
+                    //         textColor: ColorsConst.textColorPrimary,
+                    //         label: 'Ok',
+                    //         onPressed: () {},
                     //       ),
-                    //     );
-                    //   }
+                    //       duration: const Duration(milliseconds: 1500),
+                    //     ),
+                    //   );
+                    // }
                   }
                 } else {
                   print('Campos não validados');

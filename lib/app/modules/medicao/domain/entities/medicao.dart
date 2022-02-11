@@ -7,6 +7,7 @@ String listProjetoResponseToMap(Medicao data) => json.encode(data.toMap());
 
 class Medicao {
   int? id;
+  int? parcelaId;
   int numArvore;
   String nomeResponsavel;
   double dap;
@@ -20,6 +21,7 @@ class Medicao {
 
   Medicao(
       {this.id,
+      this.parcelaId,
       required this.numArvore,
       required this.nomeResponsavel,
       required this.dap,
@@ -50,6 +52,7 @@ class Medicao {
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
+    data['parcelaId'] = parcelaId;
     data['numArvore'] = numArvore;
     data['nomeResponsavel'] = nomeResponsavel;
     data['dap'] = dap;
@@ -58,8 +61,6 @@ class Medicao {
     data['longitude'] = longitude;
     data['estadoArvore'] = estadoArvore;
     data['observacao'] = observacao;
-    data['dataMedicao'] = dataMedicao;
-    data['ultimaAtualizacao'] = ultimaAtualizacao;
     return data;
   }
 }
