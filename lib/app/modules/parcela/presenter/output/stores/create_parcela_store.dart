@@ -198,8 +198,8 @@ abstract class _CreateParcelaStoreBase with Store {
   bool isValidFields() {
     return validarNumeroParcela() &&
         validarAreaParcela() &&
-        validarEspacamentoParcela() &&
         validarLarguraParcela() &&
-        validarNumTalhaoParcela();
+        validarNumTalhaoParcela() &&
+        validarEspacamentoParcela();
   }
 }

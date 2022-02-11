@@ -242,6 +242,100 @@ mixin _$CreateParcelaStore on _CreateParcelaStoreBase, Store {
     });
   }
 
+  final _$textErrorLatitudeAtom =
+      Atom(name: '_CreateParcelaStoreBase.textErrorLatitude');
+
+  @override
+  String get textErrorLatitude {
+    _$textErrorLatitudeAtom.reportRead();
+    return super.textErrorLatitude;
+  }
+
+  @override
+  set textErrorLatitude(String value) {
+    _$textErrorLatitudeAtom.reportWrite(value, super.textErrorLatitude, () {
+      super.textErrorLatitude = value;
+    });
+  }
+
+  final _$latitudeErrorAtom =
+      Atom(name: '_CreateParcelaStoreBase.latitudeError');
+
+  @override
+  bool get latitudeError {
+    _$latitudeErrorAtom.reportRead();
+    return super.latitudeError;
+  }
+
+  @override
+  set latitudeError(bool value) {
+    _$latitudeErrorAtom.reportWrite(value, super.latitudeError, () {
+      super.latitudeError = value;
+    });
+  }
+
+  final _$latitudeAtom = Atom(name: '_CreateParcelaStoreBase.latitude');
+
+  @override
+  String get latitude {
+    _$latitudeAtom.reportRead();
+    return super.latitude;
+  }
+
+  @override
+  set latitude(String value) {
+    _$latitudeAtom.reportWrite(value, super.latitude, () {
+      super.latitude = value;
+    });
+  }
+
+  final _$textErrorLongitudeAtom =
+      Atom(name: '_CreateParcelaStoreBase.textErrorLongitude');
+
+  @override
+  String get textErrorLongitude {
+    _$textErrorLongitudeAtom.reportRead();
+    return super.textErrorLongitude;
+  }
+
+  @override
+  set textErrorLongitude(String value) {
+    _$textErrorLongitudeAtom.reportWrite(value, super.textErrorLongitude, () {
+      super.textErrorLongitude = value;
+    });
+  }
+
+  final _$longitudeErrorAtom =
+      Atom(name: '_CreateParcelaStoreBase.longitudeError');
+
+  @override
+  bool get longitudeError {
+    _$longitudeErrorAtom.reportRead();
+    return super.longitudeError;
+  }
+
+  @override
+  set longitudeError(bool value) {
+    _$longitudeErrorAtom.reportWrite(value, super.longitudeError, () {
+      super.longitudeError = value;
+    });
+  }
+
+  final _$longitudeAtom = Atom(name: '_CreateParcelaStoreBase.longitude');
+
+  @override
+  String get longitude {
+    _$longitudeAtom.reportRead();
+    return super.longitude;
+  }
+
+  @override
+  set longitude(String value) {
+    _$longitudeAtom.reportWrite(value, super.longitude, () {
+      super.longitude = value;
+    });
+  }
+
   final _$_CreateParcelaStoreBaseActionController =
       ActionController(name: '_CreateParcelaStoreBase');
 
@@ -301,6 +395,28 @@ mixin _$CreateParcelaStore on _CreateParcelaStoreBase, Store {
   }
 
   @override
+  bool validarLatitudeParcela() {
+    final _$actionInfo = _$_CreateParcelaStoreBaseActionController.startAction(
+        name: '_CreateParcelaStoreBase.validarLatitudeParcela');
+    try {
+      return super.validarLatitudeParcela();
+    } finally {
+      _$_CreateParcelaStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  bool validarLongitudeParcela() {
+    final _$actionInfo = _$_CreateParcelaStoreBaseActionController.startAction(
+        name: '_CreateParcelaStoreBase.validarLongitudeParcela');
+    try {
+      return super.validarLongitudeParcela();
+    } finally {
+      _$_CreateParcelaStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 textErrorNumero: ${textErrorNumero},
@@ -317,7 +433,13 @@ numTalhaoError: ${numTalhaoError},
 numTalhao: ${numTalhao},
 textErrorEspacamento: ${textErrorEspacamento},
 espacamentoError: ${espacamentoError},
-espacamento: ${espacamento}
+espacamento: ${espacamento},
+textErrorLatitude: ${textErrorLatitude},
+latitudeError: ${latitudeError},
+latitude: ${latitude},
+textErrorLongitude: ${textErrorLongitude},
+longitudeError: ${longitudeError},
+longitude: ${longitude}
     ''';
   }
 }

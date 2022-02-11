@@ -4,6 +4,7 @@ import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/save_parcela_usecase.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/update_parcela_usecase.dart';
+import 'package:intl/intl.dart';
 
 class CreateParcelaController {
   final TextEditingController txtNumeroParcelaController =
@@ -44,7 +45,7 @@ class CreateParcelaController {
       numTalhao: int.parse(numTalhao),
       latitude: 'latitude',
       longitude: 'longitude',
-      dataPlantio: dataPlantio,
+      dataPlantio: getFormattedDate(dataPlantio),
       espacamento: espacamento,
       tipoParcelaEnum: tipoParcelaEnum,
     );
@@ -77,7 +78,7 @@ class CreateParcelaController {
       numTalhao: int.parse(numTalhao),
       latitude: 'latitude',
       longitude: 'longitude',
-      dataPlantio: dataPlantio,
+      dataPlantio: getFormattedDate(dataPlantio),
       espacamento: espacamento,
       tipoParcelaEnum: tipoParcelaEnum,
     );
@@ -124,4 +125,21 @@ class CreateParcelaController {
         espacamento: '5x5',
         tipoParcelaEnum: 'PERMANENTE',
       );
+
+  String getFormattedDate(String date) {
+    /// Convert into local date format.
+    var localDate = DateTime.parse(date).toLocal();
+
+    /// inputFormat - format getting from api or other func.
+    /// e.g If 2021-05-27 9:34:12.781341 then format should be yyyy-MM-dd HH:mm
+    /// If 27/05/2021 9:34:12.781341 then format should be dd/MM/yyyy HH:mm
+    var inputFormat = DateFormat('yyyy-MM-dd');
+    var inputDate = inputFormat.parse(localDate.toString());
+
+    /// outputFormat - convert into format you want to show.
+    var outputFormat = DateFormat('dd/MM/yyyy');
+    var outputDate = outputFormat.format(inputDate);
+
+    return outputDate.toString();
+  }
 }

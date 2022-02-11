@@ -27,7 +27,7 @@ class _CreateParcelaPageState
   @override
   void initState() {
     super.initState();
-
+    print('Parcela in CreateParcelaPage: ${parcela?.id}');
     createParcelaController.configPage(parcela);
   }
 
@@ -70,6 +70,22 @@ class _CreateParcelaPageState
                                 Icons.email,
                                 color: ColorsConst.primary,
                               ),
+                              // decoration: InputDecoration(
+                              //   prefixIcon: const Icon(
+                              //     Icons.calendar_today_outlined,
+                              //     color: ColorsConst.primary,
+                              //   ),
+                              //   labelText: 'Número da parcela',
+                              //   filled: true,
+                              //   border: OutlineInputBorder(
+                              //     borderRadius: BorderRadius.circular(10.0),
+                              //     borderSide: const BorderSide(
+                              //       width: 0,
+                              //       style: BorderStyle.none,
+                              //     ),
+                              //   ),
+                              //   fillColor: ColorsConst.primary.withOpacity(0.1),
+                              // ),
                               onChanged: (value) {
                                 store.numero = value.toString();
 
@@ -92,6 +108,22 @@ class _CreateParcelaPageState
                                 Icons.email,
                                 color: ColorsConst.primary,
                               ),
+                              // decoration: InputDecoration(
+                              //   prefixIcon: const Icon(
+                              //     Icons.calendar_today_outlined,
+                              //     color: ColorsConst.primary,
+                              //   ),
+                              //   labelText: 'Área da parcela',
+                              //   filled: true,
+                              //   border: OutlineInputBorder(
+                              //     borderRadius: BorderRadius.circular(10.0),
+                              //     borderSide: const BorderSide(
+                              //       width: 0,
+                              //       style: BorderStyle.none,
+                              //     ),
+                              //   ),
+                              //   fillColor: ColorsConst.primary.withOpacity(0.1),
+                              // ),
                               onChanged: (value) {
                                 store.area = value.toString();
 
@@ -116,6 +148,22 @@ class _CreateParcelaPageState
                                 Icons.email,
                                 color: ColorsConst.primary,
                               ),
+                              // decoration: InputDecoration(
+                              //   prefixIcon: const Icon(
+                              //     Icons.calendar_today_outlined,
+                              //     color: ColorsConst.primary,
+                              //   ),
+                              //   labelText: "Largura da parcela",
+                              //   filled: true,
+                              //   border: OutlineInputBorder(
+                              //     borderRadius: BorderRadius.circular(10.0),
+                              //     borderSide: const BorderSide(
+                              //       width: 0,
+                              //       style: BorderStyle.none,
+                              //     ),
+                              //   ),
+                              //   fillColor: ColorsConst.primary.withOpacity(0.1),
+                              // ),
                               onChanged: (value) {
                                 store.largura = value.toString();
 
@@ -140,6 +188,22 @@ class _CreateParcelaPageState
                                 Icons.email,
                                 color: ColorsConst.primary,
                               ),
+                              // decoration: InputDecoration(
+                              //   prefixIcon: const Icon(
+                              //     Icons.calendar_today_outlined,
+                              //     color: ColorsConst.primary,
+                              //   ),
+                              //   labelText: "Número do talhão",
+                              //   filled: true,
+                              //   border: OutlineInputBorder(
+                              //     borderRadius: BorderRadius.circular(10.0),
+                              //     borderSide: const BorderSide(
+                              //       width: 0,
+                              //       style: BorderStyle.none,
+                              //     ),
+                              //   ),
+                              //   fillColor: ColorsConst.primary.withOpacity(0.1),
+                              // ),
                               onChanged: (value) {
                                 store.numTalhao = value.toString();
 
@@ -283,6 +347,22 @@ class _CreateParcelaPageState
                             Icons.email,
                             color: ColorsConst.primary,
                           ),
+                          // decoration: InputDecoration(
+                          //   prefixIcon: const Icon(
+                          //     Icons.calendar_today_outlined,
+                          //     color: ColorsConst.primary,
+                          //   ),
+                          //   labelText: "Espaçamento. Ex: 2x2, 5x5",
+                          //   filled: true,
+                          //   border: OutlineInputBorder(
+                          //     borderRadius: BorderRadius.circular(10.0),
+                          //     borderSide: const BorderSide(
+                          //       width: 0,
+                          //       style: BorderStyle.none,
+                          //     ),
+                          //   ),
+                          //   fillColor: ColorsConst.primary.withOpacity(0.1),
+                          // ),
                           onChanged: (value) {
                             store.espacamento = value.toString();
 
@@ -307,8 +387,11 @@ class _CreateParcelaPageState
             padding: const EdgeInsets.only(bottom: 8.0, left: 8, right: 8),
             child: CustomButton(
               action: () async {
+                print('Entrou no botão');
                 if (store.isValidFields()) {
+                  print('Entrou no if isValidFields');
                   if (parcela == null) {
+                    print('Entrou no if parcela == null');
                     final response = await createParcelaController
                         .createParcela(widget.args.elementAt(1));
                     if (response.ok) {
@@ -355,12 +438,11 @@ class _CreateParcelaPageState
                         await createParcelaController.updateParcela(
                             parcela!.id.toString(), widget.args.elementAt(1));
                     if (response.ok) {
-                      final parcela = response.result as Parcela;
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(
-                            'Parcela número: ${parcela.numero} Atualizada com sucesso.',
-                            style: const TextStyle(
+                          content: const Text(
+                            'Parcela atualizada com sucesso.',
+                            style: TextStyle(
                               color: ColorsConst.textColorPrimary,
                             ),
                           ),
@@ -394,6 +476,8 @@ class _CreateParcelaPageState
                       );
                     }
                   }
+                } else {
+                  print('Campos não validados');
                 }
               },
               title: parcela == null ? "Salvar" : 'Atualizar',

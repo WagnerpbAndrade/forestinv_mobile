@@ -56,19 +56,17 @@ class Parcela {
             : DateTime.parse(json["ultimaAtualizacao"]),
       );
 
-  Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['projetoId'] = projetoId;
-    data['numero'] = numero;
-    data['area'] = area;
-    data['largura'] = largura;
-    data['numTalhao'] = numTalhao;
-    data['latitude'] = latitude;
-    data['longitude'] = longitude;
-    data['dataPlantio'] = dataPlantio;
-    data['espacamento'] = espacamento;
-    data['tipoParcelaEnum'] = tipoParcelaEnum;
-    return data;
-  }
+  Map<String, dynamic> toMap() => {
+        'id': id,
+        'projetoId': projetoId,
+        'numero': numero,
+        'area': area,
+        'largura': largura,
+        'numTalhao': numTalhao,
+        'latitude': latitude,
+        'longitude': longitude,
+        'dataPlantio': dataPlantio,
+        'espacamento': espacamento,
+        'tipoParcelaEnum': tipoParcelaEnum,
+      };
 }

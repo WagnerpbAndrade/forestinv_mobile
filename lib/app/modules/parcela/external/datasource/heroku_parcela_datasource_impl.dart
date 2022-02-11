@@ -61,13 +61,8 @@ class HerokuParcelaDatasourceImpl implements ParcelaDatasource {
   @override
   Future<ApiResponse> update(Parcela parcela) async {
     try {
-      final Response response =
-          await dioClient.put(_baseUrl, '', parcela.toMap());
-
-      print('Update Parcela Info: ${response.data}');
-      return ApiResponse.ok(
-        result: Parcela.fromMap(response.data),
-      );
+      await dioClient.put(_baseUrl, '', parcela.toMap());
+      return ApiResponse.ok();
     } catch (e) {
       print('HerokuParcelaDatasourceImpl-update: $e');
       return ApiResponse.error(

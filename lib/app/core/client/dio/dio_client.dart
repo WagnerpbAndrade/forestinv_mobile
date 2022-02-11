@@ -86,6 +86,7 @@ class DioClient {
       case 201:
         return response;
       case 204:
+        return response;
       case 400:
         throw BadRequestException(
             message: utf8.decode(response.bodyBytes),
