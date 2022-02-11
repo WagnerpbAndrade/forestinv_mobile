@@ -6,4 +6,8 @@ abstract class MedicaoDatasource {
   Future<ListMedicaoResponse> getMedicaoPagination(String parcelaId);
 
   Future<ApiResponse> save(final Medicao medicao);
+
+  Future<ApiResponse> update(final Medicao medicao);
+
+  Future<ApiResponse> delete(final String medicaoId);
 }

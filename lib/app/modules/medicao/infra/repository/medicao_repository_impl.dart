@@ -21,4 +21,14 @@ class MedicaoRepositoryImpl implements MedicaoRepository {
   Future<ApiResponse> save(final Medicao medicao) {
     return datasource.save(medicao);
   }
+
+  @override
+  Future<ApiResponse> update(Medicao medicao) {
+    return datasource.update(medicao);
+  }
+
+  @override
+  Future<ApiResponse> delete(String medicaoId) {
+    return datasource.delete(medicaoId);
+  }
 }

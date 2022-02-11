@@ -222,47 +222,46 @@ class _CreateMedicaoPageState
                       );
                     }
                   } else {
-                    // final response =
-                    //     await createMedicaoController.updateParcela(
-                    //         medicao!.id.toString(), widget.args.elementAt(1));
-                    // if (response.ok) {
-                    //   ScaffoldMessenger.of(context).showSnackBar(
-                    //     SnackBar(
-                    //       content: const Text(
-                    //         'Parcela atualizada com sucesso.',
-                    //         style: TextStyle(
-                    //           color: ColorsConst.textColorPrimary,
-                    //         ),
-                    //       ),
-                    //       backgroundColor: ColorsConst.primary,
-                    //       action: SnackBarAction(
-                    //         textColor: ColorsConst.textColorPrimary,
-                    //         label: 'Ok',
-                    //         onPressed: () {},
-                    //       ),
-                    //       duration: const Duration(milliseconds: 1500),
-                    //     ),
-                    //   );
-                    //   Modular.to.pop();
-                    // } else {
-                    //   ScaffoldMessenger.of(context).showSnackBar(
-                    //     SnackBar(
-                    //       content: Text(
-                    //         response.message ?? '',
-                    //         style: const TextStyle(
-                    //           color: ColorsConst.textColorPrimary,
-                    //         ),
-                    //       ),
-                    //       backgroundColor: ColorsConst.primary,
-                    //       action: SnackBarAction(
-                    //         textColor: ColorsConst.textColorPrimary,
-                    //         label: 'Ok',
-                    //         onPressed: () {},
-                    //       ),
-                    //       duration: const Duration(milliseconds: 1500),
-                    //     ),
-                    //   );
-                    // }
+                    final response = await createMedicaoController.update(
+                        medicao!.id.toString(), widget.args.elementAt(1));
+                    if (response.ok) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text(
+                            'Medição atualizada com sucesso.',
+                            style: TextStyle(
+                              color: ColorsConst.textColorPrimary,
+                            ),
+                          ),
+                          backgroundColor: ColorsConst.primary,
+                          action: SnackBarAction(
+                            textColor: ColorsConst.textColorPrimary,
+                            label: 'Ok',
+                            onPressed: () {},
+                          ),
+                          duration: const Duration(milliseconds: 1500),
+                        ),
+                      );
+                      Modular.to.pop();
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            response.message ?? '',
+                            style: const TextStyle(
+                              color: ColorsConst.textColorPrimary,
+                            ),
+                          ),
+                          backgroundColor: ColorsConst.primary,
+                          action: SnackBarAction(
+                            textColor: ColorsConst.textColorPrimary,
+                            label: 'Ok',
+                            onPressed: () {},
+                          ),
+                          duration: const Duration(milliseconds: 1500),
+                        ),
+                      );
+                    }
                   }
                 } else {
                   print('Campos não validados');

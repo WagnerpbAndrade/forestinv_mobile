@@ -56,4 +56,29 @@ class HerokuMedicaoDatasourceImpl implements MedicaoDatasource {
       return ApiResponse.error(message: 'Oops! ${e.toString()}');
     }
   }
+
+  @override
+  Future<ApiResponse> update(final Medicao medicao) async {
+    try {
+      print('Medição update: ${medicao.toMap()}');
+      await dioClient.put(_baseUrl, '', medicao.toMap());
+      print('Medição updated successfully');
+      return ApiResponse.ok();
+    } catch (e) {
+      print('HerokuMedicaoDatasourceImpl-update: $e');
+      return ApiResponse.error(message: 'Oops! ${e.toString()}');
+    }
+  }
+
+  @override
+  Future<ApiResponse> delete(final String medicaoId) async {
+    try {
+      await dioClient.delete(_baseUrl, '/$medicaoId');
+      print('Medição deleted successfully');
+      return ApiResponse.ok();
+    } catch (e) {
+      print('HerokuMedicaoDatasourceImpl-delete: $e');
+      return ApiResponse.error(message: 'Oops! ${e.toString()}');
+    }
+  }
 }

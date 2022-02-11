@@ -1,8 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
+import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/delete_medicao_usecase.dart';
 
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/get_all_medicao_by_parcela.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/save_medicao_usecase.dart';
+import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/update_medicao_usecase.dart';
 import 'package:forestinv_mobile/app/modules/medicao/external/datasource/heroku_medicao_datasource_impl.dart';
 import 'package:forestinv_mobile/app/modules/medicao/infra/repository/medicao_repository_impl.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/controllers/create_medicao_controller.dart';
@@ -23,6 +25,8 @@ class MedicaoModule extends Module {
     Bind((i) => MedicaoRepositoryImpl(i.get())),
     Bind((i) => GetAllMedicaoByParcelaImpl(i.get())),
     Bind((i) => SaveMedicaoUsecaseImpl(i.get())),
+    Bind((i) => UpdateMedicaoUsecaseImpl(i.get())),
+    Bind((i) => DeleteMedicaoUsecaseImpl(i.get())),
   ];
 
   @override

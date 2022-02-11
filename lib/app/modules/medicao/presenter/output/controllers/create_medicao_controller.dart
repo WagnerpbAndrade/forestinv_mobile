@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/save_medicao_usecase.dart';
+import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/update_medicao_usecase.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/create_medicao_store.dart';
 
 class CreateMedicaoController {
@@ -34,6 +35,26 @@ class CreateMedicaoController {
       longitude: 'longitude',
       estadoArvore: 'NORMAL',
       observacao: store.observacao,
+      parcelaId: int.parse(parcelaId),
+    );
+
+    return usecase.call(medicao);
+  }
+
+  Future<ApiResponse> update(final String medicaoId, final String parcelaId) {
+    final usecase = Modular.get<IUpdateMedicaoUsecase>();
+    final store = Modular.get<CreateMedicaoStore>();
+
+    final medicao = Medicao(
+      id: int.parse(medicaoId),
+      numArvore: int.parse(store.numeroArvore),
+      nomeResponsavel: store.responsavel,
+      dap: double.parse(store.dap),
+      alturaTotal: double.parse(store.altura),
+      latitude: 'latitude',
+      longitude: 'longitude',
+      estadoArvore: 'NORMAL',
+      observacao: txtObservacaoController.text,
       parcelaId: int.parse(parcelaId),
     );
 
