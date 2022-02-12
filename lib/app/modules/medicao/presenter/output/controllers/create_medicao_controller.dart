@@ -60,4 +60,20 @@ class CreateMedicaoController {
 
     return usecase.call(medicao);
   }
+
+  void configPage(final Medicao? medicao) {
+    if (medicao != null) {
+      txtNumeroArvoreController.text = medicao.numArvore.toString();
+      txtNomeResponsavelController.text = medicao.nomeResponsavel;
+      txtDapController.text = medicao.dap.toString();
+      txtAlturaTotalController.text = medicao.alturaTotal.toString();
+      txtObservacaoController.text = medicao.observacao;
+    } else {
+      txtNumeroArvoreController.text = '';
+      txtNomeResponsavelController.text = '';
+      txtDapController.text = '';
+      txtAlturaTotalController.text = '';
+      txtObservacaoController.text = '';
+    }
+  }
 }

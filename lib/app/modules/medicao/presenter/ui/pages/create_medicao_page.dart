@@ -21,6 +21,13 @@ class _CreateMedicaoPageState
     extends ModularState<CreateMedicaoPage, CreateMedicaoStore> {
   final createMedicaoController = Modular.get<CreateMedicaoController>();
   Medicao? get medicao => widget.args.elementAt(0);
+
+  @override
+  void initState() {
+    super.initState();
+    createMedicaoController.configPage(medicao);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
