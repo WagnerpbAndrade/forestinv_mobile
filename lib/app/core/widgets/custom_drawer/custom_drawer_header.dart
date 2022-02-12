@@ -11,7 +11,7 @@ class CustomDrawerHeader extends StatelessWidget {
     final authStore = Modular.get<AuthStore>();
     final user = authStore.getUser();
     return Container(
-      color: ColorsConst.secondary,
+      color: ColorsConst.primary,
       height: 120,
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(

@@ -11,33 +11,54 @@ class PageSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        PageTile(
-          label: 'Regras de Consistência',
-          iconData: Icons.rule,
-          onTap: () {},
-          highlighted: false,
-        ),
-        PageTile(
-          label: 'Configurações',
-          iconData: Icons.settings,
-          onTap: () {},
-          highlighted: false,
-        ),
-        PageTile(
-          label: 'Minha Conta',
-          iconData: Icons.account_circle,
-          onTap: () {},
-          highlighted: false,
-        ),
-        PageTile(
-          label: 'Sair',
-          iconData: Icons.exit_to_app,
-          onTap: () => loginController.logoutGoogle(),
-          highlighted: false,
-        ),
-      ],
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.8,
+      child: Column(
+        children: [
+          Column(
+            children: [
+              PageTile(
+                label: 'Minha Conta',
+                iconData: Icons.account_circle,
+                onTap: () {},
+                highlighted: false,
+              ),
+              PageTile(
+                label: 'Regras de Consistência',
+                iconData: Icons.rule,
+                onTap: () {},
+                highlighted: false,
+              ),
+            ],
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Divider(
+                  color: Colors.black54,
+                  thickness: 1,
+                ),
+                PageTile(
+                  label: 'Configurações',
+                  iconData: Icons.settings,
+                  onTap: () {},
+                  highlighted: false,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: PageTile(
+                    label: 'Sair',
+                    iconData: Icons.logout,
+                    onTap: () => loginController.logoutGoogle(),
+                    highlighted: false,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
