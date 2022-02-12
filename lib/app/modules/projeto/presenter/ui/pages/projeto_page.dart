@@ -37,22 +37,24 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
         resizeToAvoidBottomInset: false,
         drawer: const CustomDrawer(),
         appBar: AppBar(
-          title: Observer(
-            builder: (_) {
-              if (controller.search.isEmpty) return Container();
-              return GestureDetector(
-                onTap: () => openSearch(),
-                child: LayoutBuilder(
-                  builder: (_, constraints) {
-                    return Container(
-                      width: constraints.biggest.width,
-                      child: Text(controller.search),
+          title: store.search.isEmpty
+              ? const Text('Projetos')
+              : Observer(
+                  builder: (_) {
+                    if (controller.search.isEmpty) return Container();
+                    return GestureDetector(
+                      onTap: () => openSearch(),
+                      child: LayoutBuilder(
+                        builder: (_, constraints) {
+                          return Container(
+                            width: constraints.biggest.width,
+                            child: Text(controller.search),
+                          );
+                        },
+                      ),
                     );
                   },
                 ),
-              );
-            },
-          ),
           actions: [
             Observer(
               builder: (_) {
@@ -73,6 +75,7 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
               },
             )
           ],
+          centerTitle: true,
         ),
         body: buidListProjetos(),
         floatingActionButton: FloatingActionButton(
