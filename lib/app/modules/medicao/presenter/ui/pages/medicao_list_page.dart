@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
-import 'package:forestinv_mobile/app/modules/medicao/presenter/output/controllers/create_medicao_controller.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/controllers/medicao_list_controller.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/medicao_store.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
@@ -37,7 +36,7 @@ class MedicaoListPageState extends ModularState<MedicaoListPage, MedicaoStore> {
       body: SafeArea(
         child: Column(
           children: [
-            topBar(),
+            //topBar(),
             Expanded(
               child: buildListMedicoes(),
             ),

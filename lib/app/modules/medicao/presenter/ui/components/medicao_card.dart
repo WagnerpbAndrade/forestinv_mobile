@@ -18,7 +18,7 @@ class MedicaoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 135,
+      height: 160,
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
       child: GestureDetector(
         onTap: () => onTap(),
@@ -96,6 +96,22 @@ class MedicaoCard extends StatelessWidget {
                   ),
                 ],
               ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Estado da árvore: ${medicao.estadoArvore}',
+                      style: const TextStyle(
+                        color: ColorsConst.primary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),
