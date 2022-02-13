@@ -17,6 +17,7 @@ import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/new
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/projeto_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/new_project_page.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/projeto_page.dart';
+import 'package:forestinv_mobile/app/modules/regra_consistencia/regra_consistencia_module.dart';
 
 import 'output/controllers/new_project_controller.dart';
 
@@ -42,13 +43,10 @@ class ProjetoModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => ProjetoPage()),
-    ChildRoute(
-      RouterConst.ADD_PROJECT_ROUTER,
-      child: (_, args) => NewProjectPage(
-        project: args.data,
-      ),
-    ),
+    ChildRoute(RouterConst.ADD_PROJECT_ROUTER,
+        child: (_, args) => NewProjectPage(project: args.data)),
     ModuleRoute(RouterConst.PARCELA_ROUTER, module: ParcelaModule()),
     ModuleRoute(RouterConst.MEDICAO_ROUTER, module: MedicaoModule()),
+    ModuleRoute(RouterConst.REGRAS_ROUTER, module: RegraConsistenciaModule()),
   ];
 }

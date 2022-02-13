@@ -83,4 +83,9 @@ class ProjetoController {
         '${RouterConst.PROJECT_ROUTER}${RouterConst.ADD_PROJECT_ROUTER}',
         arguments: project);
   }
+
+  void goToRegrasConsistencia() {
+    Modular.to
+        .pushNamed('${RouterConst.PROJECT_ROUTER}${RouterConst.REGRAS_ROUTER}');
+  }
 }

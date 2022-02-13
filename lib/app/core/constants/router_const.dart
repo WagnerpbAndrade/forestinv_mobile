@@ -12,4 +12,6 @@ class RouterConst {
   static String CREATE_MEDICAO_ROUTER = '/create-medicao';
 
   static String MEDICAO_ROUTER = '/medicao';
+
+  static String REGRAS_ROUTER = '/regras';
 }

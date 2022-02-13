@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/output/controller/login_controller.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/controllers/projeto_controller.dart';
 
 import 'page_tile.dart';
 
@@ -8,6 +9,7 @@ class PageSection extends StatelessWidget {
   PageSection({Key? key}) : super(key: key);
 
   final loginController = Modular.get<LoginController>();
+  final projetoController = Modular.get<ProjetoController>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,9 @@ class PageSection extends StatelessWidget {
               PageTile(
                 label: 'Regras de Consistência',
                 iconData: Icons.rule,
-                onTap: () {},
+                onTap: () {
+                  projetoController.goToRegrasConsistencia();
+                },
                 highlighted: false,
               ),
             ],
