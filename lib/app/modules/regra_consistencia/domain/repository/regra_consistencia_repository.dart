@@ -1,5 +1,5 @@
-import 'package:forestinv_mobile/app/core/interface/api_response.dart';
+import 'package:forestinv_mobile/app/modules/regra_consistencia/domain/entities/regra_consistencia.dart';
 
 abstract class RegraConsistenciaRepository {
-  Future<ApiResponse> getAllByUser(final String uuid);
+  Future<List<RegraConsistencia>> getAllByUser(final String uuid);
 }

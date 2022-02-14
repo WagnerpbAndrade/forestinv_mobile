@@ -20,6 +20,6 @@ class RegraConsistenciaModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => const RegraConsistenciaPage()),
+    ChildRoute('/', child: (_, args) => RegraConsistenciaPage()),
   ];
 }
