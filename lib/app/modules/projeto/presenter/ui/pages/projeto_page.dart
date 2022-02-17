@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -203,14 +204,16 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
             child: CircularProgressIndicator(),
           );
         }
-        final List<Project> projetos = snapshot.data as List<Project>;
+
+        final List<Project> projects = snapshot.data!;
+
         return ListView.builder(
-          itemCount: projetos.length,
+          itemCount: projects.length,
           itemBuilder: (_, index) {
             return ProjectCard(
-              project: projetos[index],
+              project: projects[index],
               onTap: () => projetoController.goToParcelaPage(
-                projetos[index],
+                projects[index],
               ),
               onPressedDelete: () {
                 Alert(
@@ -222,7 +225,7 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
                         projetoController.deleteProject(
                           controller.projectsList[index].id.toString(),
                         );
-                        store.projectsList.remove(projetos[index]);
+                        store.projectsList.remove(projects[index]);
                         Modular.to.pop();
                       },
                     ),
@@ -239,7 +242,7 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
                 ).show();
               },
               onPressedUpdate: () {
-                projetoController.goToNewProject(projetos[index]);
+                projetoController.goToNewProject(projects[index]);
               },
             );
           },

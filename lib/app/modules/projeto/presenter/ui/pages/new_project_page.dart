@@ -193,7 +193,7 @@ class _NewProjectPageState
                         }
                       }
                     } else {
-                      newProjectController.atualizarProjeto(widget.project!.id);
+                      newProjectController.atualizarProjeto(widget.project!);
 
                       if (newProjectController.formKey.currentState!
                           .validate()) {

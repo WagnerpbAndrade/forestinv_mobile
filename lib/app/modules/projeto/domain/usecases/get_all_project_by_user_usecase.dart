@@ -10,7 +10,7 @@ class GetAllProjectByUserUsecaseImpl extends GetAllProjectByUserUsecase {
 
   GetAllProjectByUserUsecaseImpl(this._repository);
   @override
-  Future<List<Project>> getAllByUser(final String uuid) {
+  Future<List<Project>> getAllByUser(final String uuid) async {
     return _repository.getAllByUser(uuid);
   }
 }

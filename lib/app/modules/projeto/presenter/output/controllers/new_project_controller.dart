@@ -62,7 +62,7 @@ class NewProjectController {
   }
 
   @action
-  void atualizarProjeto(int? projectId) async {
+  void atualizarProjeto(Project project) async {
     if (formKey.currentState!.validate()) {
       final projetoStore = Modular.get<ProjetoStore>();
       final usecase = Modular.get<UpdateProjectUsecase>();
@@ -70,9 +70,11 @@ class NewProjectController {
       final area = double.parse(areaController.text.toString());
 
       final projectToUpdate = Project(
-        id: projectId,
+        id: project.id,
+        uuid: project.uuid,
         nome: nome,
         area: area,
+        dataCriacao: project.dataCriacao,
         visibilidadeProjetoEnum: "PRIVADO",
       );
       final resultEither = await usecase.update(projectToUpdate);

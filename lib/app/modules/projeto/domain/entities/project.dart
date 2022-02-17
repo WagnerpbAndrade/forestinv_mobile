@@ -8,15 +8,15 @@ String projectToMap(List<Project> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
 
 class Project extends Equatable {
-  final int? id;
+  final dynamic id;
   final String? uuid;
   final String nome;
-  final double area;
+  final dynamic area;
   final String? visibilidadeProjetoEnum;
-  final DateTime? dataCriacao;
-  final DateTime? ultimaAtualizacao;
+  DateTime? dataCriacao;
+  DateTime? ultimaAtualizacao;
 
-  const Project({
+  Project({
     this.id,
     this.uuid,
     required this.nome,
@@ -39,11 +39,12 @@ class Project extends Equatable {
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
         "uuid": uuid,
         "nome": nome,
         "area": area,
-        "visibilidadeProjetoEnum": visibilidadeProjetoEnum
+        "visibilidadeProjetoEnum": visibilidadeProjetoEnum,
+        "dataCriacao": dataCriacao,
+        "ultimaAtualizacao": ultimaAtualizacao,
       };
 
   @override

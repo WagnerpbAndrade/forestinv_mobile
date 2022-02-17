@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
+import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/medicao_module.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/parcela_module.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/delete_project_usecase.dart';
@@ -11,6 +12,7 @@ import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_name
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/save_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/update_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/external/datasource/project_datasource_impl.dart';
+import 'package:forestinv_mobile/app/modules/projeto/external/datasource/project_firestore_datasource.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/repository/projeto_repository_impl.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/controllers/projeto_controller.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/new_projeto_store.dart';
@@ -27,9 +29,8 @@ class ProjetoModule extends Module {
     Bind((i) => ProjetoStore()),
     Bind((i) => NewProjetoStore()),
     Bind((i) => NewProjectController()),
-    Bind((i) => ProjectDatasourceImpl(i.get())),
+    //Bind((i) => ProjectDatasourceImpl(i.get())),
     Bind((i) => ProjectRepositoryImpl(i.get())),
-    Bind((i) => GetAllProjectsUsecaseImpl(i.get())),
     Bind((i) => GetByIdProjectUsecaseImpl(i.get())),
     Bind((i) => GetByNameProjectUsecaseImpl(i.get())),
     Bind((i) => SaveProjectUsecaseImpl(i.get())),
@@ -38,6 +39,8 @@ class ProjetoModule extends Module {
     Bind((i) => UpdateProjectUsecaseImpl(i())),
     Bind((i) => GetAllProjectByUserUsecaseImpl(i())),
     Bind((i) => GetByNameProjectAndUserUsecaseImpl(i())),
+    Bind((i) => AuthStore(i())),
+    Bind((i) => ProjectFirestoreDatasourceImpl(i(), i())),
   ];
 
   @override

@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/firebase_firestore_constants.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
@@ -21,12 +23,25 @@ class ProjetoController {
   @action
   void setError(bool value) => error = value;
 
-  Future<List<Project>> getAllProjectByUser() {
+  // Query<Project> getAllProjectByUser() {
+  //   final instance = Modular.get<FirebaseFirestore>();
+  //   final auth = Modular.get<AuthStore>();
+  //   final userUuid = auth.getUser().uid;
+  //   return instance
+  //       .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
+  //       .where('uuid', isEqualTo: userUuid)
+  //       .withConverter<Project>(
+  //         fromFirestore: (snapshots, _) => Project.fromMap(snapshots.data()!),
+  //         toFirestore: (projeto, _) => projeto.toMap(),
+  //       );
+  // }
+
+  Future<List<Project>> getAllProjectByUser() async {
     final usecase = Modular.get<GetAllProjectByUserUsecase>();
     final auth = Modular.get<AuthStore>();
     final uuid = auth.firebaseAuth.currentUser!.uid;
     try {
-      return usecase.getAllByUser(uuid);
+      return await usecase.getAllByUser(uuid);
     } catch (e) {
       rethrow;
     }
