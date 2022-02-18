@@ -1,18 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:forestinv_mobile/app/core/client/dio/dio_client.dart';
+import 'package:forestinv_mobile/app/core/constants/firebase_firestore_constants.dart';
 import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/list_medicao_response.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:forestinv_mobile/app/modules/medicao/infra/datasource/medicao_datasource.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
 
-class HerokuMedicaoDatasourceImpl implements MedicaoDatasource {
+class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
   static const String _baseUrl =
       'https://forestinv-api.herokuapp.com/v1/api/medicoes';
 
+  final FirebaseFirestore _firestore;
   final DioClient dioClient;
 
-  HerokuMedicaoDatasourceImpl(this.dioClient);
+  MedicaoFirestoreDatasourceImpl(this.dioClient, this._firestore);
 
   @override
   Future<ListMedicaoResponse> getMedicaoPagination(String parcelaId) async {
@@ -42,18 +45,56 @@ class HerokuMedicaoDatasourceImpl implements MedicaoDatasource {
   }
 
   @override
+  Future<List<Medicao>> listAllByParcela(dynamic parcelaId) async {
+    try {
+      final List<Medicao> list = [];
+      final medicoesRef = _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
+          .where('parcelaId', isEqualTo: parcelaId);
+
+      final QuerySnapshot querySnapshot = await medicoesRef.get();
+
+      querySnapshot.docs.forEach((doc) {
+        final medicaoId = doc.id;
+        final parcelaId = doc.get('parcelaId');
+        final nomeResponsavel = doc.get('nomeResponsavel');
+        final dataMedicaoTimestamp = doc.get('dataMedicao') as Timestamp;
+        final dataMedicao = DateTime.fromMicrosecondsSinceEpoch(
+            dataMedicaoTimestamp.microsecondsSinceEpoch);
+        final updated = doc.get('ultimaAtualizacao') as Timestamp;
+        final ultimaAtualizacao =
+            DateTime.fromMicrosecondsSinceEpoch(updated.microsecondsSinceEpoch);
+
+        final Medicao medicao = Medicao(
+          id: medicaoId,
+          parcelaId: parcelaId,
+          nomeResponsavel: nomeResponsavel,
+          dataMedicao: dataMedicao,
+          ultimaAtualizacao: ultimaAtualizacao,
+        );
+        list.add(medicao);
+      });
+
+      print('listAllByParcela Info: $list');
+      return list;
+    } catch (e) {
+      print('MedicaoFirestoreDatasourceImpl-listAllByParcela: $e');
+      rethrow;
+    }
+  }
+
+  @override
   Future<ApiResponse> save(final Medicao medicao) async {
     try {
-      final Response response =
-          await dioClient.post(_baseUrl, '', medicao.toMap());
-
-      print('Save Medição Info: ${response.data}');
-      return ApiResponse.ok(
-        result: Medicao.fromMap(response.data),
-      );
+      medicao.dataMedicao = DateTime.now();
+      medicao.ultimaAtualizacao = DateTime.now();
+      await _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
+          .add(medicao.toMap());
+      return ApiResponse.ok();
     } catch (e) {
-      print('HerokuMedicaoDatasourceImpl-save: $e');
-      return ApiResponse.error(message: 'Oops! ${e.toString()}');
+      print('MedicaoFirestoreDatasourceImpl-save: $e');
+      return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
     }
   }
 
@@ -80,11 +121,5 @@ class HerokuMedicaoDatasourceImpl implements MedicaoDatasource {
       print('HerokuMedicaoDatasourceImpl-delete: $e');
       return ApiResponse.error(message: 'Oops! ${e.toString()}');
     }
-  }
-
-  @override
-  Future<List<Medicao>> listAllByParcela(parcelaId) {
-    // TODO: implement listAllByParcela
-    throw UnimplementedError();
   }
 }

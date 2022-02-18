@@ -34,4 +34,9 @@ class ParcelaRepositoryImpl implements ParcelaRepository {
   Future<ApiResponse> delete(final String parcelaId) {
     return datasource.delete(parcelaId);
   }
+
+  @override
+  Future<List<Parcela>> listAllByProject(dynamic projectId) {
+    return datasource.listAllByProject(projectId);
+  }
 }

@@ -190,12 +190,11 @@ class _CreateMedicaoPageState
                     final response = await createMedicaoController
                         .save(widget.args.elementAt(1));
                     if (response.ok) {
-                      final medicao = response.result as Medicao;
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(
-                            'Medição da árvore ${medicao.numArvore} cadastrada com sucesso.',
-                            style: const TextStyle(
+                          content: const Text(
+                            'Medição cadastrada com sucesso.',
+                            style: TextStyle(
                               color: ColorsConst.textColorPrimary,
                             ),
                           ),

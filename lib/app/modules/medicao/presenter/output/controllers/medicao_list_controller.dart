@@ -3,14 +3,13 @@ import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/delete_medicao_usecase.dart';
-import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/get_all_medicao_by_parcela.dart';
+import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/list_all_medicao_by_parcela.dart';
 
 class MedicaoListController {
   Future<List<Medicao>> getAllMedicaoByParcela(String parcelaId) async {
-    final usecase = Modular.get<GetAllMedicaoByParcela>();
+    final usecase = Modular.get<ListAllMedicaoByParcela>();
     try {
-      final response = await usecase.getMedicaoPagination(parcelaId);
-      return response.medicoes;
+      return await usecase.listAllByParcela(parcelaId);
     } catch (e) {
       rethrow;
     }

@@ -10,4 +10,6 @@ abstract class MedicaoDatasource {
   Future<ApiResponse> update(final Medicao medicao);
 
   Future<ApiResponse> delete(final String medicaoId);
+
+  Future<List<Medicao>> listAllByParcela(dynamic parcelaId);
 }

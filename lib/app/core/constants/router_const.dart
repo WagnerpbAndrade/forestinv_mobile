@@ -14,4 +14,6 @@ class RouterConst {
   static String MEDICAO_ROUTER = '/medicao';
 
   static String REGRAS_ROUTER = '/regras';
+
+  static String ARVORE_ROUTER = '/arvore';
 }

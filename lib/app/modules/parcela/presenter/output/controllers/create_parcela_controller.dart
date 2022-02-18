@@ -24,7 +24,8 @@ class CreateParcelaController {
   final TextEditingController txtEspacamentoParcelaController =
       TextEditingController();
 
-  Future<ApiResponse> createParcela(final String projectId) {
+  Future<ApiResponse> createParcela(
+      final String projectId, DateTime dataPlantio) {
     final usecase = Modular.get<SaveParcelaUsecase>();
     final numero = txtNumeroParcelaController.text;
     final area = txtAreaParcelaController.text;
@@ -32,20 +33,22 @@ class CreateParcelaController {
     final numTalhao = txtNumTalhaoParcelaController.text;
     final latitude = txtLatitudeParcelaController.text;
     final longitude = txtLongitudeParcelaController.text;
-    final dataPlantio = txtDataPlantioParcelaController.text;
+    //final dataPlantio = txtDataPlantioParcelaController.text;
     print('Data de plantio: $dataPlantio');
     final espacamento = txtEspacamentoParcelaController.text;
     const tipoParcelaEnum = 'PERMANENTE';
 
+    final DateTime tempDate = DateFormat("yyyy-MM-dd").parse('2022-02-27');
+
     final parcela = Parcela(
-      projetoId: int.parse(projectId),
+      projetoId: projectId,
       numero: int.parse(numero),
       area: double.parse(area),
       largura: double.parse(largura),
       numTalhao: int.parse(numTalhao),
       latitude: 'latitude',
       longitude: 'longitude',
-      dataPlantio: getFormattedDate(dataPlantio),
+      dataPlantio: dataPlantio,
       espacamento: espacamento,
       tipoParcelaEnum: tipoParcelaEnum,
     );
@@ -69,16 +72,18 @@ class CreateParcelaController {
     final espacamento = txtEspacamentoParcelaController.text;
     const tipoParcelaEnum = 'PERMANENTE';
 
+    final DateTime tempDate =
+        DateFormat("yyyy-MM-dd hh:mm:ss").parse(dataPlantio);
+
     final parcela = Parcela(
-      id: int.parse(parcelaId),
-      projetoId: int.parse(projectId),
+      projetoId: projectId,
       numero: int.parse(numero),
       area: double.parse(area),
       largura: double.parse(largura),
       numTalhao: int.parse(numTalhao),
       latitude: 'latitude',
       longitude: 'longitude',
-      dataPlantio: getFormattedDate(dataPlantio),
+      dataPlantio: tempDate,
       espacamento: espacamento,
       tipoParcelaEnum: tipoParcelaEnum,
     );
@@ -121,7 +126,7 @@ class CreateParcelaController {
         numTalhao: 1,
         latitude: 'latitude',
         longitude: 'longitude',
-        dataPlantio: '08/02/2022',
+        dataPlantio: DateTime.now(),
         espacamento: '5x5',
         tipoParcelaEnum: 'PERMANENTE',
       );

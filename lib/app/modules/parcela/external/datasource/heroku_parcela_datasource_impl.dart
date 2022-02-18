@@ -81,4 +81,10 @@ class HerokuParcelaDatasourceImpl implements ParcelaDatasource {
           message: 'Oops! Algo deu errado. Tente novamente!');
     }
   }
+
+  @override
+  Future<List<Parcela>> listAllByProject(dynamic projectId) {
+    // TODO: implement listAllByUser
+    throw UnimplementedError();
+  }
 }

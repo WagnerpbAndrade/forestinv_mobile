@@ -3,14 +3,13 @@ import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/delete_parcela_usecase.dart';
-import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/get_all_parcela_by_project.dart';
+import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/list_all_parcela_by_projeto.dart';
 
 class ParcelaController {
   Future<List<Parcela>> getAllParcelaByProject(String projectId) async {
-    final usecase = Modular.get<GetAllParcelaByProject>();
+    final usecase = Modular.get<ListAllParcelaByProjeto>();
     try {
-      final response = await usecase.getParcelasPagination(projectId);
-      return response.parcelas;
+      return await usecase.call(projectId);
     } catch (e) {
       rethrow;
     }

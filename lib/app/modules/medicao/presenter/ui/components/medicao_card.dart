@@ -58,7 +58,7 @@ class MedicaoCard extends StatelessWidget {
                   ),
                   Expanded(
                       child: Text(
-                    'Árvore ${medicao.numArvore.toString()}',
+                    'Data de conclusão: ${medicao.dataMedicao}',
                     style: const TextStyle(
                       color: ColorsConst.secondary,
                       fontSize: 20,
@@ -96,22 +96,22 @@ class MedicaoCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Estado da árvore: ${medicao.estadoArvore}',
-                      style: const TextStyle(
-                        color: ColorsConst.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  ],
-                ),
-              )
+              // Padding(
+              //   padding: const EdgeInsets.only(bottom: 8.0),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       Text(
+              //         'Estado da árvore: ${medicao.estadoArvore}',
+              //         style: const TextStyle(
+              //           color: ColorsConst.primary,
+              //           fontSize: 14,
+              //           fontWeight: FontWeight.bold,
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // )
             ],
           ),
         ),

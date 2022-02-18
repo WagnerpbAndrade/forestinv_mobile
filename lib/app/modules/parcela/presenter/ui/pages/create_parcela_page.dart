@@ -393,14 +393,13 @@ class _CreateParcelaPageState
                   if (parcela == null) {
                     print('Entrou no if parcela == null');
                     final response = await createParcelaController
-                        .createParcela(widget.args.elementAt(1));
+                        .createParcela(widget.args.elementAt(1), _date);
                     if (response.ok) {
-                      final parcela = response.result as Parcela;
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(
-                            'Parcela número: ${parcela.numero} Cadastrada com sucesso. ',
-                            style: const TextStyle(
+                          content: const Text(
+                            'Parcela cadastrada com sucesso. ',
+                            style: TextStyle(
                               color: ColorsConst.textColorPrimary,
                             ),
                           ),

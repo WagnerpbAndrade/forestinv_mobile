@@ -31,4 +31,9 @@ class MedicaoRepositoryImpl implements MedicaoRepository {
   Future<ApiResponse> delete(String medicaoId) {
     return datasource.delete(medicaoId);
   }
+
+  @override
+  Future<List<Medicao>> listAllByParcela(dynamic parcelaId) {
+    return datasource.listAllByParcela(parcelaId);
+  }
 }

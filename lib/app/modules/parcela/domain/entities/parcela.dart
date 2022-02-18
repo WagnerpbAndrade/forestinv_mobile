@@ -1,20 +1,19 @@
 import 'dart:convert';
 
-Parcela listProjetoResponseFromMap(String str) =>
-    Parcela.fromMap(json.decode(str));
+Parcela ParcelaFromMap(String str) => Parcela.fromMap(json.decode(str));
 
-String listProjetoResponseToMap(Parcela data) => json.encode(data.toMap());
+String ParcelaToMap(Parcela data) => json.encode(data.toMap());
 
 class Parcela {
-  int? id;
-  final int? projetoId;
+  dynamic id;
+  final dynamic projetoId;
   int numero;
   double area;
   double largura;
   int numTalhao;
-  String latitude;
-  String longitude;
-  String dataPlantio;
+  String? latitude;
+  String? longitude;
+  DateTime dataPlantio;
   String espacamento;
   int? idadeParcela;
   String tipoParcelaEnum;
@@ -28,8 +27,8 @@ class Parcela {
       required this.area,
       required this.largura,
       required this.numTalhao,
-      required this.latitude,
-      required this.longitude,
+      this.latitude,
+      this.longitude,
       required this.dataPlantio,
       required this.espacamento,
       this.idadeParcela,
@@ -57,7 +56,6 @@ class Parcela {
       );
 
   Map<String, dynamic> toMap() => {
-        'id': id,
         'projetoId': projetoId,
         'numero': numero,
         'area': area,
@@ -68,5 +66,7 @@ class Parcela {
         'dataPlantio': dataPlantio,
         'espacamento': espacamento,
         'tipoParcelaEnum': tipoParcelaEnum,
+        'dataCriacao': dataCriacao,
+        'ultimaAtualizacao': ultimaAtualizacao,
       };
 }

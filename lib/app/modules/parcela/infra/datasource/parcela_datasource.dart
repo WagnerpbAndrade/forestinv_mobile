@@ -10,4 +10,6 @@ abstract class ParcelaDatasource {
   Future<ApiResponse> update(Parcela parcela);
 
   Future<ApiResponse> delete(final String parcelaId);
+
+  Future<List<Parcela>> listAllByProject(dynamic projectId);
 }

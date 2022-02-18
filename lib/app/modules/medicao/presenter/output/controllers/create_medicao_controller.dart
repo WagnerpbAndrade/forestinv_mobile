@@ -27,15 +27,15 @@ class CreateMedicaoController {
     final store = Modular.get<CreateMedicaoStore>();
 
     final medicao = Medicao(
-      numArvore: int.parse(store.numeroArvore),
       nomeResponsavel: store.responsavel,
-      dap: double.parse(store.dap),
-      alturaTotal: double.parse(store.altura),
-      latitude: 'latitude',
-      longitude: 'longitude',
-      estadoArvore: 'NORMAL',
-      observacao: store.observacao,
-      parcelaId: int.parse(parcelaId),
+      // numArvore: int.parse(store.numeroArvore),
+      // dap: double.parse(store.dap),
+      // alturaTotal: double.parse(store.altura),
+      // latitude: 'latitude',
+      // longitude: 'longitude',
+      // estadoArvore: 'NORMAL',
+      // observacao: store.observacao,
+      parcelaId: parcelaId,
     );
 
     return usecase.call(medicao);
@@ -46,16 +46,16 @@ class CreateMedicaoController {
     final store = Modular.get<CreateMedicaoStore>();
 
     final medicao = Medicao(
-      id: int.parse(medicaoId),
-      numArvore: int.parse(store.numeroArvore),
+      id: medicaoId,
       nomeResponsavel: store.responsavel,
-      dap: double.parse(store.dap),
-      alturaTotal: double.parse(store.altura),
-      latitude: 'latitude',
-      longitude: 'longitude',
-      estadoArvore: 'NORMAL',
-      observacao: txtObservacaoController.text,
-      parcelaId: int.parse(parcelaId),
+      // numArvore: int.parse(store.numeroArvore),
+      // dap: double.parse(store.dap),
+      // alturaTotal: double.parse(store.altura),
+      // latitude: 'latitude',
+      // longitude: 'longitude',
+      // estadoArvore: 'NORMAL',
+      // observacao: txtObservacaoController.text,
+      parcelaId: parcelaId,
     );
 
     return usecase.call(medicao);
@@ -63,11 +63,11 @@ class CreateMedicaoController {
 
   void configPage(final Medicao? medicao) {
     if (medicao != null) {
-      txtNumeroArvoreController.text = medicao.numArvore.toString();
       txtNomeResponsavelController.text = medicao.nomeResponsavel;
-      txtDapController.text = medicao.dap.toString();
-      txtAlturaTotalController.text = medicao.alturaTotal.toString();
-      txtObservacaoController.text = medicao.observacao;
+      // txtNumeroArvoreController.text = medicao.numArvore.toString();
+      // txtDapController.text = medicao.dap.toString();
+      // txtAlturaTotalController.text = medicao.alturaTotal.toString();
+      // txtObservacaoController.text = medicao.observacao;
     } else {
       txtNumeroArvoreController.text = '';
       txtNomeResponsavelController.text = '';
