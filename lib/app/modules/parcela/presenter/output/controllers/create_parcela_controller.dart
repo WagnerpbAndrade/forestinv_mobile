@@ -59,7 +59,7 @@ class CreateParcelaController {
   }
 
   Future<ApiResponse> updateParcela(
-      final String parcelaId, final String projectId) {
+      final Parcela? parcela, final String projectId) {
     final usecase = Modular.get<UpdateParcelaUsecaseImpl>();
     final numero = txtNumeroParcelaController.text;
     final area = txtAreaParcelaController.text;
@@ -75,7 +75,8 @@ class CreateParcelaController {
     final DateTime tempDate =
         DateFormat("yyyy-MM-dd hh:mm:ss").parse(dataPlantio);
 
-    final parcela = Parcela(
+    final parcelaUpdate = Parcela(
+      id: parcela!.id,
       projetoId: projectId,
       numero: int.parse(numero),
       area: double.parse(area),
@@ -86,11 +87,12 @@ class CreateParcelaController {
       dataPlantio: tempDate,
       espacamento: espacamento,
       tipoParcelaEnum: tipoParcelaEnum,
+      dataCriacao: parcela.dataCriacao,
     );
 
     //final mock = getMockParcela();
 
-    return usecase.call(parcela);
+    return usecase.call(parcelaUpdate);
   }
 
   void configPage(final Parcela? parcela) {

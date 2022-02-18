@@ -101,25 +101,30 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
   @override
   Future<ApiResponse> update(final Medicao medicao) async {
     try {
-      print('Medição update: ${medicao.toMap()}');
-      await dioClient.put(_baseUrl, '', medicao.toMap());
-      print('Medição updated successfully');
+      medicao.ultimaAtualizacao = DateTime.now().toUtc();
+      await _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
+          .doc(medicao.id)
+          .set(medicao.toMap());
       return ApiResponse.ok();
     } catch (e) {
-      print('HerokuMedicaoDatasourceImpl-update: $e');
-      return ApiResponse.error(message: 'Oops! ${e.toString()}');
+      print('MedicaoFirestoreDatasourceImpl-update: $e');
+      return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
     }
   }
 
   @override
   Future<ApiResponse> delete(final String medicaoId) async {
     try {
-      await dioClient.delete(_baseUrl, '/$medicaoId');
-      print('Medição deleted successfully');
-      return ApiResponse.ok();
+      await _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
+          .doc(medicaoId)
+          .delete();
+      return ApiResponse.ok(result: true);
     } catch (e) {
-      print('HerokuMedicaoDatasourceImpl-delete: $e');
-      return ApiResponse.error(message: 'Oops! ${e.toString()}');
+      print(e);
+      print('MedicaoFirestoreDatasourceImpl-delete: $e');
+      return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
     }
   }
 }

@@ -433,9 +433,8 @@ class _CreateParcelaPageState
                       );
                     }
                   } else {
-                    final response =
-                        await createParcelaController.updateParcela(
-                            parcela!.id.toString(), widget.args.elementAt(1));
+                    final response = await createParcelaController
+                        .updateParcela(parcela, widget.args.elementAt(1));
                     if (response.ok) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

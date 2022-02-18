@@ -11,9 +11,18 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
   ParcelaFirestoreDatasourceImpl(this._firestore);
 
   @override
-  Future<ApiResponse> delete(String parcelaId) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<ApiResponse> delete(String parcelaId) async {
+    try {
+      await _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
+          .doc(parcelaId)
+          .delete();
+      return ApiResponse.ok(result: true);
+    } catch (e) {
+      print(e);
+      print('ParcelaFirestoreDatasourceImpl-delete: $e');
+      return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
+    }
   }
 
   @override
@@ -38,20 +47,29 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
   }
 
   @override
-  Future<ApiResponse> update(Parcela parcela) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<ApiResponse> update(Parcela parcela) async {
+    try {
+      parcela.ultimaAtualizacao = DateTime.now().toUtc();
+      await _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
+          .doc(parcela.id)
+          .set(parcela.toMap());
+      return ApiResponse.ok();
+    } catch (e) {
+      print('ParcelaFirestoreDatasourceImpl-update: $e');
+      return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
+    }
   }
 
   @override
   Future<List<Parcela>> listAllByProject(dynamic projectId) async {
     try {
       final List<Parcela> list = [];
-      final projectsRef = _firestore
+      final parcelasRef = _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
           .where('projetoId', isEqualTo: projectId);
 
-      final QuerySnapshot querySnapshot = await projectsRef.get();
+      final QuerySnapshot querySnapshot = await parcelasRef.get();
 
       querySnapshot.docs.forEach((doc) {
         final parcelaId = doc.id;
