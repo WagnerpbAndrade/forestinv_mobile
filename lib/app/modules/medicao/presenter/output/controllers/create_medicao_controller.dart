@@ -7,20 +7,8 @@ import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/update_medi
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/create_medicao_store.dart';
 
 class CreateMedicaoController {
-  final TextEditingController txtNumeroArvoreController =
-      TextEditingController();
   final TextEditingController txtNomeResponsavelController =
       TextEditingController();
-  final TextEditingController txtDapController = TextEditingController();
-  final TextEditingController txtAlturaTotalController =
-      TextEditingController();
-  final TextEditingController txtLatitudeParcelaController =
-      TextEditingController();
-  final TextEditingController txtLongitudeParcelaController =
-      TextEditingController();
-  final TextEditingController txtEstadoArvoreController =
-      TextEditingController();
-  final TextEditingController txtObservacaoController = TextEditingController();
 
   Future<ApiResponse> save(final String parcelaId) {
     final usecase = Modular.get<SaveMedicaoUsecase>();
@@ -28,13 +16,6 @@ class CreateMedicaoController {
 
     final medicao = Medicao(
       nomeResponsavel: store.responsavel,
-      // numArvore: int.parse(store.numeroArvore),
-      // dap: double.parse(store.dap),
-      // alturaTotal: double.parse(store.altura),
-      // latitude: 'latitude',
-      // longitude: 'longitude',
-      // estadoArvore: 'NORMAL',
-      // observacao: store.observacao,
       parcelaId: parcelaId,
     );
 
@@ -48,13 +29,6 @@ class CreateMedicaoController {
     final medicao = Medicao(
       id: medicaoId,
       nomeResponsavel: store.responsavel,
-      // numArvore: int.parse(store.numeroArvore),
-      // dap: double.parse(store.dap),
-      // alturaTotal: double.parse(store.altura),
-      // latitude: 'latitude',
-      // longitude: 'longitude',
-      // estadoArvore: 'NORMAL',
-      // observacao: txtObservacaoController.text,
       parcelaId: parcelaId,
     );
 
@@ -64,16 +38,8 @@ class CreateMedicaoController {
   void configPage(final Medicao? medicao) {
     if (medicao != null) {
       txtNomeResponsavelController.text = medicao.nomeResponsavel;
-      // txtNumeroArvoreController.text = medicao.numArvore.toString();
-      // txtDapController.text = medicao.dap.toString();
-      // txtAlturaTotalController.text = medicao.alturaTotal.toString();
-      // txtObservacaoController.text = medicao.observacao;
     } else {
-      txtNumeroArvoreController.text = '';
       txtNomeResponsavelController.text = '';
-      txtDapController.text = '';
-      txtAlturaTotalController.text = '';
-      txtObservacaoController.text = '';
     }
   }
 }

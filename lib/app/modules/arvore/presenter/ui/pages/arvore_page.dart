@@ -46,10 +46,10 @@ class ArvorePageState extends State<ArvorePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // medicaoListController.goToCreateMedicaoPage(
-          //   null,
-          //   widget.medicao.id.toString(),
-          // );
+          arvoreController.goToCreateArvorePage(
+            null,
+            widget.medicao.id.toString(),
+          );
         },
         child: const Icon(Icons.add),
       ),

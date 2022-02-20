@@ -32,10 +32,21 @@ class Arvore {
         observacao: json['observacao'],
       );
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> createToMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
     data['medicaoId'] = medicaoId;
+    data['numArvore'] = numArvore;
+    data['dap'] = dap;
+    data['alturaTotal'] = alturaTotal;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
+    data['estadoArvore'] = estadoArvore;
+    data['observacao'] = observacao;
+    return data;
+  }
+
+  Map<String, dynamic> updateToMap() {
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['numArvore'] = numArvore;
     data['dap'] = dap;
     data['alturaTotal'] = alturaTotal;
