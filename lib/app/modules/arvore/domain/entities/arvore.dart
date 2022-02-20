@@ -47,6 +47,7 @@ class Arvore {
 
   Map<String, dynamic> updateToMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    //data['medicaoId'] = medicaoId;
     data['numArvore'] = numArvore;
     data['dap'] = dap;
     data['alturaTotal'] = alturaTotal;

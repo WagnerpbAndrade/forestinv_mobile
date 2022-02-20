@@ -9,9 +9,8 @@ class ArvoreRepositoryImpl implements ArvoreRepository {
   ArvoreRepositoryImpl(this._datasource);
 
   @override
-  Future<ApiResponse> delete(String arvoreId) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<ApiResponse> delete(String arvoreId) async {
+    return _datasource.delete(arvoreId);
   }
 
   @override
@@ -25,8 +24,7 @@ class ArvoreRepositoryImpl implements ArvoreRepository {
   }
 
   @override
-  Future<ApiResponse> update(Arvore arvore) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<ApiResponse> update(Arvore arvore) async {
+    return _datasource.update(arvore);
   }
 }

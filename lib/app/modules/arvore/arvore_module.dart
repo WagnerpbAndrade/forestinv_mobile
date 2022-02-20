@@ -1,7 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
+import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/delete_arvore_usecase.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/get_all_by_medicao_usecase.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/save_arvore_usecase.dart';
+import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/update_arvore_usecase.dart';
 import 'package:forestinv_mobile/app/modules/arvore/external/datasource/arvore_firestore_datasource.dart';
 import 'package:forestinv_mobile/app/modules/arvore/infra/repositories/arvore_repository_impl.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/controllers/arvore_controller.dart';
@@ -22,6 +24,8 @@ class ArvoreModule extends Module {
     Bind((i) => ArvoreRepositoryImpl(i())),
     Bind((i) => GetAllByMedicaoUsecaseImpl(i())),
     Bind((i) => SaveArvoreUsecaseImpl(i())),
+    Bind((i) => UpdateArvoreUsecaseImpl(i())),
+    Bind((i) => DeleteArvoreUsecaseImpl(i())),
   ];
 
   @override

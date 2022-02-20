@@ -79,19 +79,19 @@ class ArvorePageState extends State<ArvorePage> {
                 child: Text("Erro ao carregar os dados!"),
               );
             } else {
-              final List<Arvore>? medicoes = snapshot.data as List<Arvore>;
-              if (medicoes != null && medicoes.isNotEmpty) {
+              final List<Arvore>? arvores = snapshot.data as List<Arvore>;
+              if (arvores != null && arvores.isNotEmpty) {
                 return ListView.builder(
-                  itemCount: medicoes.length,
+                  itemCount: arvores.length,
                   itemBuilder: (_, index) {
                     return ArvoreCard(
-                      arvore: medicoes[index],
+                      arvore: arvores[index],
                       onTap: () => {},
                       onPressedUpdate: () {
-                        // medicaoListController.goToCreateMedicaoPage(
-                        //   medicoes[index],
-                        //   widget.medicao.id.toString(),
-                        // );
+                        arvoreController.goToCreateArvorePage(
+                          arvores[index],
+                          widget.medicao.id.toString(),
+                        );
                       },
                       onPressedDelete: () {
                         Alert(
@@ -100,11 +100,10 @@ class ArvorePageState extends State<ArvorePage> {
                             DialogButton(
                               child: const Text('Sim'),
                               onPressed: () {
-                                // medicaoListController.delete(
-                                //   medicoes[index].id.toString(),
-                                // );
-                                // //store.projectsList.remove(projetos[index]);
-                                // Modular.to.pop();
+                                arvoreController.delete(
+                                  arvores[index].id.toString(),
+                                );
+                                Modular.to.pop();
                               },
                             ),
                             DialogButton(

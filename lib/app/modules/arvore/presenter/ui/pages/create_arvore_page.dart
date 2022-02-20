@@ -23,6 +23,12 @@ class _CreateArvorePageState
   Arvore? get arvore => widget.args.elementAt(0);
 
   @override
+  void initState() {
+    super.initState();
+    createArvoreController.configPage(arvore);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

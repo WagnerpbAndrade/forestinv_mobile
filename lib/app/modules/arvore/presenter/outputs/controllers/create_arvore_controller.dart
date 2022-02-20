@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/save_arvore_usecase.dart';
+import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/update_arvore_usecase.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/create_arvore_story.dart';
 
 class CreateArvoreController {
@@ -51,11 +52,12 @@ class CreateArvoreController {
     return usecase.save(arvore);
   }
 
-  Future<ApiResponse> update(final String medicaoId, final String parcelaId) {
-    final usecase = Modular.get<SaveArvoreUsecase>();
+  Future<ApiResponse> update(final String arvoreId, final String medicaoId) {
+    final usecase = Modular.get<UpdateArvoreUsecase>();
     final store = Modular.get<CreateArvoreStore>();
 
     final arvore = Arvore(
+      id: arvoreId,
       numArvore: int.parse(store.numeroArvore),
       dap: double.parse(store.dap),
       alturaTotal: double.parse(store.altura),
@@ -65,6 +67,6 @@ class CreateArvoreController {
       observacao: txtObservacaoController.text,
     );
 
-    return usecase.save(arvore);
+    return usecase.update(arvore);
   }
 }
