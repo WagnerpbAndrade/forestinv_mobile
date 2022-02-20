@@ -85,7 +85,8 @@ class MedicaoListPageState extends ModularState<MedicaoListPage, MedicaoStore> {
                   itemBuilder: (_, index) {
                     return MedicaoCard(
                       medicao: medicoes[index],
-                      onTap: () => {},
+                      onTap: () => medicaoListController
+                          .goToArvoreListPage(medicoes[index]),
                       onPressedUpdate: () {
                         medicaoListController.goToCreateMedicaoPage(
                           medicoes[index],

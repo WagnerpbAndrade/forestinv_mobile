@@ -26,4 +26,10 @@ class MedicaoListController {
     final usecase = Modular.get<IDeleteMedicaoUsecase>();
     return usecase.call(medicaoId);
   }
+
+  void goToArvoreListPage(Medicao medicao) {
+    Modular.to.pushNamed(
+        '${RouterConst.PROJECT_ROUTER}${RouterConst.ARVORE_ROUTER}',
+        arguments: medicao);
+  }
 }

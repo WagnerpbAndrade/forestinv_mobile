@@ -1,17 +1,16 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
+import 'package:forestinv_mobile/app/modules/arvore/arvore_module.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/medicao_module.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/parcela_module.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/delete_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_project_by_user_usecase.dart';
-import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_id_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_name_project_by_user_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_by_name_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/save_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/update_project_usecase.dart';
-import 'package:forestinv_mobile/app/modules/projeto/external/datasource/project_datasource_impl.dart';
 import 'package:forestinv_mobile/app/modules/projeto/external/datasource/project_firestore_datasource.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/repository/projeto_repository_impl.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/controllers/projeto_controller.dart';
@@ -50,6 +49,7 @@ class ProjetoModule extends Module {
         child: (_, args) => NewProjectPage(project: args.data)),
     ModuleRoute(RouterConst.PARCELA_ROUTER, module: ParcelaModule()),
     ModuleRoute(RouterConst.MEDICAO_ROUTER, module: MedicaoModule()),
+    ModuleRoute(RouterConst.ARVORE_ROUTER, module: ArvoreModule()),
     ModuleRoute(RouterConst.REGRAS_ROUTER, module: RegraConsistenciaModule()),
   ];
 }
