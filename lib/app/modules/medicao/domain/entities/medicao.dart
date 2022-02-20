@@ -36,4 +36,11 @@ class Medicao {
     data['ultimaAtualizacao'] = ultimaAtualizacao;
     return data;
   }
+
+  Map<String, dynamic> updateToMap() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['nomeResponsavel'] = nomeResponsavel;
+    data['ultimaAtualizacao'] = ultimaAtualizacao;
+    return data;
+  }
 }

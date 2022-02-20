@@ -60,63 +60,74 @@ class MedicaoListPageState extends ModularState<MedicaoListPage, MedicaoStore> {
       future: medicaoListController
           .getAllMedicaoByParcela(widget.parcela.id.toString()),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.none) {
-          return Container();
-        }
-
-        if (snapshot.hasError) {
-          return const Center(
-            child: Text("Servidor indisponível no momento"),
-          );
-        }
-
-        if (!snapshot.hasData) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        final List<Medicao> medicoes = snapshot.data as List<Medicao>;
-        return ListView.builder(
-          itemCount: medicoes.length,
-          itemBuilder: (_, index) {
-            return MedicaoCard(
-              medicao: medicoes[index],
-              onTap: () => {},
-              onPressedUpdate: () {
-                medicaoListController.goToCreateMedicaoPage(
-                  medicoes[index],
-                  widget.parcela.id.toString(),
-                );
-              },
-              onPressedDelete: () {
-                Alert(
-                  type: AlertType.warning,
-                  buttons: [
-                    DialogButton(
-                      child: const Text('Sim'),
-                      onPressed: () {
-                        medicaoListController.delete(
-                          medicoes[index].id.toString(),
-                        );
-                        //store.projectsList.remove(projetos[index]);
-                        Modular.to.pop();
-                      },
-                    ),
-                    DialogButton(
-                      child: const Text('Não'),
-                      onPressed: () {
-                        Modular.to.pop();
-                      },
-                    )
-                  ],
-                  context: context,
-                  title: "Excluir medição",
-                  desc: 'Deseja continuar com a exclusão da medição?',
-                ).show();
-              },
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+          case ConnectionState.waiting:
+            return Center(
+              child: Column(
+                children: [
+                  const Text('Carregando medições'),
+                  const CircularProgressIndicator(),
+                ],
+              ),
             );
-          },
-        );
+          case ConnectionState.active:
+          case ConnectionState.done:
+            if (snapshot.hasError) {
+              return const Center(
+                child: Text("Erro ao carregar os dados!"),
+              );
+            } else {
+              final List<Medicao>? medicoes = snapshot.data as List<Medicao>;
+              if (medicoes != null && medicoes.isNotEmpty) {
+                return ListView.builder(
+                  itemCount: medicoes.length,
+                  itemBuilder: (_, index) {
+                    return MedicaoCard(
+                      medicao: medicoes[index],
+                      onTap: () => {},
+                      onPressedUpdate: () {
+                        medicaoListController.goToCreateMedicaoPage(
+                          medicoes[index],
+                          widget.parcela.id.toString(),
+                        );
+                      },
+                      onPressedDelete: () {
+                        Alert(
+                          type: AlertType.warning,
+                          buttons: [
+                            DialogButton(
+                              child: const Text('Sim'),
+                              onPressed: () {
+                                medicaoListController.delete(
+                                  medicoes[index].id.toString(),
+                                );
+                                //store.projectsList.remove(projetos[index]);
+                                Modular.to.pop();
+                              },
+                            ),
+                            DialogButton(
+                              child: const Text('Não'),
+                              onPressed: () {
+                                Modular.to.pop();
+                              },
+                            )
+                          ],
+                          context: context,
+                          title: "Excluir medição",
+                          desc: 'Deseja continuar com a exclusão da medição?',
+                        ).show();
+                      },
+                    );
+                  },
+                );
+              }
+
+              return const Center(
+                child: Text("Nenhuma medição encontrada!"),
+              );
+            }
+        }
       },
     );
   }

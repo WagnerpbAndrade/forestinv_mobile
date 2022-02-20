@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
+import 'package:forestinv_mobile/helper/extensions.dart';
 
 class MedicaoCard extends StatelessWidget {
   const MedicaoCard({
@@ -58,7 +59,7 @@ class MedicaoCard extends StatelessWidget {
                   ),
                   Expanded(
                       child: Text(
-                    'Data de conclusão: ${medicao.dataMedicao}',
+                    'Data de conclusão: ${medicao.dataMedicao!.formattedDate()}',
                     style: const TextStyle(
                       color: ColorsConst.secondary,
                       fontSize: 20,

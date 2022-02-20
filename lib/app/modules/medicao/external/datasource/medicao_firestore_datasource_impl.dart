@@ -103,9 +103,9 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
     try {
       medicao.ultimaAtualizacao = DateTime.now().toUtc();
       await _firestore
-          .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
+          .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
           .doc(medicao.id)
-          .set(medicao.toMap());
+          .set(medicao.updateToMap(), SetOptions(merge: true));
       return ApiResponse.ok();
     } catch (e) {
       print('MedicaoFirestoreDatasourceImpl-update: $e');
