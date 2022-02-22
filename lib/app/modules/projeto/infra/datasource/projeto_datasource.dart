@@ -6,7 +6,7 @@ abstract class ProjetoDatasource {
 
   Future<ApiResponse> save(Project project);
 
-  Future<Project> update(Project project);
+  Future<ApiResponse> update(Project project);
 
   Future<bool> delete(String projectId);
 

@@ -1,10 +1,9 @@
-import 'package:dartz/dartz.dart';
-import 'package:forestinv_mobile/app/core/exceptions/failure.dart';
+import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/repository/project_repository.dart';
 
 abstract class UpdateProjectUsecase {
-  Future<Either<Failure, Project>> update(Project project);
+  Future<ApiResponse> update(Project project);
 }
 
 class UpdateProjectUsecaseImpl implements UpdateProjectUsecase {
@@ -13,7 +12,7 @@ class UpdateProjectUsecaseImpl implements UpdateProjectUsecase {
   UpdateProjectUsecaseImpl(this.repository);
 
   @override
-  Future<Either<Failure, Project>> update(Project project) {
+  Future<ApiResponse> update(Project project) {
     return repository.update(project);
   }
 }

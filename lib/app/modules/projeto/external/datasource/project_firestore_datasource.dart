@@ -157,13 +157,18 @@ class ProjectFirestoreDatasourceImpl implements ProjetoDatasource {
   }
 
   @override
-  Future<Project> update(Project project) async {
-    project.ultimaAtualizacao = DateTime.now().toUtc();
-    final documentReference = await _instance
-        .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
-        .doc(project.id)
-        .set(project.toMap());
-
-    return Project(nome: "nome", area: 120);
+  Future<ApiResponse> update(Project project) async {
+    try {
+      project.ultimaAtualizacao = DateTime.now().toUtc();
+      await _instance
+          .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
+          .doc(project.id)
+          .set(project.toMap());
+      print('ProjectFirestoreDatasourceImpl-update');
+      return ApiResponse.ok();
+    } catch (e) {
+      print('ProjectFirestoreDatasourceImpl-update: $e');
+      return ApiResponse.error(message: 'Oops! $e');
+    }
   }
 }

@@ -107,24 +107,17 @@ class ProjectDatasourceImpl implements ProjetoDatasource {
   }
 
   @override
-  Future<Project> update(Project project) async {
+  Future<ApiResponse> update(Project project) async {
     try {
       final Response response =
           await dioClient.put(_baseUrl, '', project.toMap());
 
       print('Projeto Info: ${response.data}');
 
-      return Project.fromMap(response.data);
-    } on DioError catch (e, stacktrace) {
-      if (e.type == DioErrorType.connectTimeout ||
-          e.type == DioErrorType.receiveTimeout) {
-        throw UpdateProjectNoInternetConnection();
-      } else if (e.type == DioErrorType.other) {
-        throw UpdateProjectNoInternetConnection();
-      } else {
-        throw UpdateProjectError(
-            stacktrace, 'ProjectDatasourceImpl-update', e, e.message);
-      }
+      return ApiResponse.ok(result: Project.fromMap(response.data));
+    } catch (e) {
+      print('ProjectDatasourceImpl-update: $e');
+      return ApiResponse.error(message: 'Oops! $e');
     }
   }
 

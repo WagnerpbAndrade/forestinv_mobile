@@ -13,7 +13,7 @@ class ProjectRepositoryImpl implements ProjectRepository {
 
   @override
   Future<ApiResponse> save(Project project) async {
-    return await datasource.save(project);
+    return datasource.save(project);
   }
 
   @override
@@ -63,12 +63,8 @@ class ProjectRepositoryImpl implements ProjectRepository {
   }
 
   @override
-  Future<Either<Failure, Project>> update(Project project) async {
-    try {
-      return Right(await datasource.update(project));
-    } on Failure catch (e) {
-      return Left(e);
-    }
+  Future<ApiResponse> update(Project project) async {
+    return datasource.update(project);
   }
 
   @override

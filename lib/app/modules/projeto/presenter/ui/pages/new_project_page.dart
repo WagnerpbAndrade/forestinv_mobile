@@ -147,68 +147,46 @@ class _NewProjectPageState
                         );
                       }
                     } else {
-                      newProjectController.atualizarProjeto(widget.project!);
+                      final response = await newProjectController
+                          .atualizarProjeto(widget.project!);
 
-                      if (newProjectController.formKey.currentState!
-                          .validate()) {
-                        if (newProjectController.error) {
-                          Alert(
-                            type: AlertType.error,
-                            buttons: [
-                              DialogButton(
-                                child: const Text('Ok'),
-                                onPressed: () {
-                                  Modular.to.pop();
-                                },
-                              )
-                            ],
-                            context: context,
-                            title: "Erro",
-                            desc: newProjectController.errorMessage,
-                          ).show();
-                        } else {
-                          Modular.to.pop();
-                          return Alert(
-                            type: AlertType.success,
-                            style: AlertStyle(
-                              animationType: AnimationType.fromBottom,
-                              isCloseButton: false,
-                              isOverlayTapDismiss: false,
-                              descStyle:
-                                  const TextStyle(fontWeight: FontWeight.bold),
-                              descTextAlign: TextAlign.start,
-                              animationDuration:
-                                  const Duration(milliseconds: 600),
-                              alertBorder: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(0.0),
-                                side: const BorderSide(
-                                  color: Colors.grey,
-                                ),
+                      if (response.ok) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: const Text(
+                              'Projeto atualizado com sucesso.',
+                              style: TextStyle(
+                                color: ColorsConst.textColorPrimary,
                               ),
-                              titleStyle: const TextStyle(
-                                color: Colors.red,
-                              ),
-                              alertAlignment: Alignment.topCenter,
                             ),
-                            buttons: [
-                              DialogButton(
-                                color: ColorsConst.secondary,
-                                child: const Text(
-                                  'Ok',
-                                  style: TextStyle(
-                                    color: ColorsConst.textColorPrimary,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Modular.to.pop();
-                                },
-                              )
-                            ],
-                            context: context,
-                            title: "Tudo certo",
-                            desc: 'Projeto atualizado com sucesso',
-                          ).show();
-                        }
+                            backgroundColor: ColorsConst.primary,
+                            action: SnackBarAction(
+                              textColor: ColorsConst.textColorPrimary,
+                              label: 'Ok',
+                              onPressed: () {},
+                            ),
+                            duration: const Duration(milliseconds: 1500),
+                          ),
+                        );
+                        Modular.to.pop();
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              response.message ?? '',
+                              style: const TextStyle(
+                                color: ColorsConst.textColorPrimary,
+                              ),
+                            ),
+                            backgroundColor: ColorsConst.primary,
+                            action: SnackBarAction(
+                              textColor: ColorsConst.textColorPrimary,
+                              label: 'Ok',
+                              onPressed: () {},
+                            ),
+                            duration: const Duration(milliseconds: 1500),
+                          ),
+                        );
                       }
                     }
                   },

@@ -53,9 +53,8 @@ class NewProjectController {
   }
 
   @action
-  void atualizarProjeto(Project project) async {
+  Future<ApiResponse> atualizarProjeto(Project project) async {
     if (formKey.currentState!.validate()) {
-      final projetoStore = Modular.get<ProjetoStore>();
       final usecase = Modular.get<UpdateProjectUsecase>();
       final nome = nomeController.text.toString();
       final area = double.parse(areaController.text.toString());
@@ -68,20 +67,9 @@ class NewProjectController {
         dataCriacao: project.dataCriacao,
         visibilidadeProjetoEnum: "PRIVADO",
       );
-      final resultEither = await usecase.update(projectToUpdate);
-      resultEither.fold(
-        (failureResult) {
-          setError(true);
-          setErrorMessage(failureResult.errorMessage);
-        },
-        (project) {
-          setError(false);
-          projetoStore.projectsList.clear();
-        },
-      );
-    } else {
-      print("Entrou no else do Salvar");
+      return usecase.update(projectToUpdate);
     }
+    return ApiResponse.error(message: 'Preencha todos os campos');
   }
 
   @action
