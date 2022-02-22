@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:forestinv_mobile/app/core/exceptions/failure.dart';
+import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 
 abstract class ProjectRepository {
   Future<List<Project>> getAll();
 
-  Future<Either<Failure, Project>> save(Project project);
+  Future<ApiResponse> save(Project project);
 
   Future<Either<Failure, bool>> delete(String projectId);
 

@@ -12,12 +12,8 @@ class ProjectRepositoryImpl implements ProjectRepository {
   ProjectRepositoryImpl(this.datasource);
 
   @override
-  Future<Either<Failure, Project>> save(Project project) async {
-    try {
-      return Right(await datasource.save(project));
-    } on Failure catch (e) {
-      return Left(e);
-    }
+  Future<ApiResponse> save(Project project) async {
+    return await datasource.save(project);
   }
 
   @override

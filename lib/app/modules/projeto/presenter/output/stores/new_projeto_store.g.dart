@@ -102,31 +102,6 @@ mixin _$NewProjetoStore on _NewProjetoStoreBase, Store {
     });
   }
 
-  final _$_NewProjetoStoreBaseActionController =
-      ActionController(name: '_NewProjetoStoreBase');
-
-  @override
-  String validarNome(String name) {
-    final _$actionInfo = _$_NewProjetoStoreBaseActionController.startAction(
-        name: '_NewProjetoStoreBase.validarNome');
-    try {
-      return super.validarNome(name);
-    } finally {
-      _$_NewProjetoStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  String validarAreaProjeto(String area) {
-    final _$actionInfo = _$_NewProjetoStoreBaseActionController.startAction(
-        name: '_NewProjetoStoreBase.validarAreaProjeto');
-    try {
-      return super.validarAreaProjeto(area);
-    } finally {
-      _$_NewProjetoStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''

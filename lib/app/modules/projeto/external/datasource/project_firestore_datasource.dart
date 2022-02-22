@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:forestinv_mobile/app/core/constants/firebase_firestore_constants.dart';
+import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/datasource/projeto_datasource.dart';
@@ -139,16 +140,20 @@ class ProjectFirestoreDatasourceImpl implements ProjetoDatasource {
   }
 
   @override
-  Future<Project> save(Project project) async {
-    project.dataCriacao = DateTime.now().toUtc();
-    project.ultimaAtualizacao = DateTime.now().toUtc();
-    final documentReference = await _instance
-        .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
-        .add(project.toMap());
+  Future<ApiResponse> save(Project project) async {
+    try {
+      project.dataCriacao = DateTime.now().toUtc();
+      project.ultimaAtualizacao = DateTime.now().toUtc();
+      final documentReference = await _instance
+          .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
+          .add(project.toMap());
 
-    print('Save: ${documentReference.id}');
-
-    return Project(nome: "nome", area: 120);
+      print('ProjectFirestoreDatasourceImpl-Save: ${documentReference.id}');
+      return ApiResponse.ok();
+    } catch (e) {
+      print('ProjectFirestoreDatasourceImpl-Save: $e');
+      return ApiResponse.error(message: 'Oops! $e');
+    }
   }
 
   @override

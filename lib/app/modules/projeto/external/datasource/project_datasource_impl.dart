@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:forestinv_mobile/app/core/client/dio/dio_client.dart';
+import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/error.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/errors/project_failures.dart';
@@ -14,13 +15,13 @@ class ProjectDatasourceImpl implements ProjetoDatasource {
   ProjectDatasourceImpl(this.dioClient);
 
   @override
-  Future<Project> save(Project project) async {
+  Future<ApiResponse> save(Project project) async {
     try {
       final Response response =
           await dioClient.post(_baseUrl, '', project.toMap());
 
       print('Projeto Info: ${response.data}');
-      return Project.fromMap(response.data);
+      return ApiResponse.ok(result: Project.fromMap(response.data));
     } on DioError catch (e, stacktrace) {
       if (e.type == DioErrorType.connectTimeout ||
           e.type == DioErrorType.receiveTimeout) {

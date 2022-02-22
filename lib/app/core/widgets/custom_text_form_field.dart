@@ -8,7 +8,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool isPassWord;
   final bool valido;
   final String label;
-  final Icon icon;
+  final Icon? icon;
   final TextInputType textType;
   final TextEditingController controller;
   final double? width;
@@ -19,7 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     Key? key,
     required this.label,
-    required this.icon,
+    this.icon,
     this.onChanged,
     required this.textError,
     required this.valido,
@@ -46,9 +46,10 @@ class CustomTextFormField extends StatelessWidget {
             },
       child: Container(
         margin: const EdgeInsets.only(top: 5),
-        height: 80,
+        height: MediaQuery.of(context).size.height * 0.1,
         width: width ?? double.infinity,
         child: TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator == null ? null : (value) => validator!(value),
           controller: controller,
           obscureText: isPassWord,
@@ -57,10 +58,10 @@ class CustomTextFormField extends StatelessWidget {
               InputDecoration(
                 errorText: textError == "" ? "" : textError,
                 prefixIcon: icon,
-                hintText: label,
+                label: Text(label),
                 filled: true,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.circular(30.0),
                   borderSide: BorderSide(
                     width: 0,
                     style: !valido ? BorderStyle.none : BorderStyle.solid,

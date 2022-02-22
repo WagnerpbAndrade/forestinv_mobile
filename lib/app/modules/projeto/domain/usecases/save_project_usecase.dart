@@ -1,10 +1,9 @@
-import 'package:dartz/dartz.dart';
-import 'package:forestinv_mobile/app/core/exceptions/failure.dart';
+import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/repository/project_repository.dart';
 
 abstract class SaveProjectUsecase {
-  Future<Either<Failure, Project>> save(Project project);
+  Future<ApiResponse> save(Project project);
 }
 
 class SaveProjectUsecaseImpl implements SaveProjectUsecase {
@@ -13,7 +12,7 @@ class SaveProjectUsecaseImpl implements SaveProjectUsecase {
   SaveProjectUsecaseImpl(this.repository);
 
   @override
-  Future<Either<Failure, Project>> save(Project project) {
+  Future<ApiResponse> save(Project project) {
     return repository.save(project);
   }
 }
