@@ -80,7 +80,7 @@ class _CreateMedicaoPageState
                           },
                         ),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.02,
+                          height: MediaQuery.of(context).size.height * 0.1,
                         ),
                       ],
                     ),

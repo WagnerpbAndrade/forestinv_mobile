@@ -33,6 +33,7 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
 
   @override
   Widget build(BuildContext context) {
+    projetoController.rebuildAllChildren(context);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,

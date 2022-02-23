@@ -7,7 +7,6 @@ import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dar
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/controllers/new_project_controller.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/new_projeto_store.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class NewProjectPage extends StatefulWidget {
   final Project? project;
@@ -168,6 +167,7 @@ class _NewProjectPageState
                             duration: const Duration(milliseconds: 1500),
                           ),
                         );
+
                         Modular.to.pop();
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
