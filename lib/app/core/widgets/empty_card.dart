@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 
 class EmptyCard extends StatelessWidget {
-  EmptyCard(this.text);
+  const EmptyCard(this.text);
 
   final String text;
 
@@ -15,25 +16,25 @@ class EmptyCard extends StatelessWidget {
       margin: const EdgeInsets.all(32),
       child: Column(
         children: [
-          Expanded(
+          const Expanded(
             flex: 4,
             child: Icon(
               Icons.border_clear,
               size: 200,
-              color: Colors.purple,
+              color: ColorsConst.secondary,
             ),
           ),
-          Divider(),
+          const Divider(),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(
+                  const Text(
                     'Hmmm...',
                     style: TextStyle(
-                      color: Colors.orange,
+                      color: ColorsConst.secondary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -41,7 +42,7 @@ class EmptyCard extends StatelessWidget {
                   Text(
                     text,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                     ),
                   ),

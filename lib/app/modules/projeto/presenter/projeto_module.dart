@@ -16,10 +16,12 @@ import 'package:forestinv_mobile/app/modules/projeto/external/datasource/projeto
 import 'package:forestinv_mobile/app/modules/projeto/infra/repository/projeto_repository_impl.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/controllers/projeto_controller.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/cadastrar_projeto_store.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/home_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/new_projeto_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/projeto_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/visibilidade_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/cadastrar_projeto_page.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/home_page.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/projeto_page.dart';
 import 'package:forestinv_mobile/app/modules/regra_consistencia/regra_consistencia_module.dart';
 
@@ -27,6 +29,7 @@ class ProjetoModule extends Module {
   @override
   final List<Bind> binds = [
     Bind((i) => ProjetoStore()),
+    Bind((i) => HomeStore()),
     Bind.lazySingleton((i) => VisibilidadeStore()),
     Bind((i) => CadastrarProjetoStore(null)),
     Bind((i) => NewProjetoStore()),
@@ -46,7 +49,7 @@ class ProjetoModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => ProjetoPage()),
+    ChildRoute('/', child: (_, args) => const HomePage()),
     ChildRoute(RouterConst.ADD_PROJECT_ROUTER,
         child: (_, args) => CadastrarProjetoPage(projeto: args.data)),
     ModuleRoute(RouterConst.PARCELA_ROUTER, module: ParcelaModule()),

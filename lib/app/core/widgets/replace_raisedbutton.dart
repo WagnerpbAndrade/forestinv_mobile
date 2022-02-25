@@ -6,19 +6,19 @@ class ReplaceRaisedButton extends StatelessWidget {
   final Color textColor;
   final Color color;
   final Color disabledColor;
-  final EdgeInsetsGeometry padding;
-  final MaterialTapTargetSize materialTapTargetSize;
-  final RoundedRectangleBorder shape;
+  final EdgeInsetsGeometry? padding;
+  final MaterialTapTargetSize? materialTapTargetSize;
+  final RoundedRectangleBorder? shape;
   final double elevation;
 
   const ReplaceRaisedButton(
       {required this.child,
       required this.onPressed,
       required this.textColor,
-      required this.padding,
+      this.padding,
       required this.color,
       required this.disabledColor,
-      required this.materialTapTargetSize,
+      this.materialTapTargetSize,
       required this.shape,
       required this.elevation});
 
@@ -28,7 +28,7 @@ class ReplaceRaisedButton extends StatelessWidget {
         child: child,
         onPressed: () => onPressed(),
         style: ButtonStyle(
-            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(padding),
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(padding),
             foregroundColor: MaterialStateProperty.resolveWith<Color>(
               (Set<MaterialState> states) =>
                   states.contains(MaterialState.disabled)
