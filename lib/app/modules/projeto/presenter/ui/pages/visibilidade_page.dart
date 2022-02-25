@@ -15,7 +15,7 @@ class VisibilidadePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Visibilidades'),
+        title: const Text('Visibilidade'),
       ),
       body: Center(
         child: Card(

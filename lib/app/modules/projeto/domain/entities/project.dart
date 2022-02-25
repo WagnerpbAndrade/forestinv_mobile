@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:equatable/equatable.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/entities/visibilidade.dart';
 
 List<Project> projectFromMap(String str) =>
     List<Project>.from(json.decode(str).map((x) => Project.fromMap(x)));
@@ -12,7 +13,7 @@ class Project extends Equatable {
   final String? uuid;
   final String nome;
   final dynamic area;
-  final String? visibilidadeProjetoEnum;
+  final String visibilidadeProjetoEnum;
   DateTime? dataCriacao;
   DateTime? ultimaAtualizacao;
 
@@ -21,7 +22,7 @@ class Project extends Equatable {
     this.uuid,
     required this.nome,
     required this.area,
-    this.visibilidadeProjetoEnum,
+    required this.visibilidadeProjetoEnum,
     this.dataCriacao,
     this.ultimaAtualizacao,
   });
@@ -44,6 +45,13 @@ class Project extends Equatable {
         "area": area,
         "visibilidadeProjetoEnum": visibilidadeProjetoEnum,
         "dataCriacao": dataCriacao,
+        "ultimaAtualizacao": ultimaAtualizacao,
+      };
+
+  Map<String, dynamic> updateToMap() => {
+        "nome": nome,
+        "area": area,
+        "visibilidadeProjetoEnum": visibilidadeProjetoEnum,
         "ultimaAtualizacao": ultimaAtualizacao,
       };
 

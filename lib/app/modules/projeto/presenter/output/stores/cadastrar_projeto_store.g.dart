@@ -44,17 +44,24 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
           Computed<Function?>(() => super.cadastrarOnPressed,
               name: '_CadastrarProjetoStoreBase.cadastrarOnPressed'))
       .value;
+  Computed<Function?>? _$editarOnPressedComputed;
+
+  @override
+  Function? get editarOnPressed => (_$editarOnPressedComputed ??=
+          Computed<Function?>(() => super.editarOnPressed,
+              name: '_CadastrarProjetoStoreBase.editarOnPressed'))
+      .value;
 
   final _$nomeAtom = Atom(name: '_CadastrarProjetoStoreBase.nome');
 
   @override
-  String? get nome {
+  String get nome {
     _$nomeAtom.reportRead();
     return super.nome;
   }
 
   @override
-  set nome(String? value) {
+  set nome(String value) {
     _$nomeAtom.reportWrite(value, super.nome, () {
       super.nome = value;
     });
@@ -63,13 +70,13 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
   final _$areaAtom = Atom(name: '_CadastrarProjetoStoreBase.area');
 
   @override
-  String? get area {
+  String get area {
     _$areaAtom.reportRead();
     return super.area;
   }
 
   @override
-  set area(String? value) {
+  set area(String value) {
     _$areaAtom.reportWrite(value, super.area, () {
       super.area = value;
     });
@@ -129,6 +136,14 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
     return _$_cadastrarAsyncAction.run(() => super._cadastrar());
   }
 
+  final _$_editarAsyncAction =
+      AsyncAction('_CadastrarProjetoStoreBase._editar');
+
+  @override
+  Future<void> _editar() {
+    return _$_editarAsyncAction.run(() => super._editar());
+  }
+
   final _$_CadastrarProjetoStoreBaseActionController =
       ActionController(name: '_CadastrarProjetoStoreBase');
 
@@ -177,7 +192,8 @@ nomeIsValid: ${nomeIsValid},
 areaIsValid: ${areaIsValid},
 visibilidadeValid: ${visibilidadeValid},
 isFormValid: ${isFormValid},
-cadastrarOnPressed: ${cadastrarOnPressed}
+cadastrarOnPressed: ${cadastrarOnPressed},
+editarOnPressed: ${editarOnPressed}
     ''';
   }
 }

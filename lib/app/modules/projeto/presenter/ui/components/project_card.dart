@@ -53,7 +53,7 @@ class ProjectCard extends StatelessWidget {
                   )),
                   Expanded(
                     child: Text(
-                      'Área: ${project.area.toStringAsFixed(2)} ha',
+                      'Área: ${project.area} ha',
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,

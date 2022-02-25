@@ -3,6 +3,7 @@ import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/visibilidade.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/save_project_usecase.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/update_project_usecase.dart';
 import 'package:mobx/mobx.dart';
 
 part 'cadastrar_projeto_store.g.dart';
@@ -11,18 +12,26 @@ class CadastrarProjetoStore = _CadastrarProjetoStoreBase
     with _$CadastrarProjetoStore;
 
 abstract class _CadastrarProjetoStoreBase with Store {
+  _CadastrarProjetoStoreBase(this.projeto) {
+    print('Projeto: $projeto');
+    nome = projeto?.nome ?? '';
+    area = projeto?.area.toString() ?? '';
+  }
+
+  final Project? projeto;
+
   @observable
-  String? nome;
+  String nome = '';
 
   @action
   void setNome(String value) => nome = value;
 
   @computed
-  bool get nomeIsValid => nome != null && nome!.length >= 6;
+  bool get nomeIsValid => nome.length >= 6;
   String? get nomeError {
-    if (nome == null || nomeIsValid) {
+    if (nomeIsValid) {
       return null;
-    } else if (nome == null || nome!.isEmpty) {
+    } else if (nome.isEmpty) {
       return 'Campo obrigatório';
     } else {
       return 'Nome muito curto';
@@ -30,17 +39,17 @@ abstract class _CadastrarProjetoStoreBase with Store {
   }
 
   @observable
-  String? area;
+  String area = '';
 
   @action
   void setArea(String value) => area = value;
 
   @computed
-  bool get areaIsValid => area != null && area!.isNotEmpty;
+  bool get areaIsValid => area.isNotEmpty;
   String? get areaError {
-    if (area == null || areaIsValid) {
+    if (areaIsValid) {
       return null;
-    } else if (area == null || area!.isEmpty) {
+    } else if (area.isEmpty) {
       return 'Campo obrigatório';
     } else {
       return 'Área inválida';
@@ -70,6 +79,9 @@ abstract class _CadastrarProjetoStoreBase with Store {
   Function? get cadastrarOnPressed =>
       (isFormValid && !loading) ? _cadastrar : null;
 
+  @computed
+  Function? get editarOnPressed => (isFormValid && !loading) ? _editar : null;
+
   @observable
   bool loading = false;
 
@@ -84,13 +96,36 @@ abstract class _CadastrarProjetoStoreBase with Store {
 
     final projeto = Project(
       uuid: authStore.getUser().uid,
-      nome: nome!,
+      nome: nome,
       area: area,
       visibilidadeProjetoEnum: visibilidade!.description,
     );
 
     try {
       await usecase.save(projeto);
+    } on Exception catch (e) {
+      error = e.toString();
+    }
+
+    loading = false;
+  }
+
+  @action
+  Future<void> _editar() async {
+    loading = true;
+    final usecase = Modular.get<UpdateProjectUsecase>();
+    final authStore = Modular.get<AuthStore>();
+
+    final projetoUpdate = Project(
+      id: projeto!.id,
+      uuid: authStore.getUser().uid,
+      nome: nome,
+      area: area,
+      visibilidadeProjetoEnum: visibilidade!.description,
+    );
+
+    try {
+      await usecase.update(projetoUpdate);
     } on Exception catch (e) {
       error = e.toString();
     }

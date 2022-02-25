@@ -11,26 +11,26 @@ void main() {
     expect(projetos.length, 10);
   });
 
-  test('Deve salvar um projeto', () async {
-    final newProjeto = Project(
-      nome: "Test saving project",
-      area: 2022.0,
-      visibilidadeProjetoEnum: "PRIVADO",
-    );
+  // test('Deve salvar um projeto', () async {
+  //   final newProjeto = Project(
+  //     nome: "Test saving project",
+  //     area: 2022.0,
+  //     visibilidadeProjetoEnum: "PRIVADO",
+  //   );
 
-    final result = await datasource.save(newProjeto);
-  });
+  //   final result = await datasource.save(newProjeto);
+  // });
 
-  test('Deve atualizar um projeto', () async {
-    final updateProjeto = Project(
-      id: 85,
-      nome: "Teste Update",
-      area: 120.0,
-      visibilidadeProjetoEnum: "PRIVADO",
-    );
+  // test('Deve atualizar um projeto', () async {
+  //   final updateProjeto = Project(
+  //     id: 85,
+  //     nome: "Teste Update",
+  //     area: 120.0,
+  //     visibilidadeProjetoEnum: "PRIVADO",
+  //   );
 
-    final result = await datasource.update(updateProjeto);
-  });
+  //   final result = await datasource.update(updateProjeto);
+  // });
 
   test("Deve retornar um projeto by id", () async {
     var nameExpected = "Projeto Alegre";

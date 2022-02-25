@@ -163,7 +163,7 @@ class ProjectFirestoreDatasourceImpl implements ProjetoDatasource {
       await _instance
           .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
           .doc(project.id)
-          .set(project.toMap());
+          .set(project.updateToMap(), SetOptions(merge: true));
       print('ProjectFirestoreDatasourceImpl-update');
       return ApiResponse.ok();
     } catch (e) {

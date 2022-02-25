@@ -94,16 +94,16 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
         if (controller.error.isNotEmpty) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
+            children: const [
+              Icon(
                 Icons.error,
                 color: Colors.white,
                 size: 100,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 8,
               ),
-              const Text(
+              Text(
                 'Ocorreu um erro!',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -126,59 +126,61 @@ class ProjetoPageState extends ModularState<ProjetoPage, ProjetoStore> {
         return ListView.builder(
           itemCount: controller.projectsList.length,
           itemBuilder: (_, index) {
-            return ProjectCard(
-              project: controller.projectsList[index],
-              onTap: () => projetoController.goToParcelaPage(
-                controller.projectsList[index],
-              ),
-              onPressedDelete: () {
-                Alert(
-                  type: AlertType.warning,
-                  buttons: [
-                    DialogButton(
-                      child: const Text('Sim'),
-                      onPressed: () {
-                        projetoController.deleteProject(
-                          controller.projectsList[index].id.toString(),
-                        );
-                        store.projectsList
-                            .remove(controller.projectsList[index]);
+            return SingleChildScrollView(
+              child: ProjectCard(
+                project: controller.projectsList[index],
+                onTap: () => projetoController.goToParcelaPage(
+                  controller.projectsList[index],
+                ),
+                onPressedDelete: () {
+                  Alert(
+                    type: AlertType.warning,
+                    buttons: [
+                      DialogButton(
+                        child: const Text('Sim'),
+                        onPressed: () {
+                          projetoController.deleteProject(
+                            controller.projectsList[index].id.toString(),
+                          );
+                          store.projectsList
+                              .remove(controller.projectsList[index]);
 
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: const Text(
-                              'Projeto deletado com sucesso',
-                              style: TextStyle(
-                                color: ColorsConst.textColorPrimary,
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Text(
+                                'Projeto deletado com sucesso',
+                                style: TextStyle(
+                                  color: ColorsConst.textColorPrimary,
+                                ),
                               ),
+                              backgroundColor: ColorsConst.primary,
+                              action: SnackBarAction(
+                                label: 'Ok',
+                                onPressed: () {},
+                              ),
+                              duration: const Duration(milliseconds: 1500),
                             ),
-                            backgroundColor: ColorsConst.primary,
-                            action: SnackBarAction(
-                              label: 'Ok',
-                              onPressed: () {},
-                            ),
-                            duration: const Duration(milliseconds: 1500),
-                          ),
-                        );
-                        Modular.to.pop();
-                      },
-                    ),
-                    DialogButton(
-                      child: const Text('Não'),
-                      onPressed: () {
-                        Modular.to.pop();
-                      },
-                    )
-                  ],
-                  context: context,
-                  title: "Excluir projeto",
-                  desc: 'Deseja continuar com a exclusão do projeto?',
-                ).show();
-              },
-              onPressedUpdate: () {
-                projetoController
-                    .goToNewProject(controller.projectsList[index]);
-              },
+                          );
+                          Modular.to.pop();
+                        },
+                      ),
+                      DialogButton(
+                        child: const Text('Não'),
+                        onPressed: () {
+                          Modular.to.pop();
+                        },
+                      )
+                    ],
+                    context: context,
+                    title: "Excluir projeto",
+                    desc: 'Deseja continuar com a exclusão do projeto?',
+                  ).show();
+                },
+                onPressedUpdate: () {
+                  projetoController
+                      .goToNewProject(controller.projectsList[index]);
+                },
+              ),
             );
           },
         );
