@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/delete_project_usecase.dart';
@@ -64,5 +65,11 @@ abstract class _HomeStoreBase with Store {
     loading = true;
     await usecase.delete(projectId);
     refresh();
+  }
+
+  void goToParcelaPage(final Project project) {
+    Modular.to.pushNamed(
+        '${RouterConst.PROJECT_ROUTER}${RouterConst.PARCELA_ROUTER}',
+        arguments: project);
   }
 }

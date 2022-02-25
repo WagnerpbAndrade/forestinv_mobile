@@ -8,9 +8,10 @@ import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/cadastra
 import 'package:forestinv_mobile/helper/extensions.dart';
 
 class ProjetoTile extends StatelessWidget {
-  ProjetoTile({required this.projeto});
+  ProjetoTile({required this.projeto, this.onTap});
 
   final Project projeto;
+  final Function? onTap;
 
   final store = Modular.get<HomeStore>();
 
@@ -22,7 +23,7 @@ class ProjetoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap == null ? null : () => onTap!(),
       child: Container(
         height: 135,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),

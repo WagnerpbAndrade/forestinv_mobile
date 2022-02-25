@@ -74,18 +74,19 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                         controller: scrollController,
                         itemCount: store.projetoList.length,
                         itemBuilder: (_, index) {
-                          if (index < store.projetoList.length) {
-                            return ProjetoTile(
-                              projeto: store.projetoList[index],
-                            );
-                          }
-
-                          return Container(
-                            height: 10,
-                            child: const LinearProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation(Colors.purple),
-                            ),
+                          return ProjetoTile(
+                            projeto: store.projetoList[index],
+                            onTap: () {
+                              store.goToParcelaPage(store.projetoList[index]);
+                            },
                           );
+
+                          // return Container(
+                          //   height: 10,
+                          //   child: const LinearProgressIndicator(
+                          //     valueColor: AlwaysStoppedAnimation(Colors.purple),
+                          //   ),
+                          // );
                         },
                       );
                     },
