@@ -1,12 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/home_store.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/cadastrar_projeto_page.dart';
 import 'package:forestinv_mobile/helper/extensions.dart';
 
 class ProjetoTile extends StatelessWidget {
+  ProjetoTile({required this.projeto});
+
   final Project projeto;
 
-  const ProjetoTile({required this.projeto});
+  final store = Modular.get<HomeStore>();
+
+  final List<MenuChoice> choices = [
+    MenuChoice(index: 0, title: 'Editar', iconData: Icons.edit),
+    MenuChoice(index: 1, title: 'Excluir', iconData: Icons.delete)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +78,91 @@ class ProjetoTile extends StatelessWidget {
                   ),
                 ),
               ),
+              Column(
+                children: [
+                  PopupMenuButton<MenuChoice>(
+                    onSelected: (choice) {
+                      switch (choice.index) {
+                        case 0:
+                          editProject(context);
+                          break;
+                        case 1:
+                          deleteProject(context);
+                          break;
+                      }
+                    },
+                    icon: const Icon(
+                      Icons.more_vert,
+                      size: 20,
+                      color: Colors.purple,
+                    ),
+                    itemBuilder: (_) {
+                      return choices
+                          .map(
+                            (choice) => PopupMenuItem<MenuChoice>(
+                              value: choice,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    choice.iconData,
+                                    size: 20,
+                                    color: Colors.purple,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    choice.title,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.purple,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                          .toList();
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+  Future<void> editProject(BuildContext context) async {
+    final success = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => CadastrarProjetoPage(projeto: projeto),
+      ),
+    );
+    if (success != null && success) store.refresh();
+  }
+
+  void deleteProject(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (_) => DialogPlatform(
+              title: 'Excluído',
+              content: 'Confirmar a exclusão do projeto \'${projeto.nome}\'?',
+              textNoButton: 'Não',
+              textYesButton: 'Sim',
+              actionNo: () => Navigator.of(context).pop(),
+              actionYes: () async {
+                store.deleteProject(projeto.id);
+                Navigator.of(context).pop();
+              },
+            ));
+  }
+}
+
+class MenuChoice {
+  MenuChoice(
+      {required this.index, required this.title, required this.iconData});
+
+  final int index;
+  final String title;
+  final IconData iconData;
 }

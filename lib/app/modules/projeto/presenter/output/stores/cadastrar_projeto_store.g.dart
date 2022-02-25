@@ -128,6 +128,22 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
     });
   }
 
+  final _$updatedProjectAtom =
+      Atom(name: '_CadastrarProjetoStoreBase.updatedProject');
+
+  @override
+  bool get updatedProject {
+    _$updatedProjectAtom.reportRead();
+    return super.updatedProject;
+  }
+
+  @override
+  set updatedProject(bool value) {
+    _$updatedProjectAtom.reportWrite(value, super.updatedProject, () {
+      super.updatedProject = value;
+    });
+  }
+
   final _$_cadastrarAsyncAction =
       AsyncAction('_CadastrarProjetoStoreBase._cadastrar');
 
@@ -188,6 +204,7 @@ area: ${area},
 visibilidade: ${visibilidade},
 loading: ${loading},
 error: ${error},
+updatedProject: ${updatedProject},
 nomeIsValid: ${nomeIsValid},
 areaIsValid: ${areaIsValid},
 visibilidadeValid: ${visibilidadeValid},

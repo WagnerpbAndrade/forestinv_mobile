@@ -22,7 +22,7 @@ class DialogPlatform extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Platform.isIOS)
+    if (Platform.isIOS) {
       return CupertinoAlertDialog(
         title: Text(title),
         content: Text(content),
@@ -37,7 +37,7 @@ class DialogPlatform extends StatelessWidget {
           )
         ],
       );
-    else
+    } else {
       return AlertDialog(
         title: Text(title),
         content: Text(content),
@@ -54,5 +54,6 @@ class DialogPlatform extends StatelessWidget {
           ),
         ],
       );
+    }
   }
 }

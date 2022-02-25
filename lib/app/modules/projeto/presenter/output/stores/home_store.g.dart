@@ -47,6 +47,14 @@ mixin _$HomeStore on _HomeStoreBase, Store {
     });
   }
 
+  final _$deleteProjectAsyncAction =
+      AsyncAction('_HomeStoreBase.deleteProject');
+
+  @override
+  Future<void> deleteProject(dynamic projectId) {
+    return _$deleteProjectAsyncAction.run(() => super.deleteProject(projectId));
+  }
+
   final _$_HomeStoreBaseActionController =
       ActionController(name: '_HomeStoreBase');
 

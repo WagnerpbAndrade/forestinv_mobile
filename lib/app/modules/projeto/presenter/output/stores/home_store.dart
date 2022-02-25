@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/delete_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_project_by_user_usecase.dart';
 import 'package:mobx/mobx.dart';
 
@@ -53,5 +54,15 @@ abstract class _HomeStoreBase with Store {
     final list = await usecase.getAllByUser(auth.getUser().uid);
 
     addNewProjetos(list);
+  }
+
+  void refresh() => _fetchProjetos();
+
+  @action
+  Future<void> deleteProject(final dynamic projectId) async {
+    final usecase = Modular.get<DeleteProjectUsecase>();
+    loading = true;
+    await usecase.delete(projectId);
+    refresh();
   }
 }

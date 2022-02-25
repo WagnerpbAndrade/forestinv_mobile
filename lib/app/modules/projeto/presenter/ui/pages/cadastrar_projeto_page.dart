@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_elevated_button.dart';
 import 'package:forestinv_mobile/app/core/widgets/error_box.dart';
 import 'package:forestinv_mobile/app/core/widgets/field_title.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/cadastrar_projeto_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/components/visibilidade_field.dart';
+import 'package:mobx/mobx.dart';
 
 class CadastrarProjetoPage extends StatefulWidget {
   final Project? projeto;
@@ -26,6 +28,19 @@ class _CadastrarProjetoPageState extends State<CadastrarProjetoPage> {
   final CadastrarProjetoStore cadastrarProjetoStore;
 
   bool editing;
+
+  @override
+  void initState() {
+    super.initState();
+
+    when((_) => cadastrarProjetoStore.updatedProject, () {
+      if (editing) {
+        Navigator.of(context).pop(true);
+      } else {
+        Modular.to.pop();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
