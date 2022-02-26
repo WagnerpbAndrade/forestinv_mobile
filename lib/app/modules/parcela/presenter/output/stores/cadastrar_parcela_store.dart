@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/save_parcela_usecase.dart';
@@ -11,8 +12,9 @@ class CadastrarParcelaStore = _CadastrarParcelaStoreBase
 abstract class _CadastrarParcelaStoreBase with Store {
   final List? args;
   Parcela? parcela;
+  final int YEAR = 12;
 
-  _CadastrarParcelaStoreBase({required this.args}) {
+  _CadastrarParcelaStoreBase({this.args}) {
     if (args?[0] != null) {
       parcela = args![0];
       numero = parcela!.numero.toString();
@@ -21,6 +23,12 @@ abstract class _CadastrarParcelaStoreBase with Store {
       espacamento = parcela!.espacamento.toString();
     }
   }
+
+  @observable
+  DateTime? selectedDate = DateTime.now();
+
+  @action
+  void setSelectedDate(DateTime? value) => selectedDate = value;
 
   @observable
   String numero = '';
@@ -125,7 +133,8 @@ abstract class _CadastrarParcelaStoreBase with Store {
       numTalhao: int.parse(numeroTalhao),
       latitude: 'latitude',
       longitude: 'longitude',
-      dataPlantio: DateTime.now(),
+      dataPlantio: selectedDate!,
+      idadeParcela: calcularIdadeParcela(selectedDate!),
       espacamento: espacamento,
       tipoParcelaEnum: 'Permanente',
     );
@@ -153,7 +162,8 @@ abstract class _CadastrarParcelaStoreBase with Store {
       numTalhao: int.parse(numeroTalhao),
       latitude: 'latitude',
       longitude: 'longitude',
-      dataPlantio: DateTime.now(),
+      dataPlantio: selectedDate!,
+      idadeParcela: calcularIdadeParcela(selectedDate!),
       espacamento: espacamento,
       tipoParcelaEnum: 'Permanente',
     );
@@ -166,5 +176,27 @@ abstract class _CadastrarParcelaStoreBase with Store {
     }
 
     loading = false;
+  }
+
+  @action
+  Future<void> openDatePicker(BuildContext context) async {
+    final DateTime? selected = await showDatePicker(
+      context: context,
+      initialDate: selectedDate!,
+      firstDate: DateTime(1970),
+      lastDate: DateTime(2025),
+    );
+    if (selected != null && selected != selectedDate) {
+      setSelectedDate(selected);
+    }
+  }
+
+  int calcularIdadeParcela(DateTime dataPlantio) {
+    final difference = DateTime.now().difference(dataPlantio);
+    print('Difference: ${difference.inDays}');
+
+    final inDays = (difference.inDays / 365).floor();
+
+    return inDays == 0 ? YEAR : inDays * YEAR;
   }
 }

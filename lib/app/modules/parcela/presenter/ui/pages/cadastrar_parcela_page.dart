@@ -7,6 +7,7 @@ import 'package:forestinv_mobile/app/core/widgets/error_box.dart';
 import 'package:forestinv_mobile/app/core/widgets/field_title.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/cadastrar_parcela_store.dart';
 import 'package:mobx/mobx.dart';
+import 'package:forestinv_mobile/helper/extensions.dart';
 
 class CadastrarParcelaPage extends StatefulWidget {
   final List? args;
@@ -207,6 +208,39 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                 maxLength: 7,
                               );
                             },
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const FieldTitle(
+                            title: 'Data do plantio',
+                            subtitle: 'Informe a data inicial do plantio',
+                          ),
+                          GestureDetector(
+                            onTap: () async =>
+                                cadastrarParcelaStore.openDatePicker(context),
+                            child: Observer(
+                              builder: (_) {
+                                return TextFormField(
+                                  enabled: false,
+                                  decoration: InputDecoration(
+                                      border: const OutlineInputBorder(),
+                                      label: Text(
+                                        cadastrarParcelaStore.selectedDate!
+                                            .formattedDate(),
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      isDense: true,
+                                      errorText: cadastrarParcelaStore
+                                          .espacamentoError),
+                                  keyboardType: TextInputType.text,
+                                  onChanged:
+                                      cadastrarParcelaStore.setEspacamento,
+                                );
+                              },
+                            ),
                           ),
                           Observer(
                             builder: (_) {

@@ -8,6 +8,7 @@ import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/save_parcel
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/update_parcela_usecase.dart';
 import 'package:forestinv_mobile/app/modules/parcela/external/datasource/parcela_firestore_datasource.dart';
 import 'package:forestinv_mobile/app/modules/parcela/infra/respository/parcela_repository_impl.dart';
+import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/cadastrar_parcela_store.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/pages/cadastrar_parcela_page.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/pages/parcela_page.dart';
 
@@ -15,6 +16,7 @@ class ParcelaModule extends Module {
   @override
   final List<Bind> binds = [
     Bind((i) => DioClient()),
+    Bind((i) => CadastrarParcelaStore()),
     Bind((i) => ParcelaFirestoreDatasourceImpl(i.get())),
     Bind((i) => ParcelaRepositoryImpl(i.get())),
     Bind((i) => GetAllParcelaByProjectImpl(i.get())),

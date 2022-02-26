@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/firebase_firestore_constants.dart';
 import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/list_parcela_response.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/infra/datasource/parcela_datasource.dart';
+import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/cadastrar_parcela_store.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/cadastrar_projeto_store.dart';
 
 class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
   final FirebaseFirestore _firestore;
@@ -63,6 +66,7 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
 
   @override
   Future<List<Parcela>> listAllByProject(dynamic projectId) async {
+    final cadastrarParcelaStore = Modular.get<CadastrarParcelaStore>();
     try {
       final List<Parcela> list = [];
       final parcelasRef = _firestore
@@ -86,8 +90,11 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
         final ultimaAtualizacao =
             DateTime.fromMicrosecondsSinceEpoch(updated.microsecondsSinceEpoch);
         final dataPlantioTimestamp = doc.get('dataPlantio') as Timestamp;
-        final dataPlantion = DateTime.fromMicrosecondsSinceEpoch(
+        final dataPlantio = DateTime.fromMicrosecondsSinceEpoch(
             dataPlantioTimestamp.microsecondsSinceEpoch);
+
+        final idadeParcela =
+            cadastrarParcelaStore.calcularIdadeParcela(dataPlantio);
 
         final Parcela parcela = Parcela(
           id: parcelaId,
@@ -96,20 +103,21 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
           numero: numero,
           numTalhao: numTalhao,
           espacamento: espacamento,
-          dataPlantio: dataPlantion,
+          dataPlantio: dataPlantio,
+          idadeParcela: idadeParcela,
           tipoParcelaEnum: tipoParcelaEnum,
           dataCriacao: dataCriacao,
           ultimaAtualizacao: ultimaAtualizacao,
         );
-        print(parcela);
+        update(parcela);
 
         list.add(parcela);
       });
 
-      print('getAllByUser Info: $list');
+      print('ParcelaFirestoreDatasourceImpl-listAllByProject: $list');
       return list;
     } catch (e) {
-      print('ParcelaFirestoreDatasourceImpl-save: $e');
+      print('ParcelaFirestoreDatasourceImpl-listAllByProject: $e');
       rethrow;
     }
   }

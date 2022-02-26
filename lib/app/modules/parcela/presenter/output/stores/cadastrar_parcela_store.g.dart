@@ -59,6 +59,22 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
               name: '_CadastrarParcelaStoreBase.editarOnPressed'))
       .value;
 
+  final _$selectedDateAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.selectedDate');
+
+  @override
+  DateTime? get selectedDate {
+    _$selectedDateAtom.reportRead();
+    return super.selectedDate;
+  }
+
+  @override
+  set selectedDate(DateTime? value) {
+    _$selectedDateAtom.reportWrite(value, super.selectedDate, () {
+      super.selectedDate = value;
+    });
+  }
+
   final _$numeroAtom = Atom(name: '_CadastrarParcelaStoreBase.numero');
 
   @override
@@ -199,8 +215,27 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     return _$_editarAsyncAction.run(() => super._editar());
   }
 
+  final _$openDatePickerAsyncAction =
+      AsyncAction('_CadastrarParcelaStoreBase.openDatePicker');
+
+  @override
+  Future<void> openDatePicker(BuildContext context) {
+    return _$openDatePickerAsyncAction.run(() => super.openDatePicker(context));
+  }
+
   final _$_CadastrarParcelaStoreBaseActionController =
       ActionController(name: '_CadastrarParcelaStoreBase');
+
+  @override
+  void setSelectedDate(DateTime? value) {
+    final _$actionInfo = _$_CadastrarParcelaStoreBaseActionController
+        .startAction(name: '_CadastrarParcelaStoreBase.setSelectedDate');
+    try {
+      return super.setSelectedDate(value);
+    } finally {
+      _$_CadastrarParcelaStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setNumero(String value) {
@@ -249,6 +284,7 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
   @override
   String toString() {
     return '''
+selectedDate: ${selectedDate},
 numero: ${numero},
 area: ${area},
 numeroTalhao: ${numeroTalhao},
