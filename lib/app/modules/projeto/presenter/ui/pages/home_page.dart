@@ -91,9 +91,8 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Modular.to.pushNamed(
-                '${RouterConst.PROJECT_ROUTER}${RouterConst.ADD_PROJECT_ROUTER}');
+          onPressed: () async {
+            await store.goToCadastrarProjetoPage(context);
           },
           child: const Icon(Icons.add),
         ),

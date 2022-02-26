@@ -91,6 +91,9 @@ abstract class _CadastrarProjetoStoreBase with Store {
   @observable
   bool updatedProject = false;
 
+  @observable
+  bool savedProject = false;
+
   @action
   Future<void> _cadastrar() async {
     loading = true;
@@ -106,6 +109,7 @@ abstract class _CadastrarProjetoStoreBase with Store {
 
     try {
       await usecase.save(projeto);
+      savedProject = true;
     } on Exception catch (e) {
       error = e.toString();
     }

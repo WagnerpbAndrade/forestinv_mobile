@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/delete_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_project_by_user_usecase.dart';
+import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/cadastrar_projeto_page.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_store.g.dart';
@@ -71,5 +73,19 @@ abstract class _HomeStoreBase with Store {
     Modular.to.pushNamed(
         '${RouterConst.PROJECT_ROUTER}${RouterConst.PARCELA_ROUTER}',
         arguments: project);
+  }
+
+  Future<void> goToCadastrarProjetoPage(final BuildContext context) async {
+    final success = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => const CadastrarProjetoPage(),
+      ),
+    );
+    if (success != null && success) refresh();
+  }
+
+  void goToRegrasConsistenciaPage() {
+    Modular.to
+        .pushNamed('${RouterConst.PROJECT_ROUTER}${RouterConst.REGRAS_ROUTER}');
   }
 }

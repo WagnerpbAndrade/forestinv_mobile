@@ -14,30 +14,23 @@ import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/update_proj
 import 'package:forestinv_mobile/app/modules/projeto/external/datasource/project_firestore_datasource.dart';
 import 'package:forestinv_mobile/app/modules/projeto/external/datasource/projeto_visibilidade_firebase_datasource.dart';
 import 'package:forestinv_mobile/app/modules/projeto/infra/repository/projeto_repository_impl.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/controllers/projeto_controller.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/cadastrar_projeto_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/home_store.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/new_projeto_store.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/projeto_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/visibilidade_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/cadastrar_projeto_page.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/home_page.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/projeto_page.dart';
 import 'package:forestinv_mobile/app/modules/regra_consistencia/regra_consistencia_module.dart';
 
 class ProjetoModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind((i) => ProjetoStore()),
     Bind((i) => HomeStore()),
     Bind.lazySingleton((i) => VisibilidadeStore()),
     Bind((i) => CadastrarProjetoStore(null)),
-    Bind((i) => NewProjetoStore()),
     Bind((i) => ProjectRepositoryImpl(i.get())),
     Bind((i) => GetByIdProjectUsecaseImpl(i.get())),
     Bind((i) => GetByNameProjectUsecaseImpl(i.get())),
     Bind((i) => SaveProjectUsecaseImpl(i.get())),
-    Bind((i) => ProjetoController()),
     Bind((i) => DeleteProjectUsecaseImpl(i())),
     Bind((i) => UpdateProjectUsecaseImpl(i())),
     Bind((i) => GetAllProjectByUserUsecaseImpl(i())),

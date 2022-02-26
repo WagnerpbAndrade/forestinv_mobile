@@ -40,6 +40,14 @@ class _CadastrarProjetoPageState extends State<CadastrarProjetoPage> {
         Modular.to.pop();
       }
     });
+
+    when((_) => cadastrarProjetoStore.savedProject, () {
+      if (!editing) {
+        Navigator.of(context).pop(true);
+      } else {
+        Modular.to.pop();
+      }
+    });
   }
 
   @override
