@@ -53,7 +53,7 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
       await _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
           .doc(parcela.id)
-          .set(parcela.toMap());
+          .set(parcela.updateToMap(), SetOptions(merge: true));
       return ApiResponse.ok();
     } catch (e) {
       print('ParcelaFirestoreDatasourceImpl-update: $e');

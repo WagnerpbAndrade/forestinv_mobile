@@ -2,29 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
-import 'package:forestinv_mobile/app/core/widgets/custom_drawer/custom_drawer.dart';
 import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/home_store.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/components/create_projeto_button.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/components/projeto_tile.dart';
+import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/parcela_store.dart';
+import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/components/parcela_tile.dart';
+import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/pages/cadastrar_parcela_page.dart';
+import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class ParcelaPage extends StatefulWidget {
+  final Project project;
+
+  const ParcelaPage({required this.project});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _ParcelaPageState createState() => _ParcelaPageState();
 }
 
-class _HomePageState extends ModularState<HomePage, HomeStore> {
-  final ScrollController scrollController = ScrollController();
+class _ParcelaPageState extends State<ParcelaPage> {
+  ParcelaStore? store;
+  @override
+  void initState() {
+    super.initState();
+    store = ParcelaStore(project: widget.project);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController scrollController = ScrollController();
+
     return SafeArea(
       child: Scaffold(
-        drawer: const CustomDrawer(),
         appBar: AppBar(
-          title: const Text('Projetos'),
+          title: const Text('Parcelas'),
           centerTitle: true,
         ),
         body: Column(
@@ -34,7 +42,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 children: [
                   Observer(
                     builder: (_) {
-                      if (store.error != null) {
+                      if (store!.error != null) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
@@ -61,24 +69,25 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                           ),
                         );
                       }
-                      if (store.showProgress) {
+                      if (store!.showProgress) {
                         return const Center(
                           child: CircularProgressIndicator(
                             valueColor: AlwaysStoppedAnimation(Colors.white),
                           ),
                         );
                       }
-                      if (store.projetoList.isEmpty) {
-                        return const EmptyCard('Nenhum projeto encontrado.');
+                      if (store!.parcelaList.isEmpty) {
+                        return const EmptyCard('Nenhuma parcela encontrada.');
                       }
                       return ListView.builder(
                         controller: scrollController,
-                        itemCount: store.projetoList.length,
+                        itemCount: store!.parcelaList.length,
                         itemBuilder: (_, index) {
-                          return ProjetoTile(
-                            projeto: store.projetoList[index],
+                          return ParcelaTile(
+                            store: store!,
+                            parcela: store!.parcelaList[index],
                             onTap: () {
-                              store.goToParcelaPage(store.projetoList[index]);
+                              store!.goToMedicaoPage(store!.parcelaList[index]);
                             },
                           );
                         },
@@ -91,9 +100,8 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Modular.to.pushNamed(
-                '${RouterConst.PROJECT_ROUTER}${RouterConst.ADD_PROJECT_ROUTER}');
+          onPressed: () async {
+            await store!.goToCadastrarParcelaPage(context);
           },
           child: const Icon(Icons.add),
         ),

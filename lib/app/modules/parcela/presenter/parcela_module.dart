@@ -8,22 +8,13 @@ import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/save_parcel
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/update_parcela_usecase.dart';
 import 'package:forestinv_mobile/app/modules/parcela/external/datasource/parcela_firestore_datasource.dart';
 import 'package:forestinv_mobile/app/modules/parcela/infra/respository/parcela_repository_impl.dart';
-import 'package:forestinv_mobile/app/modules/parcela/presenter/output/controllers/create_parcela_controller.dart';
-import 'package:forestinv_mobile/app/modules/parcela/presenter/output/controllers/parcela_controller.dart';
-import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/create_parcela_store.dart';
-import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/parcela_store.dart';
-import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/pages/create_parcela_page.dart';
-import 'ui/pages/parcela_list_page.dart';
+import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/pages/cadastrar_parcela_page.dart';
+import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/pages/parcela_page.dart';
 
 class ParcelaModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => ParcelaStore()),
-    Bind.lazySingleton((i) => CreateParcelaStore()),
     Bind((i) => DioClient()),
-    Bind((i) => ParcelaController()),
-    Bind((i) => CreateParcelaController()),
-    //Bind((i) => HerokuParcelaDatasourceImpl(i.get())),
     Bind((i) => ParcelaFirestoreDatasourceImpl(i.get())),
     Bind((i) => ParcelaRepositoryImpl(i.get())),
     Bind((i) => GetAllParcelaByProjectImpl(i.get())),
@@ -35,8 +26,8 @@ class ParcelaModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => ParcelaListPage(project: args.data)),
+    ChildRoute('/', child: (_, args) => ParcelaPage(project: args.data)),
     ChildRoute(RouterConst.CREATE_PARCELA_ROUTER,
-        child: (_, args) => CreateParcelaPage(args.data)),
+        child: (_, args) => CadastrarParcelaPage(args: args.data)),
   ];
 }

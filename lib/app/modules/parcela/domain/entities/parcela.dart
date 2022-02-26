@@ -69,4 +69,17 @@ class Parcela {
         'dataCriacao': dataCriacao,
         'ultimaAtualizacao': ultimaAtualizacao,
       };
+
+  Map<String, dynamic> updateToMap() => {
+        'numero': numero,
+        'area': area,
+        'largura': largura,
+        'numTalhao': numTalhao,
+        'latitude': latitude,
+        'longitude': longitude,
+        'dataPlantio': dataPlantio,
+        'espacamento': espacamento,
+        'tipoParcelaEnum': tipoParcelaEnum,
+        'ultimaAtualizacao': ultimaAtualizacao,
+      };
 }
