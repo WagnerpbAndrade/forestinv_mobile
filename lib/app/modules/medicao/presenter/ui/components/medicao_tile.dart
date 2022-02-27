@@ -147,7 +147,7 @@ class MedicaoTile extends StatelessWidget {
         builder: (_) => DialogPlatform(
               title: 'Excluído',
               content:
-                  'Confirmar a exclusão da medicao ano ${medicao.dataMedicao!.year}?',
+                  'Confirmar a exclusão da medição ano ${medicao.dataMedicao!.year}?',
               textNoButton: 'Não',
               textYesButton: 'Sim',
               actionNo: () => Navigator.of(context).pop(),

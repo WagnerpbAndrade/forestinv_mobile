@@ -23,7 +23,7 @@ class CreateMedicaoController {
   }
 
   Future<ApiResponse> update(final String medicaoId, final String parcelaId) {
-    final usecase = Modular.get<IUpdateMedicaoUsecase>();
+    final usecase = Modular.get<UpdateMedicaoUsecase>();
     final store = Modular.get<CreateMedicaoStore>();
 
     final medicao = Medicao(
