@@ -9,9 +9,9 @@ import 'package:forestinv_mobile/app/modules/medicao/infra/repository/medicao_re
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/controllers/create_medicao_controller.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/controllers/medicao_list_controller.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/create_medicao_store.dart';
-import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/pages/create_medicao_page.dart';
+import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/pages/cadastrar_medicao_page.dart';
+import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/pages/medicao_page.dart';
 import 'output/stores/medicao_store.dart';
-import 'ui/pages/medicao_list_page.dart';
 
 class MedicaoModule extends Module {
   @override
@@ -30,8 +30,8 @@ class MedicaoModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => MedicaoListPage(parcela: args.data)),
+    ChildRoute('/', child: (_, args) => MedicaoPage(parcela: args.data)),
     ChildRoute(RouterConst.CREATE_MEDICAO_ROUTER,
-        child: (_, args) => CreateMedicaoPage(args.data)),
+        child: (_, args) => CadastrarMedicaoPage(args: args.data)),
   ];
 }

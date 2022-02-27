@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
-import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/parcela_store.dart';
-import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/components/parcela_tile.dart';
-import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
+import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/medicao_store.dart';
+import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/components/medicao_tile.dart';
+import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 
-class ParcelaPage extends StatefulWidget {
-  final Project project;
+class MedicaoPage extends StatefulWidget {
+  final Parcela parcela;
 
-  const ParcelaPage({required this.project});
+  const MedicaoPage({required this.parcela});
 
   @override
-  _ParcelaPageState createState() => _ParcelaPageState();
+  _MedicaoPageState createState() => _MedicaoPageState();
 }
 
-class _ParcelaPageState extends State<ParcelaPage> {
-  ParcelaStore? store;
+class _MedicaoPageState extends State<MedicaoPage> {
+  MedicaoStore? store;
   @override
   void initState() {
     super.initState();
-    store = ParcelaStore(project: widget.project);
+    store = MedicaoStore(parcela: widget.parcela);
   }
 
   @override
@@ -29,7 +29,7 @@ class _ParcelaPageState extends State<ParcelaPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Parcelas'),
+          title: const Text('Medições'),
           centerTitle: true,
         ),
         body: Column(
@@ -73,18 +73,18 @@ class _ParcelaPageState extends State<ParcelaPage> {
                           ),
                         );
                       }
-                      if (store!.parcelaList.isEmpty) {
-                        return const EmptyCard('Nenhuma parcela encontrada.');
+                      if (store!.medicaoList.isEmpty) {
+                        return const EmptyCard('Nenhuma medição encontrada.');
                       }
                       return ListView.builder(
                         controller: scrollController,
-                        itemCount: store!.parcelaList.length,
+                        itemCount: store!.medicaoList.length,
                         itemBuilder: (_, index) {
-                          return ParcelaTile(
+                          return MedicaoTile(
                             store: store!,
-                            parcela: store!.parcelaList[index],
+                            medicao: store!.medicaoList[index],
                             onTap: () {
-                              store!.goToMedicaoPage(store!.parcelaList[index]);
+                              //store!.goToMedicaoPage(store!.medicaoList[index]);
                             },
                           );
                         },
@@ -98,7 +98,7 @@ class _ParcelaPageState extends State<ParcelaPage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            await store!.goToCadastrarParcelaPage(context);
+            await store!.goToCadastrarMedicaoPage(context);
           },
           child: const Icon(Icons.add),
         ),

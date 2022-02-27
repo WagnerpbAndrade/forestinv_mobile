@@ -23,7 +23,7 @@ class MedicaoListController {
   }
 
   Future<ApiResponse> delete(final String medicaoId) {
-    final usecase = Modular.get<IDeleteMedicaoUsecase>();
+    final usecase = Modular.get<DeleteMedicaoUsecase>();
     return usecase.call(medicaoId);
   }
 

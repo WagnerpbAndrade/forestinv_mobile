@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/delete_parcela_usecase.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/list_all_parcela_by_projeto.dart';
@@ -81,6 +82,8 @@ abstract class _ParcelaStoreBase with Store {
   }
 
   void goToMedicaoPage(final Parcela parcela) {
-    //Modular.to.pushNamed('${RouterConst.PROJECT_ROUTER}', arguments: parcela);
+    Modular.to.pushNamed(
+        '${RouterConst.PROJECT_ROUTER}${RouterConst.MEDICAO_ROUTER}',
+        arguments: parcela);
   }
 }
