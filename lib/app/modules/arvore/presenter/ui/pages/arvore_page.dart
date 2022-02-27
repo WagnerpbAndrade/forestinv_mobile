@@ -5,7 +5,6 @@ import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/controller
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/arvore_store.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/components/arvore_card.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
-import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/components/bar_button.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ArvorePage extends StatefulWidget {
@@ -129,22 +128,6 @@ class ArvorePageState extends State<ArvorePage> {
             }
         }
       },
-    );
-  }
-
-  Row topBar() {
-    return Row(
-      children: [
-        BarButton(
-          label: 'Filtros',
-          decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(color: Colors.grey),
-            ),
-          ),
-          onTap: () {},
-        ),
-      ],
     );
   }
 }

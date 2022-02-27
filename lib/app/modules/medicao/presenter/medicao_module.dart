@@ -6,9 +6,6 @@ import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/save_medica
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/update_medicao_usecase.dart';
 import 'package:forestinv_mobile/app/modules/medicao/external/datasource/medicao_firestore_datasource_impl.dart';
 import 'package:forestinv_mobile/app/modules/medicao/infra/repository/medicao_repository_impl.dart';
-import 'package:forestinv_mobile/app/modules/medicao/presenter/output/controllers/create_medicao_controller.dart';
-import 'package:forestinv_mobile/app/modules/medicao/presenter/output/controllers/medicao_list_controller.dart';
-import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/create_medicao_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/pages/cadastrar_medicao_page.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/pages/medicao_page.dart';
 import 'output/stores/medicao_store.dart';
@@ -17,9 +14,6 @@ class MedicaoModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.lazySingleton((i) => MedicaoStore()),
-    Bind.lazySingleton((i) => MedicaoListController()),
-    Bind.lazySingleton((i) => CreateMedicaoStore()),
-    Bind.lazySingleton((i) => CreateMedicaoController()),
     Bind((i) => MedicaoRepositoryImpl(i.get())),
     Bind((i) => SaveMedicaoUsecaseImpl(i.get())),
     Bind((i) => UpdateMedicaoUsecaseImpl(i.get())),
