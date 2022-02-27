@@ -6,7 +6,6 @@ import 'package:forestinv_mobile/app/modules/parcela/domain/entities/list_parcel
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/infra/datasource/parcela_datasource.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/cadastrar_parcela_store.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/cadastrar_projeto_store.dart';
 
 class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
   final FirebaseFirestore _firestore;
@@ -81,6 +80,8 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
         final largura = doc.get('largura');
         final numero = doc.get('numero');
         final espacamento = doc.get('espacamento');
+        final latitude = doc.get('latitude');
+        final longitude = doc.get('longitude');
         final numTalhao = doc.get('numTalhao');
         final tipoParcelaEnum = doc.get('tipoParcelaEnum');
         final created = doc.get('dataCriacao') as Timestamp;
@@ -105,6 +106,8 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
           espacamento: espacamento,
           dataPlantio: dataPlantio,
           idadeParcela: idadeParcela,
+          latitude: latitude,
+          longitude: longitude,
           tipoParcelaEnum: tipoParcelaEnum,
           dataCriacao: dataCriacao,
           ultimaAtualizacao: ultimaAtualizacao,

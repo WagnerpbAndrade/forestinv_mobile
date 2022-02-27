@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/save_parcela_usecase.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/update_parcela_usecase.dart';
+import 'package:forestinv_mobile/helper/location_helper.dart';
 import 'package:mobx/mobx.dart';
 part 'cadastrar_parcela_store.g.dart';
 
@@ -21,6 +22,8 @@ abstract class _CadastrarParcelaStoreBase with Store {
       area = parcela!.area.toString();
       numeroTalhao = parcela!.numTalhao.toString();
       espacamento = parcela!.espacamento.toString();
+      latitude = parcela!.latitude.toString();
+      longitude = parcela!.longitude.toString();
     }
   }
 
@@ -86,6 +89,21 @@ abstract class _CadastrarParcelaStoreBase with Store {
   @action
   void setEspacamento(String value) => espacamento = value;
 
+  @observable
+  String latitude = '';
+
+  @action
+  void setLatitude(String value) => latitude = value;
+
+  @observable
+  String longitude = '';
+
+  @action
+  void setLongitude(String value) => longitude = value;
+
+  @observable
+  bool loadingLatLong = false;
+
   @computed
   bool get espacamentoIsValid => espacamento.isNotEmpty;
   String? get espacamentoError {
@@ -131,8 +149,8 @@ abstract class _CadastrarParcelaStoreBase with Store {
       area: double.parse(area),
       largura: double.parse('1'),
       numTalhao: int.parse(numeroTalhao),
-      latitude: 'latitude',
-      longitude: 'longitude',
+      latitude: latitude,
+      longitude: longitude,
       dataPlantio: selectedDate!,
       idadeParcela: calcularIdadeParcela(selectedDate!),
       espacamento: espacamento,
@@ -160,8 +178,8 @@ abstract class _CadastrarParcelaStoreBase with Store {
       area: double.parse(area),
       largura: double.parse('1'),
       numTalhao: int.parse(numeroTalhao),
-      latitude: 'latitude',
-      longitude: 'longitude',
+      latitude: latitude,
+      longitude: longitude,
       dataPlantio: selectedDate!,
       idadeParcela: calcularIdadeParcela(selectedDate!),
       espacamento: espacamento,
@@ -181,11 +199,12 @@ abstract class _CadastrarParcelaStoreBase with Store {
   @action
   Future<void> openDatePicker(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
-      context: context,
-      initialDate: selectedDate!,
-      firstDate: DateTime(1970),
-      lastDate: DateTime(2025),
-    );
+        context: context,
+        initialDate: selectedDate!,
+        firstDate: DateTime(1970),
+        lastDate: DateTime(2025),
+        locale: const Locale('pt', 'BR'));
+
     if (selected != null && selected != selectedDate) {
       setSelectedDate(selected);
     }
@@ -198,5 +217,24 @@ abstract class _CadastrarParcelaStoreBase with Store {
     final inDays = (difference.inDays / 365).floor();
 
     return inDays == 0 ? YEAR : inDays * YEAR;
+  }
+
+  Future<void> getLatLong() async {
+    loadingLatLong = true;
+
+    final locationHelper = Modular.get<LocationHelper>();
+
+    final position = await locationHelper.getPosition().catchError((error) {
+      print('Error: $error');
+      error = error.toString();
+    });
+
+    print('Latitude: ${position.latitude}');
+    print('Longitude: ${position.longitude}');
+
+    setLatitude(position.latitude.toString());
+    setLongitude(position.longitude.toString());
+
+    loadingLatLong = false;
   }
 }

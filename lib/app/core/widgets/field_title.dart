@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class FieldTitle extends StatelessWidget {
   final String title;
-  final String subtitle;
+  final String? subtitle;
 
-  const FieldTitle({required this.title, required this.subtitle});
+  const FieldTitle({required this.title, this.subtitle = ''});
 
   @override
   Widget build(BuildContext context) {

@@ -137,6 +137,52 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
+  final _$latitudeAtom = Atom(name: '_CadastrarParcelaStoreBase.latitude');
+
+  @override
+  String get latitude {
+    _$latitudeAtom.reportRead();
+    return super.latitude;
+  }
+
+  @override
+  set latitude(String value) {
+    _$latitudeAtom.reportWrite(value, super.latitude, () {
+      super.latitude = value;
+    });
+  }
+
+  final _$longitudeAtom = Atom(name: '_CadastrarParcelaStoreBase.longitude');
+
+  @override
+  String get longitude {
+    _$longitudeAtom.reportRead();
+    return super.longitude;
+  }
+
+  @override
+  set longitude(String value) {
+    _$longitudeAtom.reportWrite(value, super.longitude, () {
+      super.longitude = value;
+    });
+  }
+
+  final _$loadingLatLongAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.loadingLatLong');
+
+  @override
+  bool get loadingLatLong {
+    _$loadingLatLongAtom.reportRead();
+    return super.loadingLatLong;
+  }
+
+  @override
+  set loadingLatLong(bool value) {
+    _$loadingLatLongAtom.reportWrite(value, super.loadingLatLong, () {
+      super.loadingLatLong = value;
+    });
+  }
+
   final _$loadingAtom = Atom(name: '_CadastrarParcelaStoreBase.loading');
 
   @override
@@ -282,6 +328,28 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
   }
 
   @override
+  void setLatitude(String value) {
+    final _$actionInfo = _$_CadastrarParcelaStoreBaseActionController
+        .startAction(name: '_CadastrarParcelaStoreBase.setLatitude');
+    try {
+      return super.setLatitude(value);
+    } finally {
+      _$_CadastrarParcelaStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLongitude(String value) {
+    final _$actionInfo = _$_CadastrarParcelaStoreBaseActionController
+        .startAction(name: '_CadastrarParcelaStoreBase.setLongitude');
+    try {
+      return super.setLongitude(value);
+    } finally {
+      _$_CadastrarParcelaStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 selectedDate: ${selectedDate},
@@ -289,6 +357,9 @@ numero: ${numero},
 area: ${area},
 numeroTalhao: ${numeroTalhao},
 espacamento: ${espacamento},
+latitude: ${latitude},
+longitude: ${longitude},
+loadingLatLong: ${loadingLatLong},
 loading: ${loading},
 error: ${error},
 savedParcela: ${savedParcela},

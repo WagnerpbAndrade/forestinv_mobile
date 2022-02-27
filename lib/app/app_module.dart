@@ -8,11 +8,13 @@ import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/intro/intro_module.dart';
 import 'package:forestinv_mobile/app/modules/login/login_module.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/projeto_module.dart';
+import 'package:forestinv_mobile/helper/location_helper.dart';
 
 class AppModule extends Module {
   @override
   final List<Bind> binds = [
     Bind.factory((i) => DioClient()),
+    Bind.factory((i) => LocationHelper()),
     Bind.singleton((i) => FirebaseAuth.instance),
     Bind.singleton((i) => FirebaseFirestore.instance),
     Bind.singleton((i) => AuthStore(i())),

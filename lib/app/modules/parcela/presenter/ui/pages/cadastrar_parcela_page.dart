@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_elevated_button.dart';
 import 'package:forestinv_mobile/app/core/widgets/error_box.dart';
 import 'package:forestinv_mobile/app/core/widgets/field_title.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/cadastrar_parcela_store.dart';
-import 'package:mobx/mobx.dart';
 import 'package:forestinv_mobile/helper/extensions.dart';
+import 'package:mobx/mobx.dart';
 
 class CadastrarParcelaPage extends StatefulWidget {
   final List? args;
@@ -224,23 +225,105 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                 return TextFormField(
                                   enabled: false,
                                   decoration: InputDecoration(
-                                      border: const OutlineInputBorder(),
-                                      label: Text(
-                                        cadastrarParcelaStore.selectedDate!
-                                            .formattedDate(),
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                        ),
+                                    border: const OutlineInputBorder(),
+                                    label: Text(
+                                      cadastrarParcelaStore.selectedDate!
+                                          .formattedDate(),
+                                      style: const TextStyle(
+                                        color: Colors.black,
                                       ),
-                                      isDense: true,
-                                      errorText: cadastrarParcelaStore
-                                          .espacamentoError),
-                                  keyboardType: TextInputType.text,
-                                  onChanged:
-                                      cadastrarParcelaStore.setEspacamento,
+                                    ),
+                                    isDense: true,
+                                  ),
+                                  keyboardType: TextInputType.datetime,
                                 );
                               },
                             ),
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const FieldTitle(title: 'Latitude'),
+                                    Observer(
+                                      builder: (_) {
+                                        return TextFormField(
+                                          enabled: false,
+                                          decoration: InputDecoration(
+                                            border: const OutlineInputBorder(),
+                                            isDense: true,
+                                            label: Text(
+                                              cadastrarParcelaStore.latitude,
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          keyboardType: TextInputType.text,
+                                          onChanged:
+                                              cadastrarParcelaStore.setLatitude,
+                                          maxLines: 1,
+                                        );
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    const FieldTitle(title: 'Longitude'),
+                                    Observer(
+                                      builder: (_) {
+                                        return TextFormField(
+                                          enabled: false,
+                                          decoration: InputDecoration(
+                                            border: const OutlineInputBorder(),
+                                            isDense: true,
+                                            label: Text(
+                                              cadastrarParcelaStore.longitude,
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          keyboardType: TextInputType.text,
+                                          onChanged: cadastrarParcelaStore
+                                              .setLongitude,
+                                          maxLines: 1,
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Observer(builder: (_) {
+                                return GestureDetector(
+                                  onTap: () =>
+                                      cadastrarParcelaStore.getLatLong(),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8),
+                                    child: !cadastrarParcelaStore.loadingLatLong
+                                        ? const Icon(
+                                            Icons.location_on,
+                                            size: 48,
+                                          )
+                                        : const CircularProgressIndicator(
+                                            valueColor: AlwaysStoppedAnimation(
+                                                ColorsConst.secondary),
+                                          ),
+                                  ),
+                                );
+                              }),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 8,
                           ),
                           Observer(
                             builder: (_) {
