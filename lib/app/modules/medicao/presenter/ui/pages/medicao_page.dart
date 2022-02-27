@@ -84,7 +84,7 @@ class _MedicaoPageState extends State<MedicaoPage> {
                             store: store!,
                             medicao: store!.medicaoList[index],
                             onTap: () {
-                              //store!.goToMedicaoPage(store!.medicaoList[index]);
+                              store!.goToArvorePage(store!.medicaoList[index]);
                             },
                           );
                         },

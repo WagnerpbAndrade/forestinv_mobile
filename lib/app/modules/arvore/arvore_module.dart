@@ -11,7 +11,7 @@ import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/controller
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/arvore_store.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/create_arvore_story.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/pages/arvore_page.dart';
-import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/pages/create_arvore_page.dart';
+import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/pages/cadastrar_arvore_page.dart';
 
 class ArvoreModule extends Module {
   @override
@@ -32,6 +32,6 @@ class ArvoreModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute('/', child: (_, args) => ArvorePage(args.data)),
     ChildRoute(RouterConst.CREATE_ARVORE_ROUTER,
-        child: (_, args) => CreateArvorePage(args.data)),
+        child: (_, args) => CadastrarArvorePage(args: args.data)),
   ];
 }

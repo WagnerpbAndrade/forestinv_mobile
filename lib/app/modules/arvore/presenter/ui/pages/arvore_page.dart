@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/controllers/arvore_controller.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/arvore_store.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/components/arvore_card.dart';
+import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/components/arvore_tile.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -17,117 +20,94 @@ class ArvorePage extends StatefulWidget {
 }
 
 class ArvorePageState extends State<ArvorePage> {
-  final ArvoreStore store = Modular.get<ArvoreStore>();
-  final arvoreController = Modular.get<ArvoreController>();
+  ArvoreStore? store;
+  @override
+  void initState() {
+    super.initState();
+    store = ArvoreStore(medicao: widget.medicao);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Medição: ${widget.medicao.dataMedicao!.year}'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.filter_alt_outlined),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Column(
+    final ScrollController scrollController = ScrollController();
+
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Árvores'),
+          centerTitle: true,
+        ),
+        body: Column(
           children: [
-            //topBar(),
             Expanded(
-              child: buildListMedicoes(),
+              child: Stack(
+                children: [
+                  Observer(
+                    builder: (_) {
+                      if (store!.error != null) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const <Widget>[
+                              Icon(
+                                Icons.error,
+                                color: Colors.white,
+                                size: 100,
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                'Ocorreu um erro!',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      if (store!.showProgress) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(Colors.white),
+                          ),
+                        );
+                      }
+                      if (store!.arvoreList.isEmpty) {
+                        return const EmptyCard('Nenhuma medição encontrada.');
+                      }
+                      return ListView.builder(
+                        controller: scrollController,
+                        itemCount: store!.arvoreList.length,
+                        itemBuilder: (_, index) {
+                          return ArvoreTile(
+                            store: store!,
+                            arvore: store!.arvoreList[index],
+                            onTap: () {
+                              //store!.goToArvorePage(store!.medicaoList[index]);
+                            },
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            await store!.goToCadastrarArvorePage(context);
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          arvoreController.goToCreateArvorePage(
-            null,
-            widget.medicao.id.toString(),
-          );
-        },
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-
-  Widget buildListMedicoes() {
-    return FutureBuilder<List<Arvore>>(
-      future:
-          arvoreController.getAllArvoresByMedicao(widget.medicao.id.toString()),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-          case ConnectionState.waiting:
-            return Center(
-              child: Column(
-                children: [
-                  const Text('Carregando árvores'),
-                  const CircularProgressIndicator(),
-                ],
-              ),
-            );
-          case ConnectionState.active:
-          case ConnectionState.done:
-            if (snapshot.hasError) {
-              return const Center(
-                child: Text("Erro ao carregar os dados!"),
-              );
-            } else {
-              final List<Arvore>? arvores = snapshot.data as List<Arvore>;
-              if (arvores != null && arvores.isNotEmpty) {
-                return ListView.builder(
-                  itemCount: arvores.length,
-                  itemBuilder: (_, index) {
-                    return ArvoreCard(
-                      arvore: arvores[index],
-                      onTap: () => {},
-                      onPressedUpdate: () {
-                        arvoreController.goToCreateArvorePage(
-                          arvores[index],
-                          widget.medicao.id.toString(),
-                        );
-                      },
-                      onPressedDelete: () {
-                        Alert(
-                          type: AlertType.warning,
-                          buttons: [
-                            DialogButton(
-                              child: const Text('Sim'),
-                              onPressed: () {
-                                arvoreController.delete(
-                                  arvores[index].id.toString(),
-                                );
-                                Modular.to.pop();
-                              },
-                            ),
-                            DialogButton(
-                              child: const Text('Não'),
-                              onPressed: () {
-                                Modular.to.pop();
-                              },
-                            )
-                          ],
-                          context: context,
-                          title: "Excluir Árvore",
-                          desc: 'Deseja continuar com a exclusão da árvore?',
-                        ).show();
-                      },
-                    );
-                  },
-                );
-              }
-
-              return const Center(
-                child: Text("Nenhuma árvore encontrada!"),
-              );
-            }
-        }
-      },
     );
   }
 }

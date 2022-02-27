@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/delete_medicao_usecase.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/list_all_medicao_by_parcela.dart';
@@ -77,5 +78,11 @@ abstract class _MedicaoStoreBase with Store {
       ),
     );
     if (success != null && success) refresh();
+  }
+
+  void goToArvorePage(final Medicao medicao) {
+    Modular.to.pushNamed(
+        '${RouterConst.PROJECT_ROUTER}${RouterConst.ARVORE_ROUTER}',
+        arguments: medicao);
   }
 }
