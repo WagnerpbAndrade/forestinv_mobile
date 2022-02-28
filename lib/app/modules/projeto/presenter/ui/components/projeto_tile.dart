@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/home_store.dart';
@@ -67,9 +68,21 @@ class ProjetoTile extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
+                      if (projeto.visibilidadeProjetoEnum.toUpperCase() ==
+                          'PRIVADO')
+                        const Icon(
+                          Icons.lock,
+                          size: 16,
+                          color: ColorsConst.primary,
+                        )
+                      else
+                        const Icon(
+                          Icons.lock_open,
+                          size: 16,
+                          color: ColorsConst.secondary,
+                        ),
                       Text(
-                        '${projeto.visibilidadeProjetoEnum.toUpperCase()} - '
-                        '${projeto.dataCriacao!.formattedDate()}',
+                        'Criado em ${projeto.dataCriacao!.formattedDate()}',
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w300,
