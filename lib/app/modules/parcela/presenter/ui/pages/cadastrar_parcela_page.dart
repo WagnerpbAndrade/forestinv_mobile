@@ -8,6 +8,7 @@ import 'package:forestinv_mobile/app/core/widgets/error_box.dart';
 import 'package:forestinv_mobile/app/core/widgets/field_title.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/cadastrar_parcela_store.dart';
 import 'package:forestinv_mobile/helper/extensions.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:mobx/mobx.dart';
 
 class CadastrarParcelaPage extends StatefulWidget {
@@ -48,6 +49,12 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
       }
     });
   }
+
+  var maskFormatter = MaskTextInputFormatter(
+    mask: '#x#',
+    filter: {"#": RegExp(r'[0-9]')},
+    type: MaskAutoCompletionType.lazy,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -203,10 +210,12 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                     isDense: true,
                                     errorText:
                                         cadastrarParcelaStore.espacamentoError),
-                                keyboardType: TextInputType.text,
+                                keyboardType: TextInputType.number,
                                 onChanged: cadastrarParcelaStore.setEspacamento,
                                 maxLines: 1,
-                                maxLength: 7,
+                                inputFormatters: [
+                                  maskFormatter,
+                                ],
                               );
                             },
                           ),
