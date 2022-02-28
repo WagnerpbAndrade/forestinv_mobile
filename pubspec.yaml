@@ -28,6 +28,7 @@ dependencies:
   data_connection_checker: ^0.3.4
   device_preview: ^1.0.0
   dio: ^4.0.0
+  enum_to_string: ^2.0.1
   equatable: ^2.0.3
   firebase_auth: ^3.3.6
   firebase_core: ^1.12.0
