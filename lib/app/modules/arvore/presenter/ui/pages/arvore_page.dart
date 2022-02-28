@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
-import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
-import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/controllers/arvore_controller.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/arvore_store.dart';
-import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/components/arvore_card.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/components/arvore_tile.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ArvorePage extends StatefulWidget {
   final Medicao medicao;

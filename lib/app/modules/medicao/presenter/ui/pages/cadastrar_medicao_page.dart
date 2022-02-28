@@ -115,11 +115,12 @@ class _CadastrarMedicaoPageState extends State<CadastrarMedicaoPage> {
                                   cadastrarMedicaoStore.nomeResponsavel,
                               enabled: !cadastrarMedicaoStore.loading,
                               decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  hintText: 'João da Silva',
-                                  isDense: true,
-                                  errorText: cadastrarMedicaoStore
-                                      .nomeResponsavelError),
+                                border: const OutlineInputBorder(),
+                                hintText: 'João da Silva',
+                                isDense: true,
+                                errorText:
+                                    cadastrarMedicaoStore.nomeResponsavelError,
+                              ),
                               onChanged:
                                   cadastrarMedicaoStore.setNomeResponsavel,
                               keyboardType: TextInputType.name,
