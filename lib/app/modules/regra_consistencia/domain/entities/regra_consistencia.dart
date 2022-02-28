@@ -56,9 +56,13 @@ class RegraConsistencia {
 
   Map<String, dynamic> updateToJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['ativoInativoEnum'] = ativoInativoEnum;
+    data['ativoInativoEnum'] = ativoInativoEnum!.index;
     data['ultimaAtualizacao'] = ultimaAtualizacao;
     return data;
+  }
+
+  bool isActive() {
+    return ativoInativoEnum == AtivoInativoEnum.SIM;
   }
 
   static List<RegraConsistencia> createListWithRegrasConsistencia(
@@ -71,6 +75,7 @@ class RegraConsistencia {
           descricao:
               "Identificar árvores com DAP2 < DAP1 entre medições consecutivas i e i+1, sendo i o ano da medição",
           dataCriacao: DateTime.now(),
+          ultimaAtualizacao: DateTime.now(),
         ),
         RegraConsistencia(
           uuid: uuid,
@@ -79,6 +84,7 @@ class RegraConsistencia {
           descricao:
               "Identificar árvores que não atendem o cálculo: IDADE ATUAL - IDADE ANTERIOR = 1",
           dataCriacao: DateTime.now(),
+          ultimaAtualizacao: DateTime.now(),
         ),
         RegraConsistencia(
           uuid: uuid,
@@ -87,6 +93,7 @@ class RegraConsistencia {
           descricao:
               "Identificação de parcelas com mais de um espaçamento em idades diferentes",
           dataCriacao: DateTime.now(),
+          ultimaAtualizacao: DateTime.now(),
         ),
         RegraConsistencia(
           uuid: uuid,
@@ -95,6 +102,7 @@ class RegraConsistencia {
           descricao:
               "Mudança no estado da árvore é irreal. Exemplo: de MORTA para DOMINADA",
           dataCriacao: DateTime.now(),
+          ultimaAtualizacao: DateTime.now(),
         ),
       ];
 }
