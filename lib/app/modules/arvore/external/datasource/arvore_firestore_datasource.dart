@@ -11,7 +11,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
   @override
   Future<ApiResponse> delete(String arvoreId) async {
     try {
-      await _firestore
+      _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_ARVORES)
           .doc(arvoreId)
           .delete();
@@ -69,7 +69,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
   @override
   Future<ApiResponse> save(Arvore arvore) async {
     try {
-      await _firestore
+      _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_ARVORES)
           .add(arvore.createToMap());
       return ApiResponse.ok();
@@ -82,7 +82,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
   @override
   Future<ApiResponse> update(Arvore arvore) async {
     try {
-      await _firestore
+      _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_ARVORES)
           .doc(arvore.id)
           .set(arvore.updateToMap(), SetOptions(merge: true));

@@ -88,7 +88,7 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
     try {
       medicao.dataMedicao = DateTime.now();
       medicao.ultimaAtualizacao = DateTime.now();
-      await _firestore
+      _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
           .add(medicao.toMap());
       return ApiResponse.ok();
@@ -102,7 +102,7 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
   Future<ApiResponse> update(final Medicao medicao) async {
     try {
       medicao.ultimaAtualizacao = DateTime.now().toUtc();
-      await _firestore
+      _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
           .doc(medicao.id)
           .set(medicao.updateToMap(), SetOptions(merge: true));
@@ -116,7 +116,7 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
   @override
   Future<ApiResponse> delete(final String medicaoId) async {
     try {
-      await _firestore
+      _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
           .doc(medicaoId)
           .delete();

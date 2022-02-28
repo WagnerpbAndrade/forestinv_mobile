@@ -105,7 +105,7 @@ class _CadastrarMedicaoPageState extends State<CadastrarMedicaoPage> {
                             );
                           }),
                           const FieldTitle(
-                            title: 'Número do responsável',
+                            title: 'Nome do responsável',
                             subtitle:
                                 'Informe o nome do responsável pela medicação',
                           ),

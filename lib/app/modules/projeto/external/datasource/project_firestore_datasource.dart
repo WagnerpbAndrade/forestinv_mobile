@@ -14,7 +14,7 @@ class ProjectFirestoreDatasourceImpl implements ProjetoDatasource {
   @override
   Future<bool> delete(String projectId) async {
     try {
-      await _instance
+      _instance
           .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
           .doc(projectId)
           .delete();
@@ -144,11 +144,11 @@ class ProjectFirestoreDatasourceImpl implements ProjetoDatasource {
     try {
       project.dataCriacao = DateTime.now().toUtc();
       project.ultimaAtualizacao = DateTime.now().toUtc();
-      final documentReference = await _instance
+      _instance
           .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
           .add(project.toMap());
 
-      print('ProjectFirestoreDatasourceImpl-Save: ${documentReference.id}');
+      print('ProjectFirestoreDatasourceImpl-Save: success');
       return ApiResponse.ok();
     } catch (e) {
       print('ProjectFirestoreDatasourceImpl-Save: $e');
@@ -160,7 +160,7 @@ class ProjectFirestoreDatasourceImpl implements ProjetoDatasource {
   Future<ApiResponse> update(Project project) async {
     try {
       project.ultimaAtualizacao = DateTime.now().toUtc();
-      await _instance
+      _instance
           .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
           .doc(project.id)
           .set(project.updateToMap(), SetOptions(merge: true));

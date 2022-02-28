@@ -18,7 +18,8 @@ class ProjetoTile extends StatelessWidget {
 
   final List<MenuChoice> choices = [
     MenuChoice(index: 0, title: 'Editar', iconData: Icons.edit),
-    MenuChoice(index: 1, title: 'Excluir', iconData: Icons.delete)
+    MenuChoice(index: 1, title: 'Excluir', iconData: Icons.delete),
+    MenuChoice(index: 2, title: 'Exportar', iconData: Icons.share)
   ];
 
   @override
@@ -103,6 +104,9 @@ class ProjetoTile extends StatelessWidget {
                         case 1:
                           deleteProject(context);
                           break;
+                        case 2:
+                          exportarProject(context);
+                          break;
                       }
                     },
                     icon: const Icon(
@@ -170,6 +174,8 @@ class ProjetoTile extends StatelessWidget {
               },
             ));
   }
+
+  void exportarProject(BuildContext context) {}
 }
 
 class MenuChoice {

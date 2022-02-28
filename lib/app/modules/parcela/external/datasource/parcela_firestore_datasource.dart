@@ -15,7 +15,7 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
   @override
   Future<ApiResponse> delete(String parcelaId) async {
     try {
-      await _firestore
+      _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
           .doc(parcelaId)
           .delete();
@@ -38,7 +38,7 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
     try {
       parcela.dataCriacao = DateTime.now();
       parcela.ultimaAtualizacao = DateTime.now();
-      await _firestore
+      _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
           .add(parcela.toMap());
       return ApiResponse.ok();
@@ -52,7 +52,7 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
   Future<ApiResponse> update(Parcela parcela) async {
     try {
       parcela.ultimaAtualizacao = DateTime.now().toUtc();
-      await _firestore
+      _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
           .doc(parcela.id)
           .set(parcela.updateToMap(), SetOptions(merge: true));
