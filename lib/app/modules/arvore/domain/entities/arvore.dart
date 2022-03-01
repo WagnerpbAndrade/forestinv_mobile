@@ -32,8 +32,8 @@ class Arvore {
         medicaoId: json['medicaoId'],
         parcelaId: json['parcelaId'],
         numArvore: json['numArvore'],
-        dap: json['dap'],
-        alturaTotal: json['alturaTotal'],
+        dap: double.parse(json['dap'].toString()),
+        alturaTotal: double.parse(json['alturaTotal'].toString()),
         latitude: json['latitude'],
         longitude: json['longitude'],
         estadoArvore: json['estadoArvore'],
@@ -71,5 +71,10 @@ class Arvore {
     data['observacao'] = observacao;
     data['ultimaAtualizacao'] = ultimaAtualizacao;
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'Arvore -> id: $id - numeroArvore: $numArvore - dap: $dap - altura: $alturaTotal - ano: ${dataCriacao?.year}';
   }
 }

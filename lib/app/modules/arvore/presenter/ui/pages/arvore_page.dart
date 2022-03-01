@@ -74,7 +74,7 @@ class ArvorePageState extends State<ArvorePage> {
                         );
                       }
                       if (store!.arvoreList.isEmpty) {
-                        return const EmptyCard('Nenhuma medição encontrada.');
+                        return const EmptyCard('Nenhuma árvore encontrada.');
                       }
                       return ListView.builder(
                         controller: scrollController,

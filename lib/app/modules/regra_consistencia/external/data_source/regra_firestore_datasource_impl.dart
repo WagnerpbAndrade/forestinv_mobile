@@ -83,4 +83,56 @@ class RegraFirestoreDatasourceImpl implements RegraConsistenciaDatasource {
       return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
     }
   }
+
+  Future<ApiResponse> regraEstaAtiva({
+    required final String uuid,
+    required final ValidacaoConsistenciaEnum validacao,
+  }) async {
+    try {
+      final regraRef = _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_REGRAS)
+          .where('uuid', isEqualTo: uuid)
+          .where('tipo', isEqualTo: validacao.index);
+
+      final snapshot = await regraRef.get();
+
+      if (snapshot.size == 0) {
+        return ApiResponse.error(
+            message: 'Nenhuma regra de consistência encontrada.');
+      }
+
+      final regraId = snapshot.docs.first.id;
+      final ativo = AtivoInativoEnum.values
+          .elementAt(snapshot.docs.first.get('ativoInativoEnum'));
+      final tipo = ValidacaoConsistenciaEnum.values
+          .elementAt(snapshot.docs.first.get('tipo'));
+      final uuidResponse = snapshot.docs.first.get('uuid');
+      final descricao = snapshot.docs.first.get('descricao');
+      final dataCriacaoTimestamp =
+          snapshot.docs.first.get('dataCriacao') as Timestamp;
+      final dataCriacao = DateTime.fromMicrosecondsSinceEpoch(
+          dataCriacaoTimestamp.microsecondsSinceEpoch);
+      final updated = snapshot.docs.first.get('ultimaAtualizacao') as Timestamp;
+      final ultimaAtualizacao =
+          DateTime.fromMicrosecondsSinceEpoch(updated.microsecondsSinceEpoch);
+
+      final regra = RegraConsistencia(
+        id: regraId,
+        ativoInativoEnum: ativo,
+        tipo: tipo,
+        descricao: descricao,
+        uuid: uuidResponse,
+        dataCriacao: dataCriacao,
+        ultimaAtualizacao: ultimaAtualizacao,
+      );
+
+      final isActive = regra.isActive();
+
+      print('RegraFirestoreDatasourceImpl-regraEstaAtiva: $isActive');
+      return ApiResponse.ok(result: isActive);
+    } catch (e) {
+      print('Error => RegraFirestoreDatasourceImpl-regraEstaAtiva: $e');
+      return ApiResponse.error();
+    }
+  }
 }

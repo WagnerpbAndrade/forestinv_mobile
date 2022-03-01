@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 Medicao listProjetoResponseFromMap(String str) =>
     Medicao.fromMap(json.decode(str));
 
@@ -21,14 +23,12 @@ class Medicao {
       this.dataMedicao,
       this.ultimaAtualizacao});
 
-  factory Medicao.fromMap(Map<String, dynamic> json) => Medicao(
-        id: json['id'],
+  factory Medicao.fromMap(DocumentSnapshot json) => Medicao(
+        parcelaId: json['parcelaId'],
         nomeResponsavel: json['nomeResponsavel'],
         dataMedicao: DateTime.parse(json["dataMedicao"]),
         anoMedicao: json["anoMedicao"],
-        ultimaAtualizacao: json["ultimaAtualizacao"] == null
-            ? null
-            : DateTime.parse(json["ultimaAtualizacao"]),
+        ultimaAtualizacao: DateTime.parse(json["ultimaAtualizacao"]),
       );
 
   Map<String, dynamic> toMap() {

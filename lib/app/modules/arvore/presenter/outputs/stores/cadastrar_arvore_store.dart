@@ -3,7 +3,11 @@ import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart'
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/estado_arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/save_arvore_usecase.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/update_arvore_usecase.dart';
+import 'package:forestinv_mobile/app/modules/arvore/external/datasource/arvore_firestore_datasource.dart';
+import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
+import 'package:forestinv_mobile/app/modules/regra_consistencia/domain/entities/regra_consistencia.dart';
+import 'package:forestinv_mobile/app/modules/regra_consistencia/external/data_source/regra_firestore_datasource_impl.dart';
 import 'package:forestinv_mobile/helper/location_helper.dart';
 import 'package:mobx/mobx.dart';
 part 'cadastrar_arvore_store.g.dart';
@@ -162,6 +166,12 @@ abstract class _CadastrarArvoreStoreBase with Store {
   @observable
   bool updatedArvore = false;
 
+  @observable
+  bool isDapValid = false;
+
+  @action
+  void setIsDapValid(bool value) => isDapValid = value;
+
   @action
   Future<void> _cadastrar() async {
     loading = true;
@@ -180,6 +190,11 @@ abstract class _CadastrarArvoreStoreBase with Store {
       observacao: observacao,
       dataCriacao: DateTime.now(),
     );
+
+    if (!await validarDapAnterior(arvoreSaved)) {
+      loading = false;
+      return;
+    }
 
     try {
       await usecase.save(arvoreSaved);
@@ -205,8 +220,14 @@ abstract class _CadastrarArvoreStoreBase with Store {
       latitude: latitude,
       longitude: longitude,
       observacao: observacao,
+      dataCriacao: arvore!.dataCriacao,
       ultimaAtualizacao: DateTime.now(),
     );
+
+    if (!await validarDapAnterior(arvoreUpdated)) {
+      loading = false;
+      return;
+    }
 
     try {
       await usecase.update(arvoreUpdated);
@@ -235,5 +256,37 @@ abstract class _CadastrarArvoreStoreBase with Store {
     setLongitude(position.longitude.toString());
 
     loadingLatLong = false;
+  }
+
+  Future<bool> validarDapAnterior(final Arvore arvore) async {
+    final datasource = Modular.get<ArvoreFirestoreDatasourceImpl>();
+    final regraDatasource = Modular.get<RegraFirestoreDatasourceImpl>();
+    final authStore = Modular.get<AuthStore>();
+
+    final responseRegra = await regraDatasource.regraEstaAtiva(
+        uuid: authStore.getUser().uid,
+        validacao: ValidacaoConsistenciaEnum.VMEDICAODAPANTERIOR);
+
+    if (responseRegra.ok && responseRegra.result == true) {
+      print('Regra Dap Anterior: ${responseRegra.result}');
+      final responseArvore = await datasource.obterArvoreAnoAnterior(arvore);
+      if (responseArvore.ok) {
+        print('Arvore Ano Anterior: ${responseArvore.result}');
+        final Arvore arvoreResult = responseArvore.result;
+        final dapAnterior = arvoreResult.dap;
+        final dapAtual = arvore.dap;
+
+        if (dapAtual < dapAnterior) {
+          print('Dap atual é menor');
+          error =
+              'Erro de consistência: O dap atual é menor que o dap de ${arvoreResult.dataCriacao?.year}';
+          setIsDapValid(false);
+          return false;
+        }
+      }
+    }
+    print('Dap atual é maior');
+    setIsDapValid(true);
+    return true;
   }
 }

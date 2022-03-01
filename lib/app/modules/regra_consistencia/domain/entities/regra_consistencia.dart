@@ -35,12 +35,10 @@ class RegraConsistencia {
     tipo = ValidacaoConsistenciaEnum.values.elementAt(json['tipo']);
     ativoInativoEnum =
         AtivoInativoEnum.values.elementAt(json['ativoInativoEnum']);
-    dataCriacao = json['dataCriacao'];
-    if (json['ultimaAtualizacao'] == null) {
-      ultimaAtualizacao = null;
-    } else {
-      ultimaAtualizacao = json['ultimaAtualizacao'];
-    }
+    dataCriacao = DateTime.parse(json["dataCriacao"]);
+    ultimaAtualizacao = json["ultimaAtualizacao"] == null
+        ? null
+        : DateTime.parse(json["ultimaAtualizacao"]);
   }
 
   Map<String, dynamic> toJson() {
