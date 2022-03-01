@@ -72,7 +72,7 @@ abstract class _ArvoreStoreBase with Store {
     final success = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => CadastrarArvorePage(
-          args: [null, medicao?.id],
+          args: [null, medicao],
         ),
       ),
     );

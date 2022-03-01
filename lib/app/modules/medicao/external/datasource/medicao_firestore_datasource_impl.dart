@@ -129,4 +129,19 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
       return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
     }
   }
+
+  Future<String> getParcelaIdByMedicao(final dynamic medicaoId) async {
+    final medicaoRer = _firestore
+        .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
+        .where("id", isEqualTo: medicaoId);
+
+    final snapshot = await medicaoRer.get();
+
+    final medicao = Medicao.fromMap(snapshot.docs.first.data());
+    return medicao.parcelaId;
+  }
+
+  void getMedicaoAnterior(final int anoMedicaoAnterior) {
+    //_firestore.collection(Fire)
+  }
 }

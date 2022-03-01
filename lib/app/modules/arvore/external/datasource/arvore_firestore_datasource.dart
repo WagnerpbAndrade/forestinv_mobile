@@ -36,6 +36,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
       querySnapshot.docs.forEach((doc) {
         final arvoreId = doc.id;
         final medicaoId = doc.get('medicaoId');
+        final parcelaId = doc.get('parcelaId');
         final numArvore = doc.get('numArvore');
         final dap = doc.get('dap');
         final alturaTotal = doc.get('alturaTotal');
@@ -47,6 +48,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
         final Arvore arvore = Arvore(
           id: arvoreId,
           medicaoId: medicaoId,
+          parcelaId: parcelaId,
           numArvore: numArvore,
           dap: dap,
           alturaTotal: alturaTotal,

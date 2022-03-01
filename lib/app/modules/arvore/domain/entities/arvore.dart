@@ -1,6 +1,7 @@
 class Arvore {
   dynamic id;
   dynamic medicaoId;
+  dynamic parcelaId;
   int numArvore;
   double dap;
   double alturaTotal;
@@ -14,6 +15,7 @@ class Arvore {
   Arvore({
     this.id,
     this.medicaoId,
+    this.parcelaId,
     required this.numArvore,
     required this.dap,
     required this.alturaTotal,
@@ -27,6 +29,8 @@ class Arvore {
 
   factory Arvore.fromMap(Map<String, dynamic> json) => Arvore(
         id: json['id'],
+        medicaoId: json['medicaoId'],
+        parcelaId: json['parcelaId'],
         numArvore: json['numArvore'],
         dap: json['dap'],
         alturaTotal: json['alturaTotal'],
@@ -43,6 +47,7 @@ class Arvore {
   Map<String, dynamic> createToMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['medicaoId'] = medicaoId;
+    data['parcelaId'] = parcelaId;
     data['numArvore'] = numArvore;
     data['dap'] = dap;
     data['alturaTotal'] = alturaTotal;

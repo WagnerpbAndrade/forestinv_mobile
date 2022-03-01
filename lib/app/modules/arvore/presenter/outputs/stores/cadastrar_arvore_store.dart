@@ -3,6 +3,7 @@ import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart'
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/estado_arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/save_arvore_usecase.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/update_arvore_usecase.dart';
+import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:forestinv_mobile/helper/location_helper.dart';
 import 'package:mobx/mobx.dart';
 part 'cadastrar_arvore_store.g.dart';
@@ -165,10 +166,11 @@ abstract class _CadastrarArvoreStoreBase with Store {
   Future<void> _cadastrar() async {
     loading = true;
     final usecase = Modular.get<SaveArvoreUsecase>();
-    final medicaoId = args![1];
+    final Medicao medicao = args![1];
 
     final arvoreSaved = Arvore(
-      medicaoId: medicaoId,
+      medicaoId: medicao.id,
+      parcelaId: medicao.parcelaId,
       numArvore: int.parse(numeroArvore),
       dap: double.parse(dapText),
       alturaTotal: double.parse(alturaText),
