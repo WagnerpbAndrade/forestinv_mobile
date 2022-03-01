@@ -43,7 +43,9 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
         final alturaTotal = doc.get('alturaTotal');
         final latitude = doc.get('latitude');
         final longitude = doc.get('longitude');
-        final estadoArvore = doc.get('estadoArvore');
+        final estadoArvore =
+            EstadoArvoreEnum.values.elementAt(doc.get('estadoArvore'));
+        final estadoDescription = doc.get('estadoDescription');
         final observacao = doc.get('observacao');
         final dataCriacaoTimestamp = doc.get('dataCriacao') as Timestamp;
         final dataCriacao = DateTime.fromMicrosecondsSinceEpoch(
@@ -59,6 +61,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
           latitude: latitude,
           longitude: longitude,
           estadoArvore: estadoArvore,
+          estadoDescription: estadoDescription,
           observacao: observacao,
           dataCriacao: dataCriacao,
         );
@@ -154,7 +157,10 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
         final alturaTotal = snapshotArvore.docs.first.get('alturaTotal');
         final latitude = snapshotArvore.docs.first.get('latitude');
         final longitude = snapshotArvore.docs.first.get('longitude');
-        final estadoArvore = snapshotArvore.docs.first.get('estadoArvore');
+        final estadoArvore = EstadoArvoreEnum.values
+            .elementAt(snapshotArvore.docs.first.get('estadoArvore'));
+        final estadoDescription =
+            snapshotArvore.docs.first.get('estadoDescription');
         final observacao = snapshotArvore.docs.first.get('observacao');
         final dataCriacaoTimestamp =
             snapshotArvore.docs.first.get('dataCriacao') as Timestamp;
@@ -171,6 +177,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
           latitude: latitude,
           longitude: longitude,
           estadoArvore: estadoArvore,
+          estadoDescription: estadoDescription,
           observacao: observacao,
           dataCriacao: dataCriacao,
         );

@@ -59,17 +59,17 @@ abstract class _CadastrarArvoreStoreBase with Store {
   @action
   void setDapText(String value) => dapText = value;
 
-  // @computed
-  // num get dap {
-  //   if (dapText!.contains(',')) {
-  //     return num.tryParse(dapText!.replaceAll(RegExp('[^0-9]'), ''))! / 100;
-  //   } else {
-  //     return num.tryParse(dapText!)!;
-  //   }
-  // }
+  @computed
+  num get dap {
+    if (dapText.contains(',')) {
+      return num.tryParse(dapText.replaceAll(RegExp('[^0-9]'), ''))! / 100;
+    } else {
+      return num.tryParse(dapText)!;
+    }
+  }
 
   @computed
-  bool get dapValid => dapText.isNotEmpty;
+  bool get dapValid => dapText.isNotEmpty && dap > 0;
   String? get dapError {
     if (dapValid) {
       return null;
@@ -86,16 +86,16 @@ abstract class _CadastrarArvoreStoreBase with Store {
   @action
   void setAlturaText(String value) => alturaText = value;
 
-  // @computed
-  // num get altura {
-  //   if (alturaText.contains(',')) {
-  //     return num.tryParse(alturaText.replaceAll(RegExp('[^0-9]'), ''))! / 100;
-  //   } else {
-  //     return num.tryParse(alturaText)!;
-  //   }
-  // }
+  @computed
+  num get altura {
+    if (alturaText.contains(',')) {
+      return num.tryParse(alturaText.replaceAll(RegExp('[^0-9]'), ''))! / 100;
+    } else {
+      return num.tryParse(alturaText)!;
+    }
+  }
 
-  bool get alturaValid => alturaText.isNotEmpty;
+  bool get alturaValid => alturaText.isNotEmpty && altura > 0;
   String? get alturaError {
     if (alturaValid) {
       return null;
@@ -184,7 +184,8 @@ abstract class _CadastrarArvoreStoreBase with Store {
       numArvore: int.parse(numeroArvore),
       dap: double.parse(dapText),
       alturaTotal: double.parse(alturaText),
-      estadoArvore: estadoArvore!.description,
+      estadoArvore: EstadoArvoreEnum.values.elementAt(estadoArvore!.index),
+      estadoDescription: estadoArvore!.description,
       latitude: latitude,
       longitude: longitude,
       observacao: observacao,
@@ -192,6 +193,11 @@ abstract class _CadastrarArvoreStoreBase with Store {
     );
 
     if (!await validarDapAnterior(arvoreSaved)) {
+      loading = false;
+      return;
+    }
+
+    if (!await validarEstadoAnterior(arvoreSaved)) {
       loading = false;
       return;
     }
@@ -216,7 +222,8 @@ abstract class _CadastrarArvoreStoreBase with Store {
       numArvore: int.parse(numeroArvore),
       dap: double.parse(dapText),
       alturaTotal: double.parse(alturaText),
-      estadoArvore: estadoArvore!.description,
+      estadoArvore: EstadoArvoreEnum.values.elementAt(estadoArvore!.index),
+      estadoDescription: estadoArvore!.description,
       latitude: latitude,
       longitude: longitude,
       observacao: observacao,
@@ -225,6 +232,11 @@ abstract class _CadastrarArvoreStoreBase with Store {
     );
 
     if (!await validarDapAnterior(arvoreUpdated)) {
+      loading = false;
+      return;
+    }
+
+    if (!await validarEstadoAnterior(arvoreUpdated)) {
       loading = false;
       return;
     }
@@ -286,6 +298,37 @@ abstract class _CadastrarArvoreStoreBase with Store {
       }
     }
     print('Dap atual é maior');
+    setIsDapValid(true);
+    return true;
+  }
+
+  Future<bool> validarEstadoAnterior(final Arvore arvore) async {
+    final datasource = Modular.get<ArvoreFirestoreDatasourceImpl>();
+    final regraDatasource = Modular.get<RegraFirestoreDatasourceImpl>();
+    final authStore = Modular.get<AuthStore>();
+
+    final responseRegra = await regraDatasource.regraEstaAtiva(
+        uuid: authStore.getUser().uid,
+        validacao: ValidacaoConsistenciaEnum.VESTINVALIDO);
+
+    if (responseRegra.ok && responseRegra.result == true) {
+      print('Regra estado inválido Anterior: ${responseRegra.result}');
+      final responseArvore = await datasource.obterArvoreAnoAnterior(arvore);
+      if (responseArvore.ok) {
+        print('Arvore Ano Anterior: ${responseArvore.result}');
+        final Arvore arvoreResult = responseArvore.result;
+        final estadoIsValid = arvoreResult.isEstadoValido(arvore);
+
+        if (!estadoIsValid) {
+          print('Estado atual é inválido');
+          error =
+              'Erro de consistência: O estado atual: ${arvore.estadoDescription.toUpperCase()} é incompatível com o estado anterior : ${arvoreResult.estadoDescription.toUpperCase()}';
+          setIsDapValid(false);
+          return false;
+        }
+      }
+    }
+    print('O estado atual é válido');
     setIsDapValid(true);
     return true;
   }

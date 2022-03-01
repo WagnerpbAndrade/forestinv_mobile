@@ -10,17 +10,20 @@ class EstadoArvoreFirebaseDatasource {
   Future<List<EstadoArvore>> getAll() async {
     final List<EstadoArvore> list = [];
     final estadoRef = _firestore
-        .collection(FirebaseFirestoreConstants.COLLECTION_ESTADOS_ARVORE);
+        .collection(FirebaseFirestoreConstants.COLLECTION_ESTADOS_ARVORE)
+        .orderBy('index', descending: false);
 
     final QuerySnapshot querySnapshot = await estadoRef.get();
 
     querySnapshot.docs.forEach((doc) {
       final estadoId = doc.id;
       final description = doc.get('estado');
+      final index = doc.get('index');
 
       final estado = EstadoArvore(
         id: estadoId,
         description: description,
+        index: index,
       );
 
       list.add(estado);

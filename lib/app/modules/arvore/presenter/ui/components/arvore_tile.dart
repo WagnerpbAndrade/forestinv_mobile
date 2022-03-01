@@ -65,7 +65,7 @@ class ArvoreTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Estado: ${arvore.estadoArvore}',
+                        'Estado: ${arvore.estadoDescription}',
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
