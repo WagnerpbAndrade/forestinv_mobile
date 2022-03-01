@@ -113,7 +113,7 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                           Observer(builder: (_) {
                             return TextFormField(
                               initialValue: cadastrarArvoreStore.numeroArvore,
-                              enabled: !cadastrarArvoreStore.loading,
+                              enabled: false,
                               decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
                                   hintText: 'Exemplo: N° 10',

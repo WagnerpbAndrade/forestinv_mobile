@@ -176,6 +176,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
   Future<void> _cadastrar() async {
     loading = true;
     final usecase = Modular.get<SaveArvoreUsecase>();
+    final datasource = Modular.get<ArvoreFirestoreDatasourceImpl>();
     final Medicao medicao = args![1];
 
     final arvoreSaved = Arvore(
@@ -191,6 +192,12 @@ abstract class _CadastrarArvoreStoreBase with Store {
       observacao: observacao,
       dataCriacao: DateTime.now(),
     );
+
+    if (await datasource.arvoreIsExists(medicao.id, arvoreSaved)) {
+      loading = false;
+      error = 'A árvore com o número $numeroArvore já está cadastrada';
+      return;
+    }
 
     if (!await validarDapAnterior(arvoreSaved)) {
       loading = false;
@@ -216,6 +223,8 @@ abstract class _CadastrarArvoreStoreBase with Store {
   Future<void> _editar() async {
     loading = true;
     final usecase = Modular.get<UpdateArvoreUsecase>();
+    final datasource = Modular.get<ArvoreFirestoreDatasourceImpl>();
+    final Medicao medicao = args![1];
 
     final arvoreUpdated = Arvore(
       id: arvore!.id,
@@ -230,6 +239,12 @@ abstract class _CadastrarArvoreStoreBase with Store {
       dataCriacao: arvore!.dataCriacao,
       ultimaAtualizacao: DateTime.now(),
     );
+
+    if (await datasource.arvoreIsExists(medicao.id, arvoreUpdated)) {
+      loading = false;
+      error = 'A árvore com o número: $numeroArvore já está cadastrada';
+      return;
+    }
 
     if (!await validarDapAnterior(arvoreUpdated)) {
       loading = false;

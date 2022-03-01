@@ -66,7 +66,7 @@ class ParcelaTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Idade ${parcela.idadeParcela.toString()} - '
+                        'Idade ${parcela.idadeParcela.toString()} meses - '
                         'Plantio em ${parcela.dataPlantio.formattedDate()}',
                         style: const TextStyle(
                           fontSize: 12,

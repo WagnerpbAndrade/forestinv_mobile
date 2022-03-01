@@ -191,4 +191,26 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
       return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
     }
   }
+
+  Future<bool> arvoreIsExists(
+      final String medicaoId, final Arvore arvore) async {
+    try {
+      final arvoreRef = _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_ARVORES)
+          .where('medicaoId', isEqualTo: medicaoId)
+          .where('numArvore', isEqualTo: arvore.numArvore);
+
+      final snapshotArvore = await arvoreRef.get();
+
+      if (snapshotArvore.size > 0) {
+        return true;
+      }
+
+      return false;
+    } catch (e) {
+      print(
+          'Error => ArvoreFirestoreDatasourceImpls-obterArvoreAnoAnterior: $e');
+      return false;
+    }
+  }
 }
