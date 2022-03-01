@@ -58,6 +58,7 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
         final medicaoId = doc.id;
         final parcelaId = doc.get('parcelaId');
         final nomeResponsavel = doc.get('nomeResponsavel');
+        final anoMedicao = doc.get('anoMedicao');
         final dataMedicaoTimestamp = doc.get('dataMedicao') as Timestamp;
         final dataMedicao = DateTime.fromMicrosecondsSinceEpoch(
             dataMedicaoTimestamp.microsecondsSinceEpoch);
@@ -69,6 +70,7 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
           id: medicaoId,
           parcelaId: parcelaId,
           nomeResponsavel: nomeResponsavel,
+          anoMedicao: anoMedicao,
           dataMedicao: dataMedicao,
           ultimaAtualizacao: ultimaAtualizacao,
         );

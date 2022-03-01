@@ -47,9 +47,8 @@ class RegraConsistenciaTile extends StatelessWidget {
                   radiusStyle: false,
                   onToggle: (index) {
                     print('switched to: $index');
-                    regra.ativoInativoEnum =
-                        AtivoInativoEnum.values.elementAt(index!);
-                    store.updateStatus(regra);
+                    store.updateStatus(
+                        regra, AtivoInativoEnum.values.elementAt(index!));
                   },
                 ),
               ),

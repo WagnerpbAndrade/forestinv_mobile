@@ -76,6 +76,7 @@ abstract class _CadastrarMedicaoStoreBase with Store {
       parcelaId: parcelaId,
       nomeResponsavel: nomeResponsavel,
       dataMedicao: selectedDate,
+      anoMedicao: selectedDate!.year,
     );
 
     try {
@@ -97,6 +98,7 @@ abstract class _CadastrarMedicaoStoreBase with Store {
       id: medicao!.id,
       nomeResponsavel: nomeResponsavel,
       dataMedicao: selectedDate,
+      anoMedicao: selectedDate!.year,
     );
 
     try {

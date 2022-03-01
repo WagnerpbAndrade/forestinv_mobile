@@ -9,6 +9,7 @@ class Medicao {
   dynamic id;
   dynamic parcelaId;
   String nomeResponsavel;
+  int? anoMedicao;
   DateTime? dataMedicao;
   DateTime? ultimaAtualizacao;
 
@@ -16,6 +17,7 @@ class Medicao {
       {this.id,
       this.parcelaId,
       required this.nomeResponsavel,
+      this.anoMedicao,
       this.dataMedicao,
       this.ultimaAtualizacao});
 
@@ -23,6 +25,7 @@ class Medicao {
         id: json['id'],
         nomeResponsavel: json['nomeResponsavel'],
         dataMedicao: DateTime.parse(json["dataMedicao"]),
+        anoMedicao: json["anoMedicao"],
         ultimaAtualizacao: json["ultimaAtualizacao"] == null
             ? null
             : DateTime.parse(json["ultimaAtualizacao"]),
@@ -32,6 +35,7 @@ class Medicao {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['parcelaId'] = parcelaId;
     data['nomeResponsavel'] = nomeResponsavel;
+    data['anoMedicao'] = anoMedicao;
     data['dataMedicao'] = dataMedicao;
     data['ultimaAtualizacao'] = ultimaAtualizacao;
     return data;
@@ -40,6 +44,7 @@ class Medicao {
   Map<String, dynamic> updateToMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['nomeResponsavel'] = nomeResponsavel;
+    data['anoMedicao'] = anoMedicao;
     data['dataMedicao'] = dataMedicao;
     data['ultimaAtualizacao'] = ultimaAtualizacao;
     return data;

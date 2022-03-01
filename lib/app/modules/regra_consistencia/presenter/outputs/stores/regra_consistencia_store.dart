@@ -72,8 +72,12 @@ abstract class _RegraConsistenciaStoreBase with Store {
     }
   }
 
-  void updateStatus(final RegraConsistencia regra) {
+  void updateStatus(
+      final RegraConsistencia regra, final AtivoInativoEnum status) {
     final usecase = Modular.get<UpdateRegraUsecase>();
+
+    regra.ativoInativoEnum = status;
+    regra.ultimaAtualizacao = DateTime.now();
 
     usecase.update(regra);
 
