@@ -177,7 +177,7 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                 enabled: !cadastrarParcelaStore.loading,
                                 decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
-                                    hintText: 'Exemplo: 100 m²',
+                                    hintText: 'Exemplo: 10',
                                     isDense: true,
                                     errorText: cadastrarParcelaStore
                                         .numeroTalhaoError),
