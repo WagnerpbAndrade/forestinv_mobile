@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
-import 'package:forestinv_mobile/app/modules/login/presenter/output/controller/login_controller.dart';
+import 'package:forestinv_mobile/app/modules/login/presenter/output/stores/login_store.dart';
 
 class GoogleLoginButton extends StatefulWidget {
   const GoogleLoginButton({Key? key}) : super(key: key);
@@ -13,33 +13,12 @@ class GoogleLoginButton extends StatefulWidget {
 class _GoogleLoginButtonState extends State<GoogleLoginButton> {
   @override
   Widget build(BuildContext context) {
-    final controller = Modular.get<LoginController>();
+    final store = Modular.get<LoginStore>();
     return SizedBox(
       height: 50,
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () async {
-          final response = await controller.loginWithGoogle();
-          if (!response.ok) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  response.message ?? '',
-                  style: const TextStyle(
-                    color: ColorsConst.textColorPrimary,
-                  ),
-                ),
-                backgroundColor: ColorsConst.primary,
-                action: SnackBarAction(
-                  textColor: ColorsConst.textColorPrimary,
-                  label: 'Ok',
-                  onPressed: () {},
-                ),
-                duration: const Duration(milliseconds: 1500),
-              ),
-            );
-          }
-        },
+        onPressed: store.loginWithGoogle,
         style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
