@@ -1,4 +1,12 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/router_const.dart';
+import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
+import 'package:forestinv_mobile/app/modules/login/domain/usecase/login_google_usecase.dart';
+import 'package:forestinv_mobile/app/modules/login/domain/usecase/login_with_email_password_usecase.dart';
+import 'package:forestinv_mobile/app/modules/login/domain/usecase/logout_google_usecase.dart';
+import 'package:forestinv_mobile/app/modules/login/infra/models/user_model.dart';
 import 'package:mobx/mobx.dart';
+import 'package:forestinv_mobile/helper/extensions.dart';
 
 part 'login_store.g.dart';
 
@@ -6,130 +14,73 @@ class LoginStore = _LoginStoreBase with _$LoginStore;
 
 abstract class _LoginStoreBase with Store {
   @observable
-  bool botaoLoading = false;
-
-  @observable
-  String textoErroEmail = "";
-  @observable
-  bool errorEmail = false;
-  @observable
-  String email = "";
-
-  @observable
-  String textoErroSenha = "";
-  @observable
-  bool erroSenha = false;
-  @observable
-  String senha = "";
-
-  @observable
-  String nome = "";
-  @observable
-  bool erroNome = false;
-  @observable
-  String textoErroNome = "";
-
-  @observable
-  String confirmacaoSenha = "";
-  @observable
-  bool erroConfirmacaoSenha = false;
-  @observable
-  String textoErroConfirmacaoSenha = "";
-
-  @observable
-  bool temErroFirebase = false;
-  @observable
-  String textoErroFirebase = "";
+  String? email;
 
   @action
-  bool validarNome() {
-    if (nome.length < 4) {
-      textoErroNome = "Nome pequeno";
-      return false;
+  void setEmail(String value) => email = value;
+
+  @computed
+  bool get emailValid => email != null && email!.isEmailValid();
+  String? get emailError =>
+      email == null || emailValid ? null : 'E-mail inválido';
+
+  @observable
+  String? password;
+
+  @action
+  void setPassword(String value) => password = value;
+
+  @computed
+  bool get passwordValid => password != null && password!.length >= 4;
+  String? get passwordError =>
+      password == null || passwordValid ? null : 'Senha inválida';
+
+  @computed
+  Function? get loginOnPressed =>
+      emailValid && passwordValid && !loading ? _login : null;
+
+  @observable
+  bool loading = false;
+
+  @observable
+  String? error;
+
+  @action
+  Future<void> _login() async {
+    loading = true;
+
+    final usecase = Modular.get<LoginWithEmailPasswordUsecase>();
+
+    final apiResponse =
+        await usecase.loginWithEmailAndPassword(email!, password!);
+    if (apiResponse.ok) {
+      final UserModelFirebase user = apiResponse.result;
+      final auth = Modular.get<AuthStore>();
+      auth.setUser(user);
+      Modular.to.pushReplacementNamed(RouterConst.PROJECT_ROUTER);
+    } else {
+      error = apiResponse.message;
     }
-    textoErroNome = "";
-    return true;
+
+    loading = false;
   }
 
-  @action
-  bool validarEmail() {
-    temErroFirebase = false;
-    textoErroFirebase = "";
-    errorEmail = true;
-    if (!email.contains("@") || !email.contains(".com") || email.length <= 3) {
-      textoErroEmail = "Usuário/senha inválido(a)";
-      return false;
+  Future<void> loginWithGoogle() async {
+    final usecase = Modular.get<LoginGoogleUsecase>();
+    final apiResponse = await usecase.loginGoogleSignIn();
+    if (apiResponse.ok) {
+      print(apiResponse.result);
+      Modular.to.pushReplacementNamed(RouterConst.PROJECT_ROUTER);
+    } else {
+      error = apiResponse.message;
     }
-    errorEmail = false;
-    textoErroEmail = "";
-    return true;
   }
 
-  @action
-  bool validarSenha() {
-    erroSenha = true;
-    if (senha.length < 6) {
-      textoErroSenha = "Usuário/senha inválido(a)";
-      return false;
-    }
-    if (senha.isEmpty) {
-      textoErroSenha = "Informe uma senha";
-      return false;
-    }
-    erroSenha = false;
-    textoErroSenha = "";
-    return true;
+  void goToRecoveryPasswordPage() {
+    Modular.to.pushNamed(RouterConst.RECOVERY_PASSWORD_ROUTER);
   }
 
-  @action
-  void validarSenhaComCampoConfirmacao() {
-    validarSenha();
-    validarConfirmacaoSenha();
-  }
-
-  @action
-  bool validarConfirmacaoSenha() {
-    erroConfirmacaoSenha = true;
-    if (senha != confirmacaoSenha) {
-      textoErroConfirmacaoSenha = "Senhas não conferem";
-      return false;
-    }
-    if (erroSenha) {
-      textoErroConfirmacaoSenha = "Senha pequena";
-      return false;
-    }
-    if (senha == "") {
-      textoErroConfirmacaoSenha = "Senha vazia";
-      return false;
-    }
-    erroConfirmacaoSenha = false;
-    textoErroConfirmacaoSenha = "";
-    return true;
-  }
-
-  @action
-  void retornoErroFirebaseLogin(String erro) {
-    switch (erro) {
-      case "Usuário não encontrado":
-        textoErroFirebase = "Usuário não encontrado";
-        temErroFirebase = true;
-        break;
-      case "Email ou senha incorretos":
-        textoErroFirebase = "Email ou senha incorretos";
-        temErroFirebase = true;
-        break;
-      case "Email informado já está cadastrado":
-        textoErroFirebase = "Email ou senha incorretos";
-        temErroFirebase = true;
-        break;
-      case "Email inválido":
-        textoErroFirebase = "Email inválido";
-        temErroFirebase = true;
-        break;
-      default:
-        temErroFirebase = false;
-        textoErroEmail = "";
-        break;
-    }
+  void goToSignUpPage() {
+    Modular.to.pushNamed(RouterConst.SIGN_UP_ROUTER);
   }
 }

@@ -12,9 +12,9 @@ import 'package:forestinv_mobile/app/modules/login/presenter/output/controller/r
 import 'package:forestinv_mobile/app/modules/login/presenter/output/controller/sign_up_controller.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/output/stores/recovery_password_store.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/output/stores/sign_up_store.dart';
-import 'package:forestinv_mobile/app/modules/login/presenter/ui/pages/login_page.dart';
+import 'package:forestinv_mobile/app/modules/login/presenter/ui/pages/login_screen.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/ui/pages/recovery_password_page.dart';
-import 'package:forestinv_mobile/app/modules/login/presenter/ui/pages/sign_up_page.dart';
+import 'package:forestinv_mobile/app/modules/login/presenter/ui/pages/signup_page.dart';
 
 import 'presenter/output/stores/login_store.dart';
 
@@ -26,10 +26,6 @@ class LoginModule extends Module {
     Bind((i) => SignUpStore()),
     Bind((i) => LoginController()),
     Bind((i) => SignUpController()),
-    Bind((i) => LoginFirebaseDataSourceImpl()),
-    Bind((i) => LoginRepositoryImpl(i())),
-    Bind((i) => LoginGoogleUsecaseImpl(i())),
-    Bind((i) => LogoutGoogleUsecaseImpl(i())),
     Bind((i) => LoginWithEmailPasswordUsecaseImpl(i())),
     Bind((i) => RecoveryPasswordUsecaseImpl(i())),
     Bind((i) => SignUpUsecaseImpl(i())),
@@ -38,10 +34,9 @@ class LoginModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/login', child: (_, args) => LoginPage()),
+    ChildRoute('/login', child: (_, args) => LoginScreen()),
     ChildRoute(RouterConst.RECOVERY_PASSWORD_ROUTER,
         child: (_, args) => const RecoveryPasswordPage()),
-    ChildRoute(RouterConst.SIGN_UP_ROUTER,
-        child: (_, args) => const SignUpPage()),
+    ChildRoute(RouterConst.SIGN_UP_ROUTER, child: (_, args) => SignupPage()),
   ];
 }

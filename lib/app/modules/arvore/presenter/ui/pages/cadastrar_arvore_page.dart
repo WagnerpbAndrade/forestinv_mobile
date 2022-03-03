@@ -107,15 +107,17 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Observer(builder: (_) {
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
-                              child: ErrorBox(
-                                message: cadastrarArvoreStore.error,
-                              ),
-                            );
-                          }),
+                          Observer(
+                            builder: (_) {
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: ErrorBox(
+                                  message: cadastrarArvoreStore.error,
+                                ),
+                              );
+                            },
+                          ),
                           const FieldTitle(
                             title: 'Número da árvore',
                             subtitle: 'Informe um número identificador',

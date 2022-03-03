@@ -6,6 +6,6 @@ class AuthGuard extends RouteGuard {
 
   @override
   Future<bool> canActivate(String path, ModularRoute router) async {
-    return Modular.get<AuthStore>().isLoggedUser();
+    return Modular.get<AuthStore>().isLoggedIn;
   }
 }

@@ -1,6 +1,8 @@
 import 'package:forestinv_mobile/app/core/interface/api_response.dart';
+import 'package:forestinv_mobile/app/modules/login/domain/entities/sign_up_entity.dart';
 import 'package:forestinv_mobile/app/modules/login/domain/repositories/login_repository.dart';
 import 'package:forestinv_mobile/app/modules/login/infra/data_source/login_firebase_data_source.dart';
+import 'package:forestinv_mobile/app/modules/login/infra/models/user_model.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
   final LoginFirebaseDatasource datasource;
@@ -28,7 +30,12 @@ class LoginRepositoryImpl implements LoginRepository {
   }
 
   @override
-  Future<ApiResponse> createUser(String email, String password) {
-    return datasource.createUser(email, password);
+  Future<ApiResponse> createUser(final SignUpEntity signUp) {
+    return datasource.createUser(signUp);
+  }
+
+  @override
+  Future<UserModelFirebase?> currentUser() async {
+    return datasource.currentUser();
   }
 }

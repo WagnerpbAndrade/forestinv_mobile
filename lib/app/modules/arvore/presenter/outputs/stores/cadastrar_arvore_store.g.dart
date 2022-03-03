@@ -16,6 +16,12 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
           Computed<bool>(() => super.numeroArvoreIsValid,
               name: '_CadastrarArvoreStoreBase.numeroArvoreIsValid'))
       .value;
+  Computed<num>? _$dapComputed;
+
+  @override
+  num get dap => (_$dapComputed ??=
+          Computed<num>(() => super.dap, name: '_CadastrarArvoreStoreBase.dap'))
+      .value;
   Computed<bool>? _$dapValidComputed;
 
   @override
@@ -23,6 +29,12 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
       (_$dapValidComputed ??= Computed<bool>(() => super.dapValid,
               name: '_CadastrarArvoreStoreBase.dapValid'))
           .value;
+  Computed<num>? _$alturaComputed;
+
+  @override
+  num get altura => (_$alturaComputed ??= Computed<num>(() => super.altura,
+          name: '_CadastrarArvoreStoreBase.altura'))
+      .value;
   Computed<bool>? _$estadoArvoreValidComputed;
 
   @override
@@ -252,6 +264,21 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
     });
   }
 
+  final _$isDapValidAtom = Atom(name: '_CadastrarArvoreStoreBase.isDapValid');
+
+  @override
+  bool get isDapValid {
+    _$isDapValidAtom.reportRead();
+    return super.isDapValid;
+  }
+
+  @override
+  set isDapValid(bool value) {
+    _$isDapValidAtom.reportWrite(value, super.isDapValid, () {
+      super.isDapValid = value;
+    });
+  }
+
   final _$_cadastrarAsyncAction =
       AsyncAction('_CadastrarArvoreStoreBase._cadastrar');
 
@@ -359,6 +386,17 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   @override
+  void setIsDapValid(bool value) {
+    final _$actionInfo = _$_CadastrarArvoreStoreBaseActionController
+        .startAction(name: '_CadastrarArvoreStoreBase.setIsDapValid');
+    try {
+      return super.setIsDapValid(value);
+    } finally {
+      _$_CadastrarArvoreStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 selectedDate: ${selectedDate},
@@ -374,8 +412,11 @@ loading: ${loading},
 error: ${error},
 savedArvore: ${savedArvore},
 updatedArvore: ${updatedArvore},
+isDapValid: ${isDapValid},
 numeroArvoreIsValid: ${numeroArvoreIsValid},
+dap: ${dap},
 dapValid: ${dapValid},
+altura: ${altura},
 estadoArvoreValid: ${estadoArvoreValid},
 isFormValid: ${isFormValid},
 cadastrarOnPressed: ${cadastrarOnPressed},

@@ -48,7 +48,7 @@ class ProjectFirestoreDatasourceImpl implements ProjetoDatasource {
   @override
   Future<List<Project>> getAllByUser(String uuid) async {
     final List<Project> list = [];
-    final userUuid = _authStore.getUser().uid;
+    final userUuid = _authStore.user!.uid;
     final projectsRef = _instance
         .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
         .where('uuid', isEqualTo: userUuid);

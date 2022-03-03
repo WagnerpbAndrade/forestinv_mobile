@@ -101,7 +101,7 @@ abstract class _CadastrarProjetoStoreBase with Store {
     final authStore = Modular.get<AuthStore>();
 
     final projeto = Project(
-      uuid: authStore.getUser().uid,
+      uuid: authStore.user!.uid,
       nome: nome,
       area: area,
       visibilidadeProjetoEnum: visibilidade!.description,
@@ -125,7 +125,7 @@ abstract class _CadastrarProjetoStoreBase with Store {
 
     final projetoUpdate = Project(
       id: projeto!.id,
-      uuid: authStore.getUser().uid,
+      uuid: authStore.user!.uid,
       nome: nome,
       area: area,
       visibilidadeProjetoEnum: visibilidade!.description,

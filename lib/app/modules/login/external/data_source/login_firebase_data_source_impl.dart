@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/interface/api_response.dart';
+import 'package:forestinv_mobile/app/modules/login/domain/entities/sign_up_entity.dart';
 import 'package:forestinv_mobile/app/modules/login/infra/data_source/login_firebase_data_source.dart';
 import 'package:forestinv_mobile/app/modules/login/infra/models/user_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -87,19 +88,25 @@ class LoginFirebaseDataSourceImpl implements LoginFirebaseDatasource {
   }
 
   @override
-  Future<ApiResponse> createUser(String email, String password) async {
+  Future<ApiResponse> createUser(final SignUpEntity signUp) async {
     try {
-      final UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      final UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(
+        email: signUp.email,
+        password: signUp.password,
+      )
+          .then((result) {
+        result.user!.updateDisplayName(signUp.name);
+        return result;
+      });
+
+      await userCredential.user!.updateDisplayName(signUp.name);
 
       final User? user = userCredential.user;
       if (user != null) {
         final UserModelFirebase userModelFirebase = UserModelFirebase(
           email: user.email,
-          nome: '',
+          nome: user.displayName ?? '',
           uid: user.uid,
           photoUrl: '',
         );
@@ -112,5 +119,17 @@ class LoginFirebaseDataSourceImpl implements LoginFirebaseDatasource {
       return ApiResponse.error(
           message: 'Não foi possível criar sua conta. Tente novamente!');
     }
+  }
+
+  @override
+  Future<UserModelFirebase?> currentUser() async {
+    final user = _auth.currentUser;
+    if (user != null) {
+      final UserModelFirebase userModelFirebase =
+          UserModelFirebase.fromJson(user);
+
+      return userModelFirebase;
+    }
+    return null;
   }
 }

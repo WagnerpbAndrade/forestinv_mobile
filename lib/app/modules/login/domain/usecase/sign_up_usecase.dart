@@ -1,8 +1,9 @@
 import 'package:forestinv_mobile/app/core/interface/api_response.dart';
+import 'package:forestinv_mobile/app/modules/login/domain/entities/sign_up_entity.dart';
 import 'package:forestinv_mobile/app/modules/login/domain/repositories/login_repository.dart';
 
 abstract class SignUpUsecase {
-  Future<ApiResponse> createUser(final String email, final String password);
+  Future<ApiResponse> createUser(final SignUpEntity signUp);
 }
 
 class SignUpUsecaseImpl implements SignUpUsecase {
@@ -11,7 +12,7 @@ class SignUpUsecaseImpl implements SignUpUsecase {
   SignUpUsecaseImpl(this.repository);
 
   @override
-  Future<ApiResponse> createUser(String email, String password) {
-    return repository.createUser(email, password);
+  Future<ApiResponse> createUser(final SignUpEntity signUp) {
+    return repository.createUser(signUp);
   }
 }

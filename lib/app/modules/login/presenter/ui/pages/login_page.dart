@@ -37,7 +37,7 @@ class LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   const LogoLogin(),
-                  FormLogin(),
+                  //FormLogin(),
                   const GoogleLoginButton(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.2,

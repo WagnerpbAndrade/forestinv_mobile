@@ -14,7 +14,7 @@ class RegraConsistenciaController {
   Future<List<RegraConsistencia>> getAllRegrasByUser() {
     final usecase = Modular.get<GetAllRegrasByUserUsecase>();
     final auth = Modular.get<AuthStore>();
-    final uuid = auth.getUser().uid;
+    final uuid = auth.user!.uid;
 
     return usecase.getAllByUser(uuid);
   }

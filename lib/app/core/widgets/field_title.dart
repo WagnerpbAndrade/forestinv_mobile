@@ -9,7 +9,10 @@ class FieldTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 3, bottom: 4),
+      padding: const EdgeInsets.only(
+        left: 3,
+        bottom: 4,
+      ),
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.end,
         children: [
@@ -20,6 +23,9 @@ class FieldTitle extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.w700,
             ),
+          ),
+          const SizedBox(
+            width: 5,
           ),
           Text(
             '$subtitle',

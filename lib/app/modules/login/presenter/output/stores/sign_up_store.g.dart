@@ -9,188 +9,232 @@ part of 'sign_up_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SignUpStore on _SignUpStoreBase, Store {
-  final _$textoErroEmailAtom = Atom(name: '_SignUpStoreBase.textoErroEmail');
+  Computed<bool>? _$nameValidComputed;
 
   @override
-  String get textoErroEmail {
-    _$textoErroEmailAtom.reportRead();
-    return super.textoErroEmail;
+  bool get nameValid =>
+      (_$nameValidComputed ??= Computed<bool>(() => super.nameValid,
+              name: '_SignUpStoreBase.nameValid'))
+          .value;
+  Computed<bool>? _$emailValidComputed;
+
+  @override
+  bool get emailValid =>
+      (_$emailValidComputed ??= Computed<bool>(() => super.emailValid,
+              name: '_SignUpStoreBase.emailValid'))
+          .value;
+  Computed<bool>? _$phoneValidComputed;
+
+  @override
+  bool get phoneValid =>
+      (_$phoneValidComputed ??= Computed<bool>(() => super.phoneValid,
+              name: '_SignUpStoreBase.phoneValid'))
+          .value;
+  Computed<bool>? _$pass1ValidComputed;
+
+  @override
+  bool get pass1Valid =>
+      (_$pass1ValidComputed ??= Computed<bool>(() => super.pass1Valid,
+              name: '_SignUpStoreBase.pass1Valid'))
+          .value;
+  Computed<bool>? _$pass2ValidComputed;
+
+  @override
+  bool get pass2Valid =>
+      (_$pass2ValidComputed ??= Computed<bool>(() => super.pass2Valid,
+              name: '_SignUpStoreBase.pass2Valid'))
+          .value;
+  Computed<bool>? _$isFormValidComputed;
+
+  @override
+  bool get isFormValid =>
+      (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid,
+              name: '_SignUpStoreBase.isFormValid'))
+          .value;
+  Computed<Function?>? _$signUpPressedComputed;
+
+  @override
+  Function? get signUpPressed => (_$signUpPressedComputed ??=
+          Computed<Function?>(() => super.signUpPressed,
+              name: '_SignUpStoreBase.signUpPressed'))
+      .value;
+
+  final _$nameAtom = Atom(name: '_SignUpStoreBase.name');
+
+  @override
+  String? get name {
+    _$nameAtom.reportRead();
+    return super.name;
   }
 
   @override
-  set textoErroEmail(String value) {
-    _$textoErroEmailAtom.reportWrite(value, super.textoErroEmail, () {
-      super.textoErroEmail = value;
-    });
-  }
-
-  final _$errorEmailAtom = Atom(name: '_SignUpStoreBase.errorEmail');
-
-  @override
-  bool get errorEmail {
-    _$errorEmailAtom.reportRead();
-    return super.errorEmail;
-  }
-
-  @override
-  set errorEmail(bool value) {
-    _$errorEmailAtom.reportWrite(value, super.errorEmail, () {
-      super.errorEmail = value;
+  set name(String? value) {
+    _$nameAtom.reportWrite(value, super.name, () {
+      super.name = value;
     });
   }
 
   final _$emailAtom = Atom(name: '_SignUpStoreBase.email');
 
   @override
-  String get email {
+  String? get email {
     _$emailAtom.reportRead();
     return super.email;
   }
 
   @override
-  set email(String value) {
+  set email(String? value) {
     _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
     });
   }
 
-  final _$textoErroSenhaAtom = Atom(name: '_SignUpStoreBase.textoErroSenha');
+  final _$phoneAtom = Atom(name: '_SignUpStoreBase.phone');
 
   @override
-  String get textoErroSenha {
-    _$textoErroSenhaAtom.reportRead();
-    return super.textoErroSenha;
+  String? get phone {
+    _$phoneAtom.reportRead();
+    return super.phone;
   }
 
   @override
-  set textoErroSenha(String value) {
-    _$textoErroSenhaAtom.reportWrite(value, super.textoErroSenha, () {
-      super.textoErroSenha = value;
+  set phone(String? value) {
+    _$phoneAtom.reportWrite(value, super.phone, () {
+      super.phone = value;
     });
   }
 
-  final _$erroSenhaAtom = Atom(name: '_SignUpStoreBase.erroSenha');
+  final _$pass1Atom = Atom(name: '_SignUpStoreBase.pass1');
 
   @override
-  bool get erroSenha {
-    _$erroSenhaAtom.reportRead();
-    return super.erroSenha;
+  String? get pass1 {
+    _$pass1Atom.reportRead();
+    return super.pass1;
   }
 
   @override
-  set erroSenha(bool value) {
-    _$erroSenhaAtom.reportWrite(value, super.erroSenha, () {
-      super.erroSenha = value;
+  set pass1(String? value) {
+    _$pass1Atom.reportWrite(value, super.pass1, () {
+      super.pass1 = value;
     });
   }
 
-  final _$senhaAtom = Atom(name: '_SignUpStoreBase.senha');
+  final _$pass2Atom = Atom(name: '_SignUpStoreBase.pass2');
 
   @override
-  String get senha {
-    _$senhaAtom.reportRead();
-    return super.senha;
+  String? get pass2 {
+    _$pass2Atom.reportRead();
+    return super.pass2;
   }
 
   @override
-  set senha(String value) {
-    _$senhaAtom.reportWrite(value, super.senha, () {
-      super.senha = value;
+  set pass2(String? value) {
+    _$pass2Atom.reportWrite(value, super.pass2, () {
+      super.pass2 = value;
     });
   }
 
-  final _$confirmacaoSenhaAtom =
-      Atom(name: '_SignUpStoreBase.confirmacaoSenha');
+  final _$loadingAtom = Atom(name: '_SignUpStoreBase.loading');
 
   @override
-  String get confirmacaoSenha {
-    _$confirmacaoSenhaAtom.reportRead();
-    return super.confirmacaoSenha;
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
   }
 
   @override
-  set confirmacaoSenha(String value) {
-    _$confirmacaoSenhaAtom.reportWrite(value, super.confirmacaoSenha, () {
-      super.confirmacaoSenha = value;
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
     });
   }
 
-  final _$erroConfirmacaoSenhaAtom =
-      Atom(name: '_SignUpStoreBase.erroConfirmacaoSenha');
+  final _$errorAtom = Atom(name: '_SignUpStoreBase.error');
 
   @override
-  bool get erroConfirmacaoSenha {
-    _$erroConfirmacaoSenhaAtom.reportRead();
-    return super.erroConfirmacaoSenha;
+  String? get error {
+    _$errorAtom.reportRead();
+    return super.error;
   }
 
   @override
-  set erroConfirmacaoSenha(bool value) {
-    _$erroConfirmacaoSenhaAtom.reportWrite(value, super.erroConfirmacaoSenha,
-        () {
-      super.erroConfirmacaoSenha = value;
+  set error(String? value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
     });
   }
 
-  final _$textoErroConfirmacaoSenhaAtom =
-      Atom(name: '_SignUpStoreBase.textoErroConfirmacaoSenha');
+  final _$_signUpAsyncAction = AsyncAction('_SignUpStoreBase._signUp');
 
   @override
-  String get textoErroConfirmacaoSenha {
-    _$textoErroConfirmacaoSenhaAtom.reportRead();
-    return super.textoErroConfirmacaoSenha;
-  }
-
-  @override
-  set textoErroConfirmacaoSenha(String value) {
-    _$textoErroConfirmacaoSenhaAtom
-        .reportWrite(value, super.textoErroConfirmacaoSenha, () {
-      super.textoErroConfirmacaoSenha = value;
-    });
+  Future<void> _signUp() {
+    return _$_signUpAsyncAction.run(() => super._signUp());
   }
 
   final _$_SignUpStoreBaseActionController =
       ActionController(name: '_SignUpStoreBase');
 
   @override
-  bool validarEmail() {
+  void setName(String value) {
     final _$actionInfo = _$_SignUpStoreBaseActionController.startAction(
-        name: '_SignUpStoreBase.validarEmail');
+        name: '_SignUpStoreBase.setName');
     try {
-      return super.validarEmail();
+      return super.setName(value);
     } finally {
       _$_SignUpStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  bool validarSenha() {
+  void setEmail(String value) {
     final _$actionInfo = _$_SignUpStoreBaseActionController.startAction(
-        name: '_SignUpStoreBase.validarSenha');
+        name: '_SignUpStoreBase.setEmail');
     try {
-      return super.validarSenha();
+      return super.setEmail(value);
     } finally {
       _$_SignUpStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void validarSenhaComCampoConfirmacao() {
+  void setPhone(String value) {
     final _$actionInfo = _$_SignUpStoreBaseActionController.startAction(
-        name: '_SignUpStoreBase.validarSenhaComCampoConfirmacao');
+        name: '_SignUpStoreBase.setPhone');
     try {
-      return super.validarSenhaComCampoConfirmacao();
+      return super.setPhone(value);
     } finally {
       _$_SignUpStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  bool validarConfirmacaoSenha() {
+  void setPass1(String value) {
     final _$actionInfo = _$_SignUpStoreBaseActionController.startAction(
-        name: '_SignUpStoreBase.validarConfirmacaoSenha');
+        name: '_SignUpStoreBase.setPass1');
     try {
-      return super.validarConfirmacaoSenha();
+      return super.setPass1(value);
+    } finally {
+      _$_SignUpStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setPass2(String value) {
+    final _$actionInfo = _$_SignUpStoreBaseActionController.startAction(
+        name: '_SignUpStoreBase.setPass2');
+    try {
+      return super.setPass2(value);
+    } finally {
+      _$_SignUpStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setError(String value) {
+    final _$actionInfo = _$_SignUpStoreBaseActionController.startAction(
+        name: '_SignUpStoreBase.setError');
+    try {
+      return super.setError(value);
     } finally {
       _$_SignUpStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -199,15 +243,20 @@ mixin _$SignUpStore on _SignUpStoreBase, Store {
   @override
   String toString() {
     return '''
-textoErroEmail: ${textoErroEmail},
-errorEmail: ${errorEmail},
+name: ${name},
 email: ${email},
-textoErroSenha: ${textoErroSenha},
-erroSenha: ${erroSenha},
-senha: ${senha},
-confirmacaoSenha: ${confirmacaoSenha},
-erroConfirmacaoSenha: ${erroConfirmacaoSenha},
-textoErroConfirmacaoSenha: ${textoErroConfirmacaoSenha}
+phone: ${phone},
+pass1: ${pass1},
+pass2: ${pass2},
+loading: ${loading},
+error: ${error},
+nameValid: ${nameValid},
+emailValid: ${emailValid},
+phoneValid: ${phoneValid},
+pass1Valid: ${pass1Valid},
+pass2Valid: ${pass2Valid},
+isFormValid: ${isFormValid},
+signUpPressed: ${signUpPressed}
     ''';
   }
 }

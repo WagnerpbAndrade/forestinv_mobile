@@ -54,9 +54,13 @@ abstract class _RegraConsistenciaStoreBase with Store {
     final usecase = Modular.get<GetAllRegrasByUserUsecase>();
     final auth = Modular.get<AuthStore>();
 
-    final list = await usecase.getAllByUser(auth.getUser().uid);
+    if (auth.isLoggedIn) {
+      final list = await usecase.getAllByUser(
+        auth.user!.uid,
+      );
 
-    addNewRegras(list);
+      addNewRegras(list);
+    }
   }
 
   void refresh() => _fetchRegras();

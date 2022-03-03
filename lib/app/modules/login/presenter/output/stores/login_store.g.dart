@@ -9,300 +9,115 @@ part of 'login_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$LoginStore on _LoginStoreBase, Store {
-  final _$botaoLoadingAtom = Atom(name: '_LoginStoreBase.botaoLoading');
+  Computed<bool>? _$emailValidComputed;
 
   @override
-  bool get botaoLoading {
-    _$botaoLoadingAtom.reportRead();
-    return super.botaoLoading;
-  }
+  bool get emailValid =>
+      (_$emailValidComputed ??= Computed<bool>(() => super.emailValid,
+              name: '_LoginStoreBase.emailValid'))
+          .value;
+  Computed<bool>? _$passwordValidComputed;
 
   @override
-  set botaoLoading(bool value) {
-    _$botaoLoadingAtom.reportWrite(value, super.botaoLoading, () {
-      super.botaoLoading = value;
-    });
-  }
-
-  final _$textoErroEmailAtom = Atom(name: '_LoginStoreBase.textoErroEmail');
+  bool get passwordValid =>
+      (_$passwordValidComputed ??= Computed<bool>(() => super.passwordValid,
+              name: '_LoginStoreBase.passwordValid'))
+          .value;
+  Computed<Function?>? _$loginOnPressedComputed;
 
   @override
-  String get textoErroEmail {
-    _$textoErroEmailAtom.reportRead();
-    return super.textoErroEmail;
-  }
-
-  @override
-  set textoErroEmail(String value) {
-    _$textoErroEmailAtom.reportWrite(value, super.textoErroEmail, () {
-      super.textoErroEmail = value;
-    });
-  }
-
-  final _$errorEmailAtom = Atom(name: '_LoginStoreBase.errorEmail');
-
-  @override
-  bool get errorEmail {
-    _$errorEmailAtom.reportRead();
-    return super.errorEmail;
-  }
-
-  @override
-  set errorEmail(bool value) {
-    _$errorEmailAtom.reportWrite(value, super.errorEmail, () {
-      super.errorEmail = value;
-    });
-  }
+  Function? get loginOnPressed => (_$loginOnPressedComputed ??=
+          Computed<Function?>(() => super.loginOnPressed,
+              name: '_LoginStoreBase.loginOnPressed'))
+      .value;
 
   final _$emailAtom = Atom(name: '_LoginStoreBase.email');
 
   @override
-  String get email {
+  String? get email {
     _$emailAtom.reportRead();
     return super.email;
   }
 
   @override
-  set email(String value) {
+  set email(String? value) {
     _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
     });
   }
 
-  final _$textoErroSenhaAtom = Atom(name: '_LoginStoreBase.textoErroSenha');
+  final _$passwordAtom = Atom(name: '_LoginStoreBase.password');
 
   @override
-  String get textoErroSenha {
-    _$textoErroSenhaAtom.reportRead();
-    return super.textoErroSenha;
+  String? get password {
+    _$passwordAtom.reportRead();
+    return super.password;
   }
 
   @override
-  set textoErroSenha(String value) {
-    _$textoErroSenhaAtom.reportWrite(value, super.textoErroSenha, () {
-      super.textoErroSenha = value;
+  set password(String? value) {
+    _$passwordAtom.reportWrite(value, super.password, () {
+      super.password = value;
     });
   }
 
-  final _$erroSenhaAtom = Atom(name: '_LoginStoreBase.erroSenha');
+  final _$loadingAtom = Atom(name: '_LoginStoreBase.loading');
 
   @override
-  bool get erroSenha {
-    _$erroSenhaAtom.reportRead();
-    return super.erroSenha;
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
   }
 
   @override
-  set erroSenha(bool value) {
-    _$erroSenhaAtom.reportWrite(value, super.erroSenha, () {
-      super.erroSenha = value;
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
     });
   }
 
-  final _$senhaAtom = Atom(name: '_LoginStoreBase.senha');
+  final _$errorAtom = Atom(name: '_LoginStoreBase.error');
 
   @override
-  String get senha {
-    _$senhaAtom.reportRead();
-    return super.senha;
+  String? get error {
+    _$errorAtom.reportRead();
+    return super.error;
   }
 
   @override
-  set senha(String value) {
-    _$senhaAtom.reportWrite(value, super.senha, () {
-      super.senha = value;
+  set error(String? value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
     });
   }
 
-  final _$nomeAtom = Atom(name: '_LoginStoreBase.nome');
+  final _$_loginAsyncAction = AsyncAction('_LoginStoreBase._login');
 
   @override
-  String get nome {
-    _$nomeAtom.reportRead();
-    return super.nome;
-  }
-
-  @override
-  set nome(String value) {
-    _$nomeAtom.reportWrite(value, super.nome, () {
-      super.nome = value;
-    });
-  }
-
-  final _$erroNomeAtom = Atom(name: '_LoginStoreBase.erroNome');
-
-  @override
-  bool get erroNome {
-    _$erroNomeAtom.reportRead();
-    return super.erroNome;
-  }
-
-  @override
-  set erroNome(bool value) {
-    _$erroNomeAtom.reportWrite(value, super.erroNome, () {
-      super.erroNome = value;
-    });
-  }
-
-  final _$textoErroNomeAtom = Atom(name: '_LoginStoreBase.textoErroNome');
-
-  @override
-  String get textoErroNome {
-    _$textoErroNomeAtom.reportRead();
-    return super.textoErroNome;
-  }
-
-  @override
-  set textoErroNome(String value) {
-    _$textoErroNomeAtom.reportWrite(value, super.textoErroNome, () {
-      super.textoErroNome = value;
-    });
-  }
-
-  final _$confirmacaoSenhaAtom = Atom(name: '_LoginStoreBase.confirmacaoSenha');
-
-  @override
-  String get confirmacaoSenha {
-    _$confirmacaoSenhaAtom.reportRead();
-    return super.confirmacaoSenha;
-  }
-
-  @override
-  set confirmacaoSenha(String value) {
-    _$confirmacaoSenhaAtom.reportWrite(value, super.confirmacaoSenha, () {
-      super.confirmacaoSenha = value;
-    });
-  }
-
-  final _$erroConfirmacaoSenhaAtom =
-      Atom(name: '_LoginStoreBase.erroConfirmacaoSenha');
-
-  @override
-  bool get erroConfirmacaoSenha {
-    _$erroConfirmacaoSenhaAtom.reportRead();
-    return super.erroConfirmacaoSenha;
-  }
-
-  @override
-  set erroConfirmacaoSenha(bool value) {
-    _$erroConfirmacaoSenhaAtom.reportWrite(value, super.erroConfirmacaoSenha,
-        () {
-      super.erroConfirmacaoSenha = value;
-    });
-  }
-
-  final _$textoErroConfirmacaoSenhaAtom =
-      Atom(name: '_LoginStoreBase.textoErroConfirmacaoSenha');
-
-  @override
-  String get textoErroConfirmacaoSenha {
-    _$textoErroConfirmacaoSenhaAtom.reportRead();
-    return super.textoErroConfirmacaoSenha;
-  }
-
-  @override
-  set textoErroConfirmacaoSenha(String value) {
-    _$textoErroConfirmacaoSenhaAtom
-        .reportWrite(value, super.textoErroConfirmacaoSenha, () {
-      super.textoErroConfirmacaoSenha = value;
-    });
-  }
-
-  final _$temErroFirebaseAtom = Atom(name: '_LoginStoreBase.temErroFirebase');
-
-  @override
-  bool get temErroFirebase {
-    _$temErroFirebaseAtom.reportRead();
-    return super.temErroFirebase;
-  }
-
-  @override
-  set temErroFirebase(bool value) {
-    _$temErroFirebaseAtom.reportWrite(value, super.temErroFirebase, () {
-      super.temErroFirebase = value;
-    });
-  }
-
-  final _$textoErroFirebaseAtom =
-      Atom(name: '_LoginStoreBase.textoErroFirebase');
-
-  @override
-  String get textoErroFirebase {
-    _$textoErroFirebaseAtom.reportRead();
-    return super.textoErroFirebase;
-  }
-
-  @override
-  set textoErroFirebase(String value) {
-    _$textoErroFirebaseAtom.reportWrite(value, super.textoErroFirebase, () {
-      super.textoErroFirebase = value;
-    });
+  Future<void> _login() {
+    return _$_loginAsyncAction.run(() => super._login());
   }
 
   final _$_LoginStoreBaseActionController =
       ActionController(name: '_LoginStoreBase');
 
   @override
-  bool validarNome() {
+  void setEmail(String value) {
     final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.validarNome');
+        name: '_LoginStoreBase.setEmail');
     try {
-      return super.validarNome();
+      return super.setEmail(value);
     } finally {
       _$_LoginStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  bool validarEmail() {
+  void setPassword(String value) {
     final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.validarEmail');
+        name: '_LoginStoreBase.setPassword');
     try {
-      return super.validarEmail();
-    } finally {
-      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  bool validarSenha() {
-    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.validarSenha');
-    try {
-      return super.validarSenha();
-    } finally {
-      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void validarSenhaComCampoConfirmacao() {
-    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.validarSenhaComCampoConfirmacao');
-    try {
-      return super.validarSenhaComCampoConfirmacao();
-    } finally {
-      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  bool validarConfirmacaoSenha() {
-    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.validarConfirmacaoSenha');
-    try {
-      return super.validarConfirmacaoSenha();
-    } finally {
-      _$_LoginStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void retornoErroFirebaseLogin(String erro) {
-    final _$actionInfo = _$_LoginStoreBaseActionController.startAction(
-        name: '_LoginStoreBase.retornoErroFirebaseLogin');
-    try {
-      return super.retornoErroFirebaseLogin(erro);
+      return super.setPassword(value);
     } finally {
       _$_LoginStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -311,21 +126,13 @@ mixin _$LoginStore on _LoginStoreBase, Store {
   @override
   String toString() {
     return '''
-botaoLoading: ${botaoLoading},
-textoErroEmail: ${textoErroEmail},
-errorEmail: ${errorEmail},
 email: ${email},
-textoErroSenha: ${textoErroSenha},
-erroSenha: ${erroSenha},
-senha: ${senha},
-nome: ${nome},
-erroNome: ${erroNome},
-textoErroNome: ${textoErroNome},
-confirmacaoSenha: ${confirmacaoSenha},
-erroConfirmacaoSenha: ${erroConfirmacaoSenha},
-textoErroConfirmacaoSenha: ${textoErroConfirmacaoSenha},
-temErroFirebase: ${temErroFirebase},
-textoErroFirebase: ${textoErroFirebase}
+password: ${password},
+loading: ${loading},
+error: ${error},
+emailValid: ${emailValid},
+passwordValid: ${passwordValid},
+loginOnPressed: ${loginOnPressed}
     ''';
   }
 }

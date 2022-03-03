@@ -4,12 +4,10 @@ import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 
 class CustomDrawerHeader extends StatelessWidget {
-  const CustomDrawerHeader({Key? key}) : super(key: key);
+  final authStore = Modular.get<AuthStore>();
 
   @override
   Widget build(BuildContext context) {
-    final authStore = Modular.get<AuthStore>();
-    final user = authStore.getUser();
     return Container(
       color: ColorsConst.primary,
       height: 120,
@@ -23,7 +21,7 @@ class CustomDrawerHeader extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              user.nome ?? '',
+              authStore.isLoggedIn ? authStore.user!.nome : '',
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -32,7 +30,7 @@ class CustomDrawerHeader extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              user.email,
+              authStore.isLoggedIn ? authStore.user!.email : '',
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,

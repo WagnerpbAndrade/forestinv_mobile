@@ -283,7 +283,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
     final authStore = Modular.get<AuthStore>();
 
     final responseRegra = await regraDatasource.regraEstaAtiva(
-        uuid: authStore.getUser().uid,
+        uuid: authStore.user!.uid,
         validacao: ValidacaoConsistenciaEnum.VMEDICAODAPANTERIOR);
 
     if (responseRegra.ok && responseRegra.result == true) {
@@ -315,7 +315,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
     final authStore = Modular.get<AuthStore>();
 
     final responseRegra = await regraDatasource.regraEstaAtiva(
-        uuid: authStore.getUser().uid,
+        uuid: authStore.user!.uid,
         validacao: ValidacaoConsistenciaEnum.VESTINVALIDO);
 
     if (responseRegra.ok && responseRegra.result == true) {

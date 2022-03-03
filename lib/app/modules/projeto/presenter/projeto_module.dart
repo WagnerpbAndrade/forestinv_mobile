@@ -35,7 +35,7 @@ class ProjetoModule extends Module {
     Bind((i) => UpdateProjectUsecaseImpl(i())),
     Bind((i) => GetAllProjectByUserUsecaseImpl(i())),
     Bind((i) => GetByNameProjectAndUserUsecaseImpl(i())),
-    Bind((i) => AuthStore(i())),
+    Bind((i) => AuthStore()),
     Bind((i) => ProjectFirestoreDatasourceImpl(i(), i())),
     Bind((i) => ProjetoVisibilidadeFirebaseDatasource(i())),
   ];

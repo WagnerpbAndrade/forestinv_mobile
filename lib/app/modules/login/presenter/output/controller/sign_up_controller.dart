@@ -12,19 +12,19 @@ class SignUpController {
       TextEditingController();
 
   Future<ApiResponse> createUserFirebase() async {
-    final usecase = Modular.get<SignUpUsecase>();
-    final email = txtEmailController.text;
-    final password = txtPasswordController.text;
+    // final usecase = Modular.get<SignUpUsecase>();
+    // final email = txtEmailController.text;
+    // final password = txtPasswordController.text;
 
-    final response = await usecase.createUser(email, password);
+    // final response = await usecase.createUser(email, password);
 
-    if (response.ok) {
-      final regraStore = Modular.get<RegraConsistenciaStore>();
-      final UserModelFirebase user = response.result;
-      await regraStore.salveAllRegrasByUser(user.uid);
-      Modular.to.pop();
-      return response;
-    }
-    return response;
+    // if (response.ok) {
+    //   final regraStore = Modular.get<RegraConsistenciaStore>();
+    //   final UserModelFirebase user = response.result;
+    //   await regraStore.salveAllRegrasByUser(user.uid);
+    //   Modular.to.pop();
+    //   return response;
+    // }
+    return ApiResponse.ok();
   }
 }

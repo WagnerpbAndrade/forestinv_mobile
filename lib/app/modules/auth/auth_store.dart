@@ -1,5 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:forestinv_mobile/app/modules/auth/entity/user_logged.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/router_const.dart';
+import 'package:forestinv_mobile/app/modules/login/domain/usecase/current_user_usecase.dart';
+import 'package:forestinv_mobile/app/modules/login/domain/usecase/logout_google_usecase.dart';
+import 'package:forestinv_mobile/app/modules/login/infra/models/user_model.dart';
 import 'package:mobx/mobx.dart';
 
 part 'auth_store.g.dart';
@@ -7,21 +10,29 @@ part 'auth_store.g.dart';
 class AuthStore = _AuthStoreBase with _$AuthStore;
 
 abstract class _AuthStoreBase with Store {
-  final FirebaseAuth firebaseAuth;
-
-  _AuthStoreBase(this.firebaseAuth);
-
-  bool isLoggedUser() {
-    return firebaseAuth.currentUser != null;
+  _AuthStoreBase() {
+    _getCurrentUser();
   }
 
-  UserLogged getUser() {
-    final user = firebaseAuth.currentUser;
-    return UserLogged(
-      nome: user?.displayName,
-      email: user!.email!,
-      uid: user.uid,
-      photoUrl: user.photoURL,
-    );
+  @observable
+  UserModelFirebase? user;
+
+  @action
+  void setUser(UserModelFirebase? value) => user = value;
+
+  @computed
+  bool get isLoggedIn => user != null;
+
+  Future<void> logoutGoogle() async {
+    final usecase = Modular.get<LogoutGoogleUsecase>();
+    await usecase.logout();
+    Modular.to.popAndPushNamed(RouterConst.INITIAL_ROUTER);
+    print('Usuário deslogado');
+  }
+
+  Future<void> _getCurrentUser() async {
+    final usecase = Modular.get<CurrentUserUsecase>();
+    final user = await usecase.currentUser();
+    setUser(user);
   }
 }
