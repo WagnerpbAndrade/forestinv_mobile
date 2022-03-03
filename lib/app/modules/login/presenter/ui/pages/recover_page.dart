@@ -125,7 +125,7 @@ class _RecoverScreenState extends State<RecoverPage> {
                           margin: const EdgeInsets.symmetric(vertical: 12),
                           height: 40,
                           child: ReplaceRaisedButton(
-                            color: Colors.orange,
+                            color: ColorsConst.secondary,
                             textColor: Colors.white,
                             child: recoverStore.loading
                                 ? const CircularProgressIndicator(
