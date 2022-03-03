@@ -5,10 +5,30 @@ import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_elevated_button.dart';
 import 'package:forestinv_mobile/app/core/widgets/error_box.dart';
+import 'package:forestinv_mobile/app/core/widgets/replace_raisedbutton.dart';
+import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/output/stores/login_store.dart';
+import 'package:forestinv_mobile/app/modules/login/presenter/ui/widgets/components/or_divider.dart';
+import 'package:mobx/mobx.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final store = Modular.get<LoginStore>();
+
+  final authStore = Modular.get<AuthStore>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    when((_) => authStore.user != null, () {
+      store.goToHome();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +53,38 @@ class LoginPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  Observer(
+                    builder: (_) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        height: 40,
+                        child: ReplaceRaisedButton(
+                          color: Colors.green[600]!,
+                          textColor: Colors.white,
+                          disabledColor: Colors.blue.withAlpha(120),
+                          child: store.loadingGoogle
+                              ? const CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.white),
+                                )
+                              : const Text(
+                                  'Entrar com Google',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          onPressed: store.googleOnPressed!,
+                        ),
+                      );
+                    },
+                  ),
+                  OrDivider(),
                   Text(
                     'Acessar com e-mail:',
                     textAlign: TextAlign.center,
@@ -97,7 +149,11 @@ class LoginPage extends StatelessWidget {
                               color: ColorsConst.primary,
                             ),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Modular.to.pushNamed(
+                                RouterConst.RECOVERY_PASSWORD_ROUTER,
+                                arguments: store.email);
+                          },
                         )
                       ],
                     ),

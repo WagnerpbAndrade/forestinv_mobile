@@ -8,73 +8,138 @@ part of 'recovery_password_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$RecoveryPasswordStore on _RecoveryPasswordStoreBase, Store {
-  final _$textoErroEmailAtom =
-      Atom(name: '_RecoveryPasswordStoreBase.textoErroEmail');
+mixin _$RecoveryPasswordStore on _RecoveryPasswordStore, Store {
+  Computed<bool>? _$emailValidComputed;
 
   @override
-  String get textoErroEmail {
-    _$textoErroEmailAtom.reportRead();
-    return super.textoErroEmail;
-  }
+  bool get emailValid =>
+      (_$emailValidComputed ??= Computed<bool>(() => super.emailValid,
+              name: '_RecoveryPasswordStore.emailValid'))
+          .value;
+  Computed<Function?>? _$recoverPressedComputed;
 
   @override
-  set textoErroEmail(String value) {
-    _$textoErroEmailAtom.reportWrite(value, super.textoErroEmail, () {
-      super.textoErroEmail = value;
-    });
-  }
+  Function? get recoverPressed => (_$recoverPressedComputed ??=
+          Computed<Function?>(() => super.recoverPressed,
+              name: '_RecoveryPasswordStore.recoverPressed'))
+      .value;
 
-  final _$errorEmailAtom = Atom(name: '_RecoveryPasswordStoreBase.errorEmail');
-
-  @override
-  bool get errorEmail {
-    _$errorEmailAtom.reportRead();
-    return super.errorEmail;
-  }
+  final _$emailAtom = Atom(name: '_RecoveryPasswordStore.email');
 
   @override
-  set errorEmail(bool value) {
-    _$errorEmailAtom.reportWrite(value, super.errorEmail, () {
-      super.errorEmail = value;
-    });
-  }
-
-  final _$emailAtom = Atom(name: '_RecoveryPasswordStoreBase.email');
-
-  @override
-  String get email {
+  String? get email {
     _$emailAtom.reportRead();
     return super.email;
   }
 
   @override
-  set email(String value) {
+  set email(String? value) {
     _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
     });
   }
 
-  final _$_RecoveryPasswordStoreBaseActionController =
-      ActionController(name: '_RecoveryPasswordStoreBase');
+  final _$successAtom = Atom(name: '_RecoveryPasswordStore.success');
 
   @override
-  bool validarEmail() {
-    final _$actionInfo = _$_RecoveryPasswordStoreBaseActionController
-        .startAction(name: '_RecoveryPasswordStoreBase.validarEmail');
+  bool get success {
+    _$successAtom.reportRead();
+    return super.success;
+  }
+
+  @override
+  set success(bool value) {
+    _$successAtom.reportWrite(value, super.success, () {
+      super.success = value;
+    });
+  }
+
+  final _$loadingAtom = Atom(name: '_RecoveryPasswordStore.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  final _$errorAtom = Atom(name: '_RecoveryPasswordStore.error');
+
+  @override
+  String? get error {
+    _$errorAtom.reportRead();
+    return super.error;
+  }
+
+  @override
+  set error(String? value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
+    });
+  }
+
+  final _$_RecoveryPasswordStoreActionController =
+      ActionController(name: '_RecoveryPasswordStore');
+
+  @override
+  void setEmail(String value) {
+    final _$actionInfo = _$_RecoveryPasswordStoreActionController.startAction(
+        name: '_RecoveryPasswordStore.setEmail');
     try {
-      return super.validarEmail();
+      return super.setEmail(value);
     } finally {
-      _$_RecoveryPasswordStoreBaseActionController.endAction(_$actionInfo);
+      _$_RecoveryPasswordStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSuccess(bool value) {
+    final _$actionInfo = _$_RecoveryPasswordStoreActionController.startAction(
+        name: '_RecoveryPasswordStore.setSuccess');
+    try {
+      return super.setSuccess(value);
+    } finally {
+      _$_RecoveryPasswordStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLoading(bool value) {
+    final _$actionInfo = _$_RecoveryPasswordStoreActionController.startAction(
+        name: '_RecoveryPasswordStore.setLoading');
+    try {
+      return super.setLoading(value);
+    } finally {
+      _$_RecoveryPasswordStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setError(String value) {
+    final _$actionInfo = _$_RecoveryPasswordStoreActionController.startAction(
+        name: '_RecoveryPasswordStore.setError');
+    try {
+      return super.setError(value);
+    } finally {
+      _$_RecoveryPasswordStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   String toString() {
     return '''
-textoErroEmail: ${textoErroEmail},
-errorEmail: ${errorEmail},
-email: ${email}
+email: ${email},
+success: ${success},
+loading: ${loading},
+error: ${error},
+emailValid: ${emailValid},
+recoverPressed: ${recoverPressed}
     ''';
   }
 }

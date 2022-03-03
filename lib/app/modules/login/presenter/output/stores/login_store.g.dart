@@ -30,6 +30,13 @@ mixin _$LoginStore on _LoginStoreBase, Store {
           Computed<Function?>(() => super.loginOnPressed,
               name: '_LoginStoreBase.loginOnPressed'))
       .value;
+  Computed<Function?>? _$googleOnPressedComputed;
+
+  @override
+  Function? get googleOnPressed => (_$googleOnPressedComputed ??=
+          Computed<Function?>(() => super.googleOnPressed,
+              name: '_LoginStoreBase.googleOnPressed'))
+      .value;
 
   final _$emailAtom = Atom(name: '_LoginStoreBase.email');
 
@@ -91,6 +98,21 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
+  final _$loadingGoogleAtom = Atom(name: '_LoginStoreBase.loadingGoogle');
+
+  @override
+  bool get loadingGoogle {
+    _$loadingGoogleAtom.reportRead();
+    return super.loadingGoogle;
+  }
+
+  @override
+  set loadingGoogle(bool value) {
+    _$loadingGoogleAtom.reportWrite(value, super.loadingGoogle, () {
+      super.loadingGoogle = value;
+    });
+  }
+
   final _$_loginAsyncAction = AsyncAction('_LoginStoreBase._login');
 
   @override
@@ -130,9 +152,11 @@ email: ${email},
 password: ${password},
 loading: ${loading},
 error: ${error},
+loadingGoogle: ${loadingGoogle},
 emailValid: ${emailValid},
 passwordValid: ${passwordValid},
-loginOnPressed: ${loginOnPressed}
+loginOnPressed: ${loginOnPressed},
+googleOnPressed: ${googleOnPressed}
     ''';
   }
 }

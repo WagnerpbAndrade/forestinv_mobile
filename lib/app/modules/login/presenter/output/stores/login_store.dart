@@ -3,10 +3,9 @@ import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/login/domain/usecase/login_google_usecase.dart';
 import 'package:forestinv_mobile/app/modules/login/domain/usecase/login_with_email_password_usecase.dart';
-import 'package:forestinv_mobile/app/modules/login/domain/usecase/logout_google_usecase.dart';
 import 'package:forestinv_mobile/app/modules/login/infra/models/user_model.dart';
-import 'package:mobx/mobx.dart';
 import 'package:forestinv_mobile/helper/extensions.dart';
+import 'package:mobx/mobx.dart';
 
 part 'login_store.g.dart';
 
@@ -45,6 +44,12 @@ abstract class _LoginStoreBase with Store {
   @observable
   String? error;
 
+  @observable
+  bool loadingGoogle = false;
+
+  @computed
+  Function? get googleOnPressed => !loading ? _google : null;
+
   @action
   Future<void> _login() async {
     loading = true;
@@ -65,7 +70,7 @@ abstract class _LoginStoreBase with Store {
     loading = false;
   }
 
-  Future<void> loginWithGoogle() async {
+  Future<void> _google() async {
     final usecase = Modular.get<LoginGoogleUsecase>();
     final apiResponse = await usecase.loginGoogleSignIn();
     if (apiResponse.ok) {
@@ -82,5 +87,9 @@ abstract class _LoginStoreBase with Store {
 
   void goToSignUpPage() {
     Modular.to.pushNamed(RouterConst.SIGN_UP_ROUTER);
+  }
+
+  void goToHome() {
+    Modular.to.pushReplacementNamed(RouterConst.PROJECT_ROUTER);
   }
 }

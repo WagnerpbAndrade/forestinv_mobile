@@ -82,8 +82,7 @@ class LoginFirebaseDataSourceImpl implements LoginFirebaseDatasource {
     } catch (e) {
       print('LoginFirebaseDataSourceImpl-recoverPassword: $e');
       return ApiResponse.error(
-          message:
-              'Não foi possível enviar o email. Tente novamente mais tarde!');
+          message: 'Não foi possível enviar o email. Tente novamente.');
     }
   }
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ReplaceRaisedButton extends StatelessWidget {
   final Widget child;
-  final Function onPressed;
+  final Function? onPressed;
   final Color textColor;
   final Color color;
   final Color disabledColor;
@@ -26,7 +26,7 @@ class ReplaceRaisedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         child: child,
-        onPressed: () => onPressed(),
+        onPressed: onPressed == null ? null : () => onPressed!(),
         style: ButtonStyle(
             padding: MaterialStateProperty.all<EdgeInsetsGeometry?>(padding),
             foregroundColor: MaterialStateProperty.resolveWith<Color>(
