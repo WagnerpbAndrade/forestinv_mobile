@@ -8,6 +8,7 @@ import 'package:forestinv_mobile/app/core/widgets/error_box.dart';
 import 'package:forestinv_mobile/app/core/widgets/replace_raisedbutton.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/output/stores/login_store.dart';
+import 'package:forestinv_mobile/app/modules/login/presenter/ui/widgets/components/logo_login.dart';
 import 'package:forestinv_mobile/app/modules/login/presenter/ui/widgets/components/or_divider.dart';
 import 'package:mobx/mobx.dart';
 
@@ -34,11 +35,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsConst.primary,
-      appBar: AppBar(
-        title: const Text('Entrar'),
-        centerTitle: true,
-        elevation: 0,
-      ),
       body: Container(
         alignment: Alignment.center,
         child: SingleChildScrollView(
@@ -53,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  const LogoLogin(),
                   Observer(
                     builder: (_) {
                       return Container(

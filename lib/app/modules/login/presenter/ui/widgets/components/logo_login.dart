@@ -9,8 +9,8 @@ class LogoLogin extends StatelessWidget {
     final width = size.width;
     final height = size.height;
     return SizedBox(
-      height: width * 0.5,
-      width: height * 0.5,
+      height: width * 0.4,
+      width: height * 0.4,
       child: Image.asset("assets/images/logo.png"),
     );
   }
