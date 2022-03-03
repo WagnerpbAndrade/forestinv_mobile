@@ -56,6 +56,7 @@ class _RecoverScreenState extends State<RecoverPage> {
     return SafeArea(
       top: false,
       child: Scaffold(
+        backgroundColor: ColorsConst.primary,
         key: scaffoldKey,
         appBar: AppBar(
           elevation: 0,
@@ -107,7 +108,7 @@ class _RecoverScreenState extends State<RecoverPage> {
                           autocorrect: false,
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            hintText: 'Exemplo: joao@gmail.com',
+                            hintText: 'Exemplo: wagner@gmail.com',
                             isDense: true,
                             errorText: recoverStore.emailError,
                           ),

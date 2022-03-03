@@ -30,7 +30,7 @@ abstract class _LoginStoreBase with Store {
   void setPassword(String value) => password = value;
 
   @computed
-  bool get passwordValid => password != null && password!.length >= 4;
+  bool get passwordValid => password != null && password!.length >= 6;
   String? get passwordError =>
       password == null || passwordValid ? null : 'Senha inválida';
 
