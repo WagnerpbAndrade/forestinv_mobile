@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
@@ -9,12 +8,11 @@ import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/cadastra
 import 'package:forestinv_mobile/helper/extensions.dart';
 
 class ProjetoTile extends StatelessWidget {
-  ProjetoTile({required this.projeto, this.onTap});
+  ProjetoTile({required this.projeto, this.onTap, required this.homeStore});
 
   final Project projeto;
   final Function? onTap;
-
-  final store = Modular.get<HomeStore>();
+  final HomeStore homeStore;
 
   final List<MenuChoice> choices = [
     MenuChoice(index: 0, title: 'Editar', iconData: Icons.edit),
@@ -156,7 +154,7 @@ class ProjetoTile extends StatelessWidget {
         builder: (_) => CadastrarProjetoPage(projeto: projeto),
       ),
     );
-    if (success != null && success) store.refresh();
+    if (success != null && success) homeStore.refresh();
   }
 
   void deleteProject(BuildContext context) {
@@ -169,7 +167,7 @@ class ProjetoTile extends StatelessWidget {
               textYesButton: 'Sim',
               actionNo: () => Navigator.of(context).pop(),
               actionYes: () async {
-                store.deleteProject(projeto.id);
+                homeStore.deleteProject(projeto.id);
                 Navigator.of(context).pop();
               },
             ));

@@ -62,7 +62,7 @@ abstract class _LoginStoreBase with Store {
       final UserModelFirebase user = apiResponse.result;
       final auth = Modular.get<AuthStore>();
       auth.setUser(user);
-      Modular.to.pushReplacementNamed(RouterConst.PROJECT_ROUTER);
+      Modular.to.popAndPushNamed(RouterConst.PROJECT_ROUTER);
     } else {
       error = apiResponse.message;
     }
@@ -75,7 +75,7 @@ abstract class _LoginStoreBase with Store {
     final apiResponse = await usecase.loginGoogleSignIn();
     if (apiResponse.ok) {
       print(apiResponse.result);
-      Modular.to.pushReplacementNamed(RouterConst.PROJECT_ROUTER);
+      Modular.to.popAndPushNamed(RouterConst.PROJECT_ROUTER);
     } else {
       error = apiResponse.message;
     }

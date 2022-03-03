@@ -1,7 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/modules/arvore/arvore_module.dart';
-import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/medicao_module.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/parcela_module.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/delete_project_usecase.dart';
@@ -24,7 +23,7 @@ import 'package:forestinv_mobile/app/modules/regra_consistencia/regra_consistenc
 class ProjetoModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind((i) => HomeStore()),
+    Bind.lazySingleton((i) => HomeStore()),
     Bind.lazySingleton((i) => VisibilidadeStore()),
     Bind((i) => CadastrarProjetoStore(null)),
     Bind((i) => ProjectRepositoryImpl(i.get())),
@@ -35,14 +34,14 @@ class ProjetoModule extends Module {
     Bind((i) => UpdateProjectUsecaseImpl(i())),
     Bind((i) => GetAllProjectByUserUsecaseImpl(i())),
     Bind((i) => GetByNameProjectAndUserUsecaseImpl(i())),
-    Bind((i) => AuthStore()),
     Bind((i) => ProjectFirestoreDatasourceImpl(i(), i())),
     Bind((i) => ProjetoVisibilidadeFirebaseDatasource(i())),
   ];
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => const HomePage()),
+    ChildRoute(RouterConst.PROJECT_ROUTER_PAGE,
+        child: (_, args) => const HomePage()),
     ChildRoute(RouterConst.ADD_PROJECT_ROUTER,
         child: (_, args) => CadastrarProjetoPage(projeto: args.data)),
     ModuleRoute(RouterConst.PARCELA_ROUTER, module: ParcelaModule()),

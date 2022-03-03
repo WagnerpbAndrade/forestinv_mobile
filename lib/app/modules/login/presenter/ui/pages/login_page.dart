@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25),
                           ),
-                          onPressed: store.googleOnPressed!,
+                          onPressed: store.googleOnPressed,
                         ),
                       );
                     },

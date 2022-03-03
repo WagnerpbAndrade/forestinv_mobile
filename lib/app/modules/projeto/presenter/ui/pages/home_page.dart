@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_drawer/custom_drawer.dart';
 import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/home_store.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/components/create_projeto_button.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/components/projeto_tile.dart';
 
 class HomePage extends StatefulWidget {
@@ -76,6 +74,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                         itemCount: store.projetoList.length,
                         itemBuilder: (_, index) {
                           return ProjetoTile(
+                            homeStore: store,
                             projeto: store.projetoList[index],
                             onTap: () {
                               store.goToParcelaPage(store.projetoList[index]);

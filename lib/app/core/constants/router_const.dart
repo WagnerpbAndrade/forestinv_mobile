@@ -18,4 +18,6 @@ class RouterConst {
   static String REGRAS_ROUTER = '/regras';
 
   static String ARVORE_ROUTER = '/arvore';
+
+  static String PROJECT_ROUTER_PAGE = '/page';
 }

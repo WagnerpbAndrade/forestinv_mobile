@@ -26,6 +26,7 @@ abstract class _AuthStoreBase with Store {
   Future<void> logoutGoogle() async {
     final usecase = Modular.get<LogoutGoogleUsecase>();
     await usecase.logout();
+    setUser(null);
     Modular.to.popAndPushNamed(RouterConst.INITIAL_ROUTER);
     print('Usuário deslogado');
   }
