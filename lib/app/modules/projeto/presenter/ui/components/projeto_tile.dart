@@ -103,7 +103,7 @@ class ProjetoTile extends StatelessWidget {
                           deleteProject(context);
                           break;
                         case 2:
-                          exportarProject(context);
+                          exportarProject(context, projeto.id);
                           break;
                       }
                     },
@@ -173,7 +173,9 @@ class ProjetoTile extends StatelessWidget {
             ));
   }
 
-  void exportarProject(BuildContext context) {}
+  void exportarProject(BuildContext context, final String projetoId) {
+    homeStore.fetchAllPorraToda(projetoId);
+  }
 }
 
 class MenuChoice {

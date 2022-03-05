@@ -18,8 +18,11 @@ class CadastrarArvoreStore = _CadastrarArvoreStoreBase
 abstract class _CadastrarArvoreStoreBase with Store {
   final List? args;
   Arvore? arvore;
+  String? projetoId;
 
   _CadastrarArvoreStoreBase({this.args}) {
+    projetoId = args?[2];
+    print('ProjetoId: $projetoId');
     if (args?[0] != null) {
       arvore = args?[0];
       numeroArvore = arvore!.numArvore.toString();
@@ -182,6 +185,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
     final arvoreSaved = Arvore(
       medicaoId: medicao.id,
       parcelaId: medicao.parcelaId,
+      projetoId: projetoId,
       numArvore: int.parse(numeroArvore),
       dap: double.parse(dapText),
       alturaTotal: double.parse(alturaText),

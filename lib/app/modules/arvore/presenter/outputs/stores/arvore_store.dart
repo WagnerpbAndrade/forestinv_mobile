@@ -13,8 +13,9 @@ class ArvoreStore = _ArvoreStoreBase with _$ArvoreStore;
 
 abstract class _ArvoreStoreBase with Store {
   final Medicao? medicao;
+  final String? projetoId;
 
-  _ArvoreStoreBase({this.medicao}) {
+  _ArvoreStoreBase({this.medicao, this.projetoId}) {
     autorun((_) async {
       setLoading(true);
       try {
@@ -72,7 +73,7 @@ abstract class _ArvoreStoreBase with Store {
     final success = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => CadastrarArvorePage(
-          args: [null, medicao],
+          args: [null, medicao, projetoId],
         ),
       ),
     );

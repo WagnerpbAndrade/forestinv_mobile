@@ -80,9 +80,9 @@ abstract class _MedicaoStoreBase with Store {
     if (success != null && success) refresh();
   }
 
-  void goToArvorePage(final Medicao medicao) {
+  void goToArvorePage(final Medicao medicao, final String projetoId) {
     Modular.to.pushNamed(
         '${RouterConst.PROJECT_ROUTER}${RouterConst.ARVORE_ROUTER}',
-        arguments: medicao);
+        arguments: [medicao, projetoId]);
   }
 }

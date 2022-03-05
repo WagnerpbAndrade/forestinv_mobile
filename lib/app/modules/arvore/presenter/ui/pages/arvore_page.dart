@@ -3,12 +3,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/arvore_store.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/components/arvore_tile.dart';
-import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 
 class ArvorePage extends StatefulWidget {
-  final Medicao medicao;
+  final List args;
 
-  const ArvorePage(this.medicao);
+  const ArvorePage(this.args);
 
   @override
   ArvorePageState createState() => ArvorePageState();
@@ -19,7 +18,7 @@ class ArvorePageState extends State<ArvorePage> {
   @override
   void initState() {
     super.initState();
-    store = ArvoreStore(medicao: widget.medicao);
+    store = ArvoreStore(medicao: widget.args[0], projetoId: widget.args[1]);
   }
 
   @override

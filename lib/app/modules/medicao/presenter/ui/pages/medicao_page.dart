@@ -3,12 +3,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/medicao_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/components/medicao_tile.dart';
-import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 
 class MedicaoPage extends StatefulWidget {
-  final Parcela parcela;
+  final List args;
 
-  const MedicaoPage({required this.parcela});
+  const MedicaoPage({required this.args});
 
   @override
   _MedicaoPageState createState() => _MedicaoPageState();
@@ -19,7 +18,7 @@ class _MedicaoPageState extends State<MedicaoPage> {
   @override
   void initState() {
     super.initState();
-    store = MedicaoStore(parcela: widget.parcela);
+    store = MedicaoStore(parcela: widget.args[0]);
   }
 
   @override
@@ -84,7 +83,8 @@ class _MedicaoPageState extends State<MedicaoPage> {
                             store: store!,
                             medicao: store!.medicaoList[index],
                             onTap: () {
-                              store!.goToArvorePage(store!.medicaoList[index]);
+                              store!.goToArvorePage(
+                                  store!.medicaoList[index], widget.args[1]);
                             },
                           );
                         },

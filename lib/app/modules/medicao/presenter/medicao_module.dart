@@ -24,7 +24,7 @@ class MedicaoModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute('/', child: (_, args) => MedicaoPage(parcela: args.data)),
+    ChildRoute('/', child: (_, args) => MedicaoPage(args: args.data)),
     ChildRoute(RouterConst.CREATE_MEDICAO_ROUTER,
         child: (_, args) => CadastrarMedicaoPage(args: args.data)),
   ];

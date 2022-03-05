@@ -38,6 +38,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
         final arvoreId = doc.id;
         final medicaoId = doc.get('medicaoId');
         final parcelaId = doc.get('parcelaId');
+        final projetoId = doc.get('projetoId');
         final numArvore = doc.get('numArvore');
         final dap = doc.get('dap');
         final alturaTotal = doc.get('alturaTotal');
@@ -55,6 +56,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
           id: arvoreId,
           medicaoId: medicaoId,
           parcelaId: parcelaId,
+          projetoId: projetoId,
           numArvore: numArvore,
           dap: double.parse(dap.toString()),
           alturaTotal: double.parse(alturaTotal.toString()),

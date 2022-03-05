@@ -81,9 +81,9 @@ abstract class _ParcelaStoreBase with Store {
     if (success != null && success) refresh();
   }
 
-  void goToMedicaoPage(final Parcela parcela) {
+  void goToMedicaoPage(final Parcela parcela, final String projetoId) {
     Modular.to.pushNamed(
         '${RouterConst.PROJECT_ROUTER}${RouterConst.MEDICAO_ROUTER}',
-        arguments: parcela);
+        arguments: [parcela, projetoId]);
   }
 }

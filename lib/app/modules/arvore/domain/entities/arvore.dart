@@ -15,6 +15,7 @@ class Arvore {
   dynamic id;
   dynamic medicaoId;
   dynamic parcelaId;
+  dynamic projetoId;
   int numArvore;
   double dap;
   double alturaTotal;
@@ -30,6 +31,7 @@ class Arvore {
     this.id,
     this.medicaoId,
     this.parcelaId,
+    this.projetoId,
     required this.numArvore,
     required this.dap,
     required this.alturaTotal,
@@ -46,6 +48,7 @@ class Arvore {
         id: json['id'],
         medicaoId: json['medicaoId'],
         parcelaId: json['parcelaId'],
+        projetoId: json['projetoId'],
         numArvore: json['numArvore'],
         dap: double.parse(json['dap'].toString()),
         alturaTotal: double.parse(json['alturaTotal'].toString()),
@@ -64,6 +67,7 @@ class Arvore {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['medicaoId'] = medicaoId;
     data['parcelaId'] = parcelaId;
+    data['projetoId'] = projetoId;
     data['numArvore'] = numArvore;
     data['dap'] = dap;
     data['alturaTotal'] = alturaTotal;

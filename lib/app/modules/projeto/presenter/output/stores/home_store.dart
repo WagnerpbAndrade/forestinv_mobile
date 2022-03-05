@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/firebase_firestore_constants.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
@@ -59,6 +61,41 @@ abstract class _HomeStoreBase with Store {
 
       addNewProjetos(list);
     }
+  }
+
+  Future<void> fetchAllPorraToda(final String projetoId) async {
+    final List<List<String>> listToCsv = [];
+    final instance = FirebaseFirestore.instance;
+    final projeto = await instance
+        .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
+        .doc(projetoId)
+        .get();
+
+    print('Projeto: ${projeto.data()}');
+    //listToCsv.add(projeto.data());
+    final queryParcela = await instance
+        .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
+        .where('projetoId', isEqualTo: projeto.id)
+        .get();
+    queryParcela.docs.forEach((parcela) async {
+      print('Parcela: ${parcela.data()}');
+
+      final queryMedicao = await instance
+          .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
+          .where('parcelaId', isEqualTo: parcela.id)
+          .get();
+      queryMedicao.docs.forEach((medicao) async {
+        print('Medicao: ${medicao.data()}');
+
+        final queryArvore = await instance
+            .collection(FirebaseFirestoreConstants.COLLECTION_ARVORES)
+            .where('medicaoId', isEqualTo: medicao.id)
+            .get();
+        queryArvore.docs.forEach((arvore) {
+          print('Arvore: ${arvore.data()}');
+        });
+      });
+    });
   }
 
   void refresh() => _fetchProjetos();

@@ -84,7 +84,8 @@ class _ParcelaPageState extends State<ParcelaPage> {
                             store: store!,
                             parcela: store!.parcelaList[index],
                             onTap: () {
-                              store!.goToMedicaoPage(store!.parcelaList[index]);
+                              store!.goToMedicaoPage(
+                                  store!.parcelaList[index], widget.project.id);
                             },
                           );
                         },
