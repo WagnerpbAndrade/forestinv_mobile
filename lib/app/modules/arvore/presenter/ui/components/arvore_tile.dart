@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/arvore_store.dart';
@@ -22,7 +23,7 @@ class ArvoreTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.2,
+        height: MediaQuery.of(context).size.height * 0.17,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
@@ -34,10 +35,13 @@ class ArvoreTile extends StatelessWidget {
               SizedBox(
                 height: 70,
                 width: 70,
-                child: CachedNetworkImage(
-                  imageUrl:
-                      'https://static.thenounproject.com/png/194055-200.png',
-                  fit: BoxFit.cover,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: CircleAvatar(
+                    backgroundColor: ColorsConst.secondary,
+                    foregroundColor: ColorsConst.textColorPrimary,
+                    child: Text(arvore.numArvore.toString()),
+                  ),
                 ),
               ),
               Expanded(
@@ -48,21 +52,27 @@ class ArvoreTile extends StatelessWidget {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'N° ${arvore.numArvore}',
-                        style: const TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        'DAP: ${arvore.dap} - Altura: ${arvore.alturaTotal}',
+                        'DAP: ${arvore.dap}',
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.01,
+                      ),
+                      Text(
+                        'Altura: ${arvore.alturaTotal}',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.01,
                       ),
                       Text(
                         'Estado: ${arvore.estadoDescription}',
