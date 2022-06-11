@@ -30,7 +30,7 @@ class CsvHelper {
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
-    return '${directory.path}/projeto-${DateTime.now().formattedDateExported()}';
+    return '${directory.path}/projeto-${DateTime.now().formattedDateExported()}.csv';
   }
 
   Future<File> _writeData(String csvData) async {
