@@ -31,14 +31,6 @@ class EmptyCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const Text(
-                    'Hmmm...',
-                    style: TextStyle(
-                      color: ColorsConst.secondary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
                   Text(
                     text,
                     textAlign: TextAlign.center,
