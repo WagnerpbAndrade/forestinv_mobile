@@ -1,10 +1,15 @@
+import 'dart:async';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_drawer/custom_drawer.dart';
 import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/home_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/components/projeto_tile.dart';
+import 'package:forestinv_mobile/app/stores/connectivity_store.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,7 +19,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeStore> {
+  final connectivityStore = Modular.get<ConnectivityStore>();
   final ScrollController scrollController = ScrollController();
+  final Connectivity _connectivity = Connectivity();
+  StreamSubscription<ConnectivityResult>? _connectivitySubscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _connectivitySubscription =
+        Connectivity().onConnectivityChanged.listen(_updateStatus);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +78,8 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                       if (store.showProgress) {
                         return const Center(
                           child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(Colors.white),
+                            valueColor:
+                                AlwaysStoppedAnimation(ColorsConst.primary),
                           ),
                         );
                       }
@@ -97,5 +114,12 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
         ),
       ),
     );
+  }
+
+  void _updateStatus(ConnectivityResult connectivityResult) {
+    print("Conexão: ${ConnectivityResult.values[connectivityResult.index]}");
+    connectivityStore
+        .setConnected(connectivityResult != ConnectivityResult.none);
+    print('Está conectado: ${connectivityStore.connected}');
   }
 }

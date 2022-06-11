@@ -27,4 +27,9 @@ class ArvoreRepositoryImpl implements ArvoreRepository {
   Future<ApiResponse> update(Arvore arvore) async {
     return _datasource.update(arvore);
   }
+
+  @override
+  Future<List<Arvore>> getAllArvoreByProjeto(final dynamic projetoId) async {
+    return _datasource.getAllArvoreByProjeto(projetoId);
+  }
 }

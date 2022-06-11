@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/home_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/cadastrar_projeto_page.dart';
+import 'package:forestinv_mobile/app/screens/offline/offline_screen.dart';
+import 'package:forestinv_mobile/app/stores/connectivity_store.dart';
 import 'package:forestinv_mobile/helper/extensions.dart';
 
 class ProjetoTile extends StatelessWidget {
@@ -173,8 +176,16 @@ class ProjetoTile extends StatelessWidget {
             ));
   }
 
-  void exportarProject(BuildContext context, final String projetoId) {
-    homeStore.fetchAllPorraToda(projetoId);
+  Future<void> exportarProject(
+      BuildContext context, final String projetoId) async {
+    final connectivityStore = Modular.get<ConnectivityStore>();
+    if (!connectivityStore.connected) {
+      Future.delayed(const Duration(milliseconds: 50)).then((value) {
+        showDialog(context: context, builder: (_) => OfflineScreen());
+      });
+    } else {
+      await homeStore.fetchAllDataForExportCsv(projetoId, context);
+    }
   }
 }
 

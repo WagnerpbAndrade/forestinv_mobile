@@ -129,4 +129,18 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
       return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
     }
   }
+
+  @override
+  Future<ApiResponse> getById(String medicaoId) async {
+    try {
+      final medicao = await _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
+          .doc(medicaoId)
+          .get();
+      return ApiResponse.ok(result: medicao);
+    } catch (e) {
+      print('MedicaoFirestoreDatasourceImpl-getById: $e');
+      return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
+    }
+  }
 }

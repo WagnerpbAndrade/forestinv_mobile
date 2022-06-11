@@ -1,4 +1,4 @@
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 abstract class NetworkManager {
@@ -8,9 +8,7 @@ abstract class NetworkManager {
 }
 
 class FlutterNetworkManager extends NetworkManager {
-  Connectivity connectivity;
-
-  FlutterNetworkManager(this.connectivity);
+  FlutterNetworkManager();
 
   @override
   Future<bool> isOffline() async {
@@ -19,7 +17,7 @@ class FlutterNetworkManager extends NetworkManager {
 
   @override
   Future<bool> isOnline() async {
-    final connectivityResult = await connectivity.checkConnectivity();
+    final connectivityResult = await Connectivity().checkConnectivity();
 
     if (connectivityResult == ConnectivityResult.none) {
       return false;

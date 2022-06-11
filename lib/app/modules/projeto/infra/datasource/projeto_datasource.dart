@@ -10,7 +10,7 @@ abstract class ProjetoDatasource {
 
   Future<bool> delete(String projectId);
 
-  Future<Project> getById(num projectId);
+  Future<ApiResponse> getById(final String projectId);
 
   Future<List<Project>> getByName(String name);
 

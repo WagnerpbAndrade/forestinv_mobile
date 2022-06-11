@@ -23,12 +23,30 @@ class Medicao {
       this.dataMedicao,
       this.ultimaAtualizacao});
 
-  factory Medicao.fromMap(DocumentSnapshot json) => Medicao(
+  Medicao copyWith({
+    dynamic id,
+    dynamic parcelaId,
+    String? nomeResponsavel,
+    int? anoMedicao,
+    DateTime? dataMedicao,
+    DateTime? ultimaAtualizacao,
+  }) {
+    return Medicao(
+      id: id ?? this.id,
+      parcelaId: parcelaId ?? this.parcelaId,
+      nomeResponsavel: nomeResponsavel ?? this.nomeResponsavel,
+      anoMedicao: anoMedicao ?? this.anoMedicao,
+      dataMedicao: dataMedicao ?? this.dataMedicao,
+      ultimaAtualizacao: ultimaAtualizacao ?? ultimaAtualizacao,
+    );
+  }
+
+  factory Medicao.fromMap(Map<String, dynamic> json) => Medicao(
         parcelaId: json['parcelaId'],
         nomeResponsavel: json['nomeResponsavel'],
-        dataMedicao: DateTime.parse(json["dataMedicao"]),
+        dataMedicao: getDateTime(json["dataMedicao"]),
         anoMedicao: json["anoMedicao"],
-        ultimaAtualizacao: DateTime.parse(json["ultimaAtualizacao"]),
+        ultimaAtualizacao: getDateTime(json["ultimaAtualizacao"]),
       );
 
   Map<String, dynamic> toMap() {
@@ -48,5 +66,10 @@ class Medicao {
     data['dataMedicao'] = dataMedicao;
     data['ultimaAtualizacao'] = ultimaAtualizacao;
     return data;
+  }
+
+  static DateTime getDateTime(Timestamp timestamp) {
+    return DateTime.fromMicrosecondsSinceEpoch(
+        timestamp.microsecondsSinceEpoch);
   }
 }

@@ -215,4 +215,58 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
       return false;
     }
   }
+
+  @override
+  Future<List<Arvore>> getAllArvoreByProjeto(projetoId) async {
+    try {
+      final List<Arvore> list = [];
+      final arvoresRef = _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_ARVORES)
+          .where('projetoId', isEqualTo: projetoId);
+
+      final QuerySnapshot querySnapshot = await arvoresRef.get();
+
+      querySnapshot.docs.forEach((doc) {
+        final arvoreId = doc.id;
+        final medicaoId = doc.get('medicaoId');
+        final parcelaId = doc.get('parcelaId');
+        final projetoId = doc.get('projetoId');
+        final numArvore = doc.get('numArvore');
+        final dap = doc.get('dap');
+        final alturaTotal = doc.get('alturaTotal');
+        final latitude = doc.get('latitude');
+        final longitude = doc.get('longitude');
+        final estadoArvore =
+            EstadoArvoreEnum.values.elementAt(doc.get('estadoArvore'));
+        final estadoDescription = doc.get('estadoDescription');
+        final observacao = doc.get('observacao');
+        final dataCriacaoTimestamp = doc.get('dataCriacao') as Timestamp;
+        final dataCriacao = DateTime.fromMicrosecondsSinceEpoch(
+            dataCriacaoTimestamp.microsecondsSinceEpoch);
+
+        final Arvore arvore = Arvore(
+          id: arvoreId,
+          medicaoId: medicaoId,
+          parcelaId: parcelaId,
+          projetoId: projetoId,
+          numArvore: numArvore,
+          dap: double.parse(dap.toString()),
+          alturaTotal: double.parse(alturaTotal.toString()),
+          latitude: latitude,
+          longitude: longitude,
+          estadoArvore: estadoArvore,
+          estadoDescription: estadoDescription,
+          observacao: observacao,
+          dataCriacao: dataCriacao,
+        );
+        list.add(arvore);
+      });
+
+      print('ArvoreFirestoreDatasourceImpl-getAllByMedicao: $list');
+      return list;
+    } catch (e) {
+      print('ArvoreFirestoreDatasourceImpl-getAllByMedicao: $e');
+      rethrow;
+    }
+  }
 }

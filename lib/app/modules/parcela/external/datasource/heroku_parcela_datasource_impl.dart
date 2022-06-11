@@ -87,4 +87,10 @@ class HerokuParcelaDatasourceImpl implements ParcelaDatasource {
     // TODO: implement listAllByUser
     throw UnimplementedError();
   }
+
+  @override
+  Future<ApiResponse> getById(String parcelaId) {
+    // TODO: implement getById
+    throw UnimplementedError();
+  }
 }

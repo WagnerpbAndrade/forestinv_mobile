@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 enum EstadoArvoreEnum {
   NORMAL,
   DOMINANTE,
@@ -44,8 +46,42 @@ class Arvore {
     this.ultimaAtualizacao,
   });
 
-  factory Arvore.fromMap(Map<String, dynamic> json) => Arvore(
-        id: json['id'],
+  Arvore copyWith({
+    dynamic id,
+    dynamic medicaoId,
+    dynamic parcelaId,
+    dynamic projetoId,
+    int? numArvore,
+    double? dap,
+    double? alturaTotal,
+    String? latitude,
+    String? longitude,
+    EstadoArvoreEnum? estadoArvore,
+    String? estadoDescription,
+    String? observacao,
+    DateTime? dataCriacao,
+    DateTime? ultimaAtualizacao,
+  }) {
+    return Arvore(
+      id: id ?? this.id,
+      medicaoId: medicaoId ?? this.medicaoId,
+      parcelaId: parcelaId ?? this.parcelaId,
+      projetoId: projetoId ?? this.projetoId,
+      numArvore: numArvore ?? this.numArvore,
+      dap: dap ?? this.dap,
+      alturaTotal: alturaTotal ?? this.alturaTotal,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      estadoArvore: estadoArvore ?? this.estadoArvore,
+      estadoDescription: estadoDescription ?? this.estadoDescription,
+      observacao: observacao ?? this.observacao,
+      dataCriacao: dataCriacao ?? this.dataCriacao,
+      ultimaAtualizacao: ultimaAtualizacao ?? this.ultimaAtualizacao,
+    );
+  }
+
+  factory Arvore.fromMap(Map<String, dynamic> json, dynamic id) => Arvore(
+        id: id,
         medicaoId: json['medicaoId'],
         parcelaId: json['parcelaId'],
         projetoId: json['projetoId'],
@@ -54,13 +90,13 @@ class Arvore {
         alturaTotal: double.parse(json['alturaTotal'].toString()),
         latitude: json['latitude'],
         longitude: json['longitude'],
-        estadoArvore: json['estadoArvore'],
+        estadoArvore: EstadoArvoreEnum.values[json['estadoArvore']],
         estadoDescription: json['estadoDescription'],
         observacao: json['observacao'],
-        dataCriacao: DateTime.parse(json["dataCriacao"]),
+        dataCriacao: getDateTime(json["dataCriacao"]),
         ultimaAtualizacao: json["ultimaAtualizacao"] == null
             ? null
-            : DateTime.parse(json["ultimaAtualizacao"]),
+            : getDateTime(json["ultimaAtualizacao"]),
       );
 
   Map<String, dynamic> createToMap() {
@@ -152,6 +188,11 @@ class Arvore {
     }
 
     return false;
+  }
+
+  static DateTime getDateTime(Timestamp timestamp) {
+    return DateTime.fromMicrosecondsSinceEpoch(
+        timestamp.microsecondsSinceEpoch);
   }
 
   @override

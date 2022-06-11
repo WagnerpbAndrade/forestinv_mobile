@@ -124,4 +124,18 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
       rethrow;
     }
   }
+
+  @override
+  Future<ApiResponse> getById(String parcelaId) async {
+    try {
+      final parcela = await _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
+          .doc(parcelaId)
+          .get();
+      return ApiResponse.ok(result: parcela);
+    } catch (e) {
+      print('ParcelaFirestoreDatasourceImpl-getById: $e');
+      return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
+    }
+  }
 }

@@ -5,6 +5,8 @@ import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dar
 abstract class ParcelaDatasource {
   Future<ListParcelaResponse> getParcelasPagination(String projectId);
 
+  Future<ApiResponse> getById(final String parcelaId);
+
   Future<ApiResponse> save(Parcela parcela);
 
   Future<ApiResponse> update(Parcela parcela);

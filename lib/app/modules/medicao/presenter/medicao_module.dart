@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/delete_medicao_usecase.dart';
+import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/get_by_id_usecase.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/list_all_medicao_by_parcela.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/save_medicao_usecase.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/update_medicao_usecase.dart';
@@ -20,6 +21,7 @@ class MedicaoModule extends Module {
     Bind((i) => DeleteMedicaoUsecaseImpl(i.get())),
     Bind((i) => MedicaoFirestoreDatasourceImpl(i.get(), i())),
     Bind((i) => ListAllMedicaoByParcelaImpl(i())),
+    Bind((i) => GetByIdUsecaseImpl(i())),
   ];
 
   @override

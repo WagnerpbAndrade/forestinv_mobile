@@ -87,4 +87,10 @@ class HerokuMedicaoDatasourceImpl implements MedicaoDatasource {
     // TODO: implement listAllByParcela
     throw UnimplementedError();
   }
+
+  @override
+  Future<ApiResponse> getById(String medicaoId) {
+    // TODO: implement getById
+    throw UnimplementedError();
+  }
 }

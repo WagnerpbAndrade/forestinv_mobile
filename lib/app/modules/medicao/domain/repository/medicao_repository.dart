@@ -5,6 +5,8 @@ import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dar
 abstract class MedicaoRepository {
   Future<ListMedicaoResponse> getMedicaoPagination(String parcelaId);
 
+  Future<ApiResponse> getById(final String medicaoId);
+
   Future<ApiResponse> save(final Medicao medicao);
 
   Future<ApiResponse> update(final Medicao medicao);

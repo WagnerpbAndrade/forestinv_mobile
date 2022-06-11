@@ -20,6 +20,7 @@ import 'package:forestinv_mobile/app/modules/regra_consistencia/external/data_so
 import 'package:forestinv_mobile/app/modules/regra_consistencia/infra/repository/regra_consistencia_repository_impl.dart';
 import 'package:forestinv_mobile/app/modules/regra_consistencia/presenter/outputs/stores/regra_consistencia_store.dart';
 import 'package:forestinv_mobile/app/modules/regra_consistencia/regra_consistencia_module.dart';
+import 'package:forestinv_mobile/app/stores/connectivity_store.dart';
 import 'package:forestinv_mobile/helper/location_helper.dart';
 
 class AppModule extends Module {
@@ -27,6 +28,7 @@ class AppModule extends Module {
   final List<Bind> binds = [
     Bind.factory((i) => DioClient()),
     Bind.factory((i) => LocationHelper()),
+    Bind.singleton((i) => ConnectivityStore()),
     Bind.singleton((i) => FirebaseAuth.instance),
     Bind.singleton((i) => FirebaseFirestore.instance),
     Bind.singleton((i) => AuthStore()),

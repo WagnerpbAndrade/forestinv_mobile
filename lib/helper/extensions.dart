@@ -25,6 +25,10 @@ extension NumberExtension on num {
 }
 
 extension DateTimeExtension on DateTime {
+  String formattedDateExported() {
+    return DateFormat('dd-MM-yyyy', 'pt-BR').format(this.toLocal());
+  }
+
   String formattedDate() {
     return DateFormat('dd/MM/yyyy', 'pt-BR').format(this.toLocal());
   }

@@ -87,9 +87,17 @@ class ProjectFirestoreDatasourceImpl implements ProjetoDatasource {
   }
 
   @override
-  Future<Project> getById(num projectId) {
-    // TODO: implement getById
-    throw UnimplementedError();
+  Future<ApiResponse> getById(final String projectId) async {
+    try {
+      final projeto = await _instance
+          .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
+          .doc(projectId)
+          .get();
+      return ApiResponse.ok(result: projeto);
+    } catch (e) {
+      print('ProjectFirestoreDatasourceImpl-getById: $e');
+      return ApiResponse.error(message: 'Oops! $e');
+    }
   }
 
   @override

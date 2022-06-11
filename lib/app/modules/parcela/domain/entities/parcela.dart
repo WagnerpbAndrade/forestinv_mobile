@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 Parcela ParcelaFromMap(String str) => Parcela.fromMap(json.decode(str));
 
 String ParcelaToMap(Parcela data) => json.encode(data.toMap());
@@ -36,6 +38,40 @@ class Parcela {
       this.dataCriacao,
       this.ultimaAtualizacao});
 
+  Parcela copyWith({
+    dynamic id,
+    dynamic projetoId,
+    int? numero,
+    double? area,
+    double? largura,
+    int? numTalhao,
+    String? latitude,
+    String? longitude,
+    DateTime? dataPlantio,
+    String? espacamento,
+    int? idadeParcela,
+    String? tipoParcelaEnum,
+    DateTime? dataCriacao,
+    DateTime? ultimaAtualizacao,
+  }) {
+    return Parcela(
+      id: id ?? this.id,
+      projetoId: projetoId ?? this.projetoId,
+      numero: numero ?? this.numero,
+      area: area ?? this.area,
+      largura: largura ?? this.largura,
+      numTalhao: numTalhao ?? this.numTalhao,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      dataPlantio: dataPlantio ?? this.dataPlantio,
+      espacamento: espacamento ?? this.espacamento,
+      idadeParcela: idadeParcela ?? this.idadeParcela,
+      tipoParcelaEnum: tipoParcelaEnum ?? this.tipoParcelaEnum,
+      dataCriacao: dataCriacao ?? this.dataCriacao,
+      ultimaAtualizacao: ultimaAtualizacao ?? this.ultimaAtualizacao,
+    );
+  }
+
   factory Parcela.fromMap(Map<String, dynamic> json) => Parcela(
         id: json['id'],
         projetoId: json['projetoId'],
@@ -45,14 +81,14 @@ class Parcela {
         numTalhao: json['numTalhao'],
         latitude: json['latitude'],
         longitude: json['longitude'],
-        dataPlantio: json['dataPlantio'],
+        dataPlantio: getDateTime(json['dataPlantio']),
         espacamento: json['espacamento'],
         idadeParcela: json['idadeParcela'],
         tipoParcelaEnum: json['tipoParcelaEnum'],
-        dataCriacao: DateTime.parse(json["dataCriacao"]),
+        dataCriacao: getDateTime(json["dataCriacao"]),
         ultimaAtualizacao: json["ultimaAtualizacao"] == null
             ? null
-            : DateTime.parse(json["ultimaAtualizacao"]),
+            : getDateTime(json["ultimaAtualizacao"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -84,4 +120,9 @@ class Parcela {
         'tipoParcelaEnum': tipoParcelaEnum,
         'ultimaAtualizacao': ultimaAtualizacao,
       };
+
+  static DateTime getDateTime(Timestamp timestamp) {
+    return DateTime.fromMicrosecondsSinceEpoch(
+        timestamp.microsecondsSinceEpoch);
+  }
 }

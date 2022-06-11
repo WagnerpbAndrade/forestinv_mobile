@@ -10,7 +10,7 @@ abstract class ProjectRepository {
 
   Future<Either<Failure, bool>> delete(String projectId);
 
-  Future<Either<Failure, Project>> getById(num projectId);
+  Future<ApiResponse> getById(final String projectId);
 
   Future<List<Project>> getByName(String name);
 

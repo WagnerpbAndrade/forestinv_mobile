@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/visibilidade.dart';
 
@@ -27,16 +28,36 @@ class Project extends Equatable {
     this.ultimaAtualizacao,
   });
 
+  Project copyWith({
+    dynamic id,
+    String? uuid,
+    String? nome,
+    dynamic area,
+    String? visibilidadeProjetoEnum,
+    DateTime? dataCriacao,
+    DateTime? ultimaAtualizacao,
+  }) {
+    return Project(
+      id: id ?? this.id,
+      nome: nome ?? this.nome,
+      area: area ?? this.area,
+      visibilidadeProjetoEnum:
+          visibilidadeProjetoEnum ?? this.visibilidadeProjetoEnum,
+      dataCriacao: dataCriacao ?? this.dataCriacao,
+      ultimaAtualizacao: ultimaAtualizacao ?? this.ultimaAtualizacao,
+    );
+  }
+
   factory Project.fromMap(Map<String, dynamic> json) => Project(
         id: json["id"],
         uuid: json["uuid"],
         nome: json["nome"],
         area: json["area"],
         visibilidadeProjetoEnum: json["visibilidadeProjetoEnum"],
-        dataCriacao: DateTime.parse(json["dataCriacao"]),
+        dataCriacao: getDateTime(json["dataCriacao"]),
         ultimaAtualizacao: json["ultimaAtualizacao"] == null
             ? null
-            : DateTime.parse(json["ultimaAtualizacao"]),
+            : getDateTime(json["ultimaAtualizacao"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -54,6 +75,11 @@ class Project extends Equatable {
         "visibilidadeProjetoEnum": visibilidadeProjetoEnum,
         "ultimaAtualizacao": ultimaAtualizacao,
       };
+
+  static DateTime getDateTime(Timestamp timestamp) {
+    return DateTime.fromMicrosecondsSinceEpoch(
+        timestamp.microsecondsSinceEpoch);
+  }
 
   @override
   List<Object?> get props =>

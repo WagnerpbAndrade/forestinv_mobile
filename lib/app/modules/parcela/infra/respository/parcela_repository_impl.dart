@@ -39,4 +39,9 @@ class ParcelaRepositoryImpl implements ParcelaRepository {
   Future<List<Parcela>> listAllByProject(dynamic projectId) {
     return datasource.listAllByProject(projectId);
   }
+
+  @override
+  Future<ApiResponse> getById(String parcelaId) async {
+    return datasource.getById(parcelaId);
+  }
 }

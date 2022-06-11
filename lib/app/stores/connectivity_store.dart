@@ -1,4 +1,4 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:mobx/mobx.dart';
 
 part 'connectivity_store.g.dart';
@@ -10,11 +10,9 @@ abstract class _ConnectivityStore with Store {
     _setupListener();
   }
 
-  void _setupListener() {
-    DataConnectionChecker().checkInterval = const Duration(seconds: 5);
-    DataConnectionChecker().onStatusChange.listen((event) {
-      setConnected(event == DataConnectionStatus.connected);
-    });
+  void _setupListener() async {
+    final connectivityResult = await Connectivity().checkConnectivity();
+    setConnected(connectivityResult != ConnectivityResult.none);
   }
 
   @observable

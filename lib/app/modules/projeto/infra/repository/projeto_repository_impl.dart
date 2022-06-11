@@ -51,15 +51,8 @@ class ProjectRepositoryImpl implements ProjectRepository {
   }
 
   @override
-  Future<Either<Failure, Project>> getById(num projectId) async {
-    try {
-      final result = await datasource.getById(projectId);
-      return Right(result);
-    } on DatasourceError catch (e) {
-      throw Left(e);
-    } catch (e) {
-      throw Left(DatasourceError());
-    }
+  Future<ApiResponse> getById(final String projectId) async {
+    return datasource.getById(projectId);
   }
 
   @override

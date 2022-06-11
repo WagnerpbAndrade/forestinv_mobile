@@ -20,4 +20,6 @@ class RouterConst {
   static String ARVORE_ROUTER = '/arvore';
 
   static String PROJECT_ROUTER_PAGE = '/page';
+
+  static String OFFLINE_ROUTER_PAGE = '/offline';
 }

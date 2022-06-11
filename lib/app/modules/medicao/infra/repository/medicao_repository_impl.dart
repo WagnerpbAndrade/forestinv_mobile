@@ -36,4 +36,9 @@ class MedicaoRepositoryImpl implements MedicaoRepository {
   Future<List<Medicao>> listAllByParcela(dynamic parcelaId) {
     return datasource.listAllByParcela(parcelaId);
   }
+
+  @override
+  Future<ApiResponse> getById(String medicaoId) async {
+    return datasource.getById(medicaoId);
+  }
 }

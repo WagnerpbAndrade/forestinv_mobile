@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/stores/connectivity_store.dart';
-import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 
 class OfflineScreen extends StatefulWidget {
@@ -8,14 +9,13 @@ class OfflineScreen extends StatefulWidget {
   _OfflineScreenState createState() => _OfflineScreenState();
 }
 
-class _OfflineScreenState extends State<OfflineScreen> {
-  final ConnectivityStore connectivityStore = GetIt.I<ConnectivityStore>();
-
+class _OfflineScreenState
+    extends ModularState<OfflineScreen, ConnectivityStore> {
   @override
   void initState() {
     super.initState();
 
-    when((_) => connectivityStore.connected, () {
+    when((_) => store.connected, () {
       Navigator.of(context).pop();
     });
   }
@@ -25,10 +25,22 @@ class _OfflineScreenState extends State<OfflineScreen> {
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text('FORESTINV'),
-          centerTitle: true,
           automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Modular.to.pop();
+              },
+              icon: const Icon(
+                Icons.close,
+                color: ColorsConst.secondary,
+              ),
+            )
+          ],
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +51,7 @@ class _OfflineScreenState extends State<OfflineScreen> {
                 child: Text(
                   'Sem conexão com a internet!',
                   style: TextStyle(
-                      color: Colors.white,
+                      color: ColorsConst.secondary,
                       fontWeight: FontWeight.w700,
                       fontSize: 18),
                 ),
@@ -47,7 +59,7 @@ class _OfflineScreenState extends State<OfflineScreen> {
             ),
             const Icon(
               Icons.cloud_off,
-              color: Colors.white,
+              color: ColorsConst.secondary,
               size: 150,
             ),
             Container(
@@ -56,7 +68,7 @@ class _OfflineScreenState extends State<OfflineScreen> {
                 'Por favor, verifique a sua conexão com a internet para '
                 'continuar utilizando o app.',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: ColorsConst.secondary,
                 ),
                 textAlign: TextAlign.center,
               ),
