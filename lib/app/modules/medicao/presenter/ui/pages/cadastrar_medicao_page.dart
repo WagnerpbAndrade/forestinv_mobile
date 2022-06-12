@@ -109,52 +109,51 @@ class _CadastrarMedicaoPageState extends State<CadastrarMedicaoPage> {
                             title: 'Número da medição',
                             subtitle: 'Informe um número identificador',
                           ),
-                          Observer(builder: (_) {
-                            return TextFormField(
-                              initialValue: cadastrarMedicaoStore.numero,
-                              enabled: !cadastrarMedicaoStore.loading,
-                              decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  hintText: 'Exemplo: N° 10',
-                                  isDense: true,
-                                  errorText: cadastrarMedicaoStore.numeroError),
-                              onChanged: cadastrarMedicaoStore.setNumero,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              maxLines: 1,
-                              maxLength: 7,
-                            );
-                          }),
-                          const SizedBox(
-                            height: 16,
+                          Observer(
+                            builder: (_) {
+                              return TextFormField(
+                                initialValue: cadastrarMedicaoStore.numero,
+                                enabled: !cadastrarMedicaoStore.loading,
+                                decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
+                                    hintText: 'Exemplo: N° 10',
+                                    isDense: true,
+                                    errorText:
+                                        cadastrarMedicaoStore.numeroError),
+                                onChanged: cadastrarMedicaoStore.setNumero,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                maxLines: 1,
+                                maxLength: 7,
+                              );
+                            },
                           ),
                           const FieldTitle(
                             title: 'Nome do responsável',
                             subtitle:
                                 'Informe o nome do responsável pela medição',
                           ),
-                          Observer(builder: (_) {
-                            return TextFormField(
-                              initialValue:
-                                  cadastrarMedicaoStore.nomeResponsavel,
-                              enabled: !cadastrarMedicaoStore.loading,
-                              decoration: InputDecoration(
-                                border: const OutlineInputBorder(),
-                                isDense: true,
-                                errorText:
-                                    cadastrarMedicaoStore.nomeResponsavelError,
-                              ),
-                              onChanged:
-                                  cadastrarMedicaoStore.setNomeResponsavel,
-                              keyboardType: TextInputType.name,
-                              maxLines: 1,
-                              maxLength: 100,
-                            );
-                          }),
-                          const SizedBox(
-                            height: 16,
+                          Observer(
+                            builder: (_) {
+                              return TextFormField(
+                                initialValue:
+                                    cadastrarMedicaoStore.nomeResponsavel,
+                                enabled: !cadastrarMedicaoStore.loading,
+                                decoration: InputDecoration(
+                                  border: const OutlineInputBorder(),
+                                  isDense: true,
+                                  errorText: cadastrarMedicaoStore
+                                      .nomeResponsavelError,
+                                ),
+                                onChanged:
+                                    cadastrarMedicaoStore.setNomeResponsavel,
+                                keyboardType: TextInputType.name,
+                                maxLines: 1,
+                                maxLength: 100,
+                              );
+                            },
                           ),
                           const FieldTitle(
                             title: 'Data da medição',
@@ -182,9 +181,6 @@ class _CadastrarMedicaoPageState extends State<CadastrarMedicaoPage> {
                                 );
                               },
                             ),
-                          ),
-                          const SizedBox(
-                            height: 8,
                           ),
                           Observer(
                             builder: (_) {

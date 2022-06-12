@@ -117,26 +117,26 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                             title: 'Número da parcela',
                             subtitle: 'Informe um número identificador',
                           ),
-                          Observer(builder: (_) {
-                            return TextFormField(
-                              initialValue: cadastrarParcelaStore.numero,
-                              enabled: !cadastrarParcelaStore.loading,
-                              decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  hintText: 'Exemplo: N° 10',
-                                  isDense: true,
-                                  errorText: cadastrarParcelaStore.numeroError),
-                              onChanged: cadastrarParcelaStore.setNumero,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              maxLines: 1,
-                              maxLength: 7,
-                            );
-                          }),
-                          const SizedBox(
-                            height: 16,
+                          Observer(
+                            builder: (_) {
+                              return TextFormField(
+                                initialValue: cadastrarParcelaStore.numero,
+                                enabled: !cadastrarParcelaStore.loading,
+                                decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
+                                    hintText: 'Exemplo: N° 10',
+                                    isDense: true,
+                                    errorText:
+                                        cadastrarParcelaStore.numeroError),
+                                onChanged: cadastrarParcelaStore.setNumero,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                maxLines: 1,
+                                maxLength: 7,
+                              );
+                            },
                           ),
                           const FieldTitle(
                             title: 'Área da parcela',
@@ -161,9 +161,6 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                 maxLength: 7,
                               );
                             },
-                          ),
-                          const SizedBox(
-                            height: 16,
                           ),
                           const FieldTitle(
                             title: 'Número do talhão',
@@ -192,9 +189,6 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                               );
                             },
                           ),
-                          const SizedBox(
-                            height: 16,
-                          ),
                           const FieldTitle(
                             title: 'Espaçamento',
                             subtitle: 'Informe o espaçamento entre as árvores',
@@ -218,9 +212,6 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                 ],
                               );
                             },
-                          ),
-                          const SizedBox(
-                            height: 16,
                           ),
                           const FieldTitle(
                             title: 'Data do plantio',
@@ -248,9 +239,6 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                 );
                               },
                             ),
-                          ),
-                          const SizedBox(
-                            height: 16,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -281,9 +269,6 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                           maxLines: 1,
                                         );
                                       },
-                                    ),
-                                    const SizedBox(
-                                      height: 16,
                                     ),
                                     const FieldTitle(title: 'Longitude'),
                                     Observer(
@@ -330,9 +315,6 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                 );
                               }),
                             ],
-                          ),
-                          const SizedBox(
-                            height: 8,
                           ),
                           Observer(
                             builder: (_) {

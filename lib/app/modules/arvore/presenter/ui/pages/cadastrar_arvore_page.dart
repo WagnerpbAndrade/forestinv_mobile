@@ -122,29 +122,28 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                             title: 'Número da árvore',
                             subtitle: 'Informe um número identificador',
                           ),
-                          Observer(builder: (_) {
-                            return TextFormField(
-                              initialValue: cadastrarArvoreStore.numeroArvore,
-                              enabled: editing
-                                  ? false
-                                  : !cadastrarArvoreStore.loading,
-                              decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  hintText: 'Exemplo: N° 10',
-                                  isDense: true,
-                                  errorText:
-                                      cadastrarArvoreStore.numeroArvoreError),
-                              onChanged: cadastrarArvoreStore.setNumeroArvore,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              maxLines: 1,
-                              maxLength: 7,
-                            );
-                          }),
-                          const SizedBox(
-                            height: 16,
+                          Observer(
+                            builder: (_) {
+                              return TextFormField(
+                                initialValue: cadastrarArvoreStore.numeroArvore,
+                                enabled: editing
+                                    ? false
+                                    : !cadastrarArvoreStore.loading,
+                                decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
+                                    hintText: 'Exemplo: N° 10',
+                                    isDense: true,
+                                    errorText:
+                                        cadastrarArvoreStore.numeroArvoreError),
+                                onChanged: cadastrarArvoreStore.setNumeroArvore,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                maxLines: 1,
+                                maxLength: 7,
+                              );
+                            },
                           ),
                           const FieldTitle(
                             title: 'DAP',
@@ -172,9 +171,6 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                               );
                             },
                           ),
-                          const SizedBox(
-                            height: 16,
-                          ),
                           const FieldTitle(
                             title: 'Altura total',
                             subtitle: 'Informe a altura total em centímetros',
@@ -201,13 +197,7 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                               );
                             },
                           ),
-                          const SizedBox(
-                            height: 16,
-                          ),
                           EstadoArvoreField(cadastrarArvoreStore),
-                          const SizedBox(
-                            height: 16,
-                          ),
                           const FieldTitle(
                             title: 'Observação',
                             subtitle:
@@ -229,9 +219,6 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                                 maxLength: 200,
                               );
                             },
-                          ),
-                          const SizedBox(
-                            height: 16,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -262,9 +249,6 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                                           maxLines: 1,
                                         );
                                       },
-                                    ),
-                                    const SizedBox(
-                                      height: 16,
                                     ),
                                     const FieldTitle(title: 'Longitude'),
                                     Observer(
@@ -311,9 +295,6 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                                 );
                               }),
                             ],
-                          ),
-                          const SizedBox(
-                            height: 8,
                           ),
                           Observer(
                             builder: (_) {

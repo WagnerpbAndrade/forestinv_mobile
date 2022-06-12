@@ -111,22 +111,21 @@ class _CadastrarProjetoPageState extends State<CadastrarProjetoPage> {
                             title: 'Nome do projeto',
                             subtitle: 'Escolha um nome representativo',
                           ),
-                          Observer(builder: (_) {
-                            return TextFormField(
-                              initialValue: cadastrarProjetoStore.nome,
-                              enabled: !cadastrarProjetoStore.loading,
-                              decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  hintText: 'Exemplo: Fazenda Esperança - MG',
-                                  isDense: true,
-                                  errorText: cadastrarProjetoStore.nomeError),
-                              onChanged: cadastrarProjetoStore.setNome,
-                              maxLines: 1,
-                              maxLength: 100,
-                            );
-                          }),
-                          const SizedBox(
-                            height: 16,
+                          Observer(
+                            builder: (_) {
+                              return TextFormField(
+                                initialValue: cadastrarProjetoStore.nome,
+                                enabled: !cadastrarProjetoStore.loading,
+                                decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
+                                    hintText: 'Exemplo: Fazenda Esperança - MG',
+                                    isDense: true,
+                                    errorText: cadastrarProjetoStore.nomeError),
+                                onChanged: cadastrarProjetoStore.setNome,
+                                maxLines: 1,
+                                maxLength: 100,
+                              );
+                            },
                           ),
                           const FieldTitle(
                             title: 'Área do projeto',
