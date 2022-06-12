@@ -40,10 +40,9 @@ class ProjetoTile extends StatelessWidget {
               SizedBox(
                 height: 70,
                 width: 70,
-                child: CachedNetworkImage(
-                  imageUrl:
-                      'https://static.thenounproject.com/png/194055-200.png',
-                  fit: BoxFit.cover,
+                child: IconButton(
+                  onPressed: null,
+                  icon: Image.asset('assets/images/location.png'),
                 ),
               ),
               Expanded(
@@ -57,7 +56,7 @@ class ProjetoTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        projeto.nome,
+                        'Nome: ${projeto.nome}',
                         style: const TextStyle(
                           fontSize: 19,
                           fontWeight: FontWeight.w700,
@@ -87,7 +86,7 @@ class ProjetoTile extends StatelessWidget {
                         'Criado em ${projeto.dataCriacao!.formattedDate()}',
                         style: const TextStyle(
                           fontSize: 12,
-                          fontWeight: FontWeight.w300,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
