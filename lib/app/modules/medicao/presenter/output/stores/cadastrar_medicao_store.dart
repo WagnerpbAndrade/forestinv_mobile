@@ -35,7 +35,7 @@ abstract class _CadastrarMedicaoStoreBase with Store {
     if (numeroIsValid) {
       return null;
     } else if (numero.isEmpty) {
-      return 'Campo obrigatório';
+      return null;
     }
   }
 
@@ -57,7 +57,7 @@ abstract class _CadastrarMedicaoStoreBase with Store {
     if (nomeResponsavelIsValid) {
       return null;
     } else if (nomeResponsavel.isEmpty) {
-      return 'Campo obrigatório';
+      return null;
     }
   }
 
