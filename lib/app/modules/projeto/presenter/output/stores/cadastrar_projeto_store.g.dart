@@ -55,13 +55,13 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
   final _$nomeAtom = Atom(name: '_CadastrarProjetoStoreBase.nome');
 
   @override
-  String get nome {
+  String? get nome {
     _$nomeAtom.reportRead();
     return super.nome;
   }
 
   @override
-  set nome(String value) {
+  set nome(String? value) {
     _$nomeAtom.reportWrite(value, super.nome, () {
       super.nome = value;
     });

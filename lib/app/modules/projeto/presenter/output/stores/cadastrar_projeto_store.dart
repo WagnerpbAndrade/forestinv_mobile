@@ -21,18 +21,18 @@ abstract class _CadastrarProjetoStoreBase with Store {
   final Project? projeto;
 
   @observable
-  String nome = '';
+  String? nome = '';
 
   @action
   void setNome(String value) => nome = value;
 
   @computed
-  bool get nomeIsValid => nome.length >= 6;
+  bool get nomeIsValid => nome != null && nome!.length >= 6;
   String? get nomeError {
-    if (nomeIsValid) {
+    if (nome != null && nomeIsValid) {
       return null;
-    } else if (nome.isEmpty) {
-      return 'Campo obrigatório';
+    } else if (nome!.isEmpty) {
+      return null;
     } else {
       return 'Nome muito curto';
     }
@@ -50,7 +50,7 @@ abstract class _CadastrarProjetoStoreBase with Store {
     if (areaIsValid) {
       return null;
     } else if (area.isEmpty) {
-      return 'Campo obrigatório';
+      return null;
     } else {
       return 'Área inválida';
     }
@@ -102,7 +102,7 @@ abstract class _CadastrarProjetoStoreBase with Store {
 
     final projeto = Project(
       uuid: authStore.user!.uid,
-      nome: nome,
+      nome: nome!,
       area: area,
       visibilidadeProjetoEnum: visibilidade!.description,
     );
@@ -126,7 +126,7 @@ abstract class _CadastrarProjetoStoreBase with Store {
     final projetoUpdate = Project(
       id: projeto!.id,
       uuid: authStore.user!.uid,
-      nome: nome,
+      nome: nome!,
       area: area,
       visibilidadeProjetoEnum: visibilidade!.description,
     );
