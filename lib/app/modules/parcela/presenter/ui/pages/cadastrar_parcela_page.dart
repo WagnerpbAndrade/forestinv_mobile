@@ -72,9 +72,9 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
             child: Card(
               clipBehavior: Clip.antiAlias,
               margin: const EdgeInsets.symmetric(horizontal: 32),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
+              // shape: RoundedRectangleBorder(
+              //   borderRadius: BorderRadius.circular(16),
+              // ),
               elevation: 8,
               child: Observer(
                 builder: (_) {

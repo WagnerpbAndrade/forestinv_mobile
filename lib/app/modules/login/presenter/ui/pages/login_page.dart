@@ -40,8 +40,8 @@ class _LoginPageState extends State<LoginPage> {
         child: SingleChildScrollView(
           child: Card(
             margin: const EdgeInsets.symmetric(horizontal: 32),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            // shape:
+            //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             elevation: 8,
             child: Padding(
               padding: const EdgeInsets.all(16),
