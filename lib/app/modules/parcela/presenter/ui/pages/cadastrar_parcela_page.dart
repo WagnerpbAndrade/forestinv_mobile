@@ -213,6 +213,9 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                               );
                             },
                           ),
+                          const SizedBox(
+                            height: 8,
+                          ),
                           const FieldTitle(
                             title: 'Data do plantio',
                             subtitle: 'Informe a data inicial do plantio',
@@ -239,6 +242,9 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                 );
                               },
                             ),
+                          ),
+                          const SizedBox(
+                            height: 8,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -269,6 +275,9 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                           maxLines: 1,
                                         );
                                       },
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
                                     ),
                                     const FieldTitle(title: 'Longitude'),
                                     Observer(
