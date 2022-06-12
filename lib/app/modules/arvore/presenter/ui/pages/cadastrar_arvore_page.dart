@@ -198,6 +198,9 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                             },
                           ),
                           EstadoArvoreField(cadastrarArvoreStore),
+                          const SizedBox(
+                            height: 8,
+                          ),
                           const FieldTitle(
                             title: 'Observação',
                             subtitle:

@@ -52,7 +52,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
     if (numeroArvoreIsValid) {
       return null;
     } else if (numeroArvore.isEmpty) {
-      return 'Campo obrigatório';
+      return null;
     }
   }
 
@@ -77,7 +77,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
     if (dapValid) {
       return null;
     } else if (dapText.isEmpty) {
-      return 'Campo obrigatório';
+      return null;
     } else {
       return 'DAP inválido';
     }
@@ -103,7 +103,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
     if (alturaValid) {
       return null;
     } else if (alturaText.isEmpty) {
-      return 'Campo obrigatório';
+      return null;
     } else {
       return 'Altura inválida';
     }
@@ -141,8 +141,6 @@ abstract class _CadastrarArvoreStoreBase with Store {
   String? get estadoArvoreError {
     if (estadoArvoreValid) {
       return null;
-    } else {
-      return 'Campo obrigatório';
     }
   }
 
