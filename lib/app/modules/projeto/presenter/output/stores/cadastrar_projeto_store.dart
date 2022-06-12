@@ -67,8 +67,6 @@ abstract class _CadastrarProjetoStoreBase with Store {
   String? get visibilidadeError {
     if (visibilidadeValid) {
       return null;
-    } else {
-      return 'Campo obrigatório';
     }
   }
 
