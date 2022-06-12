@@ -19,6 +19,23 @@ abstract class _CadastrarMedicaoStoreBase with Store {
       medicao = args?[0];
       nomeResponsavel = medicao!.nomeResponsavel;
       selectedDate = medicao!.dataMedicao;
+      numero = medicao!.numero.toString();
+    }
+  }
+
+  @observable
+  String numero = '';
+
+  @action
+  void setNumero(String value) => numero = value;
+
+  @computed
+  bool get numeroIsValid => numero.isNotEmpty;
+  String? get numeroError {
+    if (numeroIsValid) {
+      return null;
+    } else if (numero.isEmpty) {
+      return 'Campo obrigatório';
     }
   }
 
@@ -45,7 +62,7 @@ abstract class _CadastrarMedicaoStoreBase with Store {
   }
 
   @computed
-  bool get isFormValid => nomeResponsavelIsValid;
+  bool get isFormValid => nomeResponsavelIsValid && numeroIsValid;
 
   @computed
   Function? get cadastrarOnPressed =>
@@ -74,6 +91,7 @@ abstract class _CadastrarMedicaoStoreBase with Store {
 
     final medicaoSaved = Medicao(
       parcelaId: parcelaId,
+      numero: int.parse(numero),
       nomeResponsavel: nomeResponsavel,
       dataMedicao: selectedDate,
       anoMedicao: selectedDate!.year,
@@ -96,6 +114,7 @@ abstract class _CadastrarMedicaoStoreBase with Store {
 
     final medicaoUpdate = Medicao(
       id: medicao!.id,
+      numero: int.parse(numero),
       nomeResponsavel: nomeResponsavel,
       dataMedicao: selectedDate,
       anoMedicao: selectedDate!.year,

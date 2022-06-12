@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_elevated_button.dart';
@@ -75,7 +76,7 @@ class _CadastrarMedicaoPageState extends State<CadastrarMedicaoPage> {
                       child: Column(
                         children: const [
                           Text(
-                            'Salvando Parcela',
+                            'Salvando Medição',
                             style:
                                 TextStyle(fontSize: 18, color: Colors.purple),
                           ),
@@ -105,9 +106,34 @@ class _CadastrarMedicaoPageState extends State<CadastrarMedicaoPage> {
                             );
                           }),
                           const FieldTitle(
+                            title: 'Número da medição',
+                            subtitle: 'Informe um número identificador',
+                          ),
+                          Observer(builder: (_) {
+                            return TextFormField(
+                              initialValue: cadastrarMedicaoStore.numero,
+                              enabled: !cadastrarMedicaoStore.loading,
+                              decoration: InputDecoration(
+                                  border: const OutlineInputBorder(),
+                                  hintText: 'Exemplo: N° 10',
+                                  isDense: true,
+                                  errorText: cadastrarMedicaoStore.numeroError),
+                              onChanged: cadastrarMedicaoStore.setNumero,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              maxLines: 1,
+                              maxLength: 7,
+                            );
+                          }),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const FieldTitle(
                             title: 'Nome do responsável',
                             subtitle:
-                                'Informe o nome do responsável pela medicação',
+                                'Informe o nome do responsável pela medição',
                           ),
                           Observer(builder: (_) {
                             return TextFormField(
@@ -116,7 +142,6 @@ class _CadastrarMedicaoPageState extends State<CadastrarMedicaoPage> {
                               enabled: !cadastrarMedicaoStore.loading,
                               decoration: InputDecoration(
                                 border: const OutlineInputBorder(),
-                                hintText: 'João da Silva',
                                 isDense: true,
                                 errorText:
                                     cadastrarMedicaoStore.nomeResponsavelError,

@@ -9,6 +9,13 @@ part of 'cadastrar_medicao_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
+  Computed<bool>? _$numeroIsValidComputed;
+
+  @override
+  bool get numeroIsValid =>
+      (_$numeroIsValidComputed ??= Computed<bool>(() => super.numeroIsValid,
+              name: '_CadastrarMedicaoStoreBase.numeroIsValid'))
+          .value;
   Computed<bool>? _$nomeResponsavelIsValidComputed;
 
   @override
@@ -37,6 +44,21 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
           Computed<Function?>(() => super.editarOnPressed,
               name: '_CadastrarMedicaoStoreBase.editarOnPressed'))
       .value;
+
+  final _$numeroAtom = Atom(name: '_CadastrarMedicaoStoreBase.numero');
+
+  @override
+  String get numero {
+    _$numeroAtom.reportRead();
+    return super.numero;
+  }
+
+  @override
+  set numero(String value) {
+    _$numeroAtom.reportWrite(value, super.numero, () {
+      super.numero = value;
+    });
+  }
 
   final _$selectedDateAtom =
       Atom(name: '_CadastrarMedicaoStoreBase.selectedDate');
@@ -160,6 +182,17 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
       ActionController(name: '_CadastrarMedicaoStoreBase');
 
   @override
+  void setNumero(String value) {
+    final _$actionInfo = _$_CadastrarMedicaoStoreBaseActionController
+        .startAction(name: '_CadastrarMedicaoStoreBase.setNumero');
+    try {
+      return super.setNumero(value);
+    } finally {
+      _$_CadastrarMedicaoStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setSelectedDate(DateTime? value) {
     final _$actionInfo = _$_CadastrarMedicaoStoreBaseActionController
         .startAction(name: '_CadastrarMedicaoStoreBase.setSelectedDate');
@@ -184,12 +217,14 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
   @override
   String toString() {
     return '''
+numero: ${numero},
 selectedDate: ${selectedDate},
 nomeResponsavel: ${nomeResponsavel},
 loading: ${loading},
 error: ${error},
 savedMedicao: ${savedMedicao},
 updatedMedicao: ${updatedMedicao},
+numeroIsValid: ${numeroIsValid},
 nomeResponsavelIsValid: ${nomeResponsavelIsValid},
 isFormValid: ${isFormValid},
 cadastrarOnPressed: ${cadastrarOnPressed},

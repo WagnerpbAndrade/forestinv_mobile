@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/medicao_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/pages/cadastrar_medicao_page.dart';
+import 'package:forestinv_mobile/helper/extensions.dart';
 
 class MedicaoTile extends StatelessWidget {
   MedicaoTile({required this.medicao, this.onTap, required this.store});
@@ -22,7 +24,7 @@ class MedicaoTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.2,
+        height: MediaQuery.of(context).size.height * 0.15,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
@@ -31,13 +33,16 @@ class MedicaoTile extends StatelessWidget {
           elevation: 8,
           child: Row(
             children: [
-              SizedBox(
-                height: 70,
-                width: 70,
-                child: CachedNetworkImage(
-                  imageUrl:
-                      'https://static.thenounproject.com/png/194055-200.png',
-                  fit: BoxFit.cover,
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: SizedBox(
+                  height: 70,
+                  width: 70,
+                  child: CircleAvatar(
+                    backgroundColor: ColorsConst.secondary,
+                    foregroundColor: ColorsConst.textColorPrimary,
+                    child: Text(medicao.numero.toString()),
+                  ),
                 ),
               ),
               Expanded(
@@ -48,22 +53,26 @@ class MedicaoTile extends StatelessWidget {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'Ano ${medicao.dataMedicao!.year}',
-                        style: const TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
                       Text(
                         'Responsável: ${medicao.nomeResponsavel}',
                         style: const TextStyle(
-                          fontSize: 16,
+                          fontSize: 19,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.015,
+                      ),
+                      Text(
+                        'Medido em: ${medicao.dataMedicao?.formattedDate()}',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+
                       // Text(
                       //   'Idade ${medicao.idadeParcela.toString()} - '
                       //   'Plantio em ${medicao.dataPlantio.formattedDate()}',
