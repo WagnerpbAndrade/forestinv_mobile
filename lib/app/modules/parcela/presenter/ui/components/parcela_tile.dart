@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/parcela_store.dart';
@@ -23,7 +24,7 @@ class ParcelaTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.2,
+        height: MediaQuery.of(context).size.height * 0.15,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
@@ -32,13 +33,16 @@ class ParcelaTile extends StatelessWidget {
           elevation: 8,
           child: Row(
             children: [
-              SizedBox(
-                height: 70,
-                width: 70,
-                child: CachedNetworkImage(
-                  imageUrl:
-                      'https://static.thenounproject.com/png/194055-200.png',
-                  fit: BoxFit.cover,
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: SizedBox(
+                  height: 70,
+                  width: 70,
+                  child: CircleAvatar(
+                    backgroundColor: ColorsConst.secondary,
+                    foregroundColor: ColorsConst.textColorPrimary,
+                    child: Text(parcela.numero.toString()),
+                  ),
                 ),
               ),
               Expanded(
@@ -52,7 +56,7 @@ class ParcelaTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'N° ${parcela.numero}',
+                        '${parcela.idadeParcela.toString()} meses de idade',
                         style: const TextStyle(
                           fontSize: 19,
                           fontWeight: FontWeight.w700,
@@ -66,11 +70,10 @@ class ParcelaTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Idade ${parcela.idadeParcela.toString()} meses - '
                         'Plantio em ${parcela.dataPlantio.formattedDate()}',
                         style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
