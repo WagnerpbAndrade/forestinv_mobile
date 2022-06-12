@@ -32,11 +32,11 @@ class ArvoreTile extends StatelessWidget {
           elevation: 8,
           child: Row(
             children: [
-              SizedBox(
-                height: 70,
-                width: 70,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8),
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: SizedBox(
+                  height: 70,
+                  width: 70,
                   child: CircleAvatar(
                     backgroundColor: ColorsConst.secondary,
                     foregroundColor: ColorsConst.textColorPrimary,
