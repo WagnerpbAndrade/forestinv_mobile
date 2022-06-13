@@ -245,4 +245,9 @@ abstract class _HomeStoreBase with Store {
     Modular.to
         .pushNamed('${RouterConst.PROJECT_ROUTER}${RouterConst.REGRAS_ROUTER}');
   }
+
+  void goToAccountPage() {
+    Modular.to.pushNamed(
+        '${RouterConst.PROJECT_ROUTER}${RouterConst.ACCOUNT_ROUTER}');
+  }
 }

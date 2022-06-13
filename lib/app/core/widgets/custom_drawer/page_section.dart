@@ -22,7 +22,9 @@ class PageSection extends StatelessWidget {
               PageTile(
                 label: 'Minha Conta',
                 iconData: Icons.account_circle,
-                onTap: () {},
+                onTap: () {
+                  homeStore.goToAccountPage();
+                },
                 highlighted: false,
               ),
               PageTile(

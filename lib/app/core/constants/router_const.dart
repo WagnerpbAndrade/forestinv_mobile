@@ -6,6 +6,7 @@ class RouterConst {
   static String ADD_PROJECT_ROUTER = "/add_project";
   static String RECOVERY_PASSWORD_ROUTER = '/recover-password';
   static String SIGN_UP_ROUTER = '/sign-up';
+  static String ACCOUNT_ROUTER = '/account';
 
   static String CREATE_PARCELA_ROUTER = '/create-parcela';
 
@@ -22,4 +23,6 @@ class RouterConst {
   static String PROJECT_ROUTER_PAGE = '/page';
 
   static String OFFLINE_ROUTER_PAGE = '/offline';
+
+  static String EDIT_ACCOUNT_ROUTER_PAGE = '/edit-account';
 }

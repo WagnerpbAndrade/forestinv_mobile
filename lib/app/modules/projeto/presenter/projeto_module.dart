@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
+import 'package:forestinv_mobile/app/modules/account/account_module.dart';
 import 'package:forestinv_mobile/app/modules/arvore/arvore_module.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/medicao_module.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/parcela_module.dart';
@@ -51,5 +52,6 @@ class ProjetoModule extends Module {
     ModuleRoute(RouterConst.MEDICAO_ROUTER, module: MedicaoModule()),
     ModuleRoute(RouterConst.ARVORE_ROUTER, module: ArvoreModule()),
     ModuleRoute(RouterConst.REGRAS_ROUTER, module: RegraConsistenciaModule()),
+    ModuleRoute(RouterConst.ACCOUNT_ROUTER, module: AccountModule()),
   ];
 }
