@@ -26,7 +26,15 @@ abstract class _EditAccountStore with Store {
 
   @computed
   bool get nameValid => name.length >= 6;
-  String? get nameError => nameValid ? null : 'Campo obrigatório';
+  String? get nameError {
+    if (nameValid || name.isEmpty) {
+      return null;
+    } else if (name.length < 6) {
+      return 'Nome com menos de 6 caracteres';
+    } else {
+      return 'Campo obrigatório';
+    }
+  }
 
   @observable
   String pass1 = '';

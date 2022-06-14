@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: ReplaceRaisedButton(
                           color: Colors.green[600]!,
                           textColor: Colors.white,
-                          disabledColor: Colors.blue.withAlpha(120),
+                          disabledColor: Colors.green.withAlpha(120),
                           child: store.loadingGoogle
                               ? const CircularProgressIndicator(
                                   valueColor:

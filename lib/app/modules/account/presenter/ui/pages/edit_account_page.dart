@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/replace_raisedbutton.dart';
 import 'package:forestinv_mobile/app/modules/account/presenter/output/stores/edit_account_store.dart';
 
@@ -83,8 +84,8 @@ class EditAccountPage extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          color: Colors.orange,
-                          disabledColor: Colors.orange.withAlpha(100),
+                          color: ColorsConst.secondary,
+                          disabledColor: ColorsConst.secondary.withAlpha(100),
                           elevation: 0,
                           textColor: Colors.white,
                           child: store.loading
