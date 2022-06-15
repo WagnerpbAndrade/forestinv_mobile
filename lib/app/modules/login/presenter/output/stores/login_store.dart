@@ -72,9 +72,11 @@ abstract class _LoginStoreBase with Store {
 
   Future<void> _google() async {
     final usecase = Modular.get<LoginGoogleUsecase>();
+    final authStore = Modular.get<AuthStore>();
     final apiResponse = await usecase.loginGoogleSignIn();
     if (apiResponse.ok) {
       print(apiResponse.result);
+      authStore.setUser(apiResponse.result);
       Modular.to.popAndPushNamed(RouterConst.PROJECT_ROUTER);
     } else {
       error = apiResponse.message;

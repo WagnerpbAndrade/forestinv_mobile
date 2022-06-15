@@ -1,3 +1,6 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
+import 'package:forestinv_mobile/app/modules/login/infra/models/user_model.dart';
 import 'package:mobx/mobx.dart';
 
 part 'edit_account_store.g.dart';
@@ -6,17 +9,15 @@ class EditAccountStore = _EditAccountStore with _$EditAccountStore;
 
 abstract class _EditAccountStore with Store {
   _EditAccountStore() {
-    //user = userManagerStore.user;
-    //print(user);
-    //name = user.name;
-    //phone = user.phone;
-    //isSocialLogin = user.isSocialLogin;
+    user = authStore.user!;
+    print(user);
+    name = user.nome;
   }
 
   bool isSocialLogin = false;
-  //User user;
+  late UserModelFirebase user;
 
-  //final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
+  final AuthStore authStore = Modular.get();
 
   @observable
   String name = '';
@@ -72,9 +73,7 @@ abstract class _EditAccountStore with Store {
   Future<void> _save() async {
     loading = true;
 
-    // user.name = name;
-    // user.phone = phone;
-    // user.type = userType;
+    user.nome = name;
 
     // if (pass1.isNotEmpty) {
     //   user.password = pass1;
@@ -92,5 +91,5 @@ abstract class _EditAccountStore with Store {
     loading = false;
   }
 
-  //void logout() => userManagerStore.logout();
+  void logout() => authStore.logoutGoogle();
 }

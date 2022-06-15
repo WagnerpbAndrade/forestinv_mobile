@@ -33,7 +33,7 @@ class LoginFirebaseDataSourceImpl implements LoginFirebaseDatasource {
       print('Firebase Email: ${user.email}');
       print('Firebase Foto: ${user.photoURL}');
 
-      return ApiResponse.ok();
+      return ApiResponse.ok(result: UserModelFirebase.fromJson(user));
     } catch (error) {
       print('Firebase error $error');
       return ApiResponse.error(message: 'Não foi possível fazer o login');

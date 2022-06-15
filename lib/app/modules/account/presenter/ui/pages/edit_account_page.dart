@@ -18,9 +18,6 @@ class EditAccountPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Card(
             margin: const EdgeInsets.symmetric(horizontal: 32),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
             elevation: 8,
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -99,6 +96,30 @@ class EditAccountPage extends StatelessWidget {
                       );
                     },
                   ),
+                  // const SizedBox(height: 8),
+                  // Observer(
+                  //   builder: (_) {
+                  //     return SizedBox(
+                  //       height: 40,
+                  //       child: ReplaceRaisedButton(
+                  //         shape: RoundedRectangleBorder(
+                  //           borderRadius: BorderRadius.circular(20),
+                  //         ),
+                  //         color: Colors.red,
+                  //         disabledColor: Colors.red.withAlpha(100),
+                  //         elevation: 0,
+                  //         textColor: Colors.white,
+                  //         child: store.loading
+                  //             ? const CircularProgressIndicator(
+                  //                 valueColor:
+                  //                     AlwaysStoppedAnimation(Colors.white),
+                  //               )
+                  //             : const Text('Sair'),
+                  //         onPressed: () {},
+                  //       ),
+                  //     );
+                  //   },
+                  // ),
                 ],
               ),
             ),
