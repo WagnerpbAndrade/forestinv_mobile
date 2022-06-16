@@ -1,6 +1,10 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/modules/account/domain/usecases/update_password_usecase.dart';
+import 'package:forestinv_mobile/app/modules/account/domain/usecases/update_profile_usecase.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
+import 'package:forestinv_mobile/app/modules/login/domain/usecase/current_user_usecase.dart';
 import 'package:forestinv_mobile/app/modules/login/infra/models/user_model.dart';
+import 'package:forestinv_mobile/app/modules/login/presenter/output/stores/login_store.dart';
 import 'package:mobx/mobx.dart';
 
 part 'edit_account_store.g.dart';
@@ -73,20 +77,25 @@ abstract class _EditAccountStore with Store {
   Future<void> _save() async {
     loading = true;
 
+    final updateProfileUsecase = Modular.get<UpdateProfileUsecase>();
+    final updatePasswordUsecase = Modular.get<UpdatePasswordUsecase>();
+    final authStore = Modular.get<AuthStore>();
+    final currentUserUsercase = Modular.get<CurrentUserUsecase>();
+
     user.nome = name;
 
-    // if (pass1.isNotEmpty) {
-    //   user.password = pass1;
-    // } else {
-    //   user.password = null;
-    // }
+    if (pass1.isNotEmpty) {
+      final apiResponse = await updatePasswordUsecase.updatePassword(pass1);
+    }
 
-    // try {
-    //   await UserRepository().save(user);
-    //   userManagerStore.setUser(user);
-    // } catch (e) {
-    //   print(e);
-    // }
+    try {
+      await updateProfileUsecase.updateProfileName(name);
+      final currentUser = await currentUserUsercase.currentUser();
+      currentUser!.nome = name;
+      authStore.setUser(currentUser);
+    } catch (e) {
+      print(e);
+    }
 
     loading = false;
   }

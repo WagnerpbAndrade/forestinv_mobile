@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/replace_flatbutton.dart';
@@ -37,15 +38,19 @@ class AccountPageState extends State<AccountPage> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                            authStore.isLoggedIn
-                                ? authStore.user!.nome
-                                : 'Complete seu cadastro',
-                            style: const TextStyle(
-                              fontSize: 20,
-                              color: ColorsConst.primary,
-                              fontWeight: FontWeight.w900,
-                            ),
+                          Observer(
+                            builder: (_) {
+                              return Text(
+                                authStore.isLoggedIn
+                                    ? authStore.user!.nome
+                                    : 'Complete seu cadastro',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: ColorsConst.primary,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              );
+                            },
                           ),
                           Text(
                             authStore.user!.email,
