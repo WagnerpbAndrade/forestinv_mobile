@@ -21,7 +21,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
   String? projetoId;
 
   _CadastrarArvoreStoreBase({this.args}) {
-    projetoId = args?[1];
+    projetoId = args?[2];
     print('ProjetoId: $projetoId');
     if (args?[0] != null) {
       arvore = args?[0];

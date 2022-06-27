@@ -152,7 +152,7 @@ class ArvoreTile extends StatelessWidget {
     final success = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => CadastrarArvorePage(
-          args: [arvore, null],
+          args: [arvore, null, arvore.projetoId],
         ),
       ),
     );
