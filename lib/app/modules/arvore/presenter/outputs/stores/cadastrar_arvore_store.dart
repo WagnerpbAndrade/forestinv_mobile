@@ -300,7 +300,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
         if (dapAtual < dapAnterior) {
           print('Dap atual é menor');
           error =
-              'Erro de consistência: O dap atual é menor que o dap de ${arvoreResult.dataCriacao?.year}';
+              'Erro de consistência: O dap atual é menor que o dap de ${DateTime.now().year - 1}';
           setIsDapValid(false);
           return false;
         }
