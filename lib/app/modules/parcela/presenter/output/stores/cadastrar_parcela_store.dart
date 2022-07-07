@@ -5,6 +5,7 @@ import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/save_parcel
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/update_parcela_usecase.dart';
 import 'package:forestinv_mobile/helper/location_helper.dart';
 import 'package:mobx/mobx.dart';
+import 'package:time_machine/time_machine.dart';
 part 'cadastrar_parcela_store.g.dart';
 
 class CadastrarParcelaStore = _CadastrarParcelaStoreBase
@@ -211,12 +212,12 @@ abstract class _CadastrarParcelaStoreBase with Store {
   }
 
   int calcularIdadeParcela(DateTime dataPlantio) {
-    final difference = DateTime.now().difference(dataPlantio);
-    print('Difference: ${difference.inDays}');
+    final LocalDate a = LocalDate.today();
+    final LocalDate b = LocalDate.dateTime(dataPlantio);
+    final Period diff = b.periodSince(a);
+    print("years: ${diff.years}; months: ${diff.months}; days: ${diff.days}");
 
-    final inDays = (difference.inDays / 365).floor();
-
-    return inDays == 0 ? YEAR : inDays * YEAR;
+    return diff.years == 0 ? YEAR : (diff.years * YEAR * -1);
   }
 
   Future<void> getLatLong() async {
