@@ -4,6 +4,7 @@ import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/login/domain/usecase/login_google_usecase.dart';
 import 'package:forestinv_mobile/app/modules/login/domain/usecase/login_with_email_password_usecase.dart';
 import 'package:forestinv_mobile/app/modules/login/infra/models/user_model.dart';
+import 'package:forestinv_mobile/app/modules/regra_consistencia/presenter/outputs/stores/regra_consistencia_store.dart';
 import 'package:forestinv_mobile/helper/extensions.dart';
 import 'package:mobx/mobx.dart';
 
@@ -73,10 +74,13 @@ abstract class _LoginStoreBase with Store {
   Future<void> _google() async {
     final usecase = Modular.get<LoginGoogleUsecase>();
     final authStore = Modular.get<AuthStore>();
+    final regraStore = Modular.get<RegraConsistenciaStore>();
     final apiResponse = await usecase.loginGoogleSignIn();
     if (apiResponse.ok) {
       print(apiResponse.result);
       authStore.setUser(apiResponse.result);
+      final UserModelFirebase user = apiResponse.result;
+      await regraStore.salveAllRegrasByUser(user.uid);
       Modular.to.popAndPushNamed(RouterConst.PROJECT_ROUTER);
     } else {
       error = apiResponse.message;

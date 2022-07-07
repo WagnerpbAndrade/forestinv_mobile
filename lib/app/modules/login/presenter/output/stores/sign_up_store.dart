@@ -3,6 +3,7 @@ import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/login/domain/entities/sign_up_entity.dart';
 import 'package:forestinv_mobile/app/modules/login/domain/usecase/sign_up_usecase.dart';
 import 'package:forestinv_mobile/app/modules/login/infra/models/user_model.dart';
+import 'package:forestinv_mobile/app/modules/regra_consistencia/presenter/outputs/stores/regra_consistencia_store.dart';
 import 'package:forestinv_mobile/helper/extensions.dart';
 import 'package:mobx/mobx.dart';
 
@@ -126,12 +127,12 @@ abstract class _SignUpStoreBase with Store {
     final apiResponse = await usecase.createUser(signUpEntity);
 
     if (apiResponse.ok) {
-      //final regraStore = Modular.get<RegraConsistenciaStore>();
+      final regraStore = Modular.get<RegraConsistenciaStore>();
       final UserModelFirebase user = apiResponse.result;
       final auth = Modular.get<AuthStore>();
       auth.setUser(user);
-      //await regraStore.salveAllRegrasByUser(user.uid);
-      //Modular.to.pop();
+      await regraStore.salveAllRegrasByUser(user.uid);
+      Modular.to.pop();
     } else {
       setError(apiResponse.message!);
     }
