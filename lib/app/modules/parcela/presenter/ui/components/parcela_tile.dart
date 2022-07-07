@@ -24,7 +24,7 @@ class ParcelaTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.15,
+        height: MediaQuery.of(context).size.height * 0.18,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
@@ -63,14 +63,21 @@ class ParcelaTile extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Área ${parcela.area.toString()} m²',
+                        'Área: ${parcela.area.toString()} m²',
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
-                        'Plantio em ${parcela.dataPlantio.formattedDate()}',
+                        'Espaçamento: ${parcela.espacamento}',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        'Plantio em: ${parcela.dataPlantio.formattedDate()}',
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
