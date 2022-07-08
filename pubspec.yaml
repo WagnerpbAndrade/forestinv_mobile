@@ -19,7 +19,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  auth_buttons: ^2.0.4
+  auth_buttons: ^3.0.0
   brasil_fields: ^1.3.1
   cached_network_image: ^3.1.0
   cloud_firestore: ^3.1.8
@@ -42,21 +42,21 @@ dependencies:
     sdk: flutter
   flutter_mobx: ^2.0.1
   flutter_modular: ^3.3.1
-  flutter_secure_storage: ^4.2.1
-  font_awesome_flutter: ^9.1.0
+  flutter_secure_storage: 
+  font_awesome_flutter: ^10.1.0
   form_field_validator: ^1.1.0
-  geolocator: ^8.2.0
+  geolocator: ^9.0.0
   google_sign_in: ^5.2.3
   intl: ^0.17.0
   mask_text_input_formatter: ^2.1.0
   material_design_icons_flutter: ^5.0.6595
   material_floating_search_bar: ^0.3.6
   mobx: ^2.0.3
-  photo_view: ^0.13.0
+  photo_view: ^0.14.0
   rflutter_alert: ^2.0.4
-  share_plus: ^3.1.0
+  share_plus: 
   time_machine: ^0.9.17
-  toggle_switch: ^1.4.0
+  toggle_switch: ^2.0.1
 
 dev_dependencies:
   build_runner: ^2.0.6
@@ -64,7 +64,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mobx_codegen: ^2.0.2
-  mocktail: ^0.1.4
+  mocktail: ^0.3.0
 
 flutter:
   uses-material-design: true

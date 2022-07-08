@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/save_parcela_usecase.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/update_parcela_usecase.dart';
+import 'package:forestinv_mobile/app/modules/parcela/external/datasource/parcela_firestore_datasource.dart';
+import 'package:forestinv_mobile/app/modules/regra_consistencia/domain/entities/regra_consistencia.dart';
+import 'package:forestinv_mobile/app/modules/regra_consistencia/external/data_source/regra_firestore_datasource_impl.dart';
 import 'package:forestinv_mobile/helper/location_helper.dart';
 import 'package:mobx/mobx.dart';
 import 'package:time_machine/time_machine.dart';
@@ -158,6 +162,11 @@ abstract class _CadastrarParcelaStoreBase with Store {
       tipoParcelaEnum: 'Permanente',
     );
 
+    if (!await validarEspacamentoPorIdade(parcelaSaved)) {
+      loading = false;
+      return;
+    }
+
     try {
       await usecase.call(parcelaSaved);
       savedParcela = true;
@@ -195,6 +204,46 @@ abstract class _CadastrarParcelaStoreBase with Store {
     }
 
     loading = false;
+  }
+
+  Future<bool> validarEspacamentoPorIdade(final Parcela parcela) async {
+    final datasource = Modular.get<ParcelaFirestoreDatasourceImpl>();
+    final regraDatasource = Modular.get<RegraFirestoreDatasourceImpl>();
+    final authStore = Modular.get<AuthStore>();
+
+    final responseRegra = await regraDatasource.regraEstaAtiva(
+        uuid: authStore.user!.uid,
+        validacao: ValidacaoConsistenciaEnum.VESPPARCELADIFIDADE);
+
+    if (responseRegra.ok && responseRegra.result == true) {
+      print('Regra >> VESPPARCELADIFIDADE << ativa? ${responseRegra.result}');
+      final List<Parcela> parcelasList =
+          await datasource.listAllByProject(parcela.projetoId);
+      if (parcelasList.isNotEmpty) {
+        print('Parcelas size: ${parcelasList.length}');
+
+        if (!isValidEspacamentos(parcela, parcelasList)) {
+          print('Espacamento diferente');
+          error =
+              'Erro de consistência: O espaçamento não pode ser diferente das outras parcelas em idades diferentes';
+          return false;
+        }
+      }
+    }
+    print('Espacamento igual');
+    // setIsDapValid(true);
+    return true;
+  }
+
+  bool isValidEspacamentos(
+      final Parcela parcela, final List<Parcela> parcelasList) {
+    for (final element in parcelasList) {
+      if (element.idadeParcela != parcela.idadeParcela &&
+          element.espacamento != parcela.espacamento) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @action

@@ -10,11 +10,12 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: const [
         GlobalWidgetsLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate
+        GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: const [
         Locale('pt', 'BR'),
       ],
+      locale: const Locale('pt'),
       debugShowCheckedModeBanner: false,
       title: 'ForestInv',
       theme: CustomTheme.apply().copyWith(
