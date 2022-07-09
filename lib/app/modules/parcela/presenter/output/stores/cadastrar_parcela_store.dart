@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/save_parcela_usecase.dart';
@@ -196,6 +197,11 @@ abstract class _CadastrarParcelaStoreBase with Store {
       tipoParcelaEnum: 'Permanente',
     );
 
+    if (!await validarEspacamentoPorIdade(parcelaUpdated)) {
+      loading = false;
+      return;
+    }
+
     try {
       await usecase.call(parcelaUpdated);
       updatedParcela = true;
@@ -225,7 +231,7 @@ abstract class _CadastrarParcelaStoreBase with Store {
         if (!isValidEspacamentos(parcela, parcelasList)) {
           print('Espacamento diferente');
           error =
-              'Erro de consistência: O espaçamento não pode ser diferente das outras parcelas em idades diferentes';
+              'Erro de consistência: Espaçamento diferente das outras parcelas';
           return false;
         }
       }
@@ -238,8 +244,7 @@ abstract class _CadastrarParcelaStoreBase with Store {
   bool isValidEspacamentos(
       final Parcela parcela, final List<Parcela> parcelasList) {
     for (final element in parcelasList) {
-      if (element.idadeParcela != parcela.idadeParcela &&
-          element.espacamento != parcela.espacamento) {
+      if (element.espacamento != parcela.espacamento) {
         return false;
       }
     }

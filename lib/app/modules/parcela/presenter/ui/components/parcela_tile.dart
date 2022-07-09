@@ -56,7 +56,7 @@ class ParcelaTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '${parcela.idadeParcela.toString()} meses de idade',
+                        'Número do talhão: ${parcela.numTalhao.toString()}',
                         style: const TextStyle(
                           fontSize: 19,
                           fontWeight: FontWeight.w700,

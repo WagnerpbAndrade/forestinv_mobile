@@ -93,4 +93,10 @@ class HerokuParcelaDatasourceImpl implements ParcelaDatasource {
     // TODO: implement getById
     throw UnimplementedError();
   }
+
+  @override
+  Future<ApiResponse> obterUltimaParcelaByProjectId(String projectId) {
+    // TODO: implement obterUltimaParcelaByProjectId
+    throw UnimplementedError();
+  }
 }

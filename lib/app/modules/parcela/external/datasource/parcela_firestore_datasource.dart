@@ -138,4 +138,22 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
       return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
     }
   }
+
+  @override
+  Future<ApiResponse> obterUltimaParcelaByProjectId(
+      final String projectId) async {
+    try {
+      final querySnapshot = await _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
+          .where('projetoId', isEqualTo: projectId)
+          .orderBy('dataPlantio', descending: true)
+          .limit(1)
+          .get();
+      return ApiResponse.ok(
+          result: Parcela.fromMap(querySnapshot.docs.first.data()));
+    } catch (e) {
+      print('ParcelaFirestoreDatasourceImpl-obterUltimaParcelaByProjectId: $e');
+      return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
+    }
+  }
 }

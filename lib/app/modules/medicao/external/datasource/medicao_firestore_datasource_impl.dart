@@ -145,4 +145,22 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
       return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
     }
   }
+
+  @override
+  Future<ApiResponse> obterUltimaMedicaoByParcelaId(
+      final String parcelaId) async {
+    try {
+      final querySnapshot = await _firestore
+          .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
+          .where('parcelaId', isEqualTo: parcelaId)
+          .orderBy('anoMedicao', descending: true)
+          .limit(1)
+          .get();
+      return ApiResponse.ok(
+          result: Medicao.fromMap(querySnapshot.docs.first.data()));
+    } catch (e) {
+      print('ParcelaFirestoreDatasourceImpl-obterUltimaMedicaoByParcelaId: $e');
+      return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
+    }
+  }
 }

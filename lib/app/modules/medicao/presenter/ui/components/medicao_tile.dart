@@ -56,23 +56,25 @@ class MedicaoTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Responsável: ${medicao.nomeResponsavel}',
+                        'Ano de Medição: ${medicao.anoMedicao}',
                         style: const TextStyle(
                           fontSize: 19,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.015,
                       ),
                       Text(
-                        'Medido em: ${medicao.dataMedicao?.formattedDate()}',
+                        'Responsável: ${medicao.nomeResponsavel}',
                         style: const TextStyle(
                           fontSize: 16,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.015,
+                      ),
                       // Text(
                       //   'Idade ${medicao.idadeParcela.toString()} - '
                       //   'Plantio em ${medicao.dataPlantio.formattedDate()}',

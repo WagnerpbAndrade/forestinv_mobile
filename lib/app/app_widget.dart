@@ -15,7 +15,7 @@ class AppWidget extends StatelessWidget {
       supportedLocales: const [
         Locale('pt', 'BR'),
       ],
-      locale: const Locale('pt'),
+      locale: const Locale('pt_BR'),
       debugShowCheckedModeBanner: false,
       title: 'ForestInv',
       theme: CustomTheme.apply().copyWith(

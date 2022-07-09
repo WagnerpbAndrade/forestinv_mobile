@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/save_medicao_usecase.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/update_medicao_usecase.dart';
+import 'package:forestinv_mobile/app/modules/medicao/external/datasource/medicao_firestore_datasource_impl.dart';
+import 'package:forestinv_mobile/app/modules/regra_consistencia/domain/entities/regra_consistencia.dart';
+import 'package:forestinv_mobile/app/modules/regra_consistencia/external/data_source/regra_firestore_datasource_impl.dart';
 import 'package:mobx/mobx.dart';
 
 part 'cadastrar_medicao_store.g.dart';
@@ -97,6 +101,11 @@ abstract class _CadastrarMedicaoStoreBase with Store {
       anoMedicao: selectedDate!.year,
     );
 
+    if (!await validarMedicoesPorIdade(medicaoSaved)) {
+      loading = false;
+      return;
+    }
+
     try {
       await usecase.call(medicaoSaved);
       savedMedicao = true;
@@ -120,6 +129,11 @@ abstract class _CadastrarMedicaoStoreBase with Store {
       anoMedicao: selectedDate!.year,
     );
 
+    if (!await validarMedicoesPorIdade(medicaoUpdate)) {
+      loading = false;
+      return;
+    }
+
     try {
       await usecase.call(medicaoUpdate);
       updatedMedicao = true;
@@ -128,6 +142,43 @@ abstract class _CadastrarMedicaoStoreBase with Store {
     }
 
     loading = false;
+  }
+
+  Future<bool> validarMedicoesPorIdade(final Medicao medicao) async {
+    final datasource = Modular.get<MedicaoFirestoreDatasourceImpl>();
+    final regraDatasource = Modular.get<RegraFirestoreDatasourceImpl>();
+    final authStore = Modular.get<AuthStore>();
+
+    final responseRegra = await regraDatasource.regraEstaAtiva(
+        uuid: authStore.user!.uid,
+        validacao: ValidacaoConsistenciaEnum.VIDADEDOISMENOSIDADEUMIGUALAUM);
+
+    if (responseRegra.ok && responseRegra.result == true) {
+      print(
+          'Regra >> VIDADEDOISMENOSIDADEUMIGUALAUM << ativa? ${responseRegra.result}');
+      final apiResponse =
+          await datasource.obterUltimaMedicaoByParcelaId(medicao.parcelaId);
+      if (apiResponse.ok && apiResponse.result != null) {
+        final Medicao medicaoAnterior = apiResponse.result;
+        final anoAtual = medicao.anoMedicao;
+        final anoAnterior = medicaoAnterior.anoMedicao;
+        print('anoAtual=$anoAtual <-> anoAnterior=$anoAnterior');
+
+        try {
+          if ((anoAtual! - anoAnterior!) != 1) {
+            print('Idade da medicao atual maior que 1 ano');
+            error =
+                'Erro de consistência: A diferença entre Medições precisa ser de 1 ano';
+            return false;
+          }
+        } catch (e) {
+          error =
+              'Erro ao verificar regra de consistência da idade das Medições';
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   @action
