@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
+import 'package:forestinv_mobile/app/core/widgets/custom_card_list.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/medicao_store.dart';
@@ -22,14 +24,14 @@ class MedicaoTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.35,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           elevation: 8,
-          child: Expanded(
+          child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 8,
@@ -39,159 +41,63 @@ class MedicaoTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Column(
-                        children: [
-                          PopupMenuButton<MenuChoice>(
-                            onSelected: (choice) {
-                              switch (choice.index) {
-                                case 0:
-                                  editMedicao(context);
-                                  break;
-                                case 1:
-                                  deleteMedicao(context);
-                                  break;
-                              }
-                            },
-                            icon: const Icon(
-                              Icons.more_vert,
-                              size: 20,
-                              color: Colors.purple,
-                            ),
-                            itemBuilder: (_) {
-                              return choices
-                                  .map(
-                                    (choice) => PopupMenuItem<MenuChoice>(
-                                      value: choice,
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            choice.iconData,
-                                            size: 20,
-                                            color: Colors.purple,
-                                          ),
-                                          const SizedBox(width: 8),
-                                          Text(
-                                            choice.title,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.purple,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                  .toList();
-                            },
+                  _getPopUpMenuItem(context),
+                  CustomCardList(
+                    titulo: 'Identificador',
+                    message: '${medicao.identificador}',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomCardList(
+                    titulo: 'Descrição',
+                    message: '${medicao.descricao}',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomCardList(
+                    titulo: 'Data da medição',
+                    message: '${medicao.dataMedicao!.formattedDate()}',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomCardList(
+                    titulo: 'Responsável',
+                    message: '${medicao.nomeResponsavel}',
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomCardList(
+                    titulo: 'Próxima medição a partir de',
+                    message: '${medicao.getProximaMedicao().formattedDate()}',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          child: Text(
+                            'Localização',
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Identificador',
-                        style: TextStyle(
-                          fontSize: 18,
                         ),
-                      ),
-                      Text(
-                        '${medicao.identificador}',
-                        style: const TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w700,
+                        IconButton(
+                          onPressed: () {
+                            print('natalia nerd');
+                          },
+                          icon: const Icon(
+                            Icons.map,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.015,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Descrição',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        '${medicao.descricao}',
-                        style: const TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.015,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Data da medição',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        '${medicao.dataMedicao!.formattedDate()}',
-                        style: const TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.015,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Responsável',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        '${medicao.nomeResponsavel}',
-                        style: const TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.03,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Próxima medição a partir de',
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        '${medicao.getProximaMedicao().formattedDate()}',
-                        style: const TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -202,7 +108,36 @@ class MedicaoTile extends StatelessWidget {
     );
   }
 
-  Future<void> editMedicao(BuildContext context) async {
+  Widget _getRowInfo(
+      final BuildContext context, final String titulo, final String valor) {
+    return Container(
+      padding: const EdgeInsets.only(left: 8, right: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            child: Text(
+              titulo,
+            ),
+          ),
+          SizedBox(
+            child: Text(
+              valor,
+              maxLines: 3,
+              textAlign: TextAlign.right,
+              style: const TextStyle(
+                overflow: TextOverflow.fade,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> editMedicao(final BuildContext context) async {
     final success = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => CadastrarMedicaoPage(
@@ -213,21 +148,78 @@ class MedicaoTile extends StatelessWidget {
     if (success != null && success) store.refresh();
   }
 
-  void deleteMedicao(BuildContext context) {
+  void deleteMedicao(final BuildContext context) {
     showDialog(
-        context: context,
-        builder: (_) => DialogPlatform(
-              title: 'Excluído',
-              content:
-                  'Confirmar a exclusão da medição ano ${medicao.dataMedicao!.year}?',
-              textNoButton: 'Não',
-              textYesButton: 'Sim',
-              actionNo: () => Navigator.of(context).pop(),
-              actionYes: () async {
-                store.deleteMedicao(medicao.id);
-                Navigator.of(context).pop();
-              },
-            ));
+      context: context,
+      builder: (_) => DialogPlatform(
+        title: 'Excluído',
+        content:
+            'Confirmar a exclusão da medição ano ${medicao.dataMedicao!.year}?',
+        textNoButton: 'Não',
+        textYesButton: 'Sim',
+        actionNo: () => Navigator.of(context).pop(),
+        actionYes: () async {
+          store.deleteMedicao(medicao.id);
+          Navigator.of(context).pop();
+        },
+      ),
+    );
+  }
+
+  Widget _getPopUpMenuItem(final BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        PopupMenuButton<MenuChoice>(
+          position: PopupMenuPosition.under,
+          onSelected: (choice) {
+            switch (choice.index) {
+              case 0:
+                editMedicao(context);
+                break;
+              case 1:
+                deleteMedicao(context);
+                break;
+            }
+          },
+          padding: const EdgeInsets.all(0),
+          icon: const Align(
+            alignment: Alignment.centerRight,
+            child: Icon(
+              Icons.more_vert,
+              size: 20,
+              color: ColorsConst.primary,
+            ),
+          ),
+          itemBuilder: (_) {
+            return choices
+                .map(
+                  (choice) => PopupMenuItem<MenuChoice>(
+                    value: choice,
+                    child: Row(
+                      children: [
+                        Icon(
+                          choice.iconData,
+                          size: 20,
+                          color: ColorsConst.primary,
+                        ),
+                        Text(
+                          choice.title,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: ColorsConst.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+                .toList();
+          },
+        ),
+      ],
+    );
   }
 }
 
