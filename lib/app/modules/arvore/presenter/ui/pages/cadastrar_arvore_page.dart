@@ -1,3 +1,4 @@
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -126,6 +127,7 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                             builder: (_) {
                               return TextFormField(
                                 initialValue: cadastrarArvoreStore.numeroArvore,
+                                // ignore: avoid_bool_literals_in_conditional_expressions
                                 enabled: editing
                                     ? false
                                     : !cadastrarArvoreStore.loading,
@@ -156,24 +158,31 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                                 enabled: !cadastrarArvoreStore.loading,
                                 decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
-                                  hintText: 'Exemplo: 100 cm',
+                                  hintText: 'Exemplo: 100',
                                   suffix: const Text('cm'),
                                   isDense: true,
                                   errorText: cadastrarArvoreStore.dapError,
                                 ),
                                 keyboardType: TextInputType.number,
+                                textAlign: TextAlign.right,
                                 onChanged: cadastrarArvoreStore.setDapText,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  TextInputMask(
+                                    mask: '9+999.99',
+                                    //placeholder: '0',
+                                    maxPlaceHolders: 3,
+                                    reverse: true,
+                                  ),
                                 ],
                                 maxLines: 1,
-                                maxLength: 7,
+                                maxLength: 6,
                               );
                             },
                           ),
                           const FieldTitle(
                             title: 'Altura total',
-                            subtitle: 'Informe a altura total em centímetros',
+                            subtitle: 'Informe a altura total em metros',
                           ),
                           Observer(
                             builder: (_) {
@@ -182,18 +191,25 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                                 enabled: !cadastrarArvoreStore.loading,
                                 decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
-                                  hintText: 'Exemplo: 100 cm',
-                                  suffix: const Text('cm'),
+                                  hintText: 'Exemplo: 100',
+                                  suffix: const Text('m'),
                                   isDense: true,
                                   errorText: cadastrarArvoreStore.alturaError,
                                 ),
                                 keyboardType: TextInputType.number,
+                                textAlign: TextAlign.right,
                                 onChanged: cadastrarArvoreStore.setAlturaText,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.digitsOnly,
+                                  TextInputMask(
+                                    mask: '9+999.99',
+                                    //placeholder: '0',
+                                    maxPlaceHolders: 3,
+                                    reverse: true,
+                                  ),
                                 ],
                                 maxLines: 1,
-                                maxLength: 7,
+                                maxLength: 5,
                               );
                             },
                           ),

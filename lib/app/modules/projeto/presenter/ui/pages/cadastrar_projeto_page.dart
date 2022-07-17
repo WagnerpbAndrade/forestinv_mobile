@@ -148,10 +148,11 @@ class _CadastrarProjetoPageState extends State<CadastrarProjetoPage> {
                                 inputFormatters: [
                                   FilteringTextInputFormatter.digitsOnly,
                                   TextInputMask(
-                                      mask: '9+999.99',
-                                      //placeholder: '0',
-                                      maxPlaceHolders: 3,
-                                      reverse: true),
+                                    mask: '9+999.99',
+                                    //placeholder: '0',
+                                    maxPlaceHolders: 3,
+                                    reverse: true,
+                                  ),
                                 ],
                                 maxLines: 1,
                                 maxLength: 9,
