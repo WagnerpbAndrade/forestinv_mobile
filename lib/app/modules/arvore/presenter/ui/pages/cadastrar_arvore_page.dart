@@ -244,75 +244,115 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    const FieldTitle(title: 'Latitude'),
-                                    Observer(
-                                      builder: (_) {
-                                        return TextFormField(
-                                          enabled: false,
-                                          decoration: InputDecoration(
-                                            border: const OutlineInputBorder(),
-                                            isDense: true,
-                                            label: Text(
-                                              cadastrarArvoreStore.latitude,
-                                              style: const TextStyle(
-                                                color: Colors.black,
+                                    Column(
+                                      children: [
+                                        const FieldTitle(title: 'Latitude'),
+                                        Observer(
+                                          builder: (_) {
+                                            return Container(
+                                              height: 40,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.27,
+                                              child: TextFormField(
+                                                enabled: false,
+                                                decoration: InputDecoration(
+                                                  border:
+                                                      const OutlineInputBorder(),
+                                                  isDense: true,
+                                                  label: Text(
+                                                    cadastrarArvoreStore
+                                                        .latitude,
+                                                    style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ),
+                                                keyboardType:
+                                                    TextInputType.text,
+                                                onChanged: cadastrarArvoreStore
+                                                    .setLatitude,
+                                                maxLines: 1,
                                               ),
-                                            ),
-                                          ),
-                                          keyboardType: TextInputType.text,
-                                          onChanged:
-                                              cadastrarArvoreStore.setLatitude,
-                                          maxLines: 1,
-                                        );
-                                      },
+                                            );
+                                          },
+                                        ),
+                                      ],
                                     ),
-                                    const FieldTitle(title: 'Longitude'),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.01,
+                                    ),
+                                    Column(
+                                      children: [
+                                        const FieldTitle(title: 'Longitude'),
+                                        Observer(
+                                          builder: (_) {
+                                            return Container(
+                                              height: 40,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.27,
+                                              child: TextFormField(
+                                                enabled: false,
+                                                decoration: InputDecoration(
+                                                  border:
+                                                      const OutlineInputBorder(),
+                                                  isDense: true,
+                                                  label: Text(
+                                                    cadastrarArvoreStore
+                                                        .longitude,
+                                                    style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ),
+                                                keyboardType:
+                                                    TextInputType.text,
+                                                onChanged: cadastrarArvoreStore
+                                                    .setLongitude,
+                                                maxLines: 1,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.01,
+                                    ),
                                     Observer(
                                       builder: (_) {
-                                        return TextFormField(
-                                          enabled: false,
-                                          decoration: InputDecoration(
-                                            border: const OutlineInputBorder(),
-                                            isDense: true,
-                                            label: Text(
-                                              cadastrarArvoreStore.longitude,
-                                              style: const TextStyle(
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ),
-                                          keyboardType: TextInputType.text,
-                                          onChanged:
-                                              cadastrarArvoreStore.setLongitude,
-                                          maxLines: 1,
+                                        return CustomElevatedButton(
+                                          onPressed:
+                                              cadastrarArvoreStore.getLatLong,
+                                          child: cadastrarArvoreStore
+                                                  .loadingLatLong
+                                              ? const CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation(
+                                                          Colors.white),
+                                                )
+                                              : const Text(
+                                                  'GPS',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
                                         );
                                       },
                                     ),
                                   ],
                                 ),
                               ),
-                              Observer(builder: (_) {
-                                return GestureDetector(
-                                  onTap: () =>
-                                      cadastrarArvoreStore.getLatLong(),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8),
-                                    child: !cadastrarArvoreStore.loadingLatLong
-                                        ? const Icon(
-                                            Icons.location_on,
-                                            size: 48,
-                                          )
-                                        : const CircularProgressIndicator(
-                                            valueColor: AlwaysStoppedAnimation(
-                                                ColorsConst.secondary),
-                                          ),
-                                  ),
-                                );
-                              }),
                             ],
                           ),
                           Observer(
