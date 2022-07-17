@@ -95,10 +95,13 @@ class ProjetoTile extends StatelessWidget {
                 break;
             }
           },
-          icon: const Icon(
-            Icons.more_vert,
-            size: 20,
-            color: Colors.purple,
+          icon: const Align(
+            alignment: Alignment.centerRight,
+            child: Icon(
+              Icons.more_vert,
+              size: 20,
+              color: ColorsConst.primary,
+            ),
           ),
           itemBuilder: (_) {
             return choices

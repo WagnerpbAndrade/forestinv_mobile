@@ -154,7 +154,6 @@ class MedicaoTile extends StatelessWidget {
                 break;
             }
           },
-          padding: const EdgeInsets.all(0),
           icon: const Align(
             alignment: Alignment.centerRight,
             child: Icon(
