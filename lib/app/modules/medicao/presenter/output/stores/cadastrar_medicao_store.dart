@@ -8,6 +8,7 @@ import 'package:forestinv_mobile/app/modules/medicao/external/datasource/medicao
 import 'package:forestinv_mobile/app/modules/regra_consistencia/domain/entities/regra_consistencia.dart';
 import 'package:forestinv_mobile/app/modules/regra_consistencia/external/data_source/regra_firestore_datasource_impl.dart';
 import 'package:mobx/mobx.dart';
+import 'package:forestinv_mobile/helper/extensions.dart';
 
 part 'cadastrar_medicao_store.g.dart';
 
@@ -146,6 +147,7 @@ abstract class _CadastrarMedicaoStoreBase with Store {
 
     final medicaoUpdate = Medicao(
       id: medicao!.id,
+      parcelaId: medicao!.parcelaId,
       identificador: identificador,
       nomeResponsavel: nomeResponsavel,
       descricao: descricao,
@@ -184,15 +186,18 @@ abstract class _CadastrarMedicaoStoreBase with Store {
           await datasource.obterUltimaMedicaoByParcelaId(medicao.parcelaId);
       if (apiResponse.ok && apiResponse.result != null) {
         final Medicao medicaoAnterior = apiResponse.result;
-        final anoAtual = medicao.anoMedicao;
-        final anoAnterior = medicaoAnterior.anoMedicao;
+        final anoAtual = medicao.dataMedicao;
+        final anoAnterior = medicaoAnterior.dataMedicao;
         print('anoAtual=$anoAtual <-> anoAnterior=$anoAnterior');
 
+        final diffIdade = _diffMedicaoAtualMenosAnterior(
+            medicao.dataMedicao, medicaoAnterior.dataMedicao);
+
         try {
-          if ((anoAtual! - anoAnterior!) != 1) {
+          if (diffIdade != 1) {
             print('Idade da medicao atual maior que 1 ano');
             error =
-                'Erro de consistência: A diferença entre Medições precisa ser de 1 ano';
+                'Erro de consistência: A diferença entre Medições precisa ser de 1 ano. Data aproximada para a próxima medição: ${DateTime(medicaoAnterior.dataMedicao!.year + 1, medicaoAnterior.dataMedicao!.month, medicaoAnterior.dataMedicao!.day).formattedDate()}';
             return false;
           }
         } catch (e) {
@@ -203,6 +208,15 @@ abstract class _CadastrarMedicaoStoreBase with Store {
       }
     }
     return true;
+  }
+
+  int _diffMedicaoAtualMenosAnterior(
+      DateTime? medicaoAtual, DateTime? dataAnterior) {
+    final Duration duration = medicaoAtual!.difference(dataAnterior!);
+    final int differenceInDays = (duration.inDays / 365).floor();
+    final differenceInYears = (duration.inDays / 365).floor();
+    print('years: $differenceInYears');
+    return differenceInYears;
   }
 
   @action
