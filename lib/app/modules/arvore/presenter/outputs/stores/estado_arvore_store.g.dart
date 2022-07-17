@@ -6,10 +6,11 @@ part of 'estado_arvore_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$EstadoArvoreStore on _EstadoArvoreStoreBase, Store {
-  final _$errorAtom = Atom(name: '_EstadoArvoreStoreBase.error');
+  late final _$errorAtom =
+      Atom(name: '_EstadoArvoreStoreBase.error', context: context);
 
   @override
   String? get error {
@@ -24,8 +25,8 @@ mixin _$EstadoArvoreStore on _EstadoArvoreStoreBase, Store {
     });
   }
 
-  final _$_EstadoArvoreStoreBaseActionController =
-      ActionController(name: '_EstadoArvoreStoreBase');
+  late final _$_EstadoArvoreStoreBaseActionController =
+      ActionController(name: '_EstadoArvoreStoreBase', context: context);
 
   @override
   void setEstadoArvore(List<EstadoArvore> estados) {

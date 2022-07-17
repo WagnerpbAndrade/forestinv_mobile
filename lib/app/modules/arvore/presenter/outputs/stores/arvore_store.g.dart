@@ -6,7 +6,7 @@ part of 'arvore_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ArvoreStore on _ArvoreStoreBase, Store {
   Computed<bool>? _$showProgressComputed;
@@ -17,7 +17,8 @@ mixin _$ArvoreStore on _ArvoreStoreBase, Store {
               name: '_ArvoreStoreBase.showProgress'))
           .value;
 
-  final _$errorAtom = Atom(name: '_ArvoreStoreBase.error');
+  late final _$errorAtom =
+      Atom(name: '_ArvoreStoreBase.error', context: context);
 
   @override
   String? get error {
@@ -32,7 +33,8 @@ mixin _$ArvoreStore on _ArvoreStoreBase, Store {
     });
   }
 
-  final _$loadingAtom = Atom(name: '_ArvoreStoreBase.loading');
+  late final _$loadingAtom =
+      Atom(name: '_ArvoreStoreBase.loading', context: context);
 
   @override
   bool get loading {
@@ -47,16 +49,16 @@ mixin _$ArvoreStore on _ArvoreStoreBase, Store {
     });
   }
 
-  final _$deleteArvoreAsyncAction =
-      AsyncAction('_ArvoreStoreBase.deleteArvore');
+  late final _$deleteArvoreAsyncAction =
+      AsyncAction('_ArvoreStoreBase.deleteArvore', context: context);
 
   @override
   Future<void> deleteArvore(dynamic arvoreId) {
     return _$deleteArvoreAsyncAction.run(() => super.deleteArvore(arvoreId));
   }
 
-  final _$_ArvoreStoreBaseActionController =
-      ActionController(name: '_ArvoreStoreBase');
+  late final _$_ArvoreStoreBaseActionController =
+      ActionController(name: '_ArvoreStoreBase', context: context);
 
   @override
   void addNewArvores(List<Arvore> newArvores) {

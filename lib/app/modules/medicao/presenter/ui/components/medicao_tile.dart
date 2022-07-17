@@ -24,7 +24,7 @@ class MedicaoTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.15,
+        height: MediaQuery.of(context).size.height * 0.2,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
@@ -41,7 +41,7 @@ class MedicaoTile extends StatelessWidget {
                   child: CircleAvatar(
                     backgroundColor: ColorsConst.secondary,
                     foregroundColor: ColorsConst.textColorPrimary,
-                    child: Text(medicao.numero.toString()),
+                    child: Text(medicao.identificador),
                   ),
                 ),
               ),
@@ -56,9 +56,16 @@ class MedicaoTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Ano de Medição: ${medicao.anoMedicao}',
+                        'Identificador: ${medicao.identificador}',
                         style: const TextStyle(
                           fontSize: 19,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Text(
+                        'Descrição: ${medicao.descricao}',
+                        style: const TextStyle(
+                          fontSize: 16,
                           fontWeight: FontWeight.w700,
                         ),
                       ),

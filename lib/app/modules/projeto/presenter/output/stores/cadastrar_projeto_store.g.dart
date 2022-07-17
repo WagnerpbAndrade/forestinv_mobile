@@ -6,7 +6,7 @@ part of 'cadastrar_projeto_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
   Computed<bool>? _$nomeIsValidComputed;
@@ -52,7 +52,8 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
               name: '_CadastrarProjetoStoreBase.editarOnPressed'))
       .value;
 
-  final _$nomeAtom = Atom(name: '_CadastrarProjetoStoreBase.nome');
+  late final _$nomeAtom =
+      Atom(name: '_CadastrarProjetoStoreBase.nome', context: context);
 
   @override
   String? get nome {
@@ -67,7 +68,8 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
     });
   }
 
-  final _$areaAtom = Atom(name: '_CadastrarProjetoStoreBase.area');
+  late final _$areaAtom =
+      Atom(name: '_CadastrarProjetoStoreBase.area', context: context);
 
   @override
   String get area {
@@ -82,8 +84,8 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
     });
   }
 
-  final _$visibilidadeAtom =
-      Atom(name: '_CadastrarProjetoStoreBase.visibilidade');
+  late final _$visibilidadeAtom =
+      Atom(name: '_CadastrarProjetoStoreBase.visibilidade', context: context);
 
   @override
   Visibilidade? get visibilidade {
@@ -98,7 +100,8 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
     });
   }
 
-  final _$loadingAtom = Atom(name: '_CadastrarProjetoStoreBase.loading');
+  late final _$loadingAtom =
+      Atom(name: '_CadastrarProjetoStoreBase.loading', context: context);
 
   @override
   bool get loading {
@@ -113,7 +116,8 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
     });
   }
 
-  final _$errorAtom = Atom(name: '_CadastrarProjetoStoreBase.error');
+  late final _$errorAtom =
+      Atom(name: '_CadastrarProjetoStoreBase.error', context: context);
 
   @override
   String? get error {
@@ -128,8 +132,8 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
     });
   }
 
-  final _$updatedProjectAtom =
-      Atom(name: '_CadastrarProjetoStoreBase.updatedProject');
+  late final _$updatedProjectAtom =
+      Atom(name: '_CadastrarProjetoStoreBase.updatedProject', context: context);
 
   @override
   bool get updatedProject {
@@ -144,8 +148,8 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
     });
   }
 
-  final _$savedProjectAtom =
-      Atom(name: '_CadastrarProjetoStoreBase.savedProject');
+  late final _$savedProjectAtom =
+      Atom(name: '_CadastrarProjetoStoreBase.savedProject', context: context);
 
   @override
   bool get savedProject {
@@ -160,24 +164,24 @@ mixin _$CadastrarProjetoStore on _CadastrarProjetoStoreBase, Store {
     });
   }
 
-  final _$_cadastrarAsyncAction =
-      AsyncAction('_CadastrarProjetoStoreBase._cadastrar');
+  late final _$_cadastrarAsyncAction =
+      AsyncAction('_CadastrarProjetoStoreBase._cadastrar', context: context);
 
   @override
   Future<void> _cadastrar() {
     return _$_cadastrarAsyncAction.run(() => super._cadastrar());
   }
 
-  final _$_editarAsyncAction =
-      AsyncAction('_CadastrarProjetoStoreBase._editar');
+  late final _$_editarAsyncAction =
+      AsyncAction('_CadastrarProjetoStoreBase._editar', context: context);
 
   @override
   Future<void> _editar() {
     return _$_editarAsyncAction.run(() => super._editar());
   }
 
-  final _$_CadastrarProjetoStoreBaseActionController =
-      ActionController(name: '_CadastrarProjetoStoreBase');
+  late final _$_CadastrarProjetoStoreBaseActionController =
+      ActionController(name: '_CadastrarProjetoStoreBase', context: context);
 
   @override
   void setNome(String value) {

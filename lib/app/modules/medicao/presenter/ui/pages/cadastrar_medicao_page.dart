@@ -106,27 +106,48 @@ class _CadastrarMedicaoPageState extends State<CadastrarMedicaoPage> {
                             );
                           }),
                           const FieldTitle(
-                            title: 'Número da medição',
-                            subtitle: 'Informe um número identificador',
+                            title: 'Identificador da medição',
+                            subtitle:
+                                'Informe um identificador de sua preferência.',
                           ),
                           Observer(
                             builder: (_) {
                               return TextFormField(
-                                initialValue: cadastrarMedicaoStore.numero,
+                                initialValue:
+                                    cadastrarMedicaoStore.identificador,
                                 enabled: !cadastrarMedicaoStore.loading,
                                 decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
-                                    hintText: 'Exemplo: N° 10',
                                     isDense: true,
-                                    errorText:
-                                        cadastrarMedicaoStore.numeroError),
-                                onChanged: cadastrarMedicaoStore.setNumero,
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
+                                    errorText: cadastrarMedicaoStore
+                                        .identificadorError),
+                                onChanged:
+                                    cadastrarMedicaoStore.setIdentificador,
+                                keyboardType: TextInputType.text,
                                 maxLines: 1,
                                 maxLength: 7,
+                              );
+                            },
+                          ),
+                          const FieldTitle(
+                            title: 'Descrição',
+                            subtitle: 'Informe uma descrição para a medição',
+                          ),
+                          Observer(
+                            builder: (_) {
+                              return TextFormField(
+                                initialValue: cadastrarMedicaoStore.descricao,
+                                enabled: !cadastrarMedicaoStore.loading,
+                                decoration: InputDecoration(
+                                  border: const OutlineInputBorder(),
+                                  isDense: true,
+                                  errorText:
+                                      cadastrarMedicaoStore.descricaoError,
+                                ),
+                                onChanged: cadastrarMedicaoStore.setDescricao,
+                                keyboardType: TextInputType.name,
+                                maxLines: 1,
+                                maxLength: 100,
                               );
                             },
                           ),

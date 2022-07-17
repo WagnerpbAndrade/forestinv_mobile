@@ -22,23 +22,24 @@ abstract class _CadastrarMedicaoStoreBase with Store {
     if (args?[0] != null) {
       medicao = args?[0];
       nomeResponsavel = medicao!.nomeResponsavel;
+      descricao = medicao!.descricao;
       selectedDate = medicao!.dataMedicao;
-      numero = medicao!.numero.toString();
+      identificador = medicao!.identificador;
     }
   }
 
   @observable
-  String numero = '';
+  String identificador = '';
 
   @action
-  void setNumero(String value) => numero = value;
+  void setIdentificador(String value) => identificador = value;
 
   @computed
-  bool get numeroIsValid => numero.isNotEmpty;
-  String? get numeroError {
-    if (numeroIsValid) {
+  bool get identificadorIsValid => identificador.isNotEmpty;
+  String? get identificadorError {
+    if (identificadorIsValid) {
       return null;
-    } else if (numero.isEmpty) {
+    } else if (identificador.isEmpty) {
       return null;
     }
   }
@@ -48,6 +49,24 @@ abstract class _CadastrarMedicaoStoreBase with Store {
 
   @action
   void setSelectedDate(DateTime? value) => selectedDate = value;
+
+  @observable
+  String descricao = '';
+
+  @action
+  void setDescricao(String value) => descricao = value;
+
+  @computed
+  bool get descricaoIsValid => descricao.isNotEmpty;
+  String? get descricaoError {
+    if (descricaoIsValid) {
+      return null;
+    } else if (descricao.isEmpty) {
+      return null;
+    } else {
+      return 'Descrição inválida';
+    }
+  }
 
   @observable
   String nomeResponsavel = '';
@@ -62,11 +81,14 @@ abstract class _CadastrarMedicaoStoreBase with Store {
       return null;
     } else if (nomeResponsavel.isEmpty) {
       return null;
+    } else if (nomeResponsavel.length < 6) {
+      return 'Nome inválido';
     }
   }
 
   @computed
-  bool get isFormValid => nomeResponsavelIsValid && numeroIsValid;
+  bool get isFormValid =>
+      nomeResponsavelIsValid && identificadorIsValid && descricaoIsValid;
 
   @computed
   Function? get cadastrarOnPressed =>
@@ -95,8 +117,9 @@ abstract class _CadastrarMedicaoStoreBase with Store {
 
     final medicaoSaved = Medicao(
       parcelaId: parcelaId,
-      numero: int.parse(numero),
+      identificador: identificador,
       nomeResponsavel: nomeResponsavel,
+      descricao: descricao,
       dataMedicao: selectedDate,
       anoMedicao: selectedDate!.year,
     );
@@ -123,8 +146,9 @@ abstract class _CadastrarMedicaoStoreBase with Store {
 
     final medicaoUpdate = Medicao(
       id: medicao!.id,
-      numero: int.parse(numero),
+      identificador: identificador,
       nomeResponsavel: nomeResponsavel,
+      descricao: descricao,
       dataMedicao: selectedDate,
       anoMedicao: selectedDate!.year,
     );

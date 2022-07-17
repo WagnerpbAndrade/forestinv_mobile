@@ -6,7 +6,7 @@ part of 'parcela_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ParcelaStore on _ParcelaStoreBase, Store {
   Computed<bool>? _$showProgressComputed;
@@ -17,7 +17,8 @@ mixin _$ParcelaStore on _ParcelaStoreBase, Store {
               name: '_ParcelaStoreBase.showProgress'))
           .value;
 
-  final _$errorAtom = Atom(name: '_ParcelaStoreBase.error');
+  late final _$errorAtom =
+      Atom(name: '_ParcelaStoreBase.error', context: context);
 
   @override
   String? get error {
@@ -32,7 +33,8 @@ mixin _$ParcelaStore on _ParcelaStoreBase, Store {
     });
   }
 
-  final _$loadingAtom = Atom(name: '_ParcelaStoreBase.loading');
+  late final _$loadingAtom =
+      Atom(name: '_ParcelaStoreBase.loading', context: context);
 
   @override
   bool get loading {
@@ -47,16 +49,16 @@ mixin _$ParcelaStore on _ParcelaStoreBase, Store {
     });
   }
 
-  final _$deleteParcelaAsyncAction =
-      AsyncAction('_ParcelaStoreBase.deleteParcela');
+  late final _$deleteParcelaAsyncAction =
+      AsyncAction('_ParcelaStoreBase.deleteParcela', context: context);
 
   @override
   Future<void> deleteParcela(dynamic parcelaId) {
     return _$deleteParcelaAsyncAction.run(() => super.deleteParcela(parcelaId));
   }
 
-  final _$_ParcelaStoreBaseActionController =
-      ActionController(name: '_ParcelaStoreBase');
+  late final _$_ParcelaStoreBaseActionController =
+      ActionController(name: '_ParcelaStoreBase', context: context);
 
   @override
   void addNewParcelas(List<Parcela> newParcelas) {

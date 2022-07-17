@@ -6,7 +6,7 @@ part of 'edit_account_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$EditAccountStore on _EditAccountStore, Store {
   Computed<bool>? _$nameValidComputed;
@@ -38,7 +38,8 @@ mixin _$EditAccountStore on _EditAccountStore, Store {
               name: '_EditAccountStore.savePressed'))
           .value;
 
-  final _$nameAtom = Atom(name: '_EditAccountStore.name');
+  late final _$nameAtom =
+      Atom(name: '_EditAccountStore.name', context: context);
 
   @override
   String get name {
@@ -53,7 +54,8 @@ mixin _$EditAccountStore on _EditAccountStore, Store {
     });
   }
 
-  final _$pass1Atom = Atom(name: '_EditAccountStore.pass1');
+  late final _$pass1Atom =
+      Atom(name: '_EditAccountStore.pass1', context: context);
 
   @override
   String get pass1 {
@@ -68,7 +70,8 @@ mixin _$EditAccountStore on _EditAccountStore, Store {
     });
   }
 
-  final _$pass2Atom = Atom(name: '_EditAccountStore.pass2');
+  late final _$pass2Atom =
+      Atom(name: '_EditAccountStore.pass2', context: context);
 
   @override
   String get pass2 {
@@ -83,7 +86,8 @@ mixin _$EditAccountStore on _EditAccountStore, Store {
     });
   }
 
-  final _$loadingAtom = Atom(name: '_EditAccountStore.loading');
+  late final _$loadingAtom =
+      Atom(name: '_EditAccountStore.loading', context: context);
 
   @override
   bool get loading {
@@ -98,15 +102,16 @@ mixin _$EditAccountStore on _EditAccountStore, Store {
     });
   }
 
-  final _$_saveAsyncAction = AsyncAction('_EditAccountStore._save');
+  late final _$_saveAsyncAction =
+      AsyncAction('_EditAccountStore._save', context: context);
 
   @override
   Future<void> _save() {
     return _$_saveAsyncAction.run(() => super._save());
   }
 
-  final _$_EditAccountStoreActionController =
-      ActionController(name: '_EditAccountStore');
+  late final _$_EditAccountStoreActionController =
+      ActionController(name: '_EditAccountStore', context: context);
 
   @override
   void setName(String value) {

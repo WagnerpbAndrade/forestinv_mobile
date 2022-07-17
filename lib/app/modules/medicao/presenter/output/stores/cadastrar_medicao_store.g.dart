@@ -6,16 +6,16 @@ part of 'cadastrar_medicao_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
-  Computed<bool>? _$numeroIsValidComputed;
+  Computed<bool>? _$identificadorIsValidComputed;
 
   @override
-  bool get numeroIsValid =>
-      (_$numeroIsValidComputed ??= Computed<bool>(() => super.numeroIsValid,
-              name: '_CadastrarMedicaoStoreBase.numeroIsValid'))
-          .value;
+  bool get identificadorIsValid => (_$identificadorIsValidComputed ??=
+          Computed<bool>(() => super.identificadorIsValid,
+              name: '_CadastrarMedicaoStoreBase.identificadorIsValid'))
+      .value;
   Computed<bool>? _$nomeResponsavelIsValidComputed;
 
   @override
@@ -45,23 +45,24 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
               name: '_CadastrarMedicaoStoreBase.editarOnPressed'))
       .value;
 
-  final _$numeroAtom = Atom(name: '_CadastrarMedicaoStoreBase.numero');
+  late final _$identificadorAtom =
+      Atom(name: '_CadastrarMedicaoStoreBase.identificador', context: context);
 
   @override
-  String get numero {
-    _$numeroAtom.reportRead();
-    return super.numero;
+  String get identificador {
+    _$identificadorAtom.reportRead();
+    return super.identificador;
   }
 
   @override
-  set numero(String value) {
-    _$numeroAtom.reportWrite(value, super.numero, () {
-      super.numero = value;
+  set identificador(String value) {
+    _$identificadorAtom.reportWrite(value, super.identificador, () {
+      super.identificador = value;
     });
   }
 
-  final _$selectedDateAtom =
-      Atom(name: '_CadastrarMedicaoStoreBase.selectedDate');
+  late final _$selectedDateAtom =
+      Atom(name: '_CadastrarMedicaoStoreBase.selectedDate', context: context);
 
   @override
   DateTime? get selectedDate {
@@ -76,8 +77,8 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
     });
   }
 
-  final _$nomeResponsavelAtom =
-      Atom(name: '_CadastrarMedicaoStoreBase.nomeResponsavel');
+  late final _$nomeResponsavelAtom = Atom(
+      name: '_CadastrarMedicaoStoreBase.nomeResponsavel', context: context);
 
   @override
   String get nomeResponsavel {
@@ -92,7 +93,8 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
     });
   }
 
-  final _$loadingAtom = Atom(name: '_CadastrarMedicaoStoreBase.loading');
+  late final _$loadingAtom =
+      Atom(name: '_CadastrarMedicaoStoreBase.loading', context: context);
 
   @override
   bool get loading {
@@ -107,7 +109,8 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
     });
   }
 
-  final _$errorAtom = Atom(name: '_CadastrarMedicaoStoreBase.error');
+  late final _$errorAtom =
+      Atom(name: '_CadastrarMedicaoStoreBase.error', context: context);
 
   @override
   String? get error {
@@ -122,8 +125,8 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
     });
   }
 
-  final _$savedMedicaoAtom =
-      Atom(name: '_CadastrarMedicaoStoreBase.savedMedicao');
+  late final _$savedMedicaoAtom =
+      Atom(name: '_CadastrarMedicaoStoreBase.savedMedicao', context: context);
 
   @override
   bool get savedMedicao {
@@ -138,8 +141,8 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
     });
   }
 
-  final _$updatedMedicaoAtom =
-      Atom(name: '_CadastrarMedicaoStoreBase.updatedMedicao');
+  late final _$updatedMedicaoAtom =
+      Atom(name: '_CadastrarMedicaoStoreBase.updatedMedicao', context: context);
 
   @override
   bool get updatedMedicao {
@@ -154,39 +157,40 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
     });
   }
 
-  final _$_cadastrarAsyncAction =
-      AsyncAction('_CadastrarMedicaoStoreBase._cadastrar');
+  late final _$_cadastrarAsyncAction =
+      AsyncAction('_CadastrarMedicaoStoreBase._cadastrar', context: context);
 
   @override
   Future<void> _cadastrar() {
     return _$_cadastrarAsyncAction.run(() => super._cadastrar());
   }
 
-  final _$_editarAsyncAction =
-      AsyncAction('_CadastrarMedicaoStoreBase._editar');
+  late final _$_editarAsyncAction =
+      AsyncAction('_CadastrarMedicaoStoreBase._editar', context: context);
 
   @override
   Future<void> _editar() {
     return _$_editarAsyncAction.run(() => super._editar());
   }
 
-  final _$openDatePickerAsyncAction =
-      AsyncAction('_CadastrarMedicaoStoreBase.openDatePicker');
+  late final _$openDatePickerAsyncAction = AsyncAction(
+      '_CadastrarMedicaoStoreBase.openDatePicker',
+      context: context);
 
   @override
   Future<void> openDatePicker(BuildContext context) {
     return _$openDatePickerAsyncAction.run(() => super.openDatePicker(context));
   }
 
-  final _$_CadastrarMedicaoStoreBaseActionController =
-      ActionController(name: '_CadastrarMedicaoStoreBase');
+  late final _$_CadastrarMedicaoStoreBaseActionController =
+      ActionController(name: '_CadastrarMedicaoStoreBase', context: context);
 
   @override
-  void setNumero(String value) {
+  void setIdentificador(String value) {
     final _$actionInfo = _$_CadastrarMedicaoStoreBaseActionController
-        .startAction(name: '_CadastrarMedicaoStoreBase.setNumero');
+        .startAction(name: '_CadastrarMedicaoStoreBase.setIdentificador');
     try {
-      return super.setNumero(value);
+      return super.setIdentificador(value);
     } finally {
       _$_CadastrarMedicaoStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -217,14 +221,14 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
   @override
   String toString() {
     return '''
-numero: ${numero},
+identificador: ${identificador},
 selectedDate: ${selectedDate},
 nomeResponsavel: ${nomeResponsavel},
 loading: ${loading},
 error: ${error},
 savedMedicao: ${savedMedicao},
 updatedMedicao: ${updatedMedicao},
-numeroIsValid: ${numeroIsValid},
+identificadorIsValid: ${identificadorIsValid},
 nomeResponsavelIsValid: ${nomeResponsavelIsValid},
 isFormValid: ${isFormValid},
 cadastrarOnPressed: ${cadastrarOnPressed},

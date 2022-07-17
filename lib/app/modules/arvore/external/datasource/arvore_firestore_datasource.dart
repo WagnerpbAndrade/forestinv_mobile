@@ -123,8 +123,9 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
 
       final medicaoId = snapshotMedicao.docs.first.id;
       final parcelaId = snapshotMedicao.docs.first.get('parcelaId');
-      final numero = snapshotMedicao.docs.first.get('numero');
+      final identificador = snapshotMedicao.docs.first.get('identificador');
       final nomeResponsavel = snapshotMedicao.docs.first.get('nomeResponsavel');
+      final descricao = snapshotMedicao.docs.first.get('descricao');
       final anoMedicao = snapshotMedicao.docs.first.get('anoMedicao');
       final dataMedicaoTimestamp =
           snapshotMedicao.docs.first.get('dataMedicao') as Timestamp;
@@ -137,9 +138,10 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
 
       final medicao = Medicao(
         id: medicaoId,
-        numero: numero,
+        identificador: identificador,
         parcelaId: parcelaId,
         nomeResponsavel: nomeResponsavel,
+        descricao: descricao,
         anoMedicao: anoMedicao,
         dataMedicao: dataMedicao,
         ultimaAtualizacao: ultimaAtualizacao,

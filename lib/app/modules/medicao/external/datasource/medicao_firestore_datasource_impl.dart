@@ -57,8 +57,9 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
       querySnapshot.docs.forEach((doc) {
         final medicaoId = doc.id;
         final parcelaId = doc.get('parcelaId');
-        final numero = doc.get('numero');
+        final identificador = doc.get('identificador');
         final nomeResponsavel = doc.get('nomeResponsavel');
+        final descricao = doc.get('descricao');
         final anoMedicao = doc.get('anoMedicao');
         final dataMedicaoTimestamp = doc.get('dataMedicao') as Timestamp;
         final dataMedicao = DateTime.fromMicrosecondsSinceEpoch(
@@ -69,9 +70,10 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
 
         final Medicao medicao = Medicao(
           id: medicaoId,
-          numero: numero,
+          identificador: identificador,
           parcelaId: parcelaId,
           nomeResponsavel: nomeResponsavel,
+          descricao: descricao,
           anoMedicao: anoMedicao,
           dataMedicao: dataMedicao,
           ultimaAtualizacao: ultimaAtualizacao,

@@ -6,7 +6,7 @@ part of 'cadastrar_parcela_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
   Computed<bool>? _$numeroIsValidComputed;
@@ -59,8 +59,8 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
               name: '_CadastrarParcelaStoreBase.editarOnPressed'))
       .value;
 
-  final _$selectedDateAtom =
-      Atom(name: '_CadastrarParcelaStoreBase.selectedDate');
+  late final _$selectedDateAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.selectedDate', context: context);
 
   @override
   DateTime? get selectedDate {
@@ -75,7 +75,8 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  final _$numeroAtom = Atom(name: '_CadastrarParcelaStoreBase.numero');
+  late final _$numeroAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.numero', context: context);
 
   @override
   String get numero {
@@ -90,7 +91,8 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  final _$areaAtom = Atom(name: '_CadastrarParcelaStoreBase.area');
+  late final _$areaAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.area', context: context);
 
   @override
   String get area {
@@ -105,8 +107,8 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  final _$numeroTalhaoAtom =
-      Atom(name: '_CadastrarParcelaStoreBase.numeroTalhao');
+  late final _$numeroTalhaoAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.numeroTalhao', context: context);
 
   @override
   String get numeroTalhao {
@@ -121,8 +123,8 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  final _$espacamentoAtom =
-      Atom(name: '_CadastrarParcelaStoreBase.espacamento');
+  late final _$espacamentoAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.espacamento', context: context);
 
   @override
   String get espacamento {
@@ -137,7 +139,8 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  final _$latitudeAtom = Atom(name: '_CadastrarParcelaStoreBase.latitude');
+  late final _$latitudeAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.latitude', context: context);
 
   @override
   String get latitude {
@@ -152,7 +155,8 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  final _$longitudeAtom = Atom(name: '_CadastrarParcelaStoreBase.longitude');
+  late final _$longitudeAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.longitude', context: context);
 
   @override
   String get longitude {
@@ -167,8 +171,8 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  final _$loadingLatLongAtom =
-      Atom(name: '_CadastrarParcelaStoreBase.loadingLatLong');
+  late final _$loadingLatLongAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.loadingLatLong', context: context);
 
   @override
   bool get loadingLatLong {
@@ -183,7 +187,8 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  final _$loadingAtom = Atom(name: '_CadastrarParcelaStoreBase.loading');
+  late final _$loadingAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.loading', context: context);
 
   @override
   bool get loading {
@@ -198,7 +203,8 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  final _$errorAtom = Atom(name: '_CadastrarParcelaStoreBase.error');
+  late final _$errorAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.error', context: context);
 
   @override
   String? get error {
@@ -213,8 +219,8 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  final _$savedParcelaAtom =
-      Atom(name: '_CadastrarParcelaStoreBase.savedParcela');
+  late final _$savedParcelaAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.savedParcela', context: context);
 
   @override
   bool get savedParcela {
@@ -229,8 +235,8 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  final _$updatedParcelaAtom =
-      Atom(name: '_CadastrarParcelaStoreBase.updatedParcela');
+  late final _$updatedParcelaAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.updatedParcela', context: context);
 
   @override
   bool get updatedParcela {
@@ -245,32 +251,33 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  final _$_cadastrarAsyncAction =
-      AsyncAction('_CadastrarParcelaStoreBase._cadastrar');
+  late final _$_cadastrarAsyncAction =
+      AsyncAction('_CadastrarParcelaStoreBase._cadastrar', context: context);
 
   @override
   Future<void> _cadastrar() {
     return _$_cadastrarAsyncAction.run(() => super._cadastrar());
   }
 
-  final _$_editarAsyncAction =
-      AsyncAction('_CadastrarParcelaStoreBase._editar');
+  late final _$_editarAsyncAction =
+      AsyncAction('_CadastrarParcelaStoreBase._editar', context: context);
 
   @override
   Future<void> _editar() {
     return _$_editarAsyncAction.run(() => super._editar());
   }
 
-  final _$openDatePickerAsyncAction =
-      AsyncAction('_CadastrarParcelaStoreBase.openDatePicker');
+  late final _$openDatePickerAsyncAction = AsyncAction(
+      '_CadastrarParcelaStoreBase.openDatePicker',
+      context: context);
 
   @override
   Future<void> openDatePicker(BuildContext context) {
     return _$openDatePickerAsyncAction.run(() => super.openDatePicker(context));
   }
 
-  final _$_CadastrarParcelaStoreBaseActionController =
-      ActionController(name: '_CadastrarParcelaStoreBase');
+  late final _$_CadastrarParcelaStoreBaseActionController =
+      ActionController(name: '_CadastrarParcelaStoreBase', context: context);
 
   @override
   void setSelectedDate(DateTime? value) {

@@ -6,7 +6,7 @@ part of 'login_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$LoginStore on _LoginStoreBase, Store {
   Computed<bool>? _$emailValidComputed;
@@ -38,7 +38,8 @@ mixin _$LoginStore on _LoginStoreBase, Store {
               name: '_LoginStoreBase.googleOnPressed'))
       .value;
 
-  final _$emailAtom = Atom(name: '_LoginStoreBase.email');
+  late final _$emailAtom =
+      Atom(name: '_LoginStoreBase.email', context: context);
 
   @override
   String? get email {
@@ -53,7 +54,8 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
-  final _$passwordAtom = Atom(name: '_LoginStoreBase.password');
+  late final _$passwordAtom =
+      Atom(name: '_LoginStoreBase.password', context: context);
 
   @override
   String? get password {
@@ -68,7 +70,8 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
-  final _$loadingAtom = Atom(name: '_LoginStoreBase.loading');
+  late final _$loadingAtom =
+      Atom(name: '_LoginStoreBase.loading', context: context);
 
   @override
   bool get loading {
@@ -83,7 +86,8 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
-  final _$errorAtom = Atom(name: '_LoginStoreBase.error');
+  late final _$errorAtom =
+      Atom(name: '_LoginStoreBase.error', context: context);
 
   @override
   String? get error {
@@ -98,7 +102,8 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
-  final _$loadingGoogleAtom = Atom(name: '_LoginStoreBase.loadingGoogle');
+  late final _$loadingGoogleAtom =
+      Atom(name: '_LoginStoreBase.loadingGoogle', context: context);
 
   @override
   bool get loadingGoogle {
@@ -113,15 +118,16 @@ mixin _$LoginStore on _LoginStoreBase, Store {
     });
   }
 
-  final _$_loginAsyncAction = AsyncAction('_LoginStoreBase._login');
+  late final _$_loginAsyncAction =
+      AsyncAction('_LoginStoreBase._login', context: context);
 
   @override
   Future<void> _login() {
     return _$_loginAsyncAction.run(() => super._login());
   }
 
-  final _$_LoginStoreBaseActionController =
-      ActionController(name: '_LoginStoreBase');
+  late final _$_LoginStoreBaseActionController =
+      ActionController(name: '_LoginStoreBase', context: context);
 
   @override
   void setEmail(String value) {

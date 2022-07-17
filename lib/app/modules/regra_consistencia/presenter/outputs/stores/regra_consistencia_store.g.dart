@@ -6,7 +6,7 @@ part of 'regra_consistencia_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$RegraConsistenciaStore on _RegraConsistenciaStoreBase, Store {
   Computed<bool>? _$showProgressComputed;
@@ -17,7 +17,8 @@ mixin _$RegraConsistenciaStore on _RegraConsistenciaStoreBase, Store {
               name: '_RegraConsistenciaStoreBase.showProgress'))
           .value;
 
-  final _$errorAtom = Atom(name: '_RegraConsistenciaStoreBase.error');
+  late final _$errorAtom =
+      Atom(name: '_RegraConsistenciaStoreBase.error', context: context);
 
   @override
   String? get error {
@@ -32,7 +33,8 @@ mixin _$RegraConsistenciaStore on _RegraConsistenciaStoreBase, Store {
     });
   }
 
-  final _$loadingAtom = Atom(name: '_RegraConsistenciaStoreBase.loading');
+  late final _$loadingAtom =
+      Atom(name: '_RegraConsistenciaStoreBase.loading', context: context);
 
   @override
   bool get loading {
@@ -47,8 +49,8 @@ mixin _$RegraConsistenciaStore on _RegraConsistenciaStoreBase, Store {
     });
   }
 
-  final _$_RegraConsistenciaStoreBaseActionController =
-      ActionController(name: '_RegraConsistenciaStoreBase');
+  late final _$_RegraConsistenciaStoreBaseActionController =
+      ActionController(name: '_RegraConsistenciaStoreBase', context: context);
 
   @override
   void addNewRegras(List<RegraConsistencia> newRegras) {

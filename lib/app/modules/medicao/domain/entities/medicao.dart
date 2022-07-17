@@ -9,18 +9,20 @@ String listProjetoResponseToMap(Medicao data) => json.encode(data.toMap());
 
 class Medicao {
   dynamic id;
-  int numero;
+  String identificador;
   dynamic parcelaId;
   String nomeResponsavel;
+  String descricao;
   int? anoMedicao;
   DateTime? dataMedicao;
   DateTime? ultimaAtualizacao;
 
   Medicao(
       {this.id,
-      required this.numero,
+      required this.identificador,
       this.parcelaId,
       required this.nomeResponsavel,
+      required this.descricao,
       this.anoMedicao,
       this.dataMedicao,
       this.ultimaAtualizacao});
@@ -36,9 +38,10 @@ class Medicao {
   }) {
     return Medicao(
       id: id ?? this.id,
-      numero: numero ?? this.numero,
+      identificador: identificador,
       parcelaId: parcelaId ?? this.parcelaId,
       nomeResponsavel: nomeResponsavel ?? this.nomeResponsavel,
+      descricao: descricao,
       anoMedicao: anoMedicao ?? this.anoMedicao,
       dataMedicao: dataMedicao ?? this.dataMedicao,
       ultimaAtualizacao: ultimaAtualizacao ?? ultimaAtualizacao,
@@ -47,8 +50,9 @@ class Medicao {
 
   factory Medicao.fromMap(Map<String, dynamic> json) => Medicao(
         parcelaId: json['parcelaId'],
-        numero: json['numero'],
+        identificador: json['identificador'],
         nomeResponsavel: json['nomeResponsavel'],
+        descricao: json['descricao'],
         dataMedicao: getDateTime(json["dataMedicao"]),
         anoMedicao: json["anoMedicao"],
         ultimaAtualizacao: getDateTime(json["ultimaAtualizacao"]),
@@ -57,8 +61,9 @@ class Medicao {
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['parcelaId'] = parcelaId;
-    data['numero'] = numero;
+    data['identificador'] = identificador;
     data['nomeResponsavel'] = nomeResponsavel;
+    data['descricao'] = descricao;
     data['anoMedicao'] = anoMedicao;
     data['dataMedicao'] = dataMedicao;
     data['ultimaAtualizacao'] = ultimaAtualizacao;
@@ -68,7 +73,8 @@ class Medicao {
   Map<String, dynamic> updateToMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['nomeResponsavel'] = nomeResponsavel;
-    data['numero'] = numero;
+    data['descricao'] = descricao;
+    data['identificador'] = identificador;
     data['anoMedicao'] = anoMedicao;
     data['dataMedicao'] = dataMedicao;
     data['ultimaAtualizacao'] = ultimaAtualizacao;

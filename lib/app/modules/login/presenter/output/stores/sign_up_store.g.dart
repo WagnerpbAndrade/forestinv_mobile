@@ -6,7 +6,7 @@ part of 'sign_up_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$SignUpStore on _SignUpStoreBase, Store {
   Computed<bool>? _$nameValidComputed;
@@ -59,7 +59,7 @@ mixin _$SignUpStore on _SignUpStoreBase, Store {
               name: '_SignUpStoreBase.signUpPressed'))
       .value;
 
-  final _$nameAtom = Atom(name: '_SignUpStoreBase.name');
+  late final _$nameAtom = Atom(name: '_SignUpStoreBase.name', context: context);
 
   @override
   String? get name {
@@ -74,7 +74,8 @@ mixin _$SignUpStore on _SignUpStoreBase, Store {
     });
   }
 
-  final _$emailAtom = Atom(name: '_SignUpStoreBase.email');
+  late final _$emailAtom =
+      Atom(name: '_SignUpStoreBase.email', context: context);
 
   @override
   String? get email {
@@ -89,7 +90,8 @@ mixin _$SignUpStore on _SignUpStoreBase, Store {
     });
   }
 
-  final _$phoneAtom = Atom(name: '_SignUpStoreBase.phone');
+  late final _$phoneAtom =
+      Atom(name: '_SignUpStoreBase.phone', context: context);
 
   @override
   String? get phone {
@@ -104,7 +106,8 @@ mixin _$SignUpStore on _SignUpStoreBase, Store {
     });
   }
 
-  final _$pass1Atom = Atom(name: '_SignUpStoreBase.pass1');
+  late final _$pass1Atom =
+      Atom(name: '_SignUpStoreBase.pass1', context: context);
 
   @override
   String? get pass1 {
@@ -119,7 +122,8 @@ mixin _$SignUpStore on _SignUpStoreBase, Store {
     });
   }
 
-  final _$pass2Atom = Atom(name: '_SignUpStoreBase.pass2');
+  late final _$pass2Atom =
+      Atom(name: '_SignUpStoreBase.pass2', context: context);
 
   @override
   String? get pass2 {
@@ -134,7 +138,8 @@ mixin _$SignUpStore on _SignUpStoreBase, Store {
     });
   }
 
-  final _$loadingAtom = Atom(name: '_SignUpStoreBase.loading');
+  late final _$loadingAtom =
+      Atom(name: '_SignUpStoreBase.loading', context: context);
 
   @override
   bool get loading {
@@ -149,7 +154,8 @@ mixin _$SignUpStore on _SignUpStoreBase, Store {
     });
   }
 
-  final _$errorAtom = Atom(name: '_SignUpStoreBase.error');
+  late final _$errorAtom =
+      Atom(name: '_SignUpStoreBase.error', context: context);
 
   @override
   String? get error {
@@ -164,15 +170,16 @@ mixin _$SignUpStore on _SignUpStoreBase, Store {
     });
   }
 
-  final _$_signUpAsyncAction = AsyncAction('_SignUpStoreBase._signUp');
+  late final _$_signUpAsyncAction =
+      AsyncAction('_SignUpStoreBase._signUp', context: context);
 
   @override
   Future<void> _signUp() {
     return _$_signUpAsyncAction.run(() => super._signUp());
   }
 
-  final _$_SignUpStoreBaseActionController =
-      ActionController(name: '_SignUpStoreBase');
+  late final _$_SignUpStoreBaseActionController =
+      ActionController(name: '_SignUpStoreBase', context: context);
 
   @override
   void setName(String value) {

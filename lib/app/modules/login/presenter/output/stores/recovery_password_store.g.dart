@@ -6,7 +6,7 @@ part of 'recovery_password_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$RecoveryPasswordStore on _RecoveryPasswordStore, Store {
   Computed<bool>? _$emailValidComputed;
@@ -24,7 +24,8 @@ mixin _$RecoveryPasswordStore on _RecoveryPasswordStore, Store {
               name: '_RecoveryPasswordStore.recoverPressed'))
       .value;
 
-  final _$emailAtom = Atom(name: '_RecoveryPasswordStore.email');
+  late final _$emailAtom =
+      Atom(name: '_RecoveryPasswordStore.email', context: context);
 
   @override
   String? get email {
@@ -39,7 +40,8 @@ mixin _$RecoveryPasswordStore on _RecoveryPasswordStore, Store {
     });
   }
 
-  final _$successAtom = Atom(name: '_RecoveryPasswordStore.success');
+  late final _$successAtom =
+      Atom(name: '_RecoveryPasswordStore.success', context: context);
 
   @override
   bool get success {
@@ -54,7 +56,8 @@ mixin _$RecoveryPasswordStore on _RecoveryPasswordStore, Store {
     });
   }
 
-  final _$loadingAtom = Atom(name: '_RecoveryPasswordStore.loading');
+  late final _$loadingAtom =
+      Atom(name: '_RecoveryPasswordStore.loading', context: context);
 
   @override
   bool get loading {
@@ -69,7 +72,8 @@ mixin _$RecoveryPasswordStore on _RecoveryPasswordStore, Store {
     });
   }
 
-  final _$errorAtom = Atom(name: '_RecoveryPasswordStore.error');
+  late final _$errorAtom =
+      Atom(name: '_RecoveryPasswordStore.error', context: context);
 
   @override
   String? get error {
@@ -84,8 +88,8 @@ mixin _$RecoveryPasswordStore on _RecoveryPasswordStore, Store {
     });
   }
 
-  final _$_RecoveryPasswordStoreActionController =
-      ActionController(name: '_RecoveryPasswordStore');
+  late final _$_RecoveryPasswordStoreActionController =
+      ActionController(name: '_RecoveryPasswordStore', context: context);
 
   @override
   void setEmail(String value) {
