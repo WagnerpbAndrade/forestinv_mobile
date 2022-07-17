@@ -126,7 +126,7 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                             },
                           ),
                           const FieldTitle(
-                            title: 'Número da árvore',
+                            title: 'Identificador da árvore',
                             subtitle: 'Informe um número identificador',
                           ),
                           Observer(

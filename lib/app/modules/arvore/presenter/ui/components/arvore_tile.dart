@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
+import 'package:forestinv_mobile/app/core/widgets/custom_card_list.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/arvore_store.dart';
@@ -23,135 +24,83 @@ class ArvoreTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.2,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           elevation: 8,
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: SizedBox(
-                  height: 70,
-                  width: 70,
-                  child: CircleAvatar(
-                    backgroundColor: ColorsConst.secondary,
-                    foregroundColor: ColorsConst.textColorPrimary,
-                    child: Text(arvore.numArvore.toString()),
-                  ),
-                ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 12,
+                horizontal: 16,
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 16,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Identificador: ${arvore.numArvore}',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.01,
-                      ),
-                      Text(
-                        'DAP: ${arvore.dap}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.01,
-                      ),
-                      Text(
-                        'Altura: ${arvore.alturaTotal}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.01,
-                      ),
-                      Text(
-                        'Estado: ${arvore.estadoDescription}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        arvore.observacao.isEmpty
-                            ? ''
-                            : 'Observação: ${arvore.observacao}',
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Column(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  PopupMenuButton<MenuChoice>(
-                    onSelected: (choice) {
-                      switch (choice.index) {
-                        case 0:
-                          editArvore(context);
-                          break;
-                        case 1:
-                          deleteArvore(context);
-                          break;
-                      }
-                    },
-                    icon: const Icon(
-                      Icons.more_vert,
-                      size: 20,
-                      color: Colors.purple,
+                  _getPopUpMenuItem(context),
+                  CustomCardList(
+                    titulo: 'Identificador',
+                    message: '${arvore.numArvore}',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomCardList(
+                    titulo: 'DAP',
+                    message: '${arvore.dap}',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomCardList(
+                    titulo: 'Altura total',
+                    message: '${arvore.alturaTotal}',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomCardList(
+                    titulo: 'Estado',
+                    message: '${arvore.estadoDescription}',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomCardList(
+                    titulo: 'Observação',
+                    message: '${arvore.observacao}',
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          child: Text(
+                            'Localização',
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            print('natalia nerd');
+                          },
+                          icon: const Icon(
+                            Icons.map,
+                          ),
+                        ),
+                      ],
                     ),
-                    itemBuilder: (_) {
-                      return choices
-                          .map(
-                            (choice) => PopupMenuItem<MenuChoice>(
-                              value: choice,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    choice.iconData,
-                                    size: 20,
-                                    color: Colors.purple,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    choice.title,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.purple,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                          .toList();
-                    },
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),
@@ -183,6 +132,62 @@ class ArvoreTile extends StatelessWidget {
                 Navigator.of(context).pop();
               },
             ));
+  }
+
+  Widget _getPopUpMenuItem(final BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        PopupMenuButton<MenuChoice>(
+          position: PopupMenuPosition.under,
+          onSelected: (choice) {
+            switch (choice.index) {
+              case 0:
+                editArvore(context);
+                break;
+              case 1:
+                deleteArvore(context);
+                break;
+            }
+          },
+          icon: const Align(
+            alignment: Alignment.centerRight,
+            child: Icon(
+              Icons.more_vert,
+              size: 20,
+              color: ColorsConst.primary,
+            ),
+          ),
+          itemBuilder: (_) {
+            return choices
+                .map(
+                  (choice) => PopupMenuItem<MenuChoice>(
+                    value: choice,
+                    child: Row(
+                      children: [
+                        Icon(
+                          choice.iconData,
+                          size: 20,
+                          color: ColorsConst.primary,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          choice.title,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: ColorsConst.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+                .toList();
+          },
+        ),
+      ],
+    );
   }
 }
 
