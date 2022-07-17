@@ -251,78 +251,115 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    const FieldTitle(title: 'Latitude'),
+                                    Column(
+                                      children: [
+                                        const FieldTitle(title: 'Latitude'),
+                                        Observer(
+                                          builder: (_) {
+                                            return Container(
+                                              height: 40,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.27,
+                                              child: TextFormField(
+                                                enabled: false,
+                                                decoration: InputDecoration(
+                                                  border:
+                                                      const OutlineInputBorder(),
+                                                  isDense: true,
+                                                  label: Text(
+                                                    cadastrarParcelaStore
+                                                        .latitude,
+                                                    style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ),
+                                                keyboardType:
+                                                    TextInputType.text,
+                                                onChanged: cadastrarParcelaStore
+                                                    .setLatitude,
+                                                maxLines: 1,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.01,
+                                    ),
+                                    Column(
+                                      children: [
+                                        const FieldTitle(title: 'Longitude'),
+                                        Observer(
+                                          builder: (_) {
+                                            return Container(
+                                              height: 40,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.27,
+                                              child: TextFormField(
+                                                enabled: false,
+                                                decoration: InputDecoration(
+                                                  border:
+                                                      const OutlineInputBorder(),
+                                                  isDense: true,
+                                                  label: Text(
+                                                    cadastrarParcelaStore
+                                                        .longitude,
+                                                    style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ),
+                                                keyboardType:
+                                                    TextInputType.text,
+                                                onChanged: cadastrarParcelaStore
+                                                    .setLongitude,
+                                                maxLines: 1,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.01,
+                                    ),
                                     Observer(
                                       builder: (_) {
-                                        return TextFormField(
-                                          enabled: false,
-                                          decoration: InputDecoration(
-                                            border: const OutlineInputBorder(),
-                                            isDense: true,
-                                            label: Text(
-                                              cadastrarParcelaStore.latitude,
-                                              style: const TextStyle(
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ),
-                                          keyboardType: TextInputType.text,
-                                          onChanged:
-                                              cadastrarParcelaStore.setLatitude,
-                                          maxLines: 1,
-                                        );
-                                      },
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    const FieldTitle(title: 'Longitude'),
-                                    Observer(
-                                      builder: (_) {
-                                        return TextFormField(
-                                          enabled: false,
-                                          decoration: InputDecoration(
-                                            border: const OutlineInputBorder(),
-                                            isDense: true,
-                                            label: Text(
-                                              cadastrarParcelaStore.longitude,
-                                              style: const TextStyle(
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ),
-                                          keyboardType: TextInputType.text,
-                                          onChanged: cadastrarParcelaStore
-                                              .setLongitude,
-                                          maxLines: 1,
+                                        return CustomElevatedButton(
+                                          onPressed:
+                                              cadastrarParcelaStore.getLatLong,
+                                          child: cadastrarParcelaStore
+                                                  .loadingLatLong
+                                              ? const CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation(
+                                                          Colors.white),
+                                                )
+                                              : const Text(
+                                                  'GPS',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
                                         );
                                       },
                                     ),
                                   ],
                                 ),
                               ),
-                              Observer(builder: (_) {
-                                return GestureDetector(
-                                  onTap: () =>
-                                      cadastrarParcelaStore.getLatLong(),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8),
-                                    child: !cadastrarParcelaStore.loadingLatLong
-                                        ? const Icon(
-                                            Icons.location_on,
-                                            size: 48,
-                                          )
-                                        : const CircularProgressIndicator(
-                                            valueColor: AlwaysStoppedAnimation(
-                                                ColorsConst.secondary),
-                                          ),
-                                  ),
-                                );
-                              }),
                             ],
                           ),
                           Observer(
