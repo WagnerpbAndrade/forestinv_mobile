@@ -45,7 +45,7 @@ abstract class _CadastrarProjetoStoreBase with Store {
   void setArea(String value) => area = value;
 
   @computed
-  bool get areaIsValid => area.isNotEmpty;
+  bool get areaIsValid => area.isNotEmpty && _isAreaMaiorQueZero;
   String? get areaError {
     if (areaIsValid) {
       return null;
@@ -53,6 +53,19 @@ abstract class _CadastrarProjetoStoreBase with Store {
       return null;
     } else {
       return 'Área inválida';
+    }
+  }
+
+  bool get _isAreaMaiorQueZero {
+    try {
+      final doubleParse = double.parse(area);
+      if (doubleParse > 0) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      print('Exception: $e');
+      return false;
     }
   }
 

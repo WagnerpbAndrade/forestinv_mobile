@@ -1,3 +1,4 @@
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -137,17 +138,24 @@ class _CadastrarProjetoPageState extends State<CadastrarProjetoPage> {
                                 initialValue: cadastrarProjetoStore.area,
                                 enabled: !cadastrarProjetoStore.loading,
                                 decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
-                                    hintText: 'Exemplo: 100 ha',
-                                    isDense: true,
-                                    errorText: cadastrarProjetoStore.areaError),
+                                  border: const OutlineInputBorder(),
+                                  isDense: true,
+                                  errorText: cadastrarProjetoStore.areaError,
+                                  suffixText: 'ha',
+                                ),
                                 keyboardType: TextInputType.number,
                                 onChanged: cadastrarProjetoStore.setArea,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  TextInputMask(
+                                      mask: '9+999.99',
+                                      //placeholder: '0',
+                                      maxPlaceHolders: 3,
+                                      reverse: true),
                                 ],
                                 maxLines: 1,
-                                maxLength: 7,
+                                maxLength: 9,
+                                textAlign: TextAlign.right,
                               );
                             },
                           ),
