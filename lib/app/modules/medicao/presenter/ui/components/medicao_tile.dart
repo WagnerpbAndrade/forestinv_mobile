@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
@@ -24,7 +23,7 @@ class MedicaoTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.2,
+        height: MediaQuery.of(context).size.height * 0.25,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
@@ -62,11 +61,24 @@ class MedicaoTile extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.007,
+                      ),
                       Text(
                         'Descrição: ${medicao.descricao}',
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.015,
+                      ),
+                      Text(
+                        'Data da medição: ${medicao.dataMedicao!.formattedDate()}',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       SizedBox(
@@ -81,6 +93,13 @@ class MedicaoTile extends StatelessWidget {
                       ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.015,
+                      ),
+                      Text(
+                        'Próxima medição em: ${medicao.getProximaMedicao().formattedDate()}',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       // Text(
                       //   'Idade ${medicao.idadeParcela.toString()} - '

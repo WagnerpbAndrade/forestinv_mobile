@@ -85,4 +85,9 @@ class Medicao {
     return DateTime.fromMicrosecondsSinceEpoch(
         timestamp.microsecondsSinceEpoch);
   }
+
+  DateTime getProximaMedicao() {
+    return DateTime(
+        dataMedicao!.year + 1, dataMedicao!.month, dataMedicao!.day);
+  }
 }

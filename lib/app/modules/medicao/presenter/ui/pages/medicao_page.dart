@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/medicao_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/components/medicao_tile.dart';
+import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 
 class MedicaoPage extends StatefulWidget {
   final List args;
@@ -24,6 +26,7 @@ class _MedicaoPageState extends State<MedicaoPage> {
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
+    final Parcela parcela = widget.args[0];
 
     return SafeArea(
       child: Scaffold(
@@ -33,6 +36,23 @@ class _MedicaoPageState extends State<MedicaoPage> {
         ),
         body: Column(
           children: [
+            Container(
+              height: 40,
+              width: double.infinity,
+              child: Card(
+                color: ColorsConst.secondaryVariant,
+                elevation: 0,
+                child: Center(
+                  child: Text(
+                    'Medições referente a parcela: ${parcela.numero}',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Expanded(
               child: Stack(
                 children: [

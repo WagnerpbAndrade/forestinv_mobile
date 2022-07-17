@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/parcela_store.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/components/parcela_tile.dart';
@@ -34,6 +35,23 @@ class _ParcelaPageState extends State<ParcelaPage> {
         ),
         body: Column(
           children: [
+            Container(
+              height: 40,
+              width: double.infinity,
+              child: Card(
+                color: ColorsConst.secondaryVariant,
+                elevation: 0,
+                child: Center(
+                  child: Text(
+                    'Parcelas referente ao projeto: ${widget.project.nome}',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Expanded(
               child: Stack(
                 children: [

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/arvore_store.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/components/arvore_tile.dart';
+import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
+import 'package:forestinv_mobile/helper/extensions.dart';
 
 class ArvorePage extends StatefulWidget {
   final List args;
@@ -24,6 +27,7 @@ class ArvorePageState extends State<ArvorePage> {
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
+    final Medicao medicao = widget.args[0];
 
     return SafeArea(
       child: Scaffold(
@@ -33,6 +37,37 @@ class ArvorePageState extends State<ArvorePage> {
         ),
         body: Column(
           children: [
+            Container(
+              height: 70,
+              width: double.infinity,
+              child: Card(
+                color: ColorsConst.secondaryVariant,
+                elevation: 0,
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Árvores referente a medição: ${medicao.identificador}',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Data da medição: ${medicao.dataMedicao!.formattedDateExported()}',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
             Expanded(
               child: Stack(
                 children: [
