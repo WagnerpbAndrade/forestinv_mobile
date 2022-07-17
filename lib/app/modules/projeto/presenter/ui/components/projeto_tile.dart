@@ -1,7 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
+import 'package:forestinv_mobile/app/core/widgets/custom_card_list.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/home_store.dart';
@@ -28,125 +28,106 @@ class ProjetoTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
-        height: 135,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           elevation: 8,
-          child: Row(
-            children: [
-              SizedBox(
-                height: 70,
-                width: 70,
-                child: IconButton(
-                  onPressed: null,
-                  icon: Image.asset('assets/images/location.png'),
-                ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 16,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Nome: ${projeto.nome}',
-                        style: const TextStyle(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      Text(
-                        'Área: ${projeto.area.toString()} ha',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      if (projeto.visibilidadeProjetoEnum.toUpperCase() ==
-                          'PRIVADO')
-                        const Icon(
-                          Icons.lock,
-                          size: 16,
-                          color: ColorsConst.primary,
-                        )
-                      else
-                        const Icon(
-                          Icons.lock_open,
-                          size: 16,
-                          color: ColorsConst.secondary,
-                        ),
-                      Text(
-                        'Criado em ${projeto.dataCriacao!.formattedDate()}',
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Column(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  PopupMenuButton<MenuChoice>(
-                    onSelected: (choice) {
-                      switch (choice.index) {
-                        case 0:
-                          editProject(context);
-                          break;
-                        case 1:
-                          deleteProject(context);
-                          break;
-                        case 2:
-                          exportarProject(context, projeto.id);
-                          break;
-                      }
-                    },
-                    icon: const Icon(
-                      Icons.more_vert,
-                      size: 20,
-                      color: Colors.purple,
-                    ),
-                    itemBuilder: (_) {
-                      return choices
-                          .map(
-                            (choice) => PopupMenuItem<MenuChoice>(
-                              value: choice,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    choice.iconData,
-                                    size: 20,
-                                    color: Colors.purple,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    choice.title,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.purple,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                          .toList();
-                    },
+                  _getPopUpMenu(context),
+                  CustomCardList(
+                    titulo: 'Nome do projeto',
+                    message: '${projeto.nome}',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomCardList(
+                    titulo: 'Área',
+                    message: '${projeto.area.toString()} ha',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomCardList(
+                    titulo: 'Criado em',
+                    message: '${projeto.dataCriacao!.formattedDate()}',
+                  ),
+                  const SizedBox(
+                    height: 20,
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _getPopUpMenu(final BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        PopupMenuButton<MenuChoice>(
+          position: PopupMenuPosition.under,
+          onSelected: (choice) {
+            switch (choice.index) {
+              case 0:
+                editProject(context);
+                break;
+              case 1:
+                deleteProject(context);
+                break;
+              case 2:
+                exportarProject(context, projeto.id);
+                break;
+            }
+          },
+          icon: const Icon(
+            Icons.more_vert,
+            size: 20,
+            color: Colors.purple,
+          ),
+          itemBuilder: (_) {
+            return choices
+                .map(
+                  (choice) => PopupMenuItem<MenuChoice>(
+                    value: choice,
+                    child: Row(
+                      children: [
+                        Icon(
+                          choice.iconData,
+                          size: 20,
+                          color: ColorsConst.primary,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          choice.title,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w400,
+                            color: ColorsConst.primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+                .toList();
+          },
+        ),
+      ],
     );
   }
 

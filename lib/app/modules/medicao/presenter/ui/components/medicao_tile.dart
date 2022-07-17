@@ -108,35 +108,6 @@ class MedicaoTile extends StatelessWidget {
     );
   }
 
-  Widget _getRowInfo(
-      final BuildContext context, final String titulo, final String valor) {
-    return Container(
-      padding: const EdgeInsets.only(left: 8, right: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            child: Text(
-              titulo,
-            ),
-          ),
-          SizedBox(
-            child: Text(
-              valor,
-              maxLines: 3,
-              textAlign: TextAlign.right,
-              style: const TextStyle(
-                overflow: TextOverflow.fade,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Future<void> editMedicao(final BuildContext context) async {
     final success = await Navigator.of(context).push(
       MaterialPageRoute(
