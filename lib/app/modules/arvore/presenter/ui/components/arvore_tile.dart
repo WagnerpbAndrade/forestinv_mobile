@@ -23,7 +23,7 @@ class ArvoreTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.17,
+        height: MediaQuery.of(context).size.height * 0.2,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
@@ -54,6 +54,16 @@ class ArvoreTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Text(
+                        'Identificador: ${arvore.numArvore}',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.01,
+                      ),
                       Text(
                         'DAP: ${arvore.dap}',
                         style: const TextStyle(
