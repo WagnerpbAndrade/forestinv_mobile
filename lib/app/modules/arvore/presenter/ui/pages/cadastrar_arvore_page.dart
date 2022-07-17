@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_elevated_button.dart';
 import 'package:forestinv_mobile/app/core/widgets/error_box.dart';
@@ -58,6 +57,13 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
         title: Text(editing ? 'Editar Árvore' : 'Cadastro'),
         centerTitle: true,
         actions: [
+          IconButton(
+            onPressed: () {
+              Modular.to.pushNamed(
+                  '${RouterConst.PROJECT_ROUTER}${RouterConst.ARVORE_ROUTER}/arvore_infos');
+            },
+            icon: const Icon(Icons.info_outline_rounded),
+          ),
           IconButton(
             onPressed: () {
               Modular.to.pushNamed(
