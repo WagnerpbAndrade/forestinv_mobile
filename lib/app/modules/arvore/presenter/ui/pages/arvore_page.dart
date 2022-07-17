@@ -57,7 +57,7 @@ class ArvorePageState extends State<ArvorePage> {
                         height: 10,
                       ),
                       Text(
-                        'Data da medição: ${medicao.dataMedicao!.formattedDateExported()}',
+                        'Data da medição: ${medicao.dataMedicao!.formattedDate()}',
                         style: const TextStyle(
                           fontSize: 16,
                           color: Colors.white,
