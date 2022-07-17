@@ -68,7 +68,7 @@ class MedicaoTile extends StatelessWidget {
                     message: '${medicao.nomeResponsavel}',
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   CustomCardList(
                     titulo: 'Próxima medição a partir de',
@@ -76,28 +76,6 @@ class MedicaoTile extends StatelessWidget {
                   ),
                   const SizedBox(
                     height: 20,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          child: Text(
-                            'Localização',
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            print('natalia nerd');
-                          },
-                          icon: const Icon(
-                            Icons.map,
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                 ],
               ),
