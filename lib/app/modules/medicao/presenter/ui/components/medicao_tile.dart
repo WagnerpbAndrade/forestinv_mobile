@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/medicao_store.dart';
@@ -23,144 +22,180 @@ class MedicaoTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.25,
+        height: MediaQuery.of(context).size.height * 0.35,
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           elevation: 8,
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: SizedBox(
-                  height: 70,
-                  width: 70,
-                  child: CircleAvatar(
-                    backgroundColor: ColorsConst.secondary,
-                    foregroundColor: ColorsConst.textColorPrimary,
-                    child: Text(medicao.identificador),
-                  ),
-                ),
+          child: Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 16,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      Column(
+                        children: [
+                          PopupMenuButton<MenuChoice>(
+                            onSelected: (choice) {
+                              switch (choice.index) {
+                                case 0:
+                                  editMedicao(context);
+                                  break;
+                                case 1:
+                                  deleteMedicao(context);
+                                  break;
+                              }
+                            },
+                            icon: const Icon(
+                              Icons.more_vert,
+                              size: 20,
+                              color: Colors.purple,
+                            ),
+                            itemBuilder: (_) {
+                              return choices
+                                  .map(
+                                    (choice) => PopupMenuItem<MenuChoice>(
+                                      value: choice,
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            choice.iconData,
+                                            size: 20,
+                                            color: Colors.purple,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Text(
+                                            choice.title,
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.purple,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                  .toList();
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Identificador',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                       Text(
-                        'Identificador: ${medicao.identificador}',
+                        '${medicao.identificador}',
                         style: const TextStyle(
                           fontSize: 19,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.007,
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.015,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Descrição',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                       Text(
-                        'Descrição: ${medicao.descricao}',
+                        '${medicao.descricao}',
                         style: const TextStyle(
-                          fontSize: 16,
+                          fontSize: 19,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.015,
-                      ),
-                      Text(
-                        'Data da medição: ${medicao.dataMedicao!.formattedDate()}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.015,
-                      ),
-                      Text(
-                        'Responsável: ${medicao.nomeResponsavel}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.015,
-                      ),
-                      Text(
-                        'Próxima medição em: ${medicao.getProximaMedicao().formattedDate()}',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      // Text(
-                      //   'Idade ${medicao.idadeParcela.toString()} - '
-                      //   'Plantio em ${medicao.dataPlantio.formattedDate()}',
-                      //   style: const TextStyle(
-                      //     fontSize: 12,
-                      //     fontWeight: FontWeight.w300,
-                      //   ),
-                      // ),
                     ],
                   ),
-                ),
-              ),
-              Column(
-                children: [
-                  PopupMenuButton<MenuChoice>(
-                    onSelected: (choice) {
-                      switch (choice.index) {
-                        case 0:
-                          editMedicao(context);
-                          break;
-                        case 1:
-                          deleteMedicao(context);
-                          break;
-                      }
-                    },
-                    icon: const Icon(
-                      Icons.more_vert,
-                      size: 20,
-                      color: Colors.purple,
-                    ),
-                    itemBuilder: (_) {
-                      return choices
-                          .map(
-                            (choice) => PopupMenuItem<MenuChoice>(
-                              value: choice,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    choice.iconData,
-                                    size: 20,
-                                    color: Colors.purple,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    choice.title,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.purple,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                          .toList();
-                    },
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.015,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Data da medição',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        '${medicao.dataMedicao!.formattedDate()}',
+                        style: const TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.015,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Responsável',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        '${medicao.nomeResponsavel}',
+                        style: const TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.03,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Próxima medição a partir de',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                      Text(
+                        '${medicao.getProximaMedicao().formattedDate()}',
+                        style: const TextStyle(
+                          fontSize: 19,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),
