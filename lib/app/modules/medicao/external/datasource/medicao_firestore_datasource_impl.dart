@@ -94,10 +94,10 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
     try {
       medicao.dataMedicao = DateTime.now();
       medicao.ultimaAtualizacao = DateTime.now();
-      _firestore
+      final doc = await _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
           .add(medicao.toMap());
-      return ApiResponse.ok();
+      return ApiResponse.ok(result: doc.id);
     } catch (e) {
       print('MedicaoFirestoreDatasourceImpl-save: $e');
       return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
@@ -150,16 +150,16 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
 
   @override
   Future<ApiResponse> obterUltimaMedicaoByParcelaId(
-      final String parcelaId) async {
+      final String parcelaId, final String anoMedicao) async {
     try {
       final querySnapshot = await _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
           .where('parcelaId', isEqualTo: parcelaId)
-          .orderBy('anoMedicao', descending: true)
-          .limit(1)
+          .where('anoMedicao', isEqualTo: num.parse(anoMedicao))
           .get();
-      return ApiResponse.ok(
-          result: Medicao.fromMap(querySnapshot.docs.first.data()));
+      final medicao = Medicao.fromMap(querySnapshot.docs.first.data());
+      medicao.id = querySnapshot.docs.first.id;
+      return ApiResponse.ok(result: medicao);
     } catch (e) {
       print('ParcelaFirestoreDatasourceImpl-obterUltimaMedicaoByParcelaId: $e');
       return ApiResponse.error(message: 'Oops! Algo deu errado: $e');

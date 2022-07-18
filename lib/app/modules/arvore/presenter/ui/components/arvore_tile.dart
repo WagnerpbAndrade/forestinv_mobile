@@ -50,14 +50,14 @@ class ArvoreTile extends StatelessWidget {
                   ),
                   CustomCardList(
                     titulo: 'DAP',
-                    message: '${arvore.dap}',
+                    message: '${arvore.dap} cm',
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   CustomCardList(
                     titulo: 'Altura total',
-                    message: '${arvore.alturaTotal}',
+                    message: '${arvore.alturaTotal} m',
                   ),
                   const SizedBox(
                     height: 20,

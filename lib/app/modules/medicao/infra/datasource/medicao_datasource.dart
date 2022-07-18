@@ -15,5 +15,6 @@ abstract class MedicaoDatasource {
 
   Future<List<Medicao>> listAllByParcela(dynamic parcelaId);
 
-  Future<ApiResponse> obterUltimaMedicaoByParcelaId(final String parcelaId);
+  Future<ApiResponse> obterUltimaMedicaoByParcelaId(
+      final String parcelaId, final String anoMedicao);
 }

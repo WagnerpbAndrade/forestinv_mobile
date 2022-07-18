@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/interface/api_response.dart';
+import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
+import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/get_all_by_medicao_usecase.dart';
+import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/save_arvore_usecase.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/usecases/save_medicao_usecase.dart';
@@ -130,14 +134,50 @@ abstract class _CadastrarMedicaoStoreBase with Store {
       return;
     }
 
+    String medicaoIdAdd = '';
     try {
-      await usecase.call(medicaoSaved);
+      final ApiResponse = await usecase.call(medicaoSaved);
+      medicaoIdAdd = ApiResponse.result;
       savedMedicao = true;
     } on Exception catch (e) {
       error = e.toString();
     }
 
+    if (savedMedicao) {
+      final datasource = Modular.get<MedicaoFirestoreDatasourceImpl>();
+      final getArvoresUsecase = Modular.get<GetAllByMedicaoUsecase>();
+
+      final apiResponse = await datasource.obterUltimaMedicaoByParcelaId(
+          parcelaId, (medicaoSaved.anoMedicao! - 1).toString());
+
+      if (apiResponse.ok && apiResponse.result != null) {
+        final Medicao medicaoAnterior = apiResponse.result;
+        final listArvoreByMedicao =
+            await getArvoresUsecase.getAllByMedicao(medicaoAnterior.id);
+        final arvoresListNova =
+            _getListNovaMedicao(listArvoreByMedicao, medicaoIdAdd);
+        _salvarArvoresNovas(arvoresListNova);
+      }
+    }
+
     loading = false;
+  }
+
+  void _salvarArvoresNovas(final List<Arvore> arvores) async {
+    final usecase = Modular.get<SaveArvoreUsecase>();
+    for (final arvore in arvores) {
+      await usecase.save(arvore);
+    }
+  }
+
+  List<Arvore> _getListNovaMedicao(
+      final List<Arvore> listaAntiga, final String medicaoIdNovo) {
+    final list = <Arvore>[];
+    for (final element in listaAntiga) {
+      final arvore = element.copyWith(medicaoId: medicaoIdNovo);
+      list.add(arvore);
+    }
+    return list;
   }
 
   @action
@@ -182,8 +222,8 @@ abstract class _CadastrarMedicaoStoreBase with Store {
     if (responseRegra.ok && responseRegra.result == true) {
       print(
           'Regra >> VIDADEDOISMENOSIDADEUMIGUALAUM << ativa? ${responseRegra.result}');
-      final apiResponse =
-          await datasource.obterUltimaMedicaoByParcelaId(medicao.parcelaId);
+      final apiResponse = await datasource.obterUltimaMedicaoByParcelaId(
+          medicao.parcelaId, (medicao.anoMedicao! - 1).toString());
       if (apiResponse.ok && apiResponse.result != null) {
         final Medicao medicaoAnterior = apiResponse.result;
         final anoAtual = medicao.dataMedicao;

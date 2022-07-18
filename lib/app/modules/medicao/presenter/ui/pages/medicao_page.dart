@@ -37,17 +37,19 @@ class _MedicaoPageState extends State<MedicaoPage> {
         body: Column(
           children: [
             Container(
-              height: 40,
               width: double.infinity,
               child: Card(
                 color: ColorsConst.secondaryVariant,
-                elevation: 0,
-                child: Center(
-                  child: Text(
-                    'Medições referente a parcela: ${parcela.numero}',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
+                elevation: 8,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Center(
+                    child: Text(
+                      'Medições referente a parcela: ${parcela.numero}',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),

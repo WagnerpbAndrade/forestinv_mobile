@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Medicao listProjetoResponseFromMap(String str) =>
-    Medicao.fromMap(json.decode(str));
+// Medicao listProjetoResponseFromMap(String str) =>
+//     Medicao.fromMap(json.decode(str));
 
 String listProjetoResponseToMap(Medicao data) => json.encode(data.toMap());
 

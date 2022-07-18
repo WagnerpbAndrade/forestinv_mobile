@@ -65,7 +65,7 @@ class ParcelaTile extends StatelessWidget {
                   ),
                   CustomCardList(
                     titulo: 'Espaçamento',
-                    message: '${parcela.espacamento}',
+                    message: '${parcela.espacamento} m',
                   ),
                   const SizedBox(
                     height: 20,

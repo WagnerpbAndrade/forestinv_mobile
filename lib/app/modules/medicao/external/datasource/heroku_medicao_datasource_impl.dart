@@ -95,7 +95,8 @@ class HerokuMedicaoDatasourceImpl implements MedicaoDatasource {
   }
 
   @override
-  Future<ApiResponse> obterUltimaMedicaoByParcelaId(String parcelaId) {
+  Future<ApiResponse> obterUltimaMedicaoByParcelaId(
+      String parcelaId, final String anoMedicao) {
     // TODO: implement obterUltimaMedicaoByParcelaId
     throw UnimplementedError();
   }
