@@ -222,8 +222,9 @@ abstract class _CadastrarMedicaoStoreBase with Store {
     if (responseRegra.ok && responseRegra.result == true) {
       print(
           'Regra >> VIDADEDOISMENOSIDADEUMIGUALAUM << ativa? ${responseRegra.result}');
-      final apiResponse = await datasource.obterUltimaMedicaoByParcelaId(
-          medicao.parcelaId, (medicao.anoMedicao! - 1).toString());
+      final apiResponse =
+          await datasource.obterUltimaMedicaoByParcelaIdOrderByAnoMedicaoDesc(
+              medicao.parcelaId);
       if (apiResponse.ok && apiResponse.result != null) {
         final Medicao medicaoAnterior = apiResponse.result;
         final anoAtual = medicao.dataMedicao;
@@ -237,7 +238,7 @@ abstract class _CadastrarMedicaoStoreBase with Store {
           if (diffIdade != 1) {
             print('Idade da medicao atual maior que 1 ano');
             error =
-                'Erro de consistência: A diferença entre Medições precisa ser de 1 ano. Data aproximada para a próxima medição: ${DateTime(medicaoAnterior.dataMedicao!.year + 1, medicaoAnterior.dataMedicao!.month, medicaoAnterior.dataMedicao!.day).formattedDate()}';
+                'Erro de consistência: A diferença entre Medições precisa ser de 1 ano. Próxima medição a partir de: ${DateTime(medicaoAnterior.dataMedicao!.year + 1, medicaoAnterior.dataMedicao!.month, medicaoAnterior.dataMedicao!.day).formattedDate()}';
             return false;
           }
         } catch (e) {
