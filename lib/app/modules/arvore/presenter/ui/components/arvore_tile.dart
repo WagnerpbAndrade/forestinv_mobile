@@ -1,11 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_card_list.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/arvore_store.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/pages/cadastrar_arvore_page.dart';
+import 'package:forestinv_mobile/helper/toast_helper.dart';
+import 'package:maps_launcher/maps_launcher.dart';
+import 'package:toast/toast.dart';
 
 class ArvoreTile extends StatelessWidget {
   ArvoreTile({required this.arvore, this.onTap, required this.store});
@@ -13,6 +16,7 @@ class ArvoreTile extends StatelessWidget {
   final Arvore arvore;
   final Function? onTap;
   final ArvoreStore store;
+  final ToastHelper toastHelper = Modular.get<ToastHelper>();
 
   final List<MenuChoice> choices = [
     MenuChoice(index: 0, title: 'Editar', iconData: Icons.edit),
@@ -21,6 +25,7 @@ class ArvoreTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    toastHelper.init(context);
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
@@ -89,7 +94,19 @@ class ArvoreTile extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {
-                            print('natalia nerd');
+                            if (arvore.latitude.isEmpty ||
+                                arvore.longitude.isEmpty) {
+                              toastHelper.show(
+                                  'Nenhuma latitude e longitude cadastrada.',
+                                  gravity: Toast.bottom,
+                                  duration: 2);
+                              return;
+                            } else {
+                              MapsLauncher.launchCoordinates(
+                                  double.tryParse(arvore.latitude) ?? 0,
+                                  double.tryParse(arvore.longitude) ?? 0,
+                                  'Localização da árvore');
+                            }
                           },
                           icon: const Icon(
                             Icons.map,

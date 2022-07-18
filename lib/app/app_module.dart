@@ -22,6 +22,7 @@ import 'package:forestinv_mobile/app/modules/regra_consistencia/presenter/output
 import 'package:forestinv_mobile/app/modules/regra_consistencia/regra_consistencia_module.dart';
 import 'package:forestinv_mobile/app/stores/connectivity_store.dart';
 import 'package:forestinv_mobile/helper/location_helper.dart';
+import 'package:forestinv_mobile/helper/toast_helper.dart';
 
 class AppModule extends Module {
   @override
@@ -43,6 +44,7 @@ class AppModule extends Module {
     Bind((i) => LoginGoogleUsecaseImpl(i())),
     Bind((i) => LogoutGoogleUsecaseImpl(i())),
     Bind((i) => CurrentUserUsecaseImpl(i())),
+    Bind((i) => ToastHelper()),
   ];
 
   @override
