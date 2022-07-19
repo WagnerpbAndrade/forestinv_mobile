@@ -41,7 +41,8 @@ class MedicaoTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _getPopUpMenuItem(context),
+                  _getMenuOptions(context),
+                  //_getPopUpMenuItem(context),
                   CustomCardList(
                     titulo: 'Identificador',
                     message: '${medicao.identificador}',
@@ -112,6 +113,27 @@ class MedicaoTile extends StatelessWidget {
           Navigator.of(context).pop();
         },
       ),
+    );
+  }
+
+  Widget _getMenuOptions(final BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        IconButton(
+          onPressed: () {
+            editMedicao(context);
+          },
+          icon: const Icon(Icons.edit),
+        ),
+        IconButton(
+          onPressed: () {
+            deleteMedicao(context);
+          },
+          icon: const Icon(Icons.delete_forever),
+        ),
+      ],
     );
   }
 

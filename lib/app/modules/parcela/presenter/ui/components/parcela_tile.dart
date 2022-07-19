@@ -47,7 +47,8 @@ class ParcelaTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _getPopUpMenuItem(context),
+                  _getMenuOptions(context),
+                  //_getPopUpMenuItem(context),
                   CustomCardList(
                     titulo: 'Identificador',
                     message: '${parcela.numero}',
@@ -123,6 +124,27 @@ class ParcelaTile extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _getMenuOptions(final BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        IconButton(
+          onPressed: () {
+            editParcela(context);
+          },
+          icon: const Icon(Icons.edit),
+        ),
+        IconButton(
+          onPressed: () {
+            deleteParcela(context);
+          },
+          icon: const Icon(Icons.delete_forever),
+        ),
+      ],
     );
   }
 

@@ -45,7 +45,8 @@ class ArvoreTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _getPopUpMenuItem(context),
+                  _getMenuOptions(context),
+                  //_getPopUpMenuItem(context),
                   CustomCardList(
                     titulo: 'Identificador',
                     message: '${arvore.numArvore}',
@@ -149,6 +150,27 @@ class ArvoreTile extends StatelessWidget {
                 Navigator.of(context).pop();
               },
             ));
+  }
+
+  Widget _getMenuOptions(final BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        IconButton(
+          onPressed: () {
+            editArvore(context);
+          },
+          icon: const Icon(Icons.edit),
+        ),
+        IconButton(
+          onPressed: () {
+            deleteArvore(context);
+          },
+          icon: const Icon(Icons.delete_forever),
+        ),
+      ],
+    );
   }
 
   Widget _getPopUpMenuItem(final BuildContext context) {
