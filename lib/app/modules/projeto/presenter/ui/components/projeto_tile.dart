@@ -44,7 +44,8 @@ class ProjetoTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _getPopUpMenu(context),
+                  _getMenuOptions(context),
+                  //_getPopUpMenu(context),
                   CustomCardList(
                     titulo: 'Nome do projeto',
                     message: '${projeto.nome}',
@@ -72,6 +73,33 @@ class ProjetoTile extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _getMenuOptions(final BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        IconButton(
+          onPressed: () {
+            editProject(context);
+          },
+          icon: const Icon(Icons.edit),
+        ),
+        IconButton(
+          onPressed: () {
+            deleteProject(context);
+          },
+          icon: const Icon(Icons.delete_forever),
+        ),
+        IconButton(
+          onPressed: () {
+            exportarProject(context, projeto.id);
+          },
+          icon: const Icon(Icons.share),
+        ),
+      ],
     );
   }
 
