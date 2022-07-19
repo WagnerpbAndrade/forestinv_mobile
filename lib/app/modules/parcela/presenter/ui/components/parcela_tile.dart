@@ -132,6 +132,7 @@ class ParcelaTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         PopupMenuButton<MenuChoice>(
+          position: PopupMenuPosition.under,
           onSelected: (choice) {
             switch (choice.index) {
               case 0:
