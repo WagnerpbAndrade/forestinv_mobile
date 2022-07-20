@@ -1,3 +1,4 @@
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -149,16 +150,24 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                 enabled: !cadastrarParcelaStore.loading,
                                 decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
-                                    hintText: 'Exemplo: 100 m²',
+                                    hintText: 'Exemplo: 100',
+                                    suffix: const Text('m²'),
                                     isDense: true,
                                     errorText: cadastrarParcelaStore.areaError),
                                 keyboardType: TextInputType.number,
                                 onChanged: cadastrarParcelaStore.setArea,
+                                textAlign: TextAlign.right,
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  TextInputMask(
+                                    mask: '9+999.99',
+                                    //placeholder: '0',
+                                    maxPlaceHolders: 3,
+                                    reverse: true,
+                                  ),
                                 ],
                                 maxLines: 1,
-                                maxLength: 7,
+                                maxLength: 9,
                               );
                             },
                           ),
