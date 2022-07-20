@@ -9,15 +9,15 @@ import 'package:share_plus/share_plus.dart';
 class CsvHelper {
   String? filePath;
 
-  Future<void> createFile(
-      final List<List<dynamic>> rows, final BuildContext context) async {
+  Future<void> createFile(final List<List<dynamic>> rows,
+      final BuildContext context, final String projectName) async {
     final String csv = const ListToCsvConverter().convert(rows);
 
-    await _writeData(csv);
+    await _writeData(csv, projectName);
 
     //final box = context.findRenderObject() as RenderBox?;
 
-    final String filePath = await _localPath;
+    final String filePath = await _localPath(projectName);
 
     await Share.shareFiles(
       [filePath],
@@ -28,13 +28,14 @@ class CsvHelper {
     );
   }
 
-  Future<String> get _localPath async {
+  Future<String> _localPath(final String projectName) async {
     final directory = await getApplicationDocumentsDirectory();
-    return '${directory.path}/projeto-${DateTime.now().formattedDateExported()}.csv';
+    return '${directory.path}/projeto<${projectName.toUpperCase()}>-${DateTime.now().formattedDateExported()}.csv';
   }
 
-  Future<File> _writeData(String csvData) async {
-    final String filePath = await _localPath;
+  Future<File> _writeData(
+      final String csvData, final String projectName) async {
+    final String filePath = await _localPath(projectName);
     final file = File(filePath);
     return file.writeAsString(csvData);
   }

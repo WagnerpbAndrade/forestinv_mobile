@@ -87,6 +87,7 @@ abstract class _HomeStoreBase with Store {
     final arvores =
         snapshotArvore.docs.map((e) => Arvore.fromMap(e.data(), e.id)).toList();
 
+    late Project projeto;
     if (arvores.isNotEmpty) {
       for (final Arvore arvore in arvores) {
         print('Arvore: id: ${arvore.id} - $arvore');
@@ -117,7 +118,7 @@ abstract class _HomeStoreBase with Store {
           medicao = medicao.copyWith(id: snapshotMedicao.id);
           print('Medicao: ${medicao.nomeResponsavel}');
 
-          var projeto = Project.fromMap(snapshotProjeto.data()!);
+          projeto = Project.fromMap(snapshotProjeto.data()!);
           projeto = projeto.copyWith(id: snapshotProjeto.id);
           print('Projeto: ${projeto.nome}');
 
@@ -132,7 +133,7 @@ abstract class _HomeStoreBase with Store {
       }
 
       print('Listagem: $rows');
-      await csvHelper.createFile(rows, context);
+      await csvHelper.createFile(rows, context, projeto.nome);
 
       setLoading(false);
     } else {
