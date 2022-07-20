@@ -27,7 +27,9 @@ class ArvoreTile extends StatelessWidget {
   Widget build(BuildContext context) {
     toastHelper.init(context);
     return GestureDetector(
-      onTap: onTap == null ? null : () => onTap!(),
+      onTap: () {
+        editArvore(context);
+      },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
@@ -45,7 +47,6 @@ class ArvoreTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _getMenuOptions(context),
                   //_getPopUpMenuItem(context),
                   CustomCardList(
                     titulo: 'Identificador',
@@ -77,7 +78,9 @@ class ArvoreTile extends StatelessWidget {
                   ),
                   CustomCardList(
                     titulo: 'Observação',
-                    message: '${arvore.observacao}',
+                    message: arvore.observacao.isNotEmpty
+                        ? '${arvore.observacao}'
+                        : 'N/A',
                   ),
                   const SizedBox(
                     height: 10,
@@ -116,6 +119,7 @@ class ArvoreTile extends StatelessWidget {
                       ],
                     ),
                   ),
+                  _getMenuOptions(context),
                 ],
               ),
             ),

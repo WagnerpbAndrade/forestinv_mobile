@@ -44,7 +44,6 @@ class ProjetoTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _getMenuOptions(context),
                   //_getPopUpMenu(context),
                   CustomCardList(
                     titulo: 'Nome do projeto',
@@ -67,6 +66,7 @@ class ProjetoTile extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
+                  _getMenuOptions(context),
                 ],
               ),
             ),

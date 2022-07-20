@@ -21,6 +21,7 @@ import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/cadastra
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/home_page.dart';
 import 'package:forestinv_mobile/app/modules/regra_consistencia/regra_consistencia_module.dart';
 import 'package:forestinv_mobile/app/screens/offline/offline_screen.dart';
+import 'package:forestinv_mobile/app/screens/settings/settings_screen.dart';
 
 class ProjetoModule extends Module {
   @override
@@ -48,6 +49,10 @@ class ProjetoModule extends Module {
         child: (_, args) => CadastrarProjetoPage(projeto: args.data)),
     ChildRoute(RouterConst.OFFLINE_ROUTER_PAGE,
         child: (_, args) => OfflineScreen()),
+    ChildRoute(
+      RouterConst.SETTINGS_ROUTER_PAGE,
+      child: (_, args) => const SettingsScreen(),
+    ),
     ModuleRoute(RouterConst.PARCELA_ROUTER, module: ParcelaModule()),
     ModuleRoute(RouterConst.MEDICAO_ROUTER, module: MedicaoModule()),
     ModuleRoute(RouterConst.ARVORE_ROUTER, module: ArvoreModule()),

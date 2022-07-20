@@ -4,6 +4,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_drawer/custom_drawer.dart';
 import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
@@ -42,33 +43,42 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           centerTitle: true,
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
               child: Stack(
                 children: [
                   Observer(
                     builder: (_) {
+                      if (store.loading) {
+                        return const SpinKitFadingCircle(
+                          color: ColorsConst.secondary,
+                          size: 50.0,
+                        );
+                      }
+
                       if (store.error != null) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const <Widget>[
-                              Icon(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              const Icon(
                                 Icons.error,
-                                color: Colors.white,
+                                color: ColorsConst.secondary,
                                 size: 100,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               Text(
-                                'Ocorreu um erro!',
+                                store.error ??
+                                    'Ocorreu um erro. Tente novamente.',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
+                                style: const TextStyle(
+                                  color: Colors.black,
                                   fontSize: 20,
-                                  fontWeight: FontWeight.w700,
                                 ),
                               ),
                             ],

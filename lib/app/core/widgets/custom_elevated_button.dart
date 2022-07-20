@@ -17,7 +17,6 @@ class CustomElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
       margin: const EdgeInsets.only(top: 20, bottom: 12),
       child: ElevatedButton(
         style: style ??

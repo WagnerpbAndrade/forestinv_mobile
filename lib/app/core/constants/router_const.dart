@@ -25,4 +25,6 @@ class RouterConst {
   static String OFFLINE_ROUTER_PAGE = '/offline';
 
   static String EDIT_ACCOUNT_ROUTER_PAGE = '/edit-account';
+
+  static String SETTINGS_ROUTER_PAGE = '/settings';
 }

@@ -69,6 +69,8 @@ abstract class _HomeStoreBase with Store {
 
   Future<void> fetchAllDataForExportCsv(
       final String projetoId, final BuildContext context) async {
+    setLoading(true);
+
     final CsvHelper csvHelper = CsvHelper();
     final FirebaseFirestore _firestore = Modular.get<FirebaseFirestore>();
 
@@ -91,40 +93,52 @@ abstract class _HomeStoreBase with Store {
             .collection(FirebaseFirestoreConstants.COLLECTION_PROJETOS)
             .doc(projetoId);
         final snapshotProjeto = await queryProjeto.get();
-        var projeto = Project.fromMap(snapshotProjeto.data()!);
-        projeto = projeto.copyWith(id: snapshotProjeto.id);
-        print('Projeto: ${projeto.nome}');
 
         final queryParcela = _firestore
             .collection(FirebaseFirestoreConstants.COLLECTION_PARCELAS)
             .doc(arvore.parcelaId);
         final snapshotParcela = await queryParcela.get();
-        var parcela = Parcela.fromMap(snapshotParcela.data()!);
-        parcela = parcela.copyWith(id: snapshotParcela.id);
-        print('Parcela: ${parcela.numero}');
 
         final queryMedicao = _firestore
             .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)
             .doc(arvore.medicaoId);
         final snapshotMedicao = await queryMedicao.get();
-        var medicao = Medicao.fromMap(snapshotMedicao.data()!);
-        medicao = medicao.copyWith(id: snapshotMedicao.id);
-        print('Medicao: ${medicao.nomeResponsavel}');
 
-        await _createList(
-          rows,
-          projeto,
-          parcela,
-          medicao,
-          arvore,
-        );
+        if (snapshotProjeto.exists &&
+            snapshotParcela.exists &&
+            snapshotMedicao.exists) {
+          var parcela = Parcela.fromMap(snapshotParcela.data()!);
+          parcela = parcela.copyWith(id: snapshotParcela.id);
+          print('Parcela: ${parcela.numero}');
+
+          var medicao = Medicao.fromMap(snapshotMedicao.data()!);
+          medicao = medicao.copyWith(id: snapshotMedicao.id);
+          print('Medicao: ${medicao.nomeResponsavel}');
+
+          var projeto = Project.fromMap(snapshotProjeto.data()!);
+          projeto = projeto.copyWith(id: snapshotProjeto.id);
+          print('Projeto: ${projeto.nome}');
+
+          await _createList(
+            rows,
+            projeto,
+            parcela,
+            medicao,
+            arvore,
+          );
+        }
       }
+
+      print('Listagem: $rows');
+      await csvHelper.createFile(rows, context);
+
+      setLoading(false);
     } else {
+      setLoading(false);
       error = 'Nenhuma árvore cadastrada para exportar.';
-      return;
+      Future.delayed(const Duration(seconds: 3))
+          .whenComplete(() => error = null);
     }
-    print('Listagem: $rows');
-    csvHelper.createFile(rows, context);
   }
 
   Future<void> _createList(
@@ -155,6 +169,8 @@ abstract class _HomeStoreBase with Store {
     row.add(medicao.id ?? '');
     row.add(medicao.parcelaId);
     row.add(medicao.nomeResponsavel);
+    row.add(medicao.identificador);
+    row.add(medicao.descricao);
     row.add(medicao.dataMedicao.toString());
     row.add(medicao.ultimaAtualizacao.toString());
     row.add(arvore.id ?? '');
@@ -197,6 +213,8 @@ abstract class _HomeStoreBase with Store {
         "medicaoId",
         "parcelaId",
         "responsavel",
+        "identificador",
+        "descricao",
         "dataMedicao",
         "ultimaAtualizacao",
         "arvoreId",
@@ -224,6 +242,7 @@ abstract class _HomeStoreBase with Store {
     loading = true;
     await usecase.delete(projectId);
     refresh();
+    loading = false;
   }
 
   void goToParcelaPage(final Project project) {
@@ -249,5 +268,10 @@ abstract class _HomeStoreBase with Store {
   void goToAccountPage() {
     Modular.to.pushNamed(
         '${RouterConst.PROJECT_ROUTER}${RouterConst.ACCOUNT_ROUTER}');
+  }
+
+  void goToSettingsPage() {
+    Modular.to.pushNamed(
+        '${RouterConst.PROJECT_ROUTER}${RouterConst.SETTINGS_ROUTER_PAGE}');
   }
 }

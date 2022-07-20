@@ -42,7 +42,7 @@ class ArvorePageState extends State<ArvorePage> {
               width: double.infinity,
               child: Card(
                 color: ColorsConst.secondaryVariant,
-                elevation: 0,
+                elevation: 8,
                 child: Center(
                   child: Column(
                     children: [

@@ -249,115 +249,96 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Expanded(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Column(
-                                      children: [
-                                        const FieldTitle(title: 'Latitude'),
-                                        Observer(
-                                          builder: (_) {
-                                            return Container(
-                                              height: 40,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.27,
-                                              child: TextFormField(
-                                                enabled: false,
-                                                decoration: InputDecoration(
-                                                  border:
-                                                      const OutlineInputBorder(),
-                                                  isDense: true,
-                                                  label: Text(
-                                                    cadastrarArvoreStore
-                                                        .latitude,
-                                                    style: const TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                                keyboardType:
-                                                    TextInputType.text,
-                                                onChanged: cadastrarArvoreStore
-                                                    .setLatitude,
-                                                maxLines: 1,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const FieldTitle(title: 'Latitude'),
+                                  Observer(
+                                    builder: (_) {
+                                      return Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.27,
+                                        child: TextFormField(
+                                          enabled: false,
+                                          decoration: InputDecoration(
+                                            border: const OutlineInputBorder(),
+                                            isDense: true,
+                                            label: Text(
+                                              cadastrarArvoreStore.latitude,
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 14,
                                               ),
-                                            );
-                                          },
+                                            ),
+                                          ),
+                                          keyboardType: TextInputType.text,
+                                          onChanged:
+                                              cadastrarArvoreStore.setLatitude,
+                                          maxLines: 1,
                                         ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.01,
-                                    ),
-                                    Column(
-                                      children: [
-                                        const FieldTitle(title: 'Longitude'),
-                                        Observer(
-                                          builder: (_) {
-                                            return Container(
-                                              height: 40,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.27,
-                                              child: TextFormField(
-                                                enabled: false,
-                                                decoration: InputDecoration(
-                                                  border:
-                                                      const OutlineInputBorder(),
-                                                  isDense: true,
-                                                  label: Text(
-                                                    cadastrarArvoreStore
-                                                        .longitude,
-                                                    style: const TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                                keyboardType:
-                                                    TextInputType.text,
-                                                onChanged: cadastrarArvoreStore
-                                                    .setLongitude,
-                                                maxLines: 1,
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const FieldTitle(title: 'Longitude'),
+                                  Observer(
+                                    builder: (_) {
+                                      return Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.27,
+                                        child: TextFormField(
+                                          enabled: false,
+                                          decoration: InputDecoration(
+                                            border: const OutlineInputBorder(),
+                                            isDense: true,
+                                            label: Text(
+                                              cadastrarArvoreStore.longitude,
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 14,
                                               ),
-                                            );
-                                          },
+                                            ),
+                                          ),
+                                          keyboardType: TextInputType.text,
+                                          onChanged:
+                                              cadastrarArvoreStore.setLongitude,
+                                          maxLines: 1,
                                         ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.01,
-                                    ),
-                                    Observer(
-                                      builder: (_) {
-                                        return CustomElevatedButton(
-                                          onPressed:
-                                              cadastrarArvoreStore.getLatLong,
-                                          child: cadastrarArvoreStore
-                                                  .loadingLatLong
-                                              ? const CircularProgressIndicator(
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation(
-                                                          Colors.white),
-                                                )
-                                              : const Text(
-                                                  'GPS',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Observer(
+                                builder: (_) {
+                                  return CustomElevatedButton(
+                                    onPressed: cadastrarArvoreStore.getLatLong,
+                                    child: cadastrarArvoreStore.loadingLatLong
+                                        ? const CircularProgressIndicator(
+                                            valueColor: AlwaysStoppedAnimation(
+                                              Colors.white,
+                                            ),
+                                          )
+                                        : const Text(
+                                            'GPS',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                  );
+                                },
                               ),
                             ],
                           ),

@@ -62,12 +62,14 @@ class NewWidget extends StatelessWidget {
                     color: Colors.black54,
                     thickness: 1,
                   ),
-                  // PageTile(
-                  //   label: 'Configurações',
-                  //   iconData: Icons.settings,
-                  //   onTap: () {},
-                  //   highlighted: false,
-                  // ),
+                  PageTile(
+                    label: 'Configurações',
+                    iconData: Icons.settings,
+                    onTap: () {
+                      homeStore.goToSettingsPage();
+                    },
+                    highlighted: false,
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: PageTile(

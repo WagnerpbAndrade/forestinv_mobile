@@ -15,7 +15,7 @@ class CsvHelper {
 
     await _writeData(csv);
 
-    final box = context.findRenderObject() as RenderBox?;
+    //final box = context.findRenderObject() as RenderBox?;
 
     final String filePath = await _localPath;
 
@@ -24,7 +24,7 @@ class CsvHelper {
       mimeTypes: ['text/csv'],
       text: 'Compartilhando exportação do projeto no formato csv.',
       subject: 'ForestInv: Dados exportados',
-      sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+      //sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
     );
   }
 

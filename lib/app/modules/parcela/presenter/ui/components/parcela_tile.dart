@@ -47,7 +47,6 @@ class ParcelaTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _getMenuOptions(context),
                   //_getPopUpMenuItem(context),
                   CustomCardList(
                     titulo: 'Identificador',
@@ -118,6 +117,7 @@ class ParcelaTile extends StatelessWidget {
                       ],
                     ),
                   ),
+                  _getMenuOptions(context),
                 ],
               ),
             ),

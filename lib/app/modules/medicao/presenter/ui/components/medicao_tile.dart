@@ -41,7 +41,6 @@ class MedicaoTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _getMenuOptions(context),
                   //_getPopUpMenuItem(context),
                   CustomCardList(
                     titulo: 'Identificador',
@@ -78,6 +77,7 @@ class MedicaoTile extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
+                  _getMenuOptions(context),
                 ],
               ),
             ),
