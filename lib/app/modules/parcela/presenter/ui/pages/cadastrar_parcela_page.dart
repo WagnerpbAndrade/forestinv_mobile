@@ -51,7 +51,7 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
     });
   }
 
-  var maskFormatter = MaskTextInputFormatter(
+  final maskFormatter = MaskTextInputFormatter(
     mask: '#x#',
     filter: {"#": RegExp(r'[0-9]')},
     type: MaskAutoCompletionType.lazy,

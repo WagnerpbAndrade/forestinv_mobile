@@ -2,7 +2,7 @@ import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dar
 import 'package:forestinv_mobile/app/modules/parcela/domain/repository/parcela_repository.dart';
 
 abstract class ListAllParcelaByProjeto {
-  Future<List<Parcela>> call(dynamic projectId);
+  Future<List<Parcela>> call(final dynamic projectId);
 }
 
 class ListAllParcelaByProjetoImpl implements ListAllParcelaByProjeto {
@@ -11,7 +11,7 @@ class ListAllParcelaByProjetoImpl implements ListAllParcelaByProjeto {
   ListAllParcelaByProjetoImpl(this._repository);
 
   @override
-  Future<List<Parcela>> call(projectId) {
+  Future<List<Parcela>> call(final dynamic projectId) {
     return _repository.listAllByProject(projectId);
   }
 }

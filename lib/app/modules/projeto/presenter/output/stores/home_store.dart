@@ -62,7 +62,9 @@ abstract class _HomeStoreBase with Store {
     final auth = Modular.get<AuthStore>();
 
     if (auth.user != null) {
-      return usecase.getAllByUser(auth.user!.uid);
+      final list = await usecase.getAllByUser(auth.user!.uid);
+      addNewProjetos(list);
+      return list;
     }
     return [];
   }
