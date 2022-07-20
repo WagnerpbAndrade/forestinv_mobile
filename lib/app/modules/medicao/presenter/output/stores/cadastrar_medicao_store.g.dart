@@ -16,6 +16,13 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
           Computed<bool>(() => super.identificadorIsValid,
               name: '_CadastrarMedicaoStoreBase.identificadorIsValid'))
       .value;
+  Computed<bool>? _$descricaoIsValidComputed;
+
+  @override
+  bool get descricaoIsValid => (_$descricaoIsValidComputed ??= Computed<bool>(
+          () => super.descricaoIsValid,
+          name: '_CadastrarMedicaoStoreBase.descricaoIsValid'))
+      .value;
   Computed<bool>? _$nomeResponsavelIsValidComputed;
 
   @override
@@ -74,6 +81,22 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
   set selectedDate(DateTime? value) {
     _$selectedDateAtom.reportWrite(value, super.selectedDate, () {
       super.selectedDate = value;
+    });
+  }
+
+  late final _$descricaoAtom =
+      Atom(name: '_CadastrarMedicaoStoreBase.descricao', context: context);
+
+  @override
+  String get descricao {
+    _$descricaoAtom.reportRead();
+    return super.descricao;
+  }
+
+  @override
+  set descricao(String value) {
+    _$descricaoAtom.reportWrite(value, super.descricao, () {
+      super.descricao = value;
     });
   }
 
@@ -208,6 +231,17 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
   }
 
   @override
+  void setDescricao(String value) {
+    final _$actionInfo = _$_CadastrarMedicaoStoreBaseActionController
+        .startAction(name: '_CadastrarMedicaoStoreBase.setDescricao');
+    try {
+      return super.setDescricao(value);
+    } finally {
+      _$_CadastrarMedicaoStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setNomeResponsavel(String value) {
     final _$actionInfo = _$_CadastrarMedicaoStoreBaseActionController
         .startAction(name: '_CadastrarMedicaoStoreBase.setNomeResponsavel');
@@ -223,12 +257,14 @@ mixin _$CadastrarMedicaoStore on _CadastrarMedicaoStoreBase, Store {
     return '''
 identificador: ${identificador},
 selectedDate: ${selectedDate},
+descricao: ${descricao},
 nomeResponsavel: ${nomeResponsavel},
 loading: ${loading},
 error: ${error},
 savedMedicao: ${savedMedicao},
 updatedMedicao: ${updatedMedicao},
 identificadorIsValid: ${identificadorIsValid},
+descricaoIsValid: ${descricaoIsValid},
 nomeResponsavelIsValid: ${nomeResponsavelIsValid},
 isFormValid: ${isFormValid},
 cadastrarOnPressed: ${cadastrarOnPressed},
