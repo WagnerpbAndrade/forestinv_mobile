@@ -1,14 +1,18 @@
+import 'package:forestinv_mobile/app/core/constants/shared_preferences_const.dart';
+import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesHelper {
-  SharedPreferences prefs;
+  late SharedPreferences prefs;
 
-  SharedPreferencesHelper(this.prefs) {
-    _init();
-  }
-
-  void _init() async {
-    prefs = await SharedPreferences.getInstance();
+  SharedPreferencesHelper() {
+    autorun((_) async {
+      prefs = await SharedPreferences.getInstance();
+      if (getDouble(SharedPreferencesConst.FONT_SIZE_KEY) == null) {
+        setDouble(SharedPreferencesConst.FONT_SIZE_KEY,
+            SharedPreferencesConst.FONT_SIZE_VALUE);
+      }
+    });
   }
 
   void setString(final String key, final String value) {
@@ -19,12 +23,12 @@ class SharedPreferencesHelper {
     prefs.setDouble(key, value);
   }
 
-  void getString(final String key) {
-    prefs.getString(key);
+  String? getString(final String key) {
+    return prefs.getString(key);
   }
 
-  void getDouble(final String key) {
-    prefs.getDouble(key);
+  double? getDouble(final String key) {
+    return prefs.getDouble(key);
   }
 
   void removeKey(final String key) async {

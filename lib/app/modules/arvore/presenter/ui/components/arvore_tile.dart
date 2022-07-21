@@ -6,6 +6,7 @@ import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/arvore_store.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/pages/cadastrar_arvore_page.dart';
+import 'package:forestinv_mobile/app/stores/settings_store.dart';
 import 'package:forestinv_mobile/helper/toast_helper.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:toast/toast.dart';
@@ -26,6 +27,7 @@ class ArvoreTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     toastHelper.init(context);
+    final settingsStore = Modular.get<SettingsStore>();
     return GestureDetector(
       onTap: () {
         editArvore(context);
@@ -91,9 +93,10 @@ class ArvoreTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           child: Text(
                             'Localização',
+                            style: TextStyle(fontSize: settingsStore.fontSize),
                           ),
                         ),
                         IconButton(

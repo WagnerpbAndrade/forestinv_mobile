@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/firebase_firestore_constants.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
+import 'package:forestinv_mobile/app/core/constants/shared_preferences_const.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
@@ -11,8 +12,10 @@ import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dar
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/delete_project_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/usecases/get_all_project_by_user_usecase.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/cadastrar_projeto_page.dart';
+import 'package:forestinv_mobile/app/stores/settings_store.dart';
 import 'package:forestinv_mobile/helper/csv_helper.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'home_store.g.dart';
 
@@ -23,6 +26,16 @@ abstract class _HomeStoreBase with Store {
     autorun((_) async {
       setLoading(true);
 
+      final settingsStore = Modular.get<SettingsStore>();
+      final prefs = await SharedPreferences.getInstance();
+      final result = prefs.getDouble(SharedPreferencesConst.FONT_SIZE_KEY);
+      print('FontSize result: $result');
+      if (result == null) {
+        prefs.setDouble(SharedPreferencesConst.FONT_SIZE_KEY,
+            SharedPreferencesConst.FONT_SIZE_VALUE);
+      }
+      settingsStore
+          .setFontSize(prefs.getDouble(SharedPreferencesConst.FONT_SIZE_KEY)!);
       try {
         final list = await _fetchProjetos();
         addNewProjetos(list);

@@ -71,7 +71,7 @@ class MedicaoTile extends StatelessWidget {
                     height: 20,
                   ),
                   CustomCardList(
-                    titulo: 'Próxima medição a partir de',
+                    titulo: 'Próxima medição',
                     message: '${medicao.getProximaMedicao().formattedDate()}',
                   ),
                   const SizedBox(

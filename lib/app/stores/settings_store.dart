@@ -5,5 +5,8 @@ class SettingsStore = SettingsStoreBase with _$SettingsStore;
 
 abstract class SettingsStoreBase with Store {
   @observable
-  int fontSize = 20;
+  double fontSize = 16;
+
+  @action
+  void setFontSize(double value) => fontSize = value;
 }

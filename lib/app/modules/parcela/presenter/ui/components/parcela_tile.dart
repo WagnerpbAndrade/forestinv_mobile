@@ -7,6 +7,7 @@ import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/parcela_store.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/pages/cadastrar_parcela_page.dart';
+import 'package:forestinv_mobile/app/stores/settings_store.dart';
 import 'package:forestinv_mobile/helper/extensions.dart';
 import 'package:forestinv_mobile/helper/toast_helper.dart';
 import 'package:maps_launcher/maps_launcher.dart';
@@ -28,6 +29,7 @@ class ParcelaTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     toastHelper.init(context);
+    final settingsStore = Modular.get<SettingsStore>();
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
@@ -89,9 +91,10 @@ class ParcelaTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           child: Text(
                             'Localização',
+                            style: TextStyle(fontSize: settingsStore.fontSize),
                           ),
                         ),
                         IconButton(

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/stores/settings_store.dart';
 
 class CustomCardList extends StatelessWidget {
   final String titulo;
@@ -8,27 +11,40 @@ class CustomCardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settingsStore = Modular.get<SettingsStore>();
     return Container(
       padding: const EdgeInsets.only(left: 8, right: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            child: Text(
-              titulo,
-            ),
+          Observer(
+            builder: (_) {
+              return Text(
+                titulo,
+                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                maxLines: 1,
+                style: TextStyle(
+                  fontSize: settingsStore.fontSize,
+                ),
+              );
+            },
           ),
-          SizedBox(
-            child: Text(
-              message,
-              maxLines: 3,
-              textAlign: TextAlign.right,
-              style: const TextStyle(
-                overflow: TextOverflow.fade,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+          Observer(
+            builder: (_) {
+              return Text(
+                message,
+                maxLines: 1,
+                textAlign: TextAlign.right,
+                overflow: TextOverflow.ellipsis,
+                softWrap: false,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: settingsStore.fontSize,
+                ),
+              );
+            },
           ),
         ],
       ),

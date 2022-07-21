@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
+import 'package:forestinv_mobile/app/core/constants/shared_preferences_const.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/delete_parcela_usecase.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/list_all_parcela_by_projeto.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/pages/cadastrar_parcela_page.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
+import 'package:forestinv_mobile/app/stores/settings_store.dart';
 import 'package:mobx/mobx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'parcela_store.g.dart';
 
@@ -18,6 +21,11 @@ abstract class _ParcelaStoreBase with Store {
   _ParcelaStoreBase({this.project}) {
     autorun((_) async {
       setLoading(true);
+
+      final settingsStore = Modular.get<SettingsStore>();
+      final prefs = await SharedPreferences.getInstance();
+      settingsStore
+          .setFontSize(prefs.getDouble(SharedPreferencesConst.FONT_SIZE_KEY)!);
 
       try {
         _fetchParcelas();
