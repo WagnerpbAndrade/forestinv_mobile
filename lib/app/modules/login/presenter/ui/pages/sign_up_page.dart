@@ -15,7 +15,7 @@ class SignUpPage extends StatelessWidget {
     final store = Modular.get<SignUpStore>();
 
     return Scaffold(
-      backgroundColor: ColorsConst.primary,
+      backgroundColor: ColorsConst.secondary,
       appBar: AppBar(
         title: const Text('Cadastro'),
         centerTitle: true,
@@ -25,7 +25,7 @@ class SignUpPage extends StatelessWidget {
         alignment: Alignment.center,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
+            padding: const EdgeInsets.only(top: 16, bottom: 16.0),
             child: Card(
               margin: const EdgeInsets.symmetric(horizontal: 32),
               shape: RoundedRectangleBorder(

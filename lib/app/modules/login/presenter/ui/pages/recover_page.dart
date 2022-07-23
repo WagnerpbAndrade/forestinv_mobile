@@ -56,7 +56,7 @@ class _RecoverScreenState extends State<RecoverPage> {
     return SafeArea(
       top: false,
       child: Scaffold(
-        backgroundColor: ColorsConst.primary,
+        backgroundColor: ColorsConst.secondary,
         key: scaffoldKey,
         appBar: AppBar(
           elevation: 0,

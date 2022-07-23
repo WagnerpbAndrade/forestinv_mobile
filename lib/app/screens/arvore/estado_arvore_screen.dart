@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:photo_view/photo_view.dart';
 
 class EstadoArvoreScreen extends StatelessWidget {
@@ -10,9 +11,17 @@ class EstadoArvoreScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Fluxograma de estado da árvore'),
       ),
-      body: Container(
-        child: PhotoView(
-          imageProvider: const AssetImage('assets/images/estados_arvore.png'),
+      body: SafeArea(
+        child: Container(
+          height: 1000,
+          color: ColorsConst.secondary,
+          child: PhotoView(
+            filterQuality: FilterQuality.high,
+            backgroundDecoration: const BoxDecoration(
+              color: Colors.white,
+            ),
+            imageProvider: const AssetImage('assets/images/estados_arvore.png'),
+          ),
         ),
       ),
     );
