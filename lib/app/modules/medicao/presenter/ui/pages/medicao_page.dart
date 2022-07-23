@@ -44,12 +44,16 @@ class _MedicaoPageState extends State<MedicaoPage> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Center(
-                    child: Text(
-                      'Medições referente a parcela: ${parcela.numero}',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
+                    child: Wrap(
+                      children: [
+                        Text(
+                          'Medições referente a parcela: ${parcela.numero}',
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

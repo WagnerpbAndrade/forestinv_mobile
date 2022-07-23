@@ -38,7 +38,6 @@ class ArvorePageState extends State<ArvorePage> {
         body: Column(
           children: [
             Container(
-              height: 70,
               width: double.infinity,
               child: Card(
                 color: ColorsConst.secondaryVariant,
@@ -46,22 +45,32 @@ class ArvorePageState extends State<ArvorePage> {
                 child: Center(
                   child: Column(
                     children: [
-                      Text(
-                        'Árvores referente a medição: ${medicao.identificador}',
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                        ),
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.end,
+                        children: [
+                          Text(
+                            'Árvores referente a medição: ${medicao.identificador}',
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        'Data da medição: ${medicao.dataMedicao!.formattedDate()}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.end,
+                        children: [
+                          Text(
+                            'Data da medição: ${medicao.dataMedicao!.formattedDate()}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

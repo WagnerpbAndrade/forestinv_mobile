@@ -36,18 +36,22 @@ class _ParcelaPageState extends State<ParcelaPage> {
         body: Column(
           children: [
             Container(
-              height: 40,
               width: double.infinity,
               child: Card(
                 color: ColorsConst.secondaryVariant,
-                elevation: 0,
+                elevation: 8,
                 child: Center(
-                  child: Text(
-                    'Parcelas referente ao projeto: ${widget.project.nome}',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                    ),
+                  child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.end,
+                    children: [
+                      Text(
+                        'Parcelas referente ao projeto: ${widget.project.nome}',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

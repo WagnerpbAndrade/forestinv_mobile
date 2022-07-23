@@ -65,7 +65,7 @@ class _SettingsScreenState extends ModularState<SettingsScreen, SettingsStore> {
                   ),
                   SfSlider(
                     min: 12,
-                    max: 18,
+                    max: 20,
                     value: store.fontSize,
                     interval: 2,
                     showTicks: false,

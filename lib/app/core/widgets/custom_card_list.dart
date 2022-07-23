@@ -20,29 +20,32 @@ class CustomCardList extends StatelessWidget {
         children: [
           Observer(
             builder: (_) {
-              return Text(
-                titulo,
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                maxLines: 1,
-                style: TextStyle(
-                  fontSize: settingsStore.fontSize,
-                ),
+              return Wrap(
+                crossAxisAlignment: WrapCrossAlignment.end,
+                children: [
+                  Text(
+                    titulo,
+                    style: TextStyle(
+                      fontSize: settingsStore.fontSize,
+                    ),
+                  ),
+                ],
               );
             },
           ),
           Observer(
             builder: (_) {
-              return Text(
-                message,
-                maxLines: 1,
-                textAlign: TextAlign.right,
-                overflow: TextOverflow.ellipsis,
-                softWrap: false,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: settingsStore.fontSize,
-                ),
+              return Wrap(
+                crossAxisAlignment: WrapCrossAlignment.end,
+                children: [
+                  Text(
+                    message,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: settingsStore.fontSize,
+                    ),
+                  ),
+                ],
               );
             },
           ),

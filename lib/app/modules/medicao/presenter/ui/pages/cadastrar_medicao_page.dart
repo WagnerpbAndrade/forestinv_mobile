@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_elevated_button.dart';
@@ -125,7 +124,7 @@ class _CadastrarMedicaoPageState extends State<CadastrarMedicaoPage> {
                                     cadastrarMedicaoStore.setIdentificador,
                                 keyboardType: TextInputType.text,
                                 maxLines: 1,
-                                maxLength: 7,
+                                maxLength: 35,
                               );
                             },
                           ),

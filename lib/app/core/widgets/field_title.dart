@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/stores/settings_store.dart';
 
 class FieldTitle extends StatelessWidget {
   final String title;
@@ -8,6 +11,7 @@ class FieldTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settingsStore = Modular.get<SettingsStore>();
     return Padding(
       padding: const EdgeInsets.only(
         left: 3,
@@ -16,23 +20,31 @@ class FieldTitle extends StatelessWidget {
       child: Wrap(
         crossAxisAlignment: WrapCrossAlignment.end,
         children: [
-          Text(
-            '$title',
-            style: TextStyle(
-              color: Colors.grey[800],
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-            ),
+          Observer(
+            builder: (_) {
+              return Text(
+                '$title',
+                style: TextStyle(
+                  color: Colors.grey[800],
+                  fontSize: settingsStore.fontSize,
+                  fontWeight: FontWeight.w700,
+                ),
+              );
+            },
           ),
           const SizedBox(
             width: 5,
           ),
-          Text(
-            '$subtitle',
-            style: const TextStyle(
-              color: Colors.grey,
-              fontSize: 16,
-            ),
+          Observer(
+            builder: (_) {
+              return Text(
+                '$subtitle',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: settingsStore.fontSize,
+                ),
+              );
+            },
           ),
         ],
       ),
