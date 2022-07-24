@@ -290,4 +290,9 @@ abstract class _HomeStoreBase with Store {
     Modular.to.pushNamed(
         '${RouterConst.PROJECT_ROUTER}${RouterConst.SETTINGS_ROUTER_PAGE}');
   }
+
+  void goToBluetoothModule() {
+    Modular.to.pushNamed(
+        '${RouterConst.PROJECT_ROUTER}${RouterConst.BLUETOOTH_ROUTER}');
+  }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_card_list.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
@@ -11,17 +10,12 @@ import 'package:forestinv_mobile/app/stores/connectivity_store.dart';
 import 'package:forestinv_mobile/helper/extensions.dart';
 
 class ProjetoTile extends StatelessWidget {
-  ProjetoTile({required this.projeto, this.onTap, required this.homeStore});
+  const ProjetoTile(
+      {required this.projeto, this.onTap, required this.homeStore});
 
   final Project projeto;
   final Function? onTap;
   final HomeStore homeStore;
-
-  final List<MenuChoice> choices = [
-    MenuChoice(index: 0, title: 'Editar', iconData: Icons.edit),
-    MenuChoice(index: 1, title: 'Excluir', iconData: Icons.delete),
-    MenuChoice(index: 2, title: 'Exportar', iconData: Icons.share)
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -99,65 +93,12 @@ class ProjetoTile extends StatelessWidget {
           },
           icon: const Icon(Icons.share),
         ),
-      ],
-    );
-  }
-
-  Widget _getPopUpMenu(final BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        PopupMenuButton<MenuChoice>(
-          position: PopupMenuPosition.under,
-          onSelected: (choice) {
-            switch (choice.index) {
-              case 0:
-                editProject(context);
-                break;
-              case 1:
-                deleteProject(context);
-                break;
-              case 2:
-                exportarProject(context, projeto.id);
-                break;
-            }
-          },
-          icon: const Align(
-            alignment: Alignment.centerRight,
-            child: Icon(
-              Icons.more_vert,
-              size: 20,
-              color: ColorsConst.primary,
-            ),
-          ),
-          itemBuilder: (_) {
-            return choices
-                .map(
-                  (choice) => PopupMenuItem<MenuChoice>(
-                    value: choice,
-                    child: Row(
-                      children: [
-                        Icon(
-                          choice.iconData,
-                          size: 20,
-                          color: ColorsConst.primary,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          choice.title,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w400,
-                            color: ColorsConst.primary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-                .toList();
-          },
-        ),
+        // IconButton(
+        //   onPressed: () {
+        //     sentToBluetooth(context);
+        //   },
+        //   icon: const Icon(Icons.bluetooth),
+        // ),
       ],
     );
   }
@@ -198,13 +139,8 @@ class ProjetoTile extends StatelessWidget {
       await homeStore.fetchAllDataForExportCsv(projetoId, context);
     }
   }
-}
 
-class MenuChoice {
-  MenuChoice(
-      {required this.index, required this.title, required this.iconData});
-
-  final int index;
-  final String title;
-  final IconData iconData;
+  Future<void> sentToBluetooth(final BuildContext context) async {
+    homeStore.goToBluetoothModule();
+  }
 }

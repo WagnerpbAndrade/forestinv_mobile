@@ -27,4 +27,6 @@ class RouterConst {
   static String EDIT_ACCOUNT_ROUTER_PAGE = '/edit-account';
 
   static String SETTINGS_ROUTER_PAGE = '/settings';
+
+  static String BLUETOOTH_ROUTER = '/bluetooth';
 }

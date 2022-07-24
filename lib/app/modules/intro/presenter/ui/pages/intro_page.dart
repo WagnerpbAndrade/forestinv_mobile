@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/utils/responsive_config.dart';
-import 'package:forestinv_mobile/app/modules/intro/intro_store.dart';
+import 'package:forestinv_mobile/app/modules/intro/presenter/outputs/stores/intro_store.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage();
