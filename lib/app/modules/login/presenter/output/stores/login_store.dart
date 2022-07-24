@@ -64,6 +64,7 @@ abstract class _LoginStoreBase with Store {
       final auth = Modular.get<AuthStore>();
       auth.setUser(user);
       Modular.to.popAndPushNamed(RouterConst.PROJECT_ROUTER);
+      //Modular.to.popAndPushNamed(RouterConst.INTRO_ROUTER);
     } else {
       error = apiResponse.message;
     }

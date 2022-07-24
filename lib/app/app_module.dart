@@ -51,11 +51,11 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
+    //ModuleRoute(Modular.initialRoute, module: IntroModule()),
     ModuleRoute(Modular.initialRoute, module: LoginModule()),
     ModuleRoute(RouterConst.PROJECT_ROUTER,
         module: ProjetoModule(), guards: [AuthGuard()]),
     ModuleRoute(RouterConst.REGRAS_ROUTER,
         module: RegraConsistenciaModule(), guards: [AuthGuard()]),
-    ModuleRoute('/intro', module: IntroModule())
   ];
 }
