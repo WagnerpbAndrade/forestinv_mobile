@@ -92,7 +92,6 @@ class MedicaoFirestoreDatasourceImpl implements MedicaoDatasource {
   @override
   Future<ApiResponse> save(final Medicao medicao) async {
     try {
-      medicao.dataMedicao = DateTime.now();
       medicao.ultimaAtualizacao = DateTime.now();
       final doc = await _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_MEDICOES)

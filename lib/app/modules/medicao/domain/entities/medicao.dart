@@ -44,7 +44,7 @@ class Medicao {
       descricao: descricao,
       anoMedicao: anoMedicao ?? this.anoMedicao,
       dataMedicao: dataMedicao ?? this.dataMedicao,
-      ultimaAtualizacao: ultimaAtualizacao ?? ultimaAtualizacao,
+      ultimaAtualizacao: ultimaAtualizacao ?? DateTime.now(),
     );
   }
 
@@ -55,7 +55,9 @@ class Medicao {
         descricao: json['descricao'],
         dataMedicao: getDateTime(json["dataMedicao"]),
         anoMedicao: json["anoMedicao"],
-        ultimaAtualizacao: getDateTime(json["ultimaAtualizacao"]),
+        ultimaAtualizacao: json["ultimaAtualizacao"] == null
+            ? null
+            : getDateTime(json["ultimaAtualizacao"]),
       );
 
   Map<String, dynamic> toMap() {

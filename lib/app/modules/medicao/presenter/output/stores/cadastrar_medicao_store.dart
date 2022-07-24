@@ -238,7 +238,7 @@ abstract class _CadastrarMedicaoStoreBase with Store {
           if (diffIdade != 1) {
             print('Idade da medicao atual maior que 1 ano');
             error =
-                'Erro de consistência: A diferença entre Medições precisa ser de 1 ano. Próxima medição a partir de: ${DateTime(medicaoAnterior.dataMedicao!.year + 1, medicaoAnterior.dataMedicao!.month, medicaoAnterior.dataMedicao!.day).formattedDate()}';
+                'Erro de consistência: A diferença entre Medições precisa ser no mínimo 1 ano. Próxima medição a partir de: ${DateTime(medicaoAnterior.dataMedicao!.year + 1, medicaoAnterior.dataMedicao!.month, medicaoAnterior.dataMedicao!.day).formattedDate()}';
             return false;
           }
         } catch (e) {
@@ -256,6 +256,7 @@ abstract class _CadastrarMedicaoStoreBase with Store {
     final Duration duration = medicaoAtual!.difference(dataAnterior!);
     final int differenceInDays = (duration.inDays / 365).floor();
     final differenceInYears = (duration.inDays / 365).floor();
+    print('differenceInDays: ${duration.inDays}');
     print('years: $differenceInYears');
     return differenceInYears;
   }
