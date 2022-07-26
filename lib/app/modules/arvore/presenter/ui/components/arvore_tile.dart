@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
+import 'package:forestinv_mobile/app/core/widgets/custom_alert_dialog.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_card_list.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
@@ -18,11 +19,6 @@ class ArvoreTile extends StatelessWidget {
   final Function? onTap;
   final ArvoreStore store;
   final ToastHelper toastHelper = Modular.get<ToastHelper>();
-
-  final List<MenuChoice> choices = [
-    MenuChoice(index: 0, title: 'Editar', iconData: Icons.edit),
-    MenuChoice(index: 1, title: 'Excluir', iconData: Icons.delete)
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -145,10 +141,10 @@ class ArvoreTile extends StatelessWidget {
   void deleteArvore(BuildContext context) {
     showDialog(
         context: context,
-        builder: (_) => DialogPlatform(
-              title: 'Excluído',
+        builder: (_) => CustomAlertDialog(
+              title: 'Excluir',
               content: 'Confirmar a exclusão da árvore N° ${arvore.numArvore}?',
-              textNoButton: 'Não',
+              textNoButton: 'Cancelar',
               textYesButton: 'Sim',
               actionNo: () => Navigator.of(context).pop(),
               actionYes: () async {
@@ -178,69 +174,4 @@ class ArvoreTile extends StatelessWidget {
       ],
     );
   }
-
-  Widget _getPopUpMenuItem(final BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        PopupMenuButton<MenuChoice>(
-          position: PopupMenuPosition.under,
-          onSelected: (choice) {
-            switch (choice.index) {
-              case 0:
-                editArvore(context);
-                break;
-              case 1:
-                deleteArvore(context);
-                break;
-            }
-          },
-          icon: const Align(
-            alignment: Alignment.centerRight,
-            child: Icon(
-              Icons.more_vert,
-              size: 20,
-              color: ColorsConst.primary,
-            ),
-          ),
-          itemBuilder: (_) {
-            return choices
-                .map(
-                  (choice) => PopupMenuItem<MenuChoice>(
-                    value: choice,
-                    child: Row(
-                      children: [
-                        Icon(
-                          choice.iconData,
-                          size: 20,
-                          color: ColorsConst.primary,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          choice.title,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w400,
-                            color: ColorsConst.primary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-                .toList();
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class MenuChoice {
-  MenuChoice(
-      {required this.index, required this.title, required this.iconData});
-
-  final int index;
-  final String title;
-  final IconData iconData;
 }

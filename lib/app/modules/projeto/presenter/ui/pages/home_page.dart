@@ -40,7 +40,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           centerTitle: true,
         ),
         body: Padding(
-          padding: const EdgeInsets.only(top: 24.0),
+          padding: const EdgeInsets.only(top: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
+import 'package:forestinv_mobile/app/core/widgets/custom_alert_dialog.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_card_list.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
@@ -121,18 +122,19 @@ class ProjetoTile extends StatelessWidget {
 
   void deleteProject(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (_) => DialogPlatform(
-              title: 'Excluído',
-              content: 'Confirmar a exclusão do projeto \'${projeto.nome}\'?',
-              textNoButton: 'Não',
-              textYesButton: 'Sim',
-              actionNo: () => Navigator.of(context).pop(),
-              actionYes: () async {
-                homeStore.deleteProject(projeto.id);
-                Navigator.of(context).pop();
-              },
-            ));
+      context: context,
+      builder: (_) => CustomAlertDialog(
+        title: 'Excluir',
+        content: 'Confirmar a exclusão do projeto \'${projeto.nome}\'?',
+        textNoButton: 'Cancelar',
+        textYesButton: 'Sim',
+        actionNo: () => Navigator.of(context).pop(),
+        actionYes: () async {
+          homeStore.deleteProject(projeto.id);
+          Navigator.of(context).pop();
+        },
+      ),
+    );
   }
 
   Future<void> exportarProject(

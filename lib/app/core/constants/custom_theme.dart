@@ -39,23 +39,23 @@ class CustomTheme {
         surface: Colors.black,
         onError: Colors.red,
         error: Colors.red,
-        onPrimaryContainer: Colors.red,
+      ),
+      dialogTheme: const DialogTheme(
+        contentTextStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+        ),
+        titleTextStyle: TextStyle(
+          color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+        backgroundColor: ColorsConst.background,
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: Colors.white,
       ),
       scaffoldBackgroundColor: ColorsConst.background,
-      // textTheme: TextTheme(
-      //   button: const TextStyle(
-      //     color: ColorsConst.background,
-      //   ),
-      //   labelMedium: const TextStyle(
-      //     color: ColorsConst.background,
-      //   ),
-      //   headlineMedium: const TextStyle(
-      //     color: ColorsConst.background,
-      //   ),
-      // ),
       appBarTheme: const AppBarTheme(
         backgroundColor: ColorsConst.primary,
         centerTitle: true,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
+import 'package:forestinv_mobile/app/core/widgets/custom_alert_dialog.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_card_list.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
@@ -8,16 +9,11 @@ import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/pages/cadastra
 import 'package:forestinv_mobile/helper/extensions.dart';
 
 class MedicaoTile extends StatelessWidget {
-  MedicaoTile({required this.medicao, this.onTap, required this.store});
+  const MedicaoTile({required this.medicao, this.onTap, required this.store});
 
   final Medicao medicao;
   final Function? onTap;
   final MedicaoStore store;
-
-  final List<MenuChoice> choices = [
-    MenuChoice(index: 0, title: 'Editar', iconData: Icons.edit),
-    MenuChoice(index: 1, title: 'Excluir', iconData: Icons.delete)
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +24,6 @@ class MedicaoTile extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
           elevation: 8,
           child: SingleChildScrollView(
             child: Padding(
@@ -102,11 +95,11 @@ class MedicaoTile extends StatelessWidget {
   void deleteMedicao(final BuildContext context) {
     showDialog(
       context: context,
-      builder: (_) => DialogPlatform(
-        title: 'Excluído',
+      builder: (_) => CustomAlertDialog(
+        title: 'Excluir',
         content:
             'Confirmar a exclusão da medição ano ${medicao.dataMedicao!.year}?',
-        textNoButton: 'Não',
+        textNoButton: 'Cancelar',
         textYesButton: 'Sim',
         actionNo: () => Navigator.of(context).pop(),
         actionYes: () async {
@@ -137,68 +130,4 @@ class MedicaoTile extends StatelessWidget {
       ],
     );
   }
-
-  Widget _getPopUpMenuItem(final BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        PopupMenuButton<MenuChoice>(
-          position: PopupMenuPosition.under,
-          onSelected: (choice) {
-            switch (choice.index) {
-              case 0:
-                editMedicao(context);
-                break;
-              case 1:
-                deleteMedicao(context);
-                break;
-            }
-          },
-          icon: const Align(
-            alignment: Alignment.centerRight,
-            child: Icon(
-              Icons.more_vert,
-              size: 20,
-              color: ColorsConst.primary,
-            ),
-          ),
-          itemBuilder: (_) {
-            return choices
-                .map(
-                  (choice) => PopupMenuItem<MenuChoice>(
-                    value: choice,
-                    child: Row(
-                      children: [
-                        Icon(
-                          choice.iconData,
-                          size: 20,
-                          color: ColorsConst.primary,
-                        ),
-                        Text(
-                          choice.title,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w400,
-                            color: ColorsConst.primary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-                .toList();
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class MenuChoice {
-  MenuChoice(
-      {required this.index, required this.title, required this.iconData});
-
-  final int index;
-  final String title;
-  final IconData iconData;
 }
