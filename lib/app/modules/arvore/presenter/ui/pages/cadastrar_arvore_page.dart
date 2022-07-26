@@ -82,9 +82,6 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
             child: Card(
               clipBehavior: Clip.antiAlias,
               margin: const EdgeInsets.symmetric(horizontal: 32),
-              // shape: RoundedRectangleBorder(
-              //   borderRadius: BorderRadius.circular(16),
-              // ),
               elevation: 8,
               child: Observer(
                 builder: (_) {
@@ -95,15 +92,14 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                         children: const [
                           Text(
                             'Salvando Árvore',
-                            style:
-                                TextStyle(fontSize: 18, color: Colors.purple),
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
                           ),
                           SizedBox(
                             height: 16,
                           ),
-                          CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(Colors.purple),
-                          )
+                          CircularProgressIndicator()
                         ],
                       ),
                     );
@@ -267,7 +263,6 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                                             label: Text(
                                               cadastrarArvoreStore.latitude,
                                               style: const TextStyle(
-                                                color: Colors.black,
                                                 fontSize: 14,
                                               ),
                                             ),
@@ -303,7 +298,6 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                                             label: Text(
                                               cadastrarArvoreStore.longitude,
                                               style: const TextStyle(
-                                                color: Colors.black,
                                                 fontSize: 14,
                                               ),
                                             ),
@@ -326,16 +320,9 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                                   return CustomElevatedButton(
                                     onPressed: cadastrarArvoreStore.getLatLong,
                                     child: cadastrarArvoreStore.loadingLatLong
-                                        ? const CircularProgressIndicator(
-                                            valueColor: AlwaysStoppedAnimation(
-                                              Colors.white,
-                                            ),
-                                          )
+                                        ? const CircularProgressIndicator()
                                         : const Text(
                                             'GPS',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                            ),
                                           ),
                                   );
                                 },
@@ -355,9 +342,6 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                                       )
                                     : Text(
                                         editing ? 'EDITAR' : 'CADASTRAR',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
                                       ),
                               );
                             },

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
@@ -33,11 +32,10 @@ class ParcelaTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
+        padding: const EdgeInsets.only(top: 24.0),
         margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
         child: Card(
           clipBehavior: Clip.antiAlias,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           elevation: 8,
           child: SingleChildScrollView(
             child: Padding(

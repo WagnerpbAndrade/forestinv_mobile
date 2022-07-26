@@ -16,10 +16,11 @@ class ReplaceFlatButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        child: child,
-        onPressed: () => onPressed(),
-        style: TextButton.styleFrom(
-            primary: textColor ?? Theme.of(context).primaryColor,
-            padding: padding));
+      child: child,
+      onPressed: () => onPressed(),
+      style: TextButton.styleFrom(
+        padding: padding,
+      ),
+    );
   }
 }

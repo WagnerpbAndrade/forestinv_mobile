@@ -168,15 +168,9 @@ class _CadastrarProjetoPageState extends State<CadastrarProjetoPage> {
                                     ? cadastrarProjetoStore.editarOnPressed
                                     : cadastrarProjetoStore.cadastrarOnPressed,
                                 child: cadastrarProjetoStore.loading
-                                    ? const CircularProgressIndicator(
-                                        valueColor: AlwaysStoppedAnimation(
-                                            Colors.white),
-                                      )
+                                    ? const CircularProgressIndicator()
                                     : Text(
                                         editing ? 'EDITAR' : 'CADASTRAR',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
                                       ),
                               );
                             },

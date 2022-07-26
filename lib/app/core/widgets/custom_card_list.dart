@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/stores/settings_store.dart';
 
 class CustomCardList extends StatelessWidget {
@@ -27,6 +28,7 @@ class CustomCardList extends StatelessWidget {
                     titulo,
                     style: TextStyle(
                       fontSize: settingsStore.fontSize,
+                      color: ColorsConst.textColorPrimary,
                     ),
                   ),
                 ],
@@ -43,6 +45,7 @@ class CustomCardList extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: settingsStore.fontSize,
+                      color: ColorsConst.textColorPrimary,
                     ),
                   ),
                 ],

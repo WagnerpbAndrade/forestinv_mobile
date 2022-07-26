@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
+import 'package:forestinv_mobile/app/core/widgets/custom_elevated_button.dart';
 import 'package:forestinv_mobile/app/core/widgets/replace_flatbutton.dart';
 import 'package:forestinv_mobile/app/modules/account/presenter/output/stores/account_store.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
@@ -46,7 +47,6 @@ class AccountPageState extends State<AccountPage> {
                                     : 'Complete seu cadastro',
                                 style: const TextStyle(
                                   fontSize: 20,
-                                  color: ColorsConst.primary,
                                   fontWeight: FontWeight.w900,
                                 ),
                               );
@@ -54,9 +54,8 @@ class AccountPageState extends State<AccountPage> {
                           ),
                           Text(
                             authStore.user!.email,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
-                              color: Colors.grey[700],
                             ),
                           ),
                         ],
@@ -64,9 +63,8 @@ class AccountPageState extends State<AccountPage> {
                     ),
                     Align(
                       alignment: Alignment.topRight,
-                      child: ReplaceFlatButton(
+                      child: CustomElevatedButton(
                         child: const Text('Editar'),
-                        textColor: ColorsConst.primary,
                         onPressed: () {
                           store.goToEditAccount();
                         },

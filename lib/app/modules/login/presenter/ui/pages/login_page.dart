@@ -34,7 +34,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsConst.secondary,
       body: Container(
         alignment: Alignment.center,
         child: SingleChildScrollView(
@@ -56,20 +55,15 @@ class _LoginPageState extends State<LoginPage> {
                         margin: const EdgeInsets.symmetric(vertical: 8),
                         height: 40,
                         child: ReplaceRaisedButton(
-                          color: Colors.green[600]!,
+                          color: ColorsConst.primary,
                           textColor: Colors.white,
-                          disabledColor: Colors.green.withAlpha(120),
+                          disabledColor: ColorsConst.primary.withAlpha(120),
                           child: store.loadingGoogle
-                              ? const CircularProgressIndicator(
-                                  valueColor:
-                                      AlwaysStoppedAnimation(Colors.white),
-                                )
+                              ? const CircularProgressIndicator()
                               : const Text(
                                   'Entrar com Google',
                                   style: TextStyle(
-                                    color: Colors.white,
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                           elevation: 0,
@@ -82,12 +76,11 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                   OrDivider(),
-                  Text(
+                  const Text(
                     'Acessar com e-mail:',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.grey[900],
                     ),
                   ),
                   Observer(
@@ -100,12 +93,11 @@ class _LoginPageState extends State<LoginPage> {
                       );
                     },
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 3, bottom: 4, top: 8),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 3, bottom: 4, top: 8),
                     child: Text(
                       'E-mail',
                       style: TextStyle(
-                        color: Colors.grey[900],
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                       ),
@@ -130,10 +122,9 @@ class _LoginPageState extends State<LoginPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           'Senha',
                           style: TextStyle(
-                            color: Colors.grey[900],
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                           ),
@@ -143,7 +134,6 @@ class _LoginPageState extends State<LoginPage> {
                             'Esqueceu sua senha?',
                             style: TextStyle(
                               decoration: TextDecoration.underline,
-                              color: ColorsConst.primary,
                             ),
                           ),
                           onTap: () {
@@ -173,21 +163,15 @@ class _LoginPageState extends State<LoginPage> {
                       return CustomElevatedButton(
                         onPressed: store.loginOnPressed,
                         child: store.loading
-                            ? const CircularProgressIndicator(
-                                valueColor:
-                                    AlwaysStoppedAnimation(Colors.white),
-                              )
+                            ? const CircularProgressIndicator()
                             : const Text(
                                 'ENTRAR',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
                               ),
                       );
                     },
                   ),
                   const Divider(
-                    color: Colors.grey,
+                    thickness: 1,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
@@ -196,7 +180,9 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         const Text(
                           'Não tem uma conta? ',
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -206,7 +192,6 @@ class _LoginPageState extends State<LoginPage> {
                             'Cadastre-se',
                             style: TextStyle(
                               decoration: TextDecoration.underline,
-                              color: ColorsConst.primary,
                               fontSize: 16,
                             ),
                           ),

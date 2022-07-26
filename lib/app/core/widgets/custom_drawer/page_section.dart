@@ -3,8 +3,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/home_store.dart';
 
-import 'page_tile.dart';
-
 class PageSection extends StatelessWidget {
   PageSection({Key? key}) : super(key: key);
 
@@ -34,50 +32,95 @@ class NewWidget extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.75,
         child: Column(
           children: [
-            Column(
-              children: [
-                PageTile(
-                  label: 'Minha Conta',
-                  iconData: Icons.account_circle,
-                  onTap: () {
-                    homeStore.goToAccountPage();
-                  },
-                  highlighted: false,
-                ),
-                PageTile(
-                  label: 'Regras de Consistência',
-                  iconData: Icons.rule,
-                  onTap: () {
-                    homeStore.goToRegrasConsistenciaPage();
-                  },
-                  highlighted: false,
-                ),
-              ],
+            const Divider(
+              thickness: 2,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Column(
+                children: [
+                  GestureDetector(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: const [
+                        Icon(Icons.account_circle),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text('Minha conta'),
+                      ],
+                    ),
+                    onTap: () {
+                      homeStore.goToAccountPage();
+                    },
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  GestureDetector(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: const [
+                        Icon(Icons.rule),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text('Regras de Consistência'),
+                      ],
+                    ),
+                    onTap: () {
+                      homeStore.goToRegrasConsistenciaPage();
+                    },
+                  ),
+                ],
+              ),
             ),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   const Divider(
-                    color: Colors.black54,
-                    thickness: 1,
-                  ),
-                  PageTile(
-                    label: 'Configurações',
-                    iconData: Icons.settings,
-                    onTap: () {
-                      homeStore.goToSettingsPage();
-                    },
-                    highlighted: false,
+                    thickness: 2,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: PageTile(
-                      label: 'Sair',
-                      iconData: Icons.logout,
-                      onTap: () => authStore.logoutGoogle(),
-                      highlighted: false,
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: GestureDetector(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: const [
+                          Icon(Icons.settings),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('Configurações'),
+                        ],
+                      ),
+                      onTap: () {
+                        homeStore.goToSettingsPage();
+                      },
                     ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: GestureDetector(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: const [
+                          Icon(Icons.logout),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('Sair'),
+                        ],
+                      ),
+                      onTap: () => authStore.logoutGoogle(),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
                   ),
                   const Padding(
                     padding: EdgeInsets.only(bottom: 8.0),
@@ -85,7 +128,9 @@ class NewWidget extends StatelessWidget {
                       child: Text(
                         'v1.0.0',
                         style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.bold),
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),

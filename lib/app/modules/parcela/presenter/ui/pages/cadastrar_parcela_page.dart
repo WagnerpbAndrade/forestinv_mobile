@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_elevated_button.dart';
 import 'package:forestinv_mobile/app/core/widgets/error_box.dart';
 import 'package:forestinv_mobile/app/core/widgets/field_title.dart';
@@ -86,15 +85,14 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                         children: const [
                           Text(
                             'Salvando Parcela',
-                            style:
-                                TextStyle(fontSize: 18, color: Colors.purple),
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
                           ),
                           SizedBox(
                             height: 16,
                           ),
-                          CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(Colors.purple),
-                          )
+                          CircularProgressIndicator()
                         ],
                       ),
                     );
@@ -241,9 +239,6 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                     label: Text(
                                       cadastrarParcelaStore.selectedDate!
                                           .formattedDate(),
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                      ),
                                     ),
                                     isDense: true,
                                   ),
@@ -284,7 +279,6 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                                     cadastrarParcelaStore
                                                         .latitude,
                                                     style: const TextStyle(
-                                                      color: Colors.black,
                                                       fontSize: 14,
                                                     ),
                                                   ),
@@ -325,7 +319,6 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                                     cadastrarParcelaStore
                                                         .longitude,
                                                     style: const TextStyle(
-                                                      color: Colors.black,
                                                       fontSize: 14,
                                                     ),
                                                   ),
@@ -352,16 +345,9 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                               cadastrarParcelaStore.getLatLong,
                                           child: cadastrarParcelaStore
                                                   .loadingLatLong
-                                              ? const CircularProgressIndicator(
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation(
-                                                          Colors.white),
-                                                )
+                                              ? const CircularProgressIndicator()
                                               : const Text(
                                                   'GPS',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                  ),
                                                 ),
                                         );
                                       },
@@ -378,15 +364,9 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                     ? cadastrarParcelaStore.editarOnPressed
                                     : cadastrarParcelaStore.cadastrarOnPressed,
                                 child: cadastrarParcelaStore.loading
-                                    ? const CircularProgressIndicator(
-                                        valueColor: AlwaysStoppedAnimation(
-                                            Colors.white),
-                                      )
+                                    ? const CircularProgressIndicator()
                                     : Text(
                                         editing ? 'EDITAR' : 'CADASTRAR',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
                                       ),
                               );
                             },

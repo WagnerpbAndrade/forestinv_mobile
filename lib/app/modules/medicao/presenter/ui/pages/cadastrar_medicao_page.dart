@@ -76,15 +76,14 @@ class _CadastrarMedicaoPageState extends State<CadastrarMedicaoPage> {
                         children: const [
                           Text(
                             'Salvando Medição',
-                            style:
-                                TextStyle(fontSize: 18, color: Colors.purple),
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
                           ),
                           SizedBox(
                             height: 16,
                           ),
-                          CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(Colors.purple),
-                          )
+                          CircularProgressIndicator()
                         ],
                       ),
                     );
@@ -191,9 +190,6 @@ class _CadastrarMedicaoPageState extends State<CadastrarMedicaoPage> {
                                     label: Text(
                                       cadastrarMedicaoStore.selectedDate!
                                           .formattedDate(),
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                      ),
                                     ),
                                     isDense: true,
                                   ),
@@ -209,15 +205,9 @@ class _CadastrarMedicaoPageState extends State<CadastrarMedicaoPage> {
                                     ? cadastrarMedicaoStore.editarOnPressed
                                     : cadastrarMedicaoStore.cadastrarOnPressed,
                                 child: cadastrarMedicaoStore.loading
-                                    ? const CircularProgressIndicator(
-                                        valueColor: AlwaysStoppedAnimation(
-                                            Colors.white),
-                                      )
+                                    ? const CircularProgressIndicator()
                                     : Text(
                                         editing ? 'EDITAR' : 'CADASTRAR',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
                                       ),
                               );
                             },

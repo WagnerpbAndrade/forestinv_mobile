@@ -9,19 +9,12 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       localizationsDelegates: const [
-        GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('pt', 'BR'),
       ],
       locale: const Locale('pt_BR'),
       debugShowCheckedModeBanner: false,
       title: 'ForestInv',
-      theme: CustomTheme.apply().copyWith(
-        primaryColor: ColorsConst.primary,
-        unselectedWidgetColor: ColorsConst.secondary,
-      ),
+      theme: CustomTheme.blueDarkTheme(),
     ).modular();
   }
 }

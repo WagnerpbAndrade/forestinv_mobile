@@ -17,14 +17,12 @@ class PageTile extends StatelessWidget {
     return ListTile(
       title: Text(
         label,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w700,
-          color: highlighted ? Colors.purple : Colors.black54,
         ),
       ),
       leading: Icon(
         iconData,
-        color: highlighted ? Colors.purple : Colors.black54,
       ),
       onTap: onTap,
     );

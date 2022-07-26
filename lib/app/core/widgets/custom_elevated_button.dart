@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final Function? onPressed;
@@ -27,13 +26,6 @@ class CustomElevatedButton extends StatelessWidget {
                 ),
               ),
               elevation: MaterialStateProperty.all(0),
-              backgroundColor: onPressed == null
-                  ? MaterialStateProperty.all(
-                      ColorsConst.secondary.withAlpha(120),
-                    )
-                  : MaterialStateProperty.all(
-                      ColorsConst.secondary,
-                    ),
             ),
         onPressed: onPressed == null ? null : () => onPressed!(),
         child: child,

@@ -15,7 +15,6 @@ class SignUpPage extends StatelessWidget {
     final store = Modular.get<SignUpStore>();
 
     return Scaffold(
-      backgroundColor: ColorsConst.secondary,
       appBar: AppBar(
         title: const Text('Cadastro'),
         centerTitle: true,
@@ -40,15 +39,14 @@ class SignUpPage extends StatelessWidget {
                         children: const [
                           Text(
                             'Cadastrando Usuário',
-                            style:
-                                TextStyle(fontSize: 18, color: Colors.purple),
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
                           ),
                           SizedBox(
                             height: 16,
                           ),
-                          CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(Colors.purple),
-                          )
+                          CircularProgressIndicator()
                         ],
                       ),
                     );
@@ -182,22 +180,14 @@ class SignUpPage extends StatelessWidget {
                               return CustomElevatedButton(
                                 onPressed: store.signUpPressed,
                                 child: store.loading
-                                    ? const CircularProgressIndicator(
-                                        valueColor: AlwaysStoppedAnimation(
-                                            Colors.white),
-                                      )
+                                    ? const CircularProgressIndicator()
                                     : const Text(
                                         'CADASTRAR',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                        ),
                                       ),
                               );
                             },
                           ),
-                          const Divider(
-                            color: Colors.grey,
-                          ),
+                          const Divider(),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             child: Wrap(
@@ -213,7 +203,6 @@ class SignUpPage extends StatelessWidget {
                                     'Entrar',
                                     style: TextStyle(
                                       decoration: TextDecoration.underline,
-                                      color: ColorsConst.primary,
                                       fontSize: 16,
                                     ),
                                   ),

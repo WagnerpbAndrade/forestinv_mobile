@@ -40,7 +40,6 @@ class ArvorePageState extends State<ArvorePage> {
             Container(
               width: double.infinity,
               child: Card(
-                color: ColorsConst.secondaryVariant,
                 elevation: 8,
                 child: Center(
                   child: Column(
@@ -52,7 +51,6 @@ class ArvorePageState extends State<ArvorePage> {
                             'Árvores referente a medição: ${medicao.identificador}',
                             style: const TextStyle(
                               fontSize: 20,
-                              color: Colors.white,
                             ),
                           ),
                         ],
@@ -67,7 +65,6 @@ class ArvorePageState extends State<ArvorePage> {
                             'Data da medição: ${medicao.dataMedicao!.formattedDate()}',
                             style: const TextStyle(
                               fontSize: 16,
-                              color: Colors.white,
                             ),
                           ),
                         ],
@@ -90,7 +87,6 @@ class ArvorePageState extends State<ArvorePage> {
                             children: const <Widget>[
                               Icon(
                                 Icons.error,
-                                color: Colors.white,
                                 size: 100,
                               ),
                               SizedBox(
@@ -100,7 +96,6 @@ class ArvorePageState extends State<ArvorePage> {
                                 'Ocorreu um erro!',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -111,9 +106,7 @@ class ArvorePageState extends State<ArvorePage> {
                       }
                       if (store!.showProgress) {
                         return const Center(
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(Colors.white),
-                          ),
+                          child: CircularProgressIndicator(),
                         );
                       }
                       if (store!.arvoreList.isEmpty) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_card_list.dart';
 import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/projeto/domain/entities/project.dart';
@@ -22,11 +23,11 @@ class ProjetoTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap == null ? null : () => onTap!(),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 1),
+        margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 8),
         child: Card(
           clipBehavior: Clip.antiAlias,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          // shape:
+          //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           elevation: 8,
           child: SingleChildScrollView(
             child: Padding(
@@ -79,19 +80,25 @@ class ProjetoTile extends StatelessWidget {
           onPressed: () {
             editProject(context);
           },
-          icon: const Icon(Icons.edit),
+          icon: const Icon(
+            Icons.edit,
+          ),
         ),
         IconButton(
           onPressed: () {
             deleteProject(context);
           },
-          icon: const Icon(Icons.delete_forever),
+          icon: const Icon(
+            Icons.delete_forever,
+          ),
         ),
         IconButton(
           onPressed: () {
             exportarProject(context, projeto.id);
           },
-          icon: const Icon(Icons.share),
+          icon: const Icon(
+            Icons.share,
+          ),
         ),
         // IconButton(
         //   onPressed: () {

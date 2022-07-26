@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
+import 'package:forestinv_mobile/app/core/widgets/custom_elevated_button.dart';
 import 'package:forestinv_mobile/app/core/widgets/error_box.dart';
 import 'package:forestinv_mobile/app/core/widgets/field_title.dart';
 import 'package:forestinv_mobile/app/core/widgets/replace_raisedbutton.dart';
@@ -56,7 +57,6 @@ class _RecoverScreenState extends State<RecoverPage> {
     return SafeArea(
       top: false,
       child: Scaffold(
-        backgroundColor: ColorsConst.secondary,
         key: scaffoldKey,
         appBar: AppBar(
           elevation: 0,
@@ -124,28 +124,17 @@ class _RecoverScreenState extends State<RecoverPage> {
                         return Container(
                           margin: const EdgeInsets.symmetric(vertical: 12),
                           height: 40,
-                          child: ReplaceRaisedButton(
-                            color: ColorsConst.secondary,
-                            textColor: Colors.white,
+                          child: CustomElevatedButton(
                             child: recoverStore.loading
-                                ? const CircularProgressIndicator(
-                                    valueColor:
-                                        AlwaysStoppedAnimation(Colors.white),
-                                  )
+                                ? const CircularProgressIndicator()
                                 : const Text(
                                     'Enviar',
                                     style: TextStyle(
-                                      color: Colors.white,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                            elevation: 0,
-                            onPressed: recoverStore.recoverPressed,
-                            disabledColor: ColorsConst.secondary.withAlpha(120),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25),
-                            ),
+                            onPressed: () => recoverStore.recoverPressed,
                           ),
                         );
                       },

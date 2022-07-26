@@ -39,7 +39,6 @@ class _MedicaoPageState extends State<MedicaoPage> {
             Container(
               width: double.infinity,
               child: Card(
-                color: ColorsConst.secondaryVariant,
                 elevation: 8,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
@@ -50,7 +49,6 @@ class _MedicaoPageState extends State<MedicaoPage> {
                           'Medições referente a parcela: ${parcela.numero}',
                           style: const TextStyle(
                             fontSize: 20,
-                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -72,7 +70,6 @@ class _MedicaoPageState extends State<MedicaoPage> {
                             children: const <Widget>[
                               Icon(
                                 Icons.error,
-                                color: Colors.white,
                                 size: 100,
                               ),
                               SizedBox(
@@ -82,7 +79,6 @@ class _MedicaoPageState extends State<MedicaoPage> {
                                 'Ocorreu um erro!',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -93,9 +89,7 @@ class _MedicaoPageState extends State<MedicaoPage> {
                       }
                       if (store!.showProgress) {
                         return const Center(
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(Colors.white),
-                          ),
+                          child: CircularProgressIndicator(),
                         );
                       }
                       if (store!.medicaoList.isEmpty) {

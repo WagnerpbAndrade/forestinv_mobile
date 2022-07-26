@@ -25,7 +25,6 @@ class FieldTitle extends StatelessWidget {
               return Text(
                 '$title',
                 style: TextStyle(
-                  color: Colors.grey[800],
                   fontSize: settingsStore.fontSize,
                   fontWeight: FontWeight.w700,
                 ),
@@ -40,7 +39,6 @@ class FieldTitle extends StatelessWidget {
               return Text(
                 '$subtitle',
                 style: TextStyle(
-                  color: Colors.grey,
                   fontSize: settingsStore.fontSize,
                 ),
               );
