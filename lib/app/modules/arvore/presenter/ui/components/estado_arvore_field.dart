@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/cadastrar_arvore_store.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/components/estado_arvore_page.dart';
-import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/visibilidade_page.dart';
 
 class EstadoArvoreField extends StatelessWidget {
   const EstadoArvoreField(this.cadastrarArvoreStore);

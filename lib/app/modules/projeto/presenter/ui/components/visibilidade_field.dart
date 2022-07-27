@@ -35,7 +35,6 @@ class VisibilidadeField extends StatelessWidget {
                 ? null
                 : Text(
                     '${cadastrarProjetoStore.visibilidade!.description}',
-                    style: const TextStyle(color: Colors.black, fontSize: 17),
                   ),
             trailing: const Icon(Icons.keyboard_arrow_down),
             onTap: () async {
@@ -54,22 +53,21 @@ class VisibilidadeField extends StatelessWidget {
             Container(
               alignment: Alignment.centerLeft,
               decoration: const BoxDecoration(
-                border: Border(top: BorderSide(color: Colors.red)),
+                border: Border(top: BorderSide()),
               ),
               padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
               child: Text(
                 cadastrarProjetoStore.visibilidadeError!,
                 style: const TextStyle(
-                  color: Colors.red,
                   fontSize: 12,
                 ),
               ),
             )
           else
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 border: Border(
-                  top: BorderSide(color: Colors.grey[500]!),
+                  top: BorderSide(),
                 ),
               ),
             )

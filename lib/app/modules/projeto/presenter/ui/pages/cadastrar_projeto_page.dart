@@ -80,15 +80,11 @@ class _CadastrarProjetoPageState extends State<CadastrarProjetoPage> {
                         children: const [
                           Text(
                             'Salvando Projeto',
-                            style:
-                                TextStyle(fontSize: 18, color: Colors.purple),
                           ),
                           SizedBox(
                             height: 16,
                           ),
-                          CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation(Colors.purple),
-                          )
+                          CircularProgressIndicator()
                         ],
                       ),
                     );

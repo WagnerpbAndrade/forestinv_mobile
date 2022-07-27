@@ -14,7 +14,7 @@ class AppWidget extends StatelessWidget {
       locale: const Locale('pt_BR'),
       debugShowCheckedModeBanner: false,
       title: 'ForestInv',
-      theme: CustomTheme.blueDarkTheme(),
+      theme: CustomTheme.whiteTheme(),
     ).modular();
   }
 }

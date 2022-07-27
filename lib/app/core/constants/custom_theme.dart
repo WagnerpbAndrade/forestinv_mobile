@@ -93,4 +93,87 @@ class CustomTheme {
       ),
     );
   }
+
+  static ThemeData whiteTheme() {
+    return ThemeData(
+      colorScheme: const ColorScheme.light(
+        primary: Color(0xFFF2F2F2),
+        onPrimary: Colors.black,
+        primaryContainer: ColorsConst.primaryVariant,
+        secondary: Color(0xFFF2F2F2),
+        onSecondary: Colors.black,
+        secondaryContainer: ColorsConst.secondaryVariant,
+        onBackground: Colors.white,
+        background: Colors.red,
+        onSurface: Colors.black,
+        surface: Colors.black,
+        onError: Colors.red,
+        error: Colors.red,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.resolveWith((states) {
+          if (!states.contains(MaterialState.disabled)) {
+            return Colors.black.withAlpha(120);
+          }
+        }),
+        textStyle: MaterialStateProperty.resolveWith((states) {
+          if (!states.contains(MaterialState.focused)) {
+            return const TextStyle(color: Colors.white);
+          }
+        }),
+      )),
+      dialogTheme: const DialogTheme(
+        contentTextStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 16,
+        ),
+        titleTextStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+        backgroundColor: Color(0xFFF2F2F2),
+      ),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: Colors.black,
+      ),
+      scaffoldBackgroundColor: const Color(0xFFDBC9C5),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xFFF2F2F2),
+        centerTitle: true,
+      ),
+      iconTheme: const IconThemeData(
+        color: Colors.black,
+      ),
+      drawerTheme: const DrawerThemeData(
+        backgroundColor: Color(0xFFF2F2F2),
+      ),
+      cardColor: const Color(0xFFF2F2F2),
+      buttonTheme: ButtonThemeData(
+        buttonColor: ColorsConst.onError,
+        disabledColor: const Color(0xFFF2F2F2).withAlpha(120),
+        highlightColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+      ),
+      focusColor: Colors.black,
+      textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: Colors.black,
+        selectionColor: Colors.black,
+        selectionHandleColor: Colors.red,
+      ),
+      listTileTheme: const ListTileThemeData(
+        tileColor: Colors.black,
+      ),
+      dividerColor: Colors.black,
+      dividerTheme: const DividerThemeData(
+        color: Colors.black,
+      ),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        foregroundColor: Colors.black,
+      ),
+    );
+  }
 }

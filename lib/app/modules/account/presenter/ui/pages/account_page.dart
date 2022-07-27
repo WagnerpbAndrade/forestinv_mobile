@@ -61,13 +61,16 @@ class AccountPageState extends State<AccountPage> {
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: CustomElevatedButton(
-                        child: const Text('Editar'),
-                        onPressed: () {
-                          store.goToEditAccount();
-                        },
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: CustomElevatedButton(
+                          child: const Text('Editar'),
+                          onPressed: () {
+                            store.goToEditAccount();
+                          },
+                        ),
                       ),
                     ),
                   ],
