@@ -92,8 +92,7 @@ abstract class _CadastrarMedicaoStoreBase with Store {
   }
 
   @computed
-  bool get isFormValid =>
-      nomeResponsavelIsValid && identificadorIsValid && descricaoIsValid;
+  bool get isFormValid => nomeResponsavelIsValid && identificadorIsValid;
 
   @computed
   Function? get cadastrarOnPressed =>
