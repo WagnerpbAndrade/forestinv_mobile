@@ -5,7 +5,6 @@ import 'package:forestinv_mobile/app/core/client/dio/dio_client.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_guard.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
-import 'package:forestinv_mobile/app/modules/intro/intro_module.dart';
 import 'package:forestinv_mobile/app/modules/login/domain/usecase/current_user_usecase.dart';
 import 'package:forestinv_mobile/app/modules/login/domain/usecase/login_google_usecase.dart';
 import 'package:forestinv_mobile/app/modules/login/domain/usecase/logout_google_usecase.dart';
@@ -22,6 +21,7 @@ import 'package:forestinv_mobile/app/modules/regra_consistencia/presenter/output
 import 'package:forestinv_mobile/app/modules/regra_consistencia/regra_consistencia_module.dart';
 import 'package:forestinv_mobile/app/stores/connectivity_store.dart';
 import 'package:forestinv_mobile/app/stores/settings_store.dart';
+import 'package:forestinv_mobile/app/stores/theme_configuration_store.dart';
 import 'package:forestinv_mobile/helper/location_helper.dart';
 import 'package:forestinv_mobile/helper/toast_helper.dart';
 
@@ -47,6 +47,7 @@ class AppModule extends Module {
     Bind((i) => CurrentUserUsecaseImpl(i())),
     Bind((i) => ToastHelper()),
     Bind((i) => SettingsStore()),
+    Bind((i) => ThemeConfigurationStore()),
   ];
 
   @override

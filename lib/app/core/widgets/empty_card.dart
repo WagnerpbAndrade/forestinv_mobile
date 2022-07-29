@@ -19,9 +19,8 @@ class EmptyCard extends StatelessWidget {
           const Expanded(
             flex: 4,
             child: Icon(
-              Icons.border_clear,
+              Icons.not_interested_outlined,
               size: 200,
-              color: ColorsConst.secondary,
             ),
           ),
           const Divider(),
