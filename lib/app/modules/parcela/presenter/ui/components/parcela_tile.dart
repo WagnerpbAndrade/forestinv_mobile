@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_alert_dialog.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_card_list.dart';
-import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/output/stores/parcela_store.dart';
 import 'package:forestinv_mobile/app/modules/parcela/presenter/ui/pages/cadastrar_parcela_page.dart';
@@ -45,22 +43,29 @@ class ParcelaTile extends StatelessWidget {
                 children: [
                   //_getPopUpMenuItem(context),
                   CustomCardList(
-                    titulo: 'Identificador',
-                    message: '${parcela.numero}',
+                    titulo: 'Identificador do talhão',
+                    message: '${parcela.identificadorTalhao.toString()}',
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   CustomCardList(
-                    titulo: 'Número do talhão',
-                    message: '${parcela.numTalhao.toString()}',
+                    titulo: 'Área do talhão',
+                    message: '${parcela.areaTalhao.toString()} m²',
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   CustomCardList(
-                    titulo: 'Área',
-                    message: '${parcela.area.toString()} m²',
+                    titulo: 'Identificador da parcela',
+                    message: '${parcela.identificadorParcela}',
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomCardList(
+                    titulo: 'Área da parcela',
+                    message: '${parcela.areaParcela.toString()} m²',
                   ),
                   const SizedBox(
                     height: 20,
@@ -161,7 +166,8 @@ class ParcelaTile extends StatelessWidget {
         context: context,
         builder: (_) => CustomAlertDialog(
               title: 'Excluir',
-              content: 'Confirmar a exclusão da parcela n° ${parcela.numero}?',
+              content:
+                  'Confirmar a exclusão da parcela n° ${parcela.identificadorParcela}?',
               textNoButton: 'Cancelar',
               textYesButton: 'Sim',
               actionNo: () => Navigator.of(context).pop(),

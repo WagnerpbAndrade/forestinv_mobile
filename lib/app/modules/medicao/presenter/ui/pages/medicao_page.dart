@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/empty_card.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/output/stores/medicao_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/presenter/ui/components/medicao_tile.dart';
@@ -46,7 +45,7 @@ class _MedicaoPageState extends State<MedicaoPage> {
                     child: Wrap(
                       children: [
                         Text(
-                          'Medições referente a parcela: ${parcela.numero}',
+                          'Medições referente a parcela: ${parcela.identificadorParcela}',
                           style: const TextStyle(
                             fontSize: 20,
                           ),

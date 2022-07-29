@@ -9,26 +9,35 @@ part of 'cadastrar_parcela_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
-  Computed<bool>? _$numeroIsValidComputed;
+  Computed<bool>? _$identificadorParcelaIsValidComputed;
 
   @override
-  bool get numeroIsValid =>
-      (_$numeroIsValidComputed ??= Computed<bool>(() => super.numeroIsValid,
-              name: '_CadastrarParcelaStoreBase.numeroIsValid'))
+  bool get identificadorParcelaIsValid =>
+      (_$identificadorParcelaIsValidComputed ??= Computed<bool>(
+              () => super.identificadorParcelaIsValid,
+              name: '_CadastrarParcelaStoreBase.identificadorParcelaIsValid'))
           .value;
-  Computed<bool>? _$areaIsValidComputed;
+  Computed<bool>? _$areaParcelaIsValidComputed;
 
   @override
-  bool get areaIsValid =>
-      (_$areaIsValidComputed ??= Computed<bool>(() => super.areaIsValid,
-              name: '_CadastrarParcelaStoreBase.areaIsValid'))
+  bool get areaParcelaIsValid => (_$areaParcelaIsValidComputed ??=
+          Computed<bool>(() => super.areaParcelaIsValid,
+              name: '_CadastrarParcelaStoreBase.areaParcelaIsValid'))
+      .value;
+  Computed<bool>? _$identificadorTalhaoIsValidComputed;
+
+  @override
+  bool get identificadorTalhaoIsValid =>
+      (_$identificadorTalhaoIsValidComputed ??= Computed<bool>(
+              () => super.identificadorTalhaoIsValid,
+              name: '_CadastrarParcelaStoreBase.identificadorTalhaoIsValid'))
           .value;
-  Computed<bool>? _$numeroTalhaoIsValidComputed;
+  Computed<bool>? _$areaTalhaoIsValidComputed;
 
   @override
-  bool get numeroTalhaoIsValid => (_$numeroTalhaoIsValidComputed ??=
-          Computed<bool>(() => super.numeroTalhaoIsValid,
-              name: '_CadastrarParcelaStoreBase.numeroTalhaoIsValid'))
+  bool get areaTalhaoIsValid => (_$areaTalhaoIsValidComputed ??= Computed<bool>(
+          () => super.areaTalhaoIsValid,
+          name: '_CadastrarParcelaStoreBase.areaTalhaoIsValid'))
       .value;
   Computed<bool>? _$espacamentoIsValidComputed;
 
@@ -75,51 +84,69 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
     });
   }
 
-  late final _$numeroAtom =
-      Atom(name: '_CadastrarParcelaStoreBase.numero', context: context);
+  late final _$identificadorParcelaAtom = Atom(
+      name: '_CadastrarParcelaStoreBase.identificadorParcela',
+      context: context);
 
   @override
-  String get numero {
-    _$numeroAtom.reportRead();
-    return super.numero;
+  String get identificadorParcela {
+    _$identificadorParcelaAtom.reportRead();
+    return super.identificadorParcela;
   }
 
   @override
-  set numero(String value) {
-    _$numeroAtom.reportWrite(value, super.numero, () {
-      super.numero = value;
+  set identificadorParcela(String value) {
+    _$identificadorParcelaAtom.reportWrite(value, super.identificadorParcela,
+        () {
+      super.identificadorParcela = value;
     });
   }
 
-  late final _$areaAtom =
-      Atom(name: '_CadastrarParcelaStoreBase.area', context: context);
+  late final _$areaParcelaAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.areaParcela', context: context);
 
   @override
-  String get area {
-    _$areaAtom.reportRead();
-    return super.area;
+  String get areaParcela {
+    _$areaParcelaAtom.reportRead();
+    return super.areaParcela;
   }
 
   @override
-  set area(String value) {
-    _$areaAtom.reportWrite(value, super.area, () {
-      super.area = value;
+  set areaParcela(String value) {
+    _$areaParcelaAtom.reportWrite(value, super.areaParcela, () {
+      super.areaParcela = value;
     });
   }
 
-  late final _$numeroTalhaoAtom =
-      Atom(name: '_CadastrarParcelaStoreBase.numeroTalhao', context: context);
+  late final _$identificadorTalhaoAtom = Atom(
+      name: '_CadastrarParcelaStoreBase.identificadorTalhao', context: context);
 
   @override
-  String get numeroTalhao {
-    _$numeroTalhaoAtom.reportRead();
-    return super.numeroTalhao;
+  String get identificadorTalhao {
+    _$identificadorTalhaoAtom.reportRead();
+    return super.identificadorTalhao;
   }
 
   @override
-  set numeroTalhao(String value) {
-    _$numeroTalhaoAtom.reportWrite(value, super.numeroTalhao, () {
-      super.numeroTalhao = value;
+  set identificadorTalhao(String value) {
+    _$identificadorTalhaoAtom.reportWrite(value, super.identificadorTalhao, () {
+      super.identificadorTalhao = value;
+    });
+  }
+
+  late final _$areaTalhaoAtom =
+      Atom(name: '_CadastrarParcelaStoreBase.areaTalhao', context: context);
+
+  @override
+  String get areaTalhao {
+    _$areaTalhaoAtom.reportRead();
+    return super.areaTalhao;
+  }
+
+  @override
+  set areaTalhao(String value) {
+    _$areaTalhaoAtom.reportWrite(value, super.areaTalhao, () {
+      super.areaTalhao = value;
     });
   }
 
@@ -291,33 +318,45 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
   }
 
   @override
-  void setNumero(String value) {
-    final _$actionInfo = _$_CadastrarParcelaStoreBaseActionController
-        .startAction(name: '_CadastrarParcelaStoreBase.setNumero');
+  void setIdentificadorParcela(String value) {
+    final _$actionInfo =
+        _$_CadastrarParcelaStoreBaseActionController.startAction(
+            name: '_CadastrarParcelaStoreBase.setIdentificadorParcela');
     try {
-      return super.setNumero(value);
+      return super.setIdentificadorParcela(value);
     } finally {
       _$_CadastrarParcelaStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setArea(String value) {
+  void setAreaParcela(String value) {
     final _$actionInfo = _$_CadastrarParcelaStoreBaseActionController
-        .startAction(name: '_CadastrarParcelaStoreBase.setArea');
+        .startAction(name: '_CadastrarParcelaStoreBase.setAreaParcela');
     try {
-      return super.setArea(value);
+      return super.setAreaParcela(value);
     } finally {
       _$_CadastrarParcelaStoreBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setNumeroTalhao(String value) {
+  void setIdentificadorTalhao(String value) {
     final _$actionInfo = _$_CadastrarParcelaStoreBaseActionController
-        .startAction(name: '_CadastrarParcelaStoreBase.setNumeroTalhao');
+        .startAction(name: '_CadastrarParcelaStoreBase.setIdentificadorTalhao');
     try {
-      return super.setNumeroTalhao(value);
+      return super.setIdentificadorTalhao(value);
+    } finally {
+      _$_CadastrarParcelaStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setAreaTalhao(String value) {
+    final _$actionInfo = _$_CadastrarParcelaStoreBaseActionController
+        .startAction(name: '_CadastrarParcelaStoreBase.setAreaTalhao');
+    try {
+      return super.setAreaTalhao(value);
     } finally {
       _$_CadastrarParcelaStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -360,9 +399,10 @@ mixin _$CadastrarParcelaStore on _CadastrarParcelaStoreBase, Store {
   String toString() {
     return '''
 selectedDate: ${selectedDate},
-numero: ${numero},
-area: ${area},
-numeroTalhao: ${numeroTalhao},
+identificadorParcela: ${identificadorParcela},
+areaParcela: ${areaParcela},
+identificadorTalhao: ${identificadorTalhao},
+areaTalhao: ${areaTalhao},
 espacamento: ${espacamento},
 latitude: ${latitude},
 longitude: ${longitude},
@@ -371,9 +411,10 @@ loading: ${loading},
 error: ${error},
 savedParcela: ${savedParcela},
 updatedParcela: ${updatedParcela},
-numeroIsValid: ${numeroIsValid},
-areaIsValid: ${areaIsValid},
-numeroTalhaoIsValid: ${numeroTalhaoIsValid},
+identificadorParcelaIsValid: ${identificadorParcelaIsValid},
+areaParcelaIsValid: ${areaParcelaIsValid},
+identificadorTalhaoIsValid: ${identificadorTalhaoIsValid},
+areaTalhaoIsValid: ${areaTalhaoIsValid},
 espacamentoIsValid: ${espacamentoIsValid},
 isFormValid: ${isFormValid},
 cadastrarOnPressed: ${cadastrarOnPressed},

@@ -72,9 +72,6 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
             child: Card(
               clipBehavior: Clip.antiAlias,
               margin: const EdgeInsets.symmetric(horizontal: 32),
-              // shape: RoundedRectangleBorder(
-              //   borderRadius: BorderRadius.circular(16),
-              // ),
               elevation: 8,
               child: Observer(
                 builder: (_) {
@@ -113,47 +110,49 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                             );
                           }),
                           const FieldTitle(
-                            title: 'Número da parcela',
-                            subtitle: 'Informe um número identificador',
+                            title: 'Identificador do talhão',
+                            subtitle: 'Informe um identificador',
                           ),
                           Observer(
                             builder: (_) {
                               return TextFormField(
-                                initialValue: cadastrarParcelaStore.numero,
+                                initialValue:
+                                    cadastrarParcelaStore.identificadorTalhao,
                                 enabled: !cadastrarParcelaStore.loading,
                                 decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
-                                    hintText: 'Exemplo: N° 10',
+                                    hintText: 'Exemplo: T01',
                                     isDense: true,
-                                    errorText:
-                                        cadastrarParcelaStore.numeroError),
-                                onChanged: cadastrarParcelaStore.setNumero,
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
+                                    errorText: cadastrarParcelaStore
+                                        .identificadorTalhaoError),
+                                onChanged: cadastrarParcelaStore
+                                    .setIdentificadorTalhao,
+                                keyboardType: TextInputType.name,
+                                textCapitalization: TextCapitalization.words,
+                                textInputAction: TextInputAction.next,
                                 maxLines: 1,
-                                maxLength: 7,
+                                maxLength: 50,
                               );
                             },
                           ),
                           const FieldTitle(
-                            title: 'Área da parcela',
-                            subtitle: 'Área total da parcela em m²',
+                            title: 'Área do talhão',
+                            subtitle: 'Área total talhão em m²',
                           ),
                           Observer(
                             builder: (_) {
                               return TextFormField(
-                                initialValue: cadastrarParcelaStore.area,
+                                initialValue: cadastrarParcelaStore.areaTalhao,
                                 enabled: !cadastrarParcelaStore.loading,
                                 decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
                                     hintText: 'Exemplo: 100',
                                     suffix: const Text('m²'),
                                     isDense: true,
-                                    errorText: cadastrarParcelaStore.areaError),
+                                    errorText:
+                                        cadastrarParcelaStore.areaTalhaoError),
                                 keyboardType: TextInputType.number,
-                                onChanged: cadastrarParcelaStore.setArea,
+                                onChanged: cadastrarParcelaStore.setAreaTalhao,
                                 textAlign: TextAlign.right,
                                 inputFormatters: [
                                   FilteringTextInputFormatter.digitsOnly,
@@ -164,35 +163,69 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                     reverse: true,
                                   ),
                                 ],
+                                textInputAction: TextInputAction.next,
                                 maxLines: 1,
                                 maxLength: 9,
                               );
                             },
                           ),
                           const FieldTitle(
-                            title: 'Número do talhão',
-                            subtitle: 'Informe um número identificador',
+                            title: 'Identificador da parcela',
+                            subtitle: 'Informe um identificador',
                           ),
                           Observer(
                             builder: (_) {
                               return TextFormField(
                                 initialValue:
-                                    cadastrarParcelaStore.numeroTalhao,
+                                    cadastrarParcelaStore.identificadorParcela,
                                 enabled: !cadastrarParcelaStore.loading,
                                 decoration: InputDecoration(
                                     border: const OutlineInputBorder(),
-                                    hintText: 'Exemplo: 10',
+                                    hintText: 'Exemplo: P01',
                                     isDense: true,
                                     errorText: cadastrarParcelaStore
-                                        .numeroTalhaoError),
-                                keyboardType: TextInputType.number,
-                                onChanged:
-                                    cadastrarParcelaStore.setNumeroTalhao,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
+                                        .identificadorParcelaError),
+                                onChanged: cadastrarParcelaStore
+                                    .setIdentificadorParcela,
+                                keyboardType: TextInputType.name,
+                                textCapitalization: TextCapitalization.words,
+                                textInputAction: TextInputAction.next,
                                 maxLines: 1,
-                                maxLength: 7,
+                                maxLength: 50,
+                              );
+                            },
+                          ),
+                          const FieldTitle(
+                            title: 'Área da parcela',
+                            subtitle: 'Área total da parcela em m²',
+                          ),
+                          Observer(
+                            builder: (_) {
+                              return TextFormField(
+                                initialValue: cadastrarParcelaStore.areaParcela,
+                                enabled: !cadastrarParcelaStore.loading,
+                                decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
+                                    hintText: 'Exemplo: 100',
+                                    suffix: const Text('m²'),
+                                    isDense: true,
+                                    errorText:
+                                        cadastrarParcelaStore.areaParcelaError),
+                                keyboardType: TextInputType.number,
+                                onChanged: cadastrarParcelaStore.setAreaParcela,
+                                textAlign: TextAlign.right,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  TextInputMask(
+                                    mask: '9+999.99',
+                                    //placeholder: '0',
+                                    maxPlaceHolders: 3,
+                                    reverse: true,
+                                  ),
+                                ],
+                                textInputAction: TextInputAction.next,
+                                maxLines: 1,
+                                maxLength: 9,
                               );
                             },
                           ),
@@ -213,6 +246,7 @@ class _CadastrarParcelaPageState extends State<CadastrarParcelaPage> {
                                         cadastrarParcelaStore.espacamentoError),
                                 keyboardType: TextInputType.number,
                                 onChanged: cadastrarParcelaStore.setEspacamento,
+                                textInputAction: TextInputAction.next,
                                 maxLines: 1,
                                 inputFormatters: [
                                   maskFormatter,

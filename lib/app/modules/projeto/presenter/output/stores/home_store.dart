@@ -125,7 +125,7 @@ abstract class _HomeStoreBase with Store {
             snapshotMedicao.exists) {
           var parcela = Parcela.fromMap(snapshotParcela.data()!);
           parcela = parcela.copyWith(id: snapshotParcela.id);
-          print('Parcela: ${parcela.numero}');
+          print('Parcela: ${parcela.identificadorParcela}');
 
           var medicao = Medicao.fromMap(snapshotMedicao.data()!);
           medicao = medicao.copyWith(id: snapshotMedicao.id);
@@ -173,9 +173,10 @@ abstract class _HomeStoreBase with Store {
     row.add(projeto.ultimaAtualizacao.toString());
     row.add(parcela.id ?? '');
     row.add(parcela.projetoId ?? '');
-    row.add(parcela.numero.toString());
-    row.add(parcela.numTalhao.toString());
-    row.add(parcela.area.toString());
+    row.add(parcela.identificadorParcela.toString());
+    row.add(parcela.areaParcela.toString());
+    row.add(parcela.identificadorTalhao.toString());
+    row.add(parcela.areaTalhao.toString());
     row.add(parcela.espacamento);
     row.add(parcela.latitude.toString());
     row.add(parcela.longitude.toString());
@@ -217,9 +218,10 @@ abstract class _HomeStoreBase with Store {
         "ultimaAtualizacao",
         "parcelaId",
         "projetoId",
-        "numero",
-        "numTalhao",
-        "area",
+        "identificadorParcela",
+        "areaParcela",
+        "identificadorTalhao",
+        "areaTalhao",
         "espacamento",
         "latitude",
         "longitude",

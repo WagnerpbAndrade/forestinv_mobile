@@ -58,7 +58,7 @@ class ParcelaCard extends StatelessWidget {
                   ),
                   Expanded(
                       child: Text(
-                    parcela.numero.toString(),
+                    parcela.identificadorParcela.toString(),
                     style: const TextStyle(
                       color: ColorsConst.secondary,
                       fontSize: 20,
@@ -67,7 +67,7 @@ class ParcelaCard extends StatelessWidget {
                   )),
                   Expanded(
                     child: Text(
-                      'Área: ${parcela.area.toStringAsFixed(2)}',
+                      'Área: ${parcela.areaParcela.toStringAsFixed(2)}',
                       style: const TextStyle(
                         color: ColorsConst.secondary,
                         fontSize: 14,

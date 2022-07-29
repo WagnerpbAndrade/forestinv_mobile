@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app/core/interface/api_response.dart';
 import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/entities/parcela.dart';
 import 'package:forestinv_mobile/app/modules/parcela/domain/usecases/save_parcela_usecase.dart';
@@ -24,9 +23,10 @@ abstract class _CadastrarParcelaStoreBase with Store {
   _CadastrarParcelaStoreBase({this.args}) {
     if (args?[0] != null) {
       parcela = args![0];
-      numero = parcela!.numero.toString();
-      area = parcela!.area.toString();
-      numeroTalhao = parcela!.numTalhao.toString();
+      identificadorParcela = parcela!.identificadorParcela;
+      areaParcela = parcela!.areaParcela.toString();
+      identificadorTalhao = parcela!.identificadorTalhao;
+      areaTalhao = parcela!.areaTalhao.toString();
       espacamento = parcela!.espacamento.toString();
       latitude = parcela!.latitude.toString();
       longitude = parcela!.longitude.toString();
@@ -40,33 +40,33 @@ abstract class _CadastrarParcelaStoreBase with Store {
   void setSelectedDate(DateTime? value) => selectedDate = value;
 
   @observable
-  String numero = '';
+  String identificadorParcela = '';
 
   @action
-  void setNumero(String value) => numero = value;
+  void setIdentificadorParcela(String value) => identificadorParcela = value;
 
   @computed
-  bool get numeroIsValid => numero.isNotEmpty;
-  String? get numeroError {
-    if (numeroIsValid) {
+  bool get identificadorParcelaIsValid => identificadorParcela.isNotEmpty;
+  String? get identificadorParcelaError {
+    if (identificadorParcelaIsValid) {
       return null;
-    } else if (numero.isEmpty) {
+    } else if (identificadorParcela.isEmpty) {
       return null;
     }
   }
 
   @observable
-  String area = '';
+  String areaParcela = '';
 
   @action
-  void setArea(String value) => area = value;
+  void setAreaParcela(String value) => areaParcela = value;
 
   @computed
-  bool get areaIsValid => area.isNotEmpty;
-  String? get areaError {
-    if (areaIsValid) {
+  bool get areaParcelaIsValid => areaParcela.isNotEmpty;
+  String? get areaParcelaError {
+    if (areaParcelaIsValid) {
       return null;
-    } else if (area.isEmpty) {
+    } else if (areaParcela.isEmpty) {
       return null;
     } else {
       return 'Área inválida';
@@ -74,18 +74,36 @@ abstract class _CadastrarParcelaStoreBase with Store {
   }
 
   @observable
-  String numeroTalhao = '';
+  String identificadorTalhao = '';
 
   @action
-  void setNumeroTalhao(String value) => numeroTalhao = value;
+  void setIdentificadorTalhao(String value) => identificadorTalhao = value;
 
   @computed
-  bool get numeroTalhaoIsValid => numeroTalhao.isNotEmpty;
-  String? get numeroTalhaoError {
-    if (numeroTalhaoIsValid) {
+  bool get identificadorTalhaoIsValid => identificadorTalhao.isNotEmpty;
+  String? get identificadorTalhaoError {
+    if (identificadorTalhaoIsValid) {
       return null;
-    } else if (numeroTalhao.isEmpty) {
+    } else if (identificadorTalhao.isEmpty) {
       return null;
+    }
+  }
+
+  @observable
+  String areaTalhao = '';
+
+  @action
+  void setAreaTalhao(String value) => areaTalhao = value;
+
+  @computed
+  bool get areaTalhaoIsValid => areaTalhao.isNotEmpty;
+  String? get areaTalhaoError {
+    if (areaTalhaoIsValid) {
+      return null;
+    } else if (areaTalhao.isEmpty) {
+      return null;
+    } else {
+      return 'Área inválida';
     }
   }
 
@@ -122,7 +140,11 @@ abstract class _CadastrarParcelaStoreBase with Store {
 
   @computed
   bool get isFormValid =>
-      numeroIsValid && areaIsValid && numeroTalhaoIsValid && espacamentoIsValid;
+      identificadorParcelaIsValid &&
+      areaParcelaIsValid &&
+      identificadorTalhaoIsValid &&
+      areaTalhaoIsValid &&
+      espacamentoIsValid;
 
   @computed
   Function? get cadastrarOnPressed =>
@@ -151,10 +173,11 @@ abstract class _CadastrarParcelaStoreBase with Store {
 
     final parcelaSaved = Parcela(
       projetoId: projetoId,
-      numero: int.parse(numero),
-      area: double.parse(area),
+      identificadorParcela: identificadorParcela,
+      areaParcela: double.parse(areaParcela),
       largura: double.parse('1'),
-      numTalhao: int.parse(numeroTalhao),
+      identificadorTalhao: identificadorTalhao,
+      areaTalhao: double.parse(areaTalhao),
       latitude: latitude,
       longitude: longitude,
       dataPlantio: selectedDate!,
@@ -185,10 +208,11 @@ abstract class _CadastrarParcelaStoreBase with Store {
 
     final parcelaUpdated = Parcela(
       id: parcela!.id,
-      numero: int.parse(numero),
-      area: double.parse(area),
+      identificadorParcela: identificadorParcela,
+      areaParcela: double.parse(areaParcela),
       largura: double.parse('1'),
-      numTalhao: int.parse(numeroTalhao),
+      identificadorTalhao: identificadorTalhao,
+      areaTalhao: double.parse(areaTalhao),
       latitude: latitude,
       longitude: longitude,
       dataPlantio: selectedDate!,

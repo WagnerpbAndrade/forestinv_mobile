@@ -9,10 +9,11 @@ String ParcelaToMap(Parcela data) => json.encode(data.toMap());
 class Parcela {
   dynamic id;
   final dynamic projetoId;
-  int numero;
-  double area;
+  dynamic identificadorParcela;
+  double areaParcela;
   double largura;
-  int numTalhao;
+  dynamic identificadorTalhao;
+  double areaTalhao;
   String? latitude;
   String? longitude;
   DateTime dataPlantio;
@@ -25,10 +26,11 @@ class Parcela {
   Parcela(
       {this.id,
       this.projetoId,
-      required this.numero,
-      required this.area,
+      required this.identificadorParcela,
+      required this.areaParcela,
       required this.largura,
-      required this.numTalhao,
+      required this.identificadorTalhao,
+      required this.areaTalhao,
       this.latitude,
       this.longitude,
       required this.dataPlantio,
@@ -41,10 +43,11 @@ class Parcela {
   Parcela copyWith({
     dynamic id,
     dynamic projetoId,
-    int? numero,
-    double? area,
+    dynamic identificadorParcela,
+    double? areaParcela,
     double? largura,
-    int? numTalhao,
+    dynamic identificadorTalhao,
+    double? areaTalhao,
     String? latitude,
     String? longitude,
     DateTime? dataPlantio,
@@ -57,10 +60,11 @@ class Parcela {
     return Parcela(
       id: id ?? this.id,
       projetoId: projetoId ?? this.projetoId,
-      numero: numero ?? this.numero,
-      area: area ?? this.area,
+      identificadorParcela: identificadorParcela ?? this.identificadorParcela,
+      areaParcela: areaParcela ?? this.areaParcela,
       largura: largura ?? this.largura,
-      numTalhao: numTalhao ?? this.numTalhao,
+      identificadorTalhao: identificadorTalhao ?? this.identificadorTalhao,
+      areaTalhao: areaTalhao ?? this.areaTalhao,
       latitude: latitude ?? this.latitude,
       longitude: longitude ?? this.longitude,
       dataPlantio: dataPlantio ?? this.dataPlantio,
@@ -75,10 +79,11 @@ class Parcela {
   factory Parcela.fromMap(Map<String, dynamic> json) => Parcela(
         id: json['id'],
         projetoId: json['projetoId'],
-        numero: json['numero'],
-        area: json['area'],
+        identificadorParcela: json['identificadorParcela'],
+        areaParcela: json['areaParcela'],
         largura: json['largura'],
-        numTalhao: json['numTalhao'],
+        identificadorTalhao: json['identificadorTalhao'],
+        areaTalhao: json['areaTalhao'],
         latitude: json['latitude'],
         longitude: json['longitude'],
         dataPlantio: getDateTime(json['dataPlantio']),
@@ -93,10 +98,11 @@ class Parcela {
 
   Map<String, dynamic> toMap() => {
         'projetoId': projetoId,
-        'numero': numero,
-        'area': area,
+        'identificadorParcela': identificadorParcela,
+        'areaParcela': areaParcela,
         'largura': largura,
-        'numTalhao': numTalhao,
+        'identificadorTalhao': identificadorTalhao,
+        'areaTalhao': areaTalhao,
         'latitude': latitude,
         'longitude': longitude,
         'dataPlantio': dataPlantio,
@@ -108,10 +114,11 @@ class Parcela {
       };
 
   Map<String, dynamic> updateToMap() => {
-        'numero': numero,
-        'area': area,
+        'identificadorParcela': identificadorParcela,
+        'areaParcela': areaParcela,
         'largura': largura,
-        'numTalhao': numTalhao,
+        'identificadorTalhao': identificadorTalhao,
+        'areaTalhao': areaTalhao,
         'latitude': latitude,
         'longitude': longitude,
         'dataPlantio': dataPlantio,

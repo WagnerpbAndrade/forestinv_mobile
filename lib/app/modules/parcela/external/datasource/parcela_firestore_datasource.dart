@@ -76,13 +76,14 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
 
       querySnapshot.docs.forEach((doc) {
         final parcelaId = doc.id;
-        final area = doc.get('area');
+        final identificadorParcela = doc.get('identificadorParcela');
+        final areaParcela = doc.get('areaParcela');
+        final identificadorTalhao = doc.get('identificadorTalhao');
+        final areaTalhao = doc.get('areaTalhao');
         final largura = doc.get('largura');
-        final numero = doc.get('numero');
         final espacamento = doc.get('espacamento');
         final latitude = doc.get('latitude');
         final longitude = doc.get('longitude');
-        final numTalhao = doc.get('numTalhao');
         final tipoParcelaEnum = doc.get('tipoParcelaEnum');
         final created = doc.get('dataCriacao') as Timestamp;
         final dataCriacao =
@@ -99,10 +100,11 @@ class ParcelaFirestoreDatasourceImpl implements ParcelaDatasource {
 
         final Parcela parcela = Parcela(
           id: parcelaId,
-          area: area,
           largura: largura,
-          numero: numero,
-          numTalhao: numTalhao,
+          identificadorParcela: identificadorParcela,
+          areaParcela: areaParcela,
+          identificadorTalhao: identificadorTalhao,
+          areaTalhao: areaTalhao,
           espacamento: espacamento,
           dataPlantio: dataPlantio,
           idadeParcela: idadeParcela,

@@ -52,7 +52,7 @@ dependencies:
   flutter_tts: ^3.5.0
   font_awesome_flutter: ^10.1.0
   form_field_validator: ^1.1.0
-  geolocator: ^9.0.0
+  geolocator: 
   google_sign_in: ^5.2.3
   group_radio_button: ^1.2.0
   intl: ^0.17.0
