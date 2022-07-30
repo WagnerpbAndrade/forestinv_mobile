@@ -25,7 +25,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
     print('ProjetoId: $projetoId');
     if (args?[0] != null) {
       arvore = args?[0];
-      numeroArvore = arvore!.numArvore.toString();
+      identificadorArvore = arvore!.identificadorArvore;
       dapText = arvore!.dap.toString();
       alturaText = arvore!.alturaTotal.toString();
       observacao = arvore!.observacao;
@@ -41,17 +41,17 @@ abstract class _CadastrarArvoreStoreBase with Store {
   void setSelectedDate(DateTime? value) => selectedDate = value;
 
   @observable
-  String numeroArvore = '';
+  String identificadorArvore = '';
 
   @action
-  void setNumeroArvore(String value) => numeroArvore = value;
+  void setIdentificadorArvore(String value) => identificadorArvore = value;
 
   @computed
-  bool get numeroArvoreIsValid => numeroArvore.isNotEmpty;
-  String? get numeroArvoreError {
-    if (numeroArvoreIsValid) {
+  bool get identificadorArvoreIsValid => identificadorArvore.isNotEmpty;
+  String? get identificadorArvoreError {
+    if (identificadorArvoreIsValid) {
       return null;
-    } else if (numeroArvore.isEmpty) {
+    } else if (identificadorArvore.isEmpty) {
       return null;
     }
   }
@@ -146,7 +146,10 @@ abstract class _CadastrarArvoreStoreBase with Store {
 
   @computed
   bool get isFormValid =>
-      numeroArvoreIsValid && dapValid && alturaValid && estadoArvoreValid;
+      identificadorArvoreIsValid &&
+      dapValid &&
+      alturaValid &&
+      estadoArvoreValid;
 
   @computed
   Function? get cadastrarOnPressed =>
@@ -184,7 +187,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
       medicaoId: medicao.id,
       parcelaId: medicao.parcelaId,
       projetoId: projetoId,
-      numArvore: int.parse(numeroArvore),
+      identificadorArvore: identificadorArvore,
       dap: double.parse(dapText),
       alturaTotal: double.parse(alturaText),
       estadoArvore: EstadoArvoreEnum.values.elementAt(estadoArvore!.index),
@@ -197,7 +200,8 @@ abstract class _CadastrarArvoreStoreBase with Store {
 
     if (await datasource.arvoreIsExists(medicao.id, arvoreSaved)) {
       loading = false;
-      error = 'A árvore com o número $numeroArvore já está cadastrada';
+      error =
+          'A árvore com o identificador $identificadorArvore já está cadastrada';
       return;
     }
 
@@ -228,7 +232,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
 
     final arvoreUpdated = Arvore(
       id: arvore!.id,
-      numArvore: int.parse(numeroArvore),
+      identificadorArvore: identificadorArvore,
       dap: double.parse(dapText),
       alturaTotal: double.parse(alturaText),
       estadoArvore: EstadoArvoreEnum.values.elementAt(estadoArvore!.index),

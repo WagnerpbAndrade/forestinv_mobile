@@ -194,7 +194,7 @@ abstract class _HomeStoreBase with Store {
     row.add(arvore.projetoId);
     row.add(arvore.parcelaId);
     row.add(arvore.medicaoId);
-    row.add(arvore.numArvore.toString());
+    row.add(arvore.identificadorArvore);
     row.add(arvore.dap.toString());
     row.add(arvore.alturaTotal.toString());
     row.add(arvore.estadoDescription);
@@ -239,7 +239,7 @@ abstract class _HomeStoreBase with Store {
         "projetoId",
         "parcelaId",
         "medicaoId",
-        "numArvore",
+        "identificadorArvore",
         "dap",
         "altura",
         "estado",

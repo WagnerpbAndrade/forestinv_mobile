@@ -123,29 +123,30 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                           ),
                           const FieldTitle(
                             title: 'Identificador da árvore',
-                            subtitle: 'Informe um número identificador',
+                            subtitle: 'Informe um identificador',
                           ),
                           Observer(
                             builder: (_) {
                               return TextFormField(
-                                initialValue: cadastrarArvoreStore.numeroArvore,
+                                initialValue:
+                                    cadastrarArvoreStore.identificadorArvore,
                                 // ignore: avoid_bool_literals_in_conditional_expressions
                                 enabled: editing
                                     ? false
                                     : !cadastrarArvoreStore.loading,
                                 decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
-                                    hintText: 'Exemplo: N° 10',
-                                    isDense: true,
-                                    errorText:
-                                        cadastrarArvoreStore.numeroArvoreError),
-                                onChanged: cadastrarArvoreStore.setNumeroArvore,
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
+                                  border: const OutlineInputBorder(),
+                                  hintText: 'Exemplo:  A10',
+                                  isDense: true,
+                                  errorText: cadastrarArvoreStore
+                                      .identificadorArvoreError,
+                                ),
+                                onChanged:
+                                    cadastrarArvoreStore.setIdentificadorArvore,
+                                keyboardType: TextInputType.name,
+                                textCapitalization: TextCapitalization.words,
                                 maxLines: 1,
-                                maxLength: 7,
+                                maxLength: 50,
                               );
                             },
                           ),

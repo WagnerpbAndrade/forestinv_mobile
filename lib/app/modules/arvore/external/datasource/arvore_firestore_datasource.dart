@@ -39,7 +39,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
         final medicaoId = doc.get('medicaoId');
         final parcelaId = doc.get('parcelaId');
         final projetoId = doc.get('projetoId');
-        final numArvore = doc.get('numArvore');
+        final identificadorArvore = doc.get('identificadorArvore');
         final dap = doc.get('dap');
         final alturaTotal = doc.get('alturaTotal');
         final latitude = doc.get('latitude');
@@ -57,7 +57,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
           medicaoId: medicaoId,
           parcelaId: parcelaId,
           projetoId: projetoId,
-          numArvore: numArvore,
+          identificadorArvore: identificadorArvore,
           dap: double.parse(dap.toString()),
           alturaTotal: double.parse(alturaTotal.toString()),
           latitude: latitude,
@@ -150,7 +150,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
       final arvoreRef = _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_ARVORES)
           .where("medicaoId", isEqualTo: medicao.id)
-          .where("numArvore", isEqualTo: arvore.numArvore);
+          .where("identificadorArvore", isEqualTo: arvore.identificadorArvore);
 
       final snapshotArvore = await arvoreRef.get();
 
@@ -158,7 +158,8 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
         final arvoreId = snapshotArvore.docs.first.id;
         final medicaoId = snapshotArvore.docs.first.get('medicaoId');
         final parcelaId = snapshotArvore.docs.first.get('parcelaId');
-        final numArvore = snapshotArvore.docs.first.get('numArvore');
+        final identificadorArvore =
+            snapshotArvore.docs.first.get('identificadorArvore');
         final dap = snapshotArvore.docs.first.get('dap');
         final alturaTotal = snapshotArvore.docs.first.get('alturaTotal');
         final latitude = snapshotArvore.docs.first.get('latitude');
@@ -177,7 +178,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
           id: arvoreId,
           medicaoId: medicaoId,
           parcelaId: parcelaId,
-          numArvore: numArvore,
+          identificadorArvore: identificadorArvore,
           dap: double.parse(dap.toString()),
           alturaTotal: double.parse(alturaTotal.toString()),
           latitude: latitude,
@@ -204,7 +205,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
       final arvoreRef = _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_ARVORES)
           .where('medicaoId', isEqualTo: medicaoId)
-          .where('numArvore', isEqualTo: arvore.numArvore);
+          .where('identificadorArvore', isEqualTo: arvore.identificadorArvore);
 
       final snapshotArvore = await arvoreRef.get();
 
@@ -235,7 +236,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
         final medicaoId = doc.get('medicaoId');
         final parcelaId = doc.get('parcelaId');
         final projetoId = doc.get('projetoId');
-        final numArvore = doc.get('numArvore');
+        final identificadorArvore = doc.get('identificadorArvore');
         final dap = doc.get('dap');
         final alturaTotal = doc.get('alturaTotal');
         final latitude = doc.get('latitude');
@@ -253,7 +254,7 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
           medicaoId: medicaoId,
           parcelaId: parcelaId,
           projetoId: projetoId,
-          numArvore: numArvore,
+          identificadorArvore: identificadorArvore,
           dap: double.parse(dap.toString()),
           alturaTotal: double.parse(alturaTotal.toString()),
           latitude: latitude,

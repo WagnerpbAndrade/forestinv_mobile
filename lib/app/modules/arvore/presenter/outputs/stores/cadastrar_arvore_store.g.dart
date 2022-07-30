@@ -9,13 +9,14 @@ part of 'cadastrar_arvore_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
-  Computed<bool>? _$numeroArvoreIsValidComputed;
+  Computed<bool>? _$identificadorArvoreIsValidComputed;
 
   @override
-  bool get numeroArvoreIsValid => (_$numeroArvoreIsValidComputed ??=
-          Computed<bool>(() => super.numeroArvoreIsValid,
-              name: '_CadastrarArvoreStoreBase.numeroArvoreIsValid'))
-      .value;
+  bool get identificadorArvoreIsValid =>
+      (_$identificadorArvoreIsValidComputed ??= Computed<bool>(
+              () => super.identificadorArvoreIsValid,
+              name: '_CadastrarArvoreStoreBase.identificadorArvoreIsValid'))
+          .value;
   Computed<num>? _$dapComputed;
 
   @override
@@ -80,19 +81,19 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
     });
   }
 
-  late final _$numeroArvoreAtom =
-      Atom(name: '_CadastrarArvoreStoreBase.numeroArvore', context: context);
+  late final _$identificadorArvoreAtom = Atom(
+      name: '_CadastrarArvoreStoreBase.identificadorArvore', context: context);
 
   @override
-  String get numeroArvore {
-    _$numeroArvoreAtom.reportRead();
-    return super.numeroArvore;
+  String get identificadorArvore {
+    _$identificadorArvoreAtom.reportRead();
+    return super.identificadorArvore;
   }
 
   @override
-  set numeroArvore(String value) {
-    _$numeroArvoreAtom.reportWrite(value, super.numeroArvore, () {
-      super.numeroArvore = value;
+  set identificadorArvore(String value) {
+    _$identificadorArvoreAtom.reportWrite(value, super.identificadorArvore, () {
+      super.identificadorArvore = value;
     });
   }
 
@@ -319,11 +320,11 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   @override
-  void setNumeroArvore(String value) {
+  void setIdentificadorArvore(String value) {
     final _$actionInfo = _$_CadastrarArvoreStoreBaseActionController
-        .startAction(name: '_CadastrarArvoreStoreBase.setNumeroArvore');
+        .startAction(name: '_CadastrarArvoreStoreBase.setIdentificadorArvore');
     try {
-      return super.setNumeroArvore(value);
+      return super.setIdentificadorArvore(value);
     } finally {
       _$_CadastrarArvoreStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -410,7 +411,7 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   String toString() {
     return '''
 selectedDate: ${selectedDate},
-numeroArvore: ${numeroArvore},
+identificadorArvore: ${identificadorArvore},
 dapText: ${dapText},
 alturaText: ${alturaText},
 latitude: ${latitude},
@@ -423,7 +424,7 @@ error: ${error},
 savedArvore: ${savedArvore},
 updatedArvore: ${updatedArvore},
 isDapValid: ${isDapValid},
-numeroArvoreIsValid: ${numeroArvoreIsValid},
+identificadorArvoreIsValid: ${identificadorArvoreIsValid},
 dap: ${dap},
 dapValid: ${dapValid},
 altura: ${altura},

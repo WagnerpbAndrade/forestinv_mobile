@@ -18,7 +18,7 @@ class Arvore {
   dynamic medicaoId;
   dynamic parcelaId;
   dynamic projetoId;
-  int numArvore;
+  String identificadorArvore;
   double dap;
   double alturaTotal;
   String latitude;
@@ -34,7 +34,7 @@ class Arvore {
     this.medicaoId,
     this.parcelaId,
     this.projetoId,
-    required this.numArvore,
+    required this.identificadorArvore,
     required this.dap,
     required this.alturaTotal,
     required this.latitude,
@@ -51,7 +51,7 @@ class Arvore {
     dynamic medicaoId,
     dynamic parcelaId,
     dynamic projetoId,
-    int? numArvore,
+    String? identificadorArvore,
     double? dap,
     double? alturaTotal,
     String? latitude,
@@ -67,7 +67,7 @@ class Arvore {
       medicaoId: medicaoId ?? this.medicaoId,
       parcelaId: parcelaId ?? this.parcelaId,
       projetoId: projetoId ?? this.projetoId,
-      numArvore: numArvore ?? this.numArvore,
+      identificadorArvore: identificadorArvore ?? this.identificadorArvore,
       dap: dap ?? this.dap,
       alturaTotal: alturaTotal ?? this.alturaTotal,
       latitude: latitude ?? this.latitude,
@@ -85,7 +85,7 @@ class Arvore {
         medicaoId: json['medicaoId'],
         parcelaId: json['parcelaId'],
         projetoId: json['projetoId'],
-        numArvore: json['numArvore'],
+        identificadorArvore: json['identificadorArvore'],
         dap: double.parse(json['dap'].toString()),
         alturaTotal: double.parse(json['alturaTotal'].toString()),
         latitude: json['latitude'],
@@ -104,7 +104,7 @@ class Arvore {
     data['medicaoId'] = medicaoId;
     data['parcelaId'] = parcelaId;
     data['projetoId'] = projetoId;
-    data['numArvore'] = numArvore;
+    data['identificadorArvore'] = identificadorArvore;
     data['dap'] = dap;
     data['alturaTotal'] = alturaTotal;
     data['latitude'] = latitude;
@@ -119,7 +119,7 @@ class Arvore {
 
   Map<String, dynamic> updateToMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['numArvore'] = numArvore;
+    data['identificadorArvore'] = identificadorArvore;
     data['dap'] = dap;
     data['alturaTotal'] = alturaTotal;
     data['latitude'] = latitude;
@@ -197,6 +197,6 @@ class Arvore {
 
   @override
   String toString() {
-    return 'Arvore -> id: $id - numeroArvore: $numArvore - estado: ${EstadoArvoreEnum.values.elementAt(estadoArvore.index).name} - dap: $dap - altura: $alturaTotal - ano: ${dataCriacao?.year}';
+    return 'Arvore -> id: $id - identificadorArvore: $identificadorArvore - estado: ${EstadoArvoreEnum.values.elementAt(estadoArvore.index).name} - dap: $dap - altura: $alturaTotal - ano: ${dataCriacao?.year}';
   }
 }

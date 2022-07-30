@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:forestinv_mobile/app/core/constants/colors_const.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_alert_dialog.dart';
 import 'package:forestinv_mobile/app/core/widgets/custom_card_list.dart';
-import 'package:forestinv_mobile/app/core/widgets/dialog_platform.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/arvore_store.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/pages/cadastrar_arvore_page.dart';
@@ -47,7 +45,7 @@ class ArvoreTile extends StatelessWidget {
                   //_getPopUpMenuItem(context),
                   CustomCardList(
                     titulo: 'Identificador',
-                    message: '${arvore.numArvore}',
+                    message: '${arvore.identificadorArvore}',
                   ),
                   const SizedBox(
                     height: 20,
@@ -143,7 +141,8 @@ class ArvoreTile extends StatelessWidget {
         context: context,
         builder: (_) => CustomAlertDialog(
               title: 'Excluir',
-              content: 'Confirmar a exclusão da árvore N° ${arvore.numArvore}?',
+              content:
+                  'Confirmar a exclusão da árvore ${arvore.identificadorArvore}?',
               textNoButton: 'Cancelar',
               textYesButton: 'Sim',
               actionNo: () => Navigator.of(context).pop(),
