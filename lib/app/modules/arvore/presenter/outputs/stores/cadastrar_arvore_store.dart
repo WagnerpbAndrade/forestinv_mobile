@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/estado_arvore.dart';
@@ -33,6 +35,12 @@ abstract class _CadastrarArvoreStoreBase with Store {
       longitude = arvore!.longitude;
     }
   }
+
+  @observable
+  File? arquivo;
+
+  @action
+  void setArquivo(final File value) => arquivo = value;
 
   @observable
   DateTime? selectedDate = DateTime.now();
@@ -344,5 +352,13 @@ abstract class _CadastrarArvoreStoreBase with Store {
     print('O estado atual é válido');
     setIsDapValid(true);
     return true;
+  }
+
+  Future<void> showPreview(dynamic file) async {
+    file = await Modular.to.popAndPushNamed('/preview', arguments: file);
+
+    if (file != null) {
+      setArquivo(file);
+    }
   }
 }

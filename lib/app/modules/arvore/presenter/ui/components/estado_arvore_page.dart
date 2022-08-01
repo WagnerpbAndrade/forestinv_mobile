@@ -41,7 +41,6 @@ class EstadoArvorePage extends StatelessWidget {
                   separatorBuilder: (_, __) {
                     return const Divider(
                       height: 0.1,
-                      color: Colors.grey,
                     );
                   },
                   itemBuilder: (_, index) {
@@ -60,7 +59,6 @@ class EstadoArvorePage extends StatelessWidget {
                         child: Text(
                           visibilidade.description,
                           style: TextStyle(
-                            color: Colors.grey[700],
                             fontWeight: visibilidade.id == selected?.id
                                 ? FontWeight.bold
                                 : null,

@@ -14,6 +14,7 @@ import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/pages/arvore_pa
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/pages/cadastrar_arvore_page.dart';
 import 'package:forestinv_mobile/app/screens/arvore/estado_arvore_screen.dart';
 import 'package:forestinv_mobile/app/screens/arvore/infos_arvore_screen.dart';
+import 'package:forestinv_mobile/app/screens/camera/preview_page.dart';
 
 class ArvoreModule extends Module {
   @override
@@ -35,6 +36,10 @@ class ArvoreModule extends Module {
     ChildRoute('/', child: (_, args) => ArvorePage(args.data)),
     ChildRoute('/estados', child: (_, args) => const EstadoArvoreScreen()),
     ChildRoute('/arvore_infos', child: (_, args) => const InfosArvoreScreen()),
+    ChildRoute('/preview',
+        child: (_, args) => PreviewPage(
+              file: args.data,
+            )),
     ChildRoute(RouterConst.CREATE_ARVORE_ROUTER,
         child: (_, args) => CadastrarArvorePage(args: args.data)),
   ];
