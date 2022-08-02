@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/repository/firebase_storage_repository.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/delete_arvore_usecase.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/get_all_by_medicao_usecase.dart';
@@ -29,6 +33,8 @@ abstract class _ArvoreStoreBase with Store {
   }
 
   ObservableList<Arvore> arvoreList = ObservableList<Arvore>();
+
+  List<File> photos = [];
 
   @action
   void addNewArvores(List<Arvore> newArvores) {
@@ -78,5 +84,10 @@ abstract class _ArvoreStoreBase with Store {
       ),
     );
     if (success != null && success) refresh();
+  }
+
+  Future<List<String>> fetchPhotos(final String arvoreId) async {
+    final repositoryStorage = Modular.get<FirebaseStorageRepository>();
+    return repositoryStorage.fetchAllPhotosByArvore(arvoreId);
   }
 }

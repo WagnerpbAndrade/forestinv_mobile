@@ -5,6 +5,7 @@ import 'package:forestinv_mobile/app/core/widgets/custom_card_list.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/arvore_store.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/pages/cadastrar_arvore_page.dart';
+import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/pages/fotos_arvore_page.dart';
 import 'package:forestinv_mobile/app/stores/settings_store.dart';
 import 'package:forestinv_mobile/helper/toast_helper.dart';
 import 'package:maps_launcher/maps_launcher.dart';
@@ -115,6 +116,35 @@ class ArvoreTile extends StatelessWidget {
                       ],
                     ),
                   ),
+                  Container(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          'Fotos',
+                          style: TextStyle(
+                            fontSize: settingsStore.fontSize,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () async {
+                            final photos = await store.fetchPhotos(arvore.id);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      FotosArvorePage(photos: photos)),
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.photo,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   _getMenuOptions(context),
                 ],
               ),
@@ -156,7 +186,7 @@ class ArvoreTile extends StatelessWidget {
   Widget _getMenuOptions(final BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
           onPressed: () {
