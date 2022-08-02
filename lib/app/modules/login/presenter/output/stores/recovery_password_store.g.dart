@@ -88,6 +88,14 @@ mixin _$RecoveryPasswordStore on _RecoveryPasswordStore, Store {
     });
   }
 
+  late final _$_recoverAsyncAction =
+      AsyncAction('_RecoveryPasswordStore._recover', context: context);
+
+  @override
+  Future<void> _recover() {
+    return _$_recoverAsyncAction.run(() => super._recover());
+  }
+
   late final _$_RecoveryPasswordStoreActionController =
       ActionController(name: '_RecoveryPasswordStore', context: context);
 

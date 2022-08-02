@@ -93,7 +93,7 @@ class _RecoverScreenState extends State<RecoverPage> {
                       },
                     ),
                     const FieldTitle(
-                      title: 'Confirme seu E-mail',
+                      title: 'Confirme seu e-mail',
                       subtitle: 'Enviaremos um link para recuperaçao',
                     ),
                     const SizedBox(
@@ -108,7 +108,7 @@ class _RecoverScreenState extends State<RecoverPage> {
                           autocorrect: false,
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            hintText: 'Exemplo: wagner@gmail.com',
+                            hintText: 'Exemplo: seu@email.com',
                             isDense: true,
                             errorText: recoverStore.emailError,
                           ),
@@ -123,7 +123,7 @@ class _RecoverScreenState extends State<RecoverPage> {
                       builder: (_) {
                         return Container(
                           margin: const EdgeInsets.symmetric(vertical: 12),
-                          height: 40,
+                          height: 70,
                           child: CustomElevatedButton(
                             child: recoverStore.loading
                                 ? const CircularProgressIndicator()
@@ -134,7 +134,7 @@ class _RecoverScreenState extends State<RecoverPage> {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                            onPressed: () => recoverStore.recoverPressed,
+                            onPressed: recoverStore.recoverPressed,
                           ),
                         );
                       },

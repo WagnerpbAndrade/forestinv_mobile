@@ -14,7 +14,6 @@ import 'package:forestinv_mobile/app/stores/grid_photo_store.dart';
 import 'package:forestinv_mobile/helper/location_helper.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
-import 'package:path/path.dart';
 
 part 'cadastrar_arvore_store.g.dart';
 

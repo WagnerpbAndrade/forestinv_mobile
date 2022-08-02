@@ -65,9 +65,8 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
               name: '_CadastrarArvoreStoreBase.editarOnPressed'))
       .value;
 
-  late final _$selectedDateAtom = Atom(
-    name: '_CadastrarArvoreStoreBase.selectedDate',
-  );
+  late final _$selectedDateAtom =
+      Atom(name: '_CadastrarArvoreStoreBase.selectedDate', context: context);
 
   @override
   DateTime? get selectedDate {
@@ -82,8 +81,8 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
     });
   }
 
-  late final _$identificadorArvoreAtom =
-      Atom(name: '_CadastrarArvoreStoreBase.identificadorArvore');
+  late final _$identificadorArvoreAtom = Atom(
+      name: '_CadastrarArvoreStoreBase.identificadorArvore', context: context);
 
   @override
   String get identificadorArvore {
@@ -98,7 +97,8 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
     });
   }
 
-  late final _$dapTextAtom = Atom(name: '_CadastrarArvoreStoreBase.dapText');
+  late final _$dapTextAtom =
+      Atom(name: '_CadastrarArvoreStoreBase.dapText', context: context);
 
   @override
   String get dapText {
@@ -114,7 +114,7 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   late final _$alturaTextAtom =
-      Atom(name: '_CadastrarArvoreStoreBase.alturaText');
+      Atom(name: '_CadastrarArvoreStoreBase.alturaText', context: context);
 
   @override
   String get alturaText {
@@ -129,7 +129,8 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
     });
   }
 
-  late final _$latitudeAtom = Atom(name: '_CadastrarArvoreStoreBase.latitude');
+  late final _$latitudeAtom =
+      Atom(name: '_CadastrarArvoreStoreBase.latitude', context: context);
 
   @override
   String get latitude {
@@ -145,7 +146,7 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   late final _$longitudeAtom =
-      Atom(name: '_CadastrarArvoreStoreBase.longitude');
+      Atom(name: '_CadastrarArvoreStoreBase.longitude', context: context);
 
   @override
   String get longitude {
@@ -161,7 +162,7 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   late final _$loadingLatLongAtom =
-      Atom(name: '_CadastrarArvoreStoreBase.loadingLatLong');
+      Atom(name: '_CadastrarArvoreStoreBase.loadingLatLong', context: context);
 
   @override
   bool get loadingLatLong {
@@ -177,7 +178,7 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   late final _$observacaoAtom =
-      Atom(name: '_CadastrarArvoreStoreBase.observacao');
+      Atom(name: '_CadastrarArvoreStoreBase.observacao', context: context);
 
   @override
   String get observacao {
@@ -193,7 +194,7 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   late final _$estadoArvoreAtom =
-      Atom(name: '_CadastrarArvoreStoreBase.estadoArvore');
+      Atom(name: '_CadastrarArvoreStoreBase.estadoArvore', context: context);
 
   @override
   EstadoArvore? get estadoArvore {
@@ -208,7 +209,8 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
     });
   }
 
-  late final _$loadingAtom = Atom(name: '_CadastrarArvoreStoreBase.loading');
+  late final _$loadingAtom =
+      Atom(name: '_CadastrarArvoreStoreBase.loading', context: context);
 
   @override
   bool get loading {
@@ -223,7 +225,8 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
     });
   }
 
-  late final _$errorAtom = Atom(name: '_CadastrarArvoreStoreBase.error');
+  late final _$errorAtom =
+      Atom(name: '_CadastrarArvoreStoreBase.error', context: context);
 
   @override
   String? get error {
@@ -239,7 +242,7 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   late final _$savedArvoreAtom =
-      Atom(name: '_CadastrarArvoreStoreBase.savedArvore');
+      Atom(name: '_CadastrarArvoreStoreBase.savedArvore', context: context);
 
   @override
   bool get savedArvore {
@@ -255,7 +258,7 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   late final _$updatedArvoreAtom =
-      Atom(name: '_CadastrarArvoreStoreBase.updatedArvore');
+      Atom(name: '_CadastrarArvoreStoreBase.updatedArvore', context: context);
 
   @override
   bool get updatedArvore {
@@ -271,7 +274,7 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   late final _$isDapValidAtom =
-      Atom(name: '_CadastrarArvoreStoreBase.isDapValid');
+      Atom(name: '_CadastrarArvoreStoreBase.isDapValid', context: context);
 
   @override
   bool get isDapValid {
@@ -287,7 +290,7 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   late final _$_cadastrarAsyncAction =
-      AsyncAction('_CadastrarArvoreStoreBase._cadastrar');
+      AsyncAction('_CadastrarArvoreStoreBase._cadastrar', context: context);
 
   @override
   Future<void> _cadastrar() {
@@ -295,7 +298,7 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   late final _$_editarAsyncAction =
-      AsyncAction('_CadastrarArvoreStoreBase._editar');
+      AsyncAction('_CadastrarArvoreStoreBase._editar', context: context);
 
   @override
   Future<void> _editar() {
@@ -303,7 +306,7 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   }
 
   late final _$_CadastrarArvoreStoreBaseActionController =
-      ActionController(name: '_CadastrarArvoreStoreBase');
+      ActionController(name: '_CadastrarArvoreStoreBase', context: context);
 
   @override
   void setSelectedDate(DateTime? value) {

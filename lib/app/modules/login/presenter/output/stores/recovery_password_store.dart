@@ -52,6 +52,7 @@ abstract class _RecoveryPasswordStore with Store {
   @action
   void setError(String value) => error = value;
 
+  @action
   Future<void> _recover() async {
     setLoading(true);
 
