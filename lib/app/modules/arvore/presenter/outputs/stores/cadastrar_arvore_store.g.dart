@@ -65,22 +65,6 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
               name: '_CadastrarArvoreStoreBase.editarOnPressed'))
       .value;
 
-  late final _$arquivoAtom =
-      Atom(name: '_CadastrarArvoreStoreBase.arquivo', context: context);
-
-  @override
-  File? get arquivo {
-    _$arquivoAtom.reportRead();
-    return super.arquivo;
-  }
-
-  @override
-  set arquivo(File? value) {
-    _$arquivoAtom.reportWrite(value, super.arquivo, () {
-      super.arquivo = value;
-    });
-  }
-
   late final _$selectedDateAtom =
       Atom(name: '_CadastrarArvoreStoreBase.selectedDate', context: context);
 
@@ -325,17 +309,6 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
       ActionController(name: '_CadastrarArvoreStoreBase', context: context);
 
   @override
-  void setArquivo(File value) {
-    final _$actionInfo = _$_CadastrarArvoreStoreBaseActionController
-        .startAction(name: '_CadastrarArvoreStoreBase.setArquivo');
-    try {
-      return super.setArquivo(value);
-    } finally {
-      _$_CadastrarArvoreStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   void setSelectedDate(DateTime? value) {
     final _$actionInfo = _$_CadastrarArvoreStoreBaseActionController
         .startAction(name: '_CadastrarArvoreStoreBase.setSelectedDate');
@@ -437,7 +410,6 @@ mixin _$CadastrarArvoreStore on _CadastrarArvoreStoreBase, Store {
   @override
   String toString() {
     return '''
-arquivo: ${arquivo},
 selectedDate: ${selectedDate},
 identificadorArvore: ${identificadorArvore},
 dapText: ${dapText},

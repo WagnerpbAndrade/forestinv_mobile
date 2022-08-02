@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/estado_arvore.dart';
@@ -11,7 +9,9 @@ import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dar
 import 'package:forestinv_mobile/app/modules/regra_consistencia/domain/entities/regra_consistencia.dart';
 import 'package:forestinv_mobile/app/modules/regra_consistencia/external/data_source/regra_firestore_datasource_impl.dart';
 import 'package:forestinv_mobile/helper/location_helper.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
+
 part 'cadastrar_arvore_store.g.dart';
 
 class CadastrarArvoreStore = _CadastrarArvoreStoreBase
@@ -35,12 +35,6 @@ abstract class _CadastrarArvoreStoreBase with Store {
       longitude = arvore!.longitude;
     }
   }
-
-  @observable
-  File? arquivo;
-
-  @action
-  void setArquivo(final File value) => arquivo = value;
 
   @observable
   DateTime? selectedDate = DateTime.now();
@@ -272,7 +266,7 @@ abstract class _CadastrarArvoreStoreBase with Store {
     loading = false;
   }
 
-  Future<void> getLatLong() async {
+  Future<Position> getLatLong() async {
     loadingLatLong = true;
 
     final locationHelper = Modular.get<LocationHelper>();
@@ -289,6 +283,8 @@ abstract class _CadastrarArvoreStoreBase with Store {
     setLongitude(position.longitude.toString());
 
     loadingLatLong = false;
+
+    return position;
   }
 
   Future<bool> validarDapAnterior(final Arvore arvore) async {
@@ -352,13 +348,5 @@ abstract class _CadastrarArvoreStoreBase with Store {
     print('O estado atual é válido');
     setIsDapValid(true);
     return true;
-  }
-
-  Future<void> showPreview(dynamic file) async {
-    file = await Modular.to.popAndPushNamed('/preview', arguments: file);
-
-    if (file != null) {
-      setArquivo(file);
-    }
   }
 }

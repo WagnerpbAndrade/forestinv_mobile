@@ -1,6 +1,4 @@
-import 'package:camera_camera/camera_camera.dart';
 import 'package:easy_mask/easy_mask.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -11,6 +9,8 @@ import 'package:forestinv_mobile/app/core/widgets/error_box.dart';
 import 'package:forestinv_mobile/app/core/widgets/field_title.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/outputs/stores/cadastrar_arvore_store.dart';
 import 'package:forestinv_mobile/app/modules/arvore/presenter/ui/components/estado_arvore_field.dart';
+import 'package:forestinv_mobile/app/screens/camera/grid_view_photo_page.dart';
+import 'package:forestinv_mobile/app/stores/grid_photo_store.dart';
 import 'package:mobx/mobx.dart';
 
 class CadastrarArvorePage extends StatefulWidget {
@@ -28,11 +28,15 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
         cadastrarArvoreStore = CadastrarArvoreStore(args: args);
 
   final CadastrarArvoreStore cadastrarArvoreStore;
+  final gridStore = Modular.get<GridPhotoStore>();
 
   bool editing;
 
   @override
   void initState() {
+    if (gridStore.photos.isNotEmpty) {
+      gridStore.photos.clear();
+    }
     super.initState();
 
     when((_) => cadastrarArvoreStore.updatedArvore, () {
@@ -50,6 +54,11 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
         Modular.to.pop();
       }
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -336,35 +345,21 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                             height: 10,
                           ),
                           ElevatedButton.icon(
-                            onPressed: () => openCamera(),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const GridViewPhotoPage(),
+                                ),
+                              );
+                            },
                             icon: const Icon(Icons.camera_alt),
                             label: const Padding(
                               padding: EdgeInsets.all(16),
                               child: Text('Registrar foto da árvore'),
                             ),
                           ),
-                          // ExpandableNotifier(
-                          //   // <-- Provides ExpandableController to its children
-                          //   child: Column(
-                          //     children: [
-                          //       Expandable(
-                          //         // <-- Driven by ExpandableController from ExpandableNotifier
-                          //         collapsed: ExpandableButton(
-                          //           // <-- Expands when tapped on the cover photo
-                          //           child: Text('exapanded'),
-                          //         ),
-                          //         expanded: Column(children: [
-                          //           const Text('audhufahushufahusf'),
-                          //           const Text('2fawefawdf'),
-                          //           ExpandableButton(
-                          //             // <-- Collapses when tapped on
-                          //             child: Text("Back"),
-                          //           ),
-                          //         ]),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
                           Observer(
                             builder: (_) {
                               return CustomElevatedButton(
@@ -387,17 +382,6 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  void openCamera() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => CameraCamera(
-          onFile: (file) => cadastrarArvoreStore.showPreview(file),
         ),
       ),
     );
