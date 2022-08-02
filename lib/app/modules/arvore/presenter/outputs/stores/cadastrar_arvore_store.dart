@@ -1,4 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:forestinv_mobile/app/core/interface/api_response.dart';
+import 'package:forestinv_mobile/app/core/repository/firebase_storage_repository.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/entities/estado_arvore.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/save_arvore_usecase.dart';
@@ -8,11 +10,15 @@ import 'package:forestinv_mobile/app/modules/auth/auth_store.dart';
 import 'package:forestinv_mobile/app/modules/medicao/domain/entities/medicao.dart';
 import 'package:forestinv_mobile/app/modules/regra_consistencia/domain/entities/regra_consistencia.dart';
 import 'package:forestinv_mobile/app/modules/regra_consistencia/external/data_source/regra_firestore_datasource_impl.dart';
+import 'package:forestinv_mobile/app/stores/grid_photo_store.dart';
 import 'package:forestinv_mobile/helper/location_helper.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:mobx/mobx.dart';
+import 'package:path/path.dart';
 
 part 'cadastrar_arvore_store.g.dart';
+
+const String FILE_NAME_PATH = 'image';
 
 class CadastrarArvoreStore = _CadastrarArvoreStoreBase
     with _$CadastrarArvoreStore;
@@ -218,8 +224,19 @@ abstract class _CadastrarArvoreStoreBase with Store {
     }
 
     try {
-      await usecase.save(arvoreSaved);
+      final ApiResponse apiResponse = await usecase.save(arvoreSaved);
       savedArvore = true;
+
+      final gridPhotoStore = Modular.get<GridPhotoStore>();
+
+      if (gridPhotoStore.files.isNotEmpty) {
+        final storageRepository = Modular.get<FirebaseStorageRepository>();
+        for (final file in gridPhotoStore.files) {
+          final String fileName = file.path.split('/').last;
+          final destino = 'arvores/${apiResponse.result}/$fileName';
+          storageRepository.uploadPhotoList(destino, file);
+        }
+      }
     } on Exception catch (e) {
       error = e.toString();
     }

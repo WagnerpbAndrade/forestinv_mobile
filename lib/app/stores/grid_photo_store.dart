@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
 import 'package:forestinv_mobile/app/screens/camera/camera_page.dart';
-import 'package:forestinv_mobile/app/screens/camera/detail_photo_page.dart';
 import 'package:mobx/mobx.dart';
 part 'grid_photo_store.g.dart';
 
@@ -17,6 +16,8 @@ abstract class GridPhotoStoreBase with Store {
 
   @action
   void setArquivo(final XFile value) => arquivo = value;
+
+  List<File> files = [];
 
   @observable
   ObservableList<Widget> photos = ObservableList();

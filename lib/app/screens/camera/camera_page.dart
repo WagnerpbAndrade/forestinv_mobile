@@ -65,6 +65,7 @@ class _CameraPageState extends State<CameraPage> {
 
   Future<void> _addWidgetList(final XFile file) async {
     final File fileWithGPS = await _addGPS(file);
+    gridPhotoStore.files.add(fileWithGPS);
 
     final widget = Image.file(
       File(fileWithGPS.path),

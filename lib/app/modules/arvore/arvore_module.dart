@@ -1,5 +1,7 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:forestinv_mobile/app/core/constants/router_const.dart';
+import 'package:forestinv_mobile/app/core/repository/firebase_storage_repository.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/delete_arvore_usecase.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/get_all_arvore_by_projeto_usecase.dart';
 import 'package:forestinv_mobile/app/modules/arvore/domain/usecases/get_all_by_medicao_usecase.dart';
@@ -33,6 +35,8 @@ class ArvoreModule extends Module {
     Bind((i) => EstadoArvoreFirebaseDatasource(i())),
     Bind((i) => CadastrarArvoreStore()),
     Bind((i) => GridPhotoStore()),
+    Bind((i) => FirebaseStorage.instance),
+    Bind((i) => FirebaseStorageRepository(i())),
   ];
 
   @override

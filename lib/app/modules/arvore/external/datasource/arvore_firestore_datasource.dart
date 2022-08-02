@@ -81,10 +81,10 @@ class ArvoreFirestoreDatasourceImpl implements ArvoreDatasource {
   @override
   Future<ApiResponse> save(Arvore arvore) async {
     try {
-      _firestore
+      final arvoreSaved = await _firestore
           .collection(FirebaseFirestoreConstants.COLLECTION_ARVORES)
           .add(arvore.createToMap());
-      return ApiResponse.ok();
+      return ApiResponse.ok(result: arvoreSaved.id);
     } catch (e) {
       print('ArvoreFirestoreDatasourceImpl-save: $e');
       return ApiResponse.error(message: 'Oops! Algo deu errado: $e');
