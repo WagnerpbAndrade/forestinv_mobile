@@ -227,21 +227,25 @@ abstract class _CadastrarArvoreStoreBase with Store {
       final ApiResponse apiResponse = await usecase.save(arvoreSaved);
       savedArvore = true;
 
-      final gridPhotoStore = Modular.get<GridPhotoStore>();
-
-      if (gridPhotoStore.files.isNotEmpty) {
-        final storageRepository = Modular.get<FirebaseStorageRepository>();
-        for (final file in gridPhotoStore.files) {
-          final String fileName = file.path.split('/').last;
-          final destino = 'arvores/${apiResponse.result}/$fileName';
-          storageRepository.uploadPhotoList(destino, file);
-        }
-      }
+      salvarImagens(apiResponse);
     } on Exception catch (e) {
       error = e.toString();
     }
 
     loading = false;
+  }
+
+  void salvarImagens(ApiResponse<dynamic> apiResponse) {
+    final gridPhotoStore = Modular.get<GridPhotoStore>();
+
+    if (gridPhotoStore.files.isNotEmpty) {
+      final storageRepository = Modular.get<FirebaseStorageRepository>();
+      for (final file in gridPhotoStore.files) {
+        final String fileName = file.path.split('/').last;
+        final destino = 'arvores/${apiResponse.result}/$fileName';
+        storageRepository.uploadPhotoList(destino, file);
+      }
+    }
   }
 
   @action
@@ -276,6 +280,8 @@ abstract class _CadastrarArvoreStoreBase with Store {
     try {
       await usecase.update(arvoreUpdated);
       updatedArvore = true;
+
+      salvarImagens(ApiResponse.ok(result: arvoreUpdated.id));
     } on Exception catch (e) {
       error = e.toString();
     }

@@ -355,9 +355,11 @@ class _CadastrarArvorePageState extends State<CadastrarArvorePage> {
                               );
                             },
                             icon: const Icon(Icons.camera_alt),
-                            label: const Padding(
-                              padding: EdgeInsets.all(16),
-                              child: Text('Registrar foto da árvore'),
+                            label: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Text(editing
+                                  ? 'Editar foto da árvore'
+                                  : 'Tirar foto da árvore'),
                             ),
                           ),
                           Observer(
