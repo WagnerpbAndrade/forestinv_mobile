@@ -33,4 +33,6 @@ class RouterConst {
   static String THEME_ROUTER_PAGE = '/theme';
 
   static String BLUETOOTH_ROUTER = '/bluetooth';
+
+  static String ABOUT_APP_PAGE = '/about';
 }

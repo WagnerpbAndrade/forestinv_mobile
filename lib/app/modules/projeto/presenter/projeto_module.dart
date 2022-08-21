@@ -21,6 +21,7 @@ import 'package:forestinv_mobile/app/modules/projeto/presenter/output/stores/vis
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/cadastrar_projeto_page.dart';
 import 'package:forestinv_mobile/app/modules/projeto/presenter/ui/pages/home_page.dart';
 import 'package:forestinv_mobile/app/modules/regra_consistencia/regra_consistencia_module.dart';
+import 'package:forestinv_mobile/app/screens/about_app/about_app_screen.dart';
 import 'package:forestinv_mobile/app/screens/offline/offline_screen.dart';
 import 'package:forestinv_mobile/app/screens/settings/settings_screen.dart';
 
@@ -53,6 +54,10 @@ class ProjetoModule extends Module {
     ChildRoute(
       RouterConst.SETTINGS_ROUTER_PAGE,
       child: (_, args) => const SettingsScreen(),
+    ),
+    ChildRoute(
+      RouterConst.ABOUT_APP_PAGE,
+      child: (_, args) => const AboutAppScreen(),
     ),
     ModuleRoute(RouterConst.PARCELA_ROUTER, module: ParcelaModule()),
     ModuleRoute(RouterConst.MEDICAO_ROUTER, module: MedicaoModule()),

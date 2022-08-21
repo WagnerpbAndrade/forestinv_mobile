@@ -95,9 +95,7 @@ class ProjetoTile extends StatelessWidget {
           onPressed: () {
             exportarProject(context, projeto.id);
           },
-          icon: const Icon(
-            Icons.share,
-          ),
+          icon: const Icon(Icons.upload_file_outlined),
         ),
         // IconButton(
         //   onPressed: () {

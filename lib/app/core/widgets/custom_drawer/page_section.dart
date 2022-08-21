@@ -109,6 +109,27 @@ class NewWidget extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: const [
+                          Icon(Icons.info_outline),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text('Sobre'),
+                        ],
+                      ),
+                      onTap: () {
+                        homeStore.goToAboutAppPage();
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: GestureDetector(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: const [
                           Icon(Icons.logout),
                           SizedBox(
                             width: 10,
